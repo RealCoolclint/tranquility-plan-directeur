@@ -1,5 +1,5 @@
-# Plan Directeur Tranquility Suite — V1.6
-*Mise à jour le 22 mars 2026 18:00 — Cellule Vidéo L'Étudiant*
+# Plan Directeur Tranquility Suite — V1.7
+*Mise à jour le 23 mars 2026 — Cellule Vidéo L'Étudiant*
 
 > *"Omnia in ordine."*
 
@@ -7,7 +7,7 @@
 
 ## Phase Mercury — État du programme
 
-**Progression : 75% (Launcher V2 features en cours)**
+**Progression : 85% (Launcher V2 Phase C quasi-complète)**
 
 | État | Définition |
 |------|-----------|
