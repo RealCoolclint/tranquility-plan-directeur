@@ -1,4 +1,4 @@
-# Plan Directeur Tranquility Suite — V1.9
+# Plan Directeur Tranquility Suite — V2.0
 *Mise à jour le 28 mars 2026 — Cellule Vidéo L'Étudiant*
 
 > *"Omnia in ordine."*
@@ -7,119 +7,206 @@
 
 ## Phase Mercury — État du programme
 
-**Progression : 88%**
+**Progression : 45%**
+
+> *Réévaluation honnête après audit complet du 28 mars 2026. Le scope Mercury a été redéfini : ARK est une condition de sortie, l'alignement design complet s'applique à toutes les apps, le modèle profils est entièrement refondu. La progression réelle est donc inférieure à ce qu'indiquaient les versions précédentes.*
 
 | État | Définition |
 |------|-----------|
 | **En projet** | Idée de projet, pas de construction lancée |
 | **Lancement** | Chantier en cours — développement actif |
-| **En orbite** | Version buildée, lancée et en utilisation |
+| **En orbite** | Version buildée, testée, alignée suite, utilisable par l'équipe |
+
+---
+
+## Conditions de sortie Mercury
+
+Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et alignées** :
+
+| # | App | Type | Condition minimale |
+|---|-----|------|--------------------|
+| 1 | **Launcher** | Desktop | Hub opérationnel, modèle licence, équipe peut se connecter |
+| 2 | **BackUpFlow** | Desktop | Workflow complet, modèle profils Launcher, design aligné |
+| 3 | **Transporter** | Desktop | Workflow valise complet, modèle profils Launcher, design aligné |
+| 4 | **ARK** | Desktop | Archivage complet, Monday, design aligné |
+| 5 | **Reviewer** | Web | Design aligné (fonctionnel primitif conservé) |
+| 6 | **Manifest** | Web | Design aligné (fonctionnel primitif conservé) |
 
 ---
 
 ## Inventaire de la flotte — 17 outils
 
-### En orbite 🟣
-
-| # | Outil | Version | Notes |
-|---|-------|---------|-------|
-| 1 | **BackUpFlow** | V1.06.03.26 — Mercury | Mercury Opening ✅, Protocole Session ✅ |
-| 2 | **Transporter** | V1.19.03.26 — Mercury | Mercury Opening ✅, Protocole Session ✅ |
-| 3 | **Reviewer** | — | Web, GitHub Pages — Mercury Design à faire |
-| 4 | **Manifest** | — | Web, GitHub Pages — Mercury Design à faire |
-
 ### Lancement en cours 🔵
 
 | # | Outil | Avancement | Notes |
 |---|-------|-----------|-------|
-| 5 | **Launcher V2** | Phase C — finalisation | Session Launcher côté écrivain ✅ |
+| 1 | **Launcher V2** | Finalisation — modèle profils à refondre | Hub central, étalon design |
+| 2 | **BackUpFlow** | Refonte profils + alignement design | Mercury Opening ✅ |
+| 3 | **Transporter** | Refonte profils + alignement design | Mercury Opening ✅ |
 
-### En projet ⚫
+### En projet Mercury ⚫
 
 | # | Outil | Notes |
 |---|-------|-------|
-| 6 | ARK | Spec à définir |
-| 7 | Cargo | — |
-| 8 | Payload | Desktop + Mobile, Phase Gemini |
-| 9 | Hatch | — |
-| 10 | Guidance | — |
-| 11 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
-| 12-17 | Outils Phase Gemini/Apollo | CAPCOM, DATAPAD, BLACKBOX, Telemetry, Beacon, Debrief |
+| 4 | **ARK** | Construction complète — condition de sortie Mercury |
+| 5 | **Reviewer** | Alignement design uniquement — fonctionnel primitif conservé |
+| 6 | **Manifest** | Alignement design uniquement — fonctionnel primitif conservé |
+
+### En projet Gemini/Apollo ⚫
+
+| # | Outil | Notes |
+|---|-------|-------|
+| 7 | Payload | Desktop + Mobile, Monday DB |
+| 8 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 9 | Cargo | — |
+| 10 | Hatch | — |
+| 11 | Guidance | — |
+| 12 | Beacon | Web |
+| 13 | Debrief | Web |
+| 14 | Telemetry | Extension Premiere |
+| 15 | CAPCOM | Extension Premiere |
+| 16 | DATAPAD | Extension Premiere |
+| 17 | BLACKBOX | Extension Premiere |
 
 ---
 
-## Protocole Session Launcher — Mercury
+## Ordre d'exécution Mercury
 
-**Implémenté le 28 mars 2026. Architecture validée.**
-
-Modèle Adobe CC — couplage faible par fichier local :
-- Launcher écrit `~/Library/Application Support/tranquility-suite/session.json` au login profil
-- Apps lisent le fichier au démarrage — aucune communication temps réel
-- Expiration automatique 8h
-- Suppression au quit de Launcher
-- Mode standalone : chaque app reste pleinement fonctionnelle sans Launcher
-
-| App | session-writer | session-reader | Écran connecté | Persistance retour |
-|-----|---------------|----------------|----------------|--------------------|
-| Launcher V2 | ✅ | — | — | — |
-| BackUpFlow | — | ✅ | ✅ | ✅ |
-| Transporter | — | ✅ | ✅ | ✅ |
-| Reviewer | — | À faire (Phase Gemini) | — | — |
-| Manifest | — | À faire (Phase Gemini) | — | — |
+```
+1. LAUNCHER        → finalisation complète (clé de voûte)
+2. BACKUPFLOW      → premier cobaye du nouveau modèle
+3. TRANSPORTER     → réplication du pattern BackUpFlow
+4. REVIEWER        → alignement design (web, indépendant)
+   MANIFEST        → alignement design (web, indépendant)
+5. ARK             → construction complète sur écosystème validé
+6. DOCUMENTATION   → fil rouge tout au long
+```
 
 ---
 
-## Mercury Design — État de la normalisation
+## Décisions produit actées — 28 mars 2026
 
-Norme Mercury Opening : grille canvas + cercle radar SVG + patch animé `<video>` + flash blanc.
+### Modèle "Launcher = Licence" (nouveau)
 
-| App | Dark theme | Mercury Opening | Header patch | Bouton QUITTER |
-|-----|-----------|----------------|-------------|----------------|
-| BackUpFlow | ✅ | ✅ | ✅ | ✅ supprimé |
-| Transporter | ✅ | ✅ | ✅ | ✅ supprimé |
-| Reviewer | À faire | À faire | À faire | — |
-| Manifest | À faire | À faire | À faire | — |
+Calqué sur Adobe Creative Cloud. **Décision définitive.**
+
+- Launcher est le seul gestionnaire d'identité de la suite
+- Les apps n'ont plus de profils locaux propres
+- Si une app démarre sans session Launcher → elle spawne Launcher automatiquement
+- L'app poll `session.json` toutes les 2 secondes → reprise automatique
+- Zéro mode standalone dégradé
+- Option "Rester connecté" : session 30j (Mac perso) vs 8h (Mac partagé)
+
+**Document de référence :** `TRANQUILITY_LAUNCHER_PROFILS_SPEC.md`
+
+### Centralisation des clés API (nouveau)
+
+- Toutes les clés vivent dans le Retriever de Launcher
+- Injectées dans `session.json` au login → lues par les apps
+- Les apps ne stockent plus aucune clé localement
+- Si clé absente → message vers MASTER → Retriever
+
+### Design Reference — Launcher V2 comme étalon (nouveau)
+
+- Alignement design complet sur toutes les apps en Mercury
+- Reviewer et Manifest incluses (design seulement, pas les fonctionnalités)
+- Document de référence : `TRANQUILITY_SUITE_DESIGN_REFERENCE.md`
+- Remplace `TRANQUILITY_SUITE_UX_DESIGN_SKILL.md` sur les questions de design
+
+### Comparaison de version (nouveau)
+
+- Launcher compare les versions par `published_at` GitHub Releases
+- Pas par tag — le format `V1.JJ.MM.AA` n'est pas comparable lexicographiquement
+
+### ARK — premières specs (nouveau)
+
+- Archivage long terme = remplacement du projet d'origine (avec confirmation)
+- Compression vidéo HandBrake (seuil à définir)
+- ZIP du dossier projet
+- Monday : lecture infos + écriture statut ARCHIVÉ
+- Option double : conserver original + archive ailleurs
+- Stockage centralisé : hors scope Mercury — question stratégique ouverte
 
 ---
 
-## Launcher V2 — Détail Phase C
+## Décisions produit actées — Sessions précédentes
 
-### Livré ✅
-- Splash screen Mercury + cosmos dashboard (1100 étoiles, constellations, étoiles filantes)
-- Dashboard : cartes 280px, devise latine, bouton lancement direct
-- Modale PlayStation : ambiances canvas, parallaxe, depth particles
-- Profils GitHub sync (`launcher-profiles` privé)
-- GitHub Releases API — badges "À jour" / "↑ Mise à jour"
-- Icône barre de menu macOS (tray)
-- CSP propre — `version.js` externalisé
-- Favoris par profil — étoile ★, section dédiée
-- Admin protégé — SHA-256, code de secours, TouchID, fichier lock
-- Mode MASTER — tour de contrôle 5 onglets
-- Retriever — coffre-fort AES-256-GCM, keytar, sync GitHub
-- Signalement Resend — branché Retriever, mail validé en test réel
-- Permissions granulaires — active / vitrine / masqué par profil
-- Bouquets thématiques — tri des apps par rôle métier
-- Notes de version via API Claude — claude-sonnet-4-6
-- App Manager intégré — téléchargement + installation silencieuse
-- Désinstallation — confirmation native, redraw dashboard
-- Avatars profils — 28 avatars NASA style, grille de sélection
-- Patches animés Mercury Opening — Launcher + Transporter en MP4 fond noir
-- 3 contextes d'animation — splash, modale PlayStation (auto), carte dashboard (hover)
-- Touche Entrée — sur toutes les modales
-- Bouton modale adapté à l'état — Télécharger / Lancer / Mettre à jour / Localiser
-- Correction modale installation — étape "déplacer le .app" supprimée
-- Bouton "Passer" onboarding — skip vers grille des profils
-- Caches MASTER — 3 boutons séparés avec confirmation native
-- **Session Launcher** — `session-writer.js`, écriture au login, suppression au quit ✅
+- **Retriever** — Launcher = source de vérité des secrets. Chaque app lit depuis session.json.
+- **Installation autarcique** — téléchargement + installation 100% dans Launcher.
+- **Protocole Session** — couche Mercury : fichier local `session.json`. Couche Gemini : sync cross-machine via GitHub.
+- **Build BackUpFlow** — `electron-builder --mac dir` + `hdiutil` (pas `npm run dist`).
+- **Plan Directeur public** — repo `tranquility-plan-directeur`, source de vérité unique.
 
-### En cours / À faire 🔵
-- `author` dans `package.json` (warning electron-builder)
-- Bouton "Mettre à jour le Plan Directeur" — MASTER → Système
-- MASTER Retriever — statut connexions + âge clés API
-- MASTER Équipe — santé repo GitHub, inactifs 30j, état onboarding
-- Paramètres profil — permissions système, console logs, rapport santé
-- Modale PlayStation — description longue, changelog, modifier chemin, doc
-- Release GitHub Launcher mise à jour (Plan Directeur V1.9 + DMG)
+---
+
+## Détail des chantiers Mercury
+
+### LAUNCHER — Finalisation
+
+| Chantier | Priorité |
+|----------|----------|
+| Refonte logique profils → modèle licence | 🔴 |
+| Écran d'attente session dans les apps (standard) | 🔴 |
+| Option "Rester connecté" | 🟠 |
+| Vérification features MASTER dans le code | 🟠 |
+| `author` dans `package.json` | 🟡 |
+| Comparaison version par `published_at` | 🟡 |
+| Release GitHub à jour | 🟡 |
+
+### BACKUPFLOW — Refonte + Alignement
+
+| Chantier | Priorité |
+|----------|----------|
+| Suppression profils locaux | 🔴 |
+| Écran d'attente session | 🔴 |
+| Clés API → session.json uniquement | 🔴 |
+| Alignement design complet (Design Reference) | 🟠 |
+| Build final + Release GitHub | 🟡 |
+
+### TRANSPORTER — Refonte + Alignement
+
+| Chantier | Priorité |
+|----------|----------|
+| Suppression profils locaux | 🔴 |
+| Écran d'attente session | 🔴 |
+| Clés API → session.json uniquement | 🔴 |
+| Alignement design complet (Design Reference) | 🟠 |
+| Test production complet | 🟠 |
+| Release GitHub | 🟡 |
+
+### ARK — Construction complète
+
+| Chantier | Priorité |
+|----------|----------|
+| Spec fonctionnelle complète | 🔴 |
+| Patch + identité visuelle | 🔴 |
+| Architecture Electron | 🔴 |
+| Mercury Opening | 🔴 |
+| Écran d'attente session (natif) | 🔴 |
+| Analyse projet Premiere | 🔴 |
+| Compression vidéo HandBrake (seuil à définir) | 🔴 |
+| ZIP dossier projet | 🔴 |
+| Gestion destination (remplacement ou double) | 🔴 |
+| Monday : lecture + écriture statut ARCHIVÉ | 🔴 |
+| Release GitHub | 🟡 |
+
+### REVIEWER — Alignement design
+
+| Chantier | Priorité |
+|----------|----------|
+| Dark theme par défaut | 🟠 |
+| Tokens CSS Design Reference | 🟠 |
+| Patch dans le header | 🟠 |
+| Version affichée | 🟠 |
+
+### MANIFEST — Alignement design
+
+| Chantier | Priorité |
+|----------|----------|
+| Dark theme par défaut | 🟠 |
+| Tokens CSS Design Reference | 🟠 |
+| Patch dans le header | 🟠 |
+| Version affichée | 🟠 |
 
 ---
 
@@ -127,55 +214,41 @@ Norme Mercury Opening : grille canvas + cercle radar SVG + patch animé `<video>
 
 | App | Repo | Release | DMG |
 |-----|------|---------|-----|
-| BackUpFlow | `RealCoolclint/BackUpFlow` (public) | v1.06.03.26 — Mercury | ✅ |
-| Transporter | `RealCoolclint/Transporter` (public) | v1.19.03.26 — Mercury | ✅ 270MB |
+| BackUpFlow | `RealCoolclint/BackUpFlow` (public) | v1.06.03.26 — Mercury | ✅ (à refaire après refonte) |
+| Transporter | `RealCoolclint/Transporter` (public) | v1.19.03.26 — Mercury | ✅ |
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | — |
-| Manifest | `RealCoolclint/EasyCallSheet` | GitHub Pages | — |
+| Manifest | `RealCoolclint/EasyCallSheet` (à renommer) | GitHub Pages | — |
 | Profiles | `RealCoolclint/launcher-profiles` (privé) | `profiles.json` | — |
 | Plan Directeur | `RealCoolclint/tranquility-plan-directeur` (public) | `TRANQUILITY_PLAN_DIRECTEUR.md` | — |
-| Launcher V2 | `RealCoolclint/Launcher` (public) | v1.0.0 | ✅ |
+| Launcher V2 | `RealCoolclint/Launcher` (public) | v1.0.0 (à mettre à jour) | ✅ |
+| ARK | À créer | — | — |
 
 ---
 
-## Décisions produit actées — Phase Mercury
+## Ressources du projet
 
-- **Retriever** — Launcher = source de vérité des secrets. Chaque app reste autonome avec ses propres clés.
-- **Installation autarcique** — téléchargement + installation 100% dans Launcher, zéro Finder.
-- **Protocole Session** — couche Mercury : fichier local `session.json`. Couche Gemini : sync cross-machine via GitHub (Phase Gemini).
-- **Profil temporaire** — en mode connecté, les apps construisent un profil en mémoire depuis `session.json` sans lookup local. Aucune synchronisation d'ID requise entre Launcher et les apps.
-- **SSO implicite** — via repo `launcher-profiles` GitHub. Reporté Phase Gemini.
-- **Plan Directeur public** — repo `tranquility-plan-directeur`, source de vérité unique.
-- **Build BackUpFlow** — `electron-builder --mac dir` + `hdiutil` (pas `npm run dist` — erreur `native.node`).
-
----
-
-## Prochains chantiers — ordre prioritaire
-
-### 🔴 Immédiat
-1. Transporter — 2ème test production (valise avec médias accessibles localement)
-
-### 🟠 Mercury Design suite
-2. Reviewer — dark theme, version, patch header
-3. Manifest — audit + dark theme + version
-4. ARK — spec, patch, Fleet HTML
-
-### 🟡 Launcher V2 finalisation
-5. `author` package.json
-6. Bouton "Mettre à jour le Plan Directeur" — MASTER Système
-7. MASTER Retriever — statut + âge clés
-8. MASTER Équipe — santé repo, inactifs, onboarding
-9. Paramètres profil
-10. Modale PlayStation — enrichissement
-11. Release GitHub Launcher mise à jour
-
-### 🟡 Skill Mercury
-12. Réécriture `TRANQUILITY_SUITE_UX_DESIGN_SKILL.md`
-
-### ⚫ Phase Gemini
-13. SSO cross-machine — `tranquility-session`
-14. Payload — UX documentation, Mode 2 et Mode 3
+| Document | Rôle |
+|----------|------|
+| `TRANQUILITY_LAUNCHER_PROFILS_SPEC.md` | Modèle "Launcher = Licence" — référence définitive |
+| `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design complète — Launcher V2 comme étalon |
+| `TRANQUILITY_LAUNCHER_SESSION_SPEC.md` | Protocole technique session.json |
+| `TRANQUILITY_SSO_SPEC.md` | SSO cross-machine — Phase Gemini |
+| `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Patterns backend Electron |
+| `TRANQUILITY_SUITE_UX_DESIGN_SKILL.md` | Splash screen + Mercury Opening (Design Reference remplace les règles UI) |
+| `TRANQUILITY_SUITE_MERCURY_OPENING.md` | Norme splash screen détaillée |
 
 ---
 
-*Plan Directeur V1.9 — 28 mars 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V1.8*
+## Phase Gemini — Horizon
+
+- SSO cross-machine — `tranquility-session` GitHub
+- Reviewer V2 — Supabase, proxy 720p HandBrake, commentaires timestampés
+- Payload — Desktop + Mobile, Mode 2 (checkout QR), Mode 3 (état matériel)
+- Extensions Premiere — CAPCOM, DATAPAD, BLACKBOX, Telemetry
+- Manifest — API Monday directe, historique, templates par format
+
+---
+
+*Plan Directeur V2.0 — 28 mars 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V1.9*
+*Prochaine mise à jour : à la fin du chantier Launcher*
