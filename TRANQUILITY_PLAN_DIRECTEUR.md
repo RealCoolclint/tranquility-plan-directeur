@@ -1,5 +1,5 @@
-# Plan Directeur Tranquility Suite — V2.8
-*Mise à jour le 31 mars 2026 — Cellule Vidéo L'Étudiant*
+# Plan Directeur Tranquility Suite — V2.9
+*Mise à jour le 1er avril 2026 — Cellule Vidéo L'Étudiant*
 
 > *"Omnia in ordine."*
 
@@ -7,13 +7,13 @@
 
 ## Phase Mercury — État du programme
 
-**Progression : 75%**
+**Progression : 50%** *(réévalué honnêtement le 1er avril — couche session non implémentée)*
 
 | État | Définition |
 |------|-----------|
 | **En projet** | Idée de projet, pas de construction lancée |
 | **Lancement** | Chantier en cours — développement actif |
-| **En orbite** | Version buildée, testée, alignée suite, utilisable par l'équipe |
+| **En orbite** | Version buildée, testée, session V1.1 conforme, utilisable par l'équipe |
 
 ---
 
@@ -23,34 +23,52 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | # | App | Type | Condition minimale | État |
 |---|-----|------|--------------------|------|
-| 1 | **Launcher** | Desktop | Hub opérationnel, MASTER Équipe, session-writer.js | 🟣 En orbite |
-| 2 | **BackUpFlow** | Desktop | Workflow complet, session conforme Spec V1.1, design aligné | 🟣 En orbite |
-| 3 | **Transporter** | Desktop | Workflow valise complet, session conforme Spec V1.1, design aligné | 🟣 En orbite |
-| 4 | **ARK** | Desktop | Archivage complet, session conforme Spec V1.1, Monday, design aligné | 🔵 En construction |
-| 5 | **Reviewer** | Web | Design aligné, session conforme Spec V1.1 | 🟣 En orbite |
-| 6 | **Manifest** | Web | Design aligné, session conforme Spec V1.1 | 🟣 En orbite |
+| 1 | **Launcher** | Desktop | MASTER Équipe ✅, session-profile.js V1.1, push profiles.json GitHub | 🔵 Session à migrer |
+| 2 | **BackUpFlow** | Desktop | Workflow complet, session-profile.js V1.1, sélecteur profil | 🔵 Session à migrer |
+| 3 | **Transporter** | Desktop | Workflow valise complet, session-profile.js V1.1, sélecteur profil | 🔵 Session à migrer |
+| 4 | **ARK** | Desktop | Archivage complet, session-profile.js V1.1, Monday, HandBrakeCLI | 🔵 En construction |
+| 5 | **Reviewer** | Web | Design aligné, sélecteur profil localStorage V1.1 | 🔵 Session à implémenter |
+| 6 | **Manifest** | Web | Design aligné, sélecteur profil localStorage V1.1, zéro alert() natif | 🔵 Session + dettes |
 
-> **Nouvelle condition transversale :** toutes les apps doivent implémenter `session-reader.js` conforme à `TRANQUILITY_SESSION_PROFILS_SPEC.md` avant Mercury exit.
+> **Condition transversale :** toutes les apps desktop doivent implémenter `session-profile.js` conforme à `TRANQUILITY_SESSION_PROFILS_SPEC.md` V1.2. Apps web : `localStorage` + 3 durées V1.1.
+
+---
+
+## Feuille de route Mercury — Phases 0 à 8
+
+```
+Phase 0 ✅  Décisions architecturales — TERMINÉE (1er avril 2026)
+Phase 1     Module session-profile.js — fondation commune
+Phase 2     Launcher — reconciliation Session V1.1 + push profiles.json
+Phase 3     BackUpFlow — migration session V1.1
+Phase 4     Transporter — migration session V1.1
+Phase 5     ARK — construction complète + tests
+Phase 6     Reviewer + Manifest — sessions web + dettes techniques
+Phase 7     Tests d'intégration — protocole complet
+Phase 8     Documentation équipe + clôture Mercury
+```
+
+**Estimation totale : ~21h · 10 sessions · 4 à 6 semaines**
 
 ---
 
 ## Inventaire de la flotte — 17 outils
 
-### En orbite 🟣
+### Design aligné — Session à migrer 🔵
 
 | # | Outil | Version | Notes |
 |---|-------|---------|-------|
-| 1 | **Launcher V2** | v1.29.03.26 | MASTER Équipe ✅, Profil Passeport ✅, Alertes Resend ✅ |
-| 2 | **Transporter** | v1.29.03.26 | Mercury complet ✅ |
-| 3 | **BackUpFlow** | v1.31.03.26 | Mercury Design ✅ |
-| 4 | **Reviewer** | GitHub Pages | Mercury Design ✅, tranquility-core.css ✅ |
-| 5 | **Manifest** | v1.30.03.26 | Mercury Design ✅, repo renommé ✅ |
+| 1 | **Launcher V2** | v1.29.03.26 | MASTER Équipe ✅, session V1.1 ❌ à migrer |
+| 2 | **Transporter** | v1.29.03.26 | Mercury Design ✅, session V1.1 ❌ à migrer |
+| 3 | **BackUpFlow** | v1.31.03.26 | Mercury Design ✅, session V1.1 ❌ à migrer |
+| 4 | **Reviewer** | GitHub Pages | Mercury Design ✅, session localStorage ❌ à implémenter |
+| 5 | **Manifest** | v1.30.03.26 | Mercury Design ✅, session localStorage ❌, dettes alert()/emojis |
 
-### Lancement en cours 🔵
+### En construction 🔵
 
 | # | Outil | Avancement | Notes |
 |---|-------|-----------|-------|
-| 6 | **ARK** | Scaffold + Mercury Opening + App shell ✅ | Session à migrer, sélecteur profil à faire |
+| 6 | **ARK** | Scaffold + Mercury Opening + App shell ✅ | Session hack ⚠️, modules non testés |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -70,17 +88,6 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 ---
 
-## Ordre d'exécution — Chantiers restants Mercury
-
-```
-1. ARK              → session-reader.js + sélecteur profil + tests + build
-2. TOUTES LES APPS  → migration session conforme TRANQUILITY_SESSION_PROFILS_SPEC.md
-3. LAUNCHER         → session-writer.js (écriture tranquility-suite/session.json)
-4. MERCURY EXIT     → 6/6 apps en orbite + session unifiée
-```
-
----
-
 ## Décisions produit actées
 
 ### Actées le 28 mars 2026
@@ -94,16 +101,26 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 ### Actées le 31 mars 2026
 - **GitHub = cloud de la Tranquility Suite** — profils, avatars, mises à jour, design system.
 - **Chaque app est autonome** — Launcher jamais requis pour lancer une app.
-- **Session unifiée** — `~/Library/Application Support/tranquility-suite/session.json` partagé entre toutes les apps.
+- **Session unifiée** — `~/Library/Application Support/tranquility-suite/session.json` partagé.
 - **La première app ouverte écrit la session** — les suivantes la lisent.
-- **Launcher = gestion, pas connexion** — Launcher gère les profils et permissions, ne connecte pas les utilisateurs.
+- **Launcher = gestion, pas connexion** — gère les profils et permissions, ne connecte pas.
 - **3 durées de session** — aujourd'hui / 7 jours / toujours.
 - **Expiration non intrusive** — jamais en cours de workflow, seulement au prochain lancement.
-- **Profils filtrés par appPermissions** — chaque app n'affiche que les profils autorisés par le MASTER.
+- **Profils filtrés par appPermissions** — chaque app n'affiche que les profils autorisés.
 - **Pas de PIN en Mercury** — sélection de profil suffit.
 - **Avatars NASA obligatoires** dans le sélecteur de profil.
 - **Badge HORS LIGNE** dans le header si pas de réseau.
-- **Design Reference V2.0** — tokens CSS synchronisés avec tranquility-core.css réel (7 corrections).
+- **Design Reference V2.0** — tokens CSS synchronisés avec tranquility-core.css réel.
+
+### Actées le 1er avril 2026
+- **Première app écrit session.json** — Launcher jamais requis (confirme V1.1, invalide Passeport V1.0 §7).
+- **profiles.json GitHub = identité + appPermissions uniquement** — léger, sans appSettings.
+- **appSettings stockés localement** — `~/Library/Application Support/tranquility-suite/appsettings.json`, indexés par `profileId` + couche `_machine` pour chemins partagés (SSD1, NAS).
+- **Mac Studio : 3 destinations BackUpFlow** — SSD1 (machine), NAS (machine), SSD Perso (profil).
+- **session-reader.js + profile-loader.js → fusionnés en session-profile.js** — un seul module dans chaque app.
+- **Apps web : localStorage + 3 durées V1.1** — même modèle que desktop, mécanisme différent.
+- **Design Reference §6 supprimée** — écran "Lance Launcher" obsolète, remplacé par sélecteur profil.
+- **HandBrakeCLI manquant = bloquant pour ARK** — écran d'erreur + lien téléchargement, pas de fallback sans compression.
 
 ---
 
@@ -111,16 +128,16 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.29.03.26 | 🟣 En orbite |
-| Transporter | `RealCoolclint/Transporter` | v1.29.03.26 | 🟣 En orbite |
-| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.31.03.26 | 🟣 En orbite |
-| Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
-| Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🟣 En orbite |
+| Launcher V2 | `RealCoolclint/Launcher` | v1.29.03.26 | 🔵 Session à migrer |
+| Transporter | `RealCoolclint/Transporter` | v1.29.03.26 | 🔵 Session à migrer |
+| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.31.03.26 | 🔵 Session à migrer |
+| Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🔵 Session à implémenter |
+| Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🔵 Session + dettes |
 | ARK | `RealCoolclint/ARK` | — | 🔵 En construction |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ |
 | Profiles | `RealCoolclint/launcher-profiles` (privé) | `profiles.json` | ✅ 6 profils |
 | Avatars | `RealCoolclint/tranquility-avatars` (public) | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V2.8 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V2.9 |
 
 ---
 
@@ -128,17 +145,15 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | Document | Rôle | Version |
 |----------|------|---------|
-| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité | V1.1 ✅ |
-| `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design complète | V2.0 ✅ |
-| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format Passeport V1 | V1.0 |
-| `TRANQUILITY_LAUNCHER_PROFILS_SPEC.md` | Modèle "Launcher = Licence" | V1.0 |
-| `TRANQUILITY_LAUNCHER_SESSION_SPEC.md` | Protocole technique session.json | V1.0 — à archiver |
+| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité | V1.1 → V1.2 à rédiger |
+| `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design complète | V2.0 → V2.1 à rédiger (§6) |
+| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format Passeport — partiellement supersédé | V1.0 → à archiver |
+| `TRANQUILITY_LAUNCHER_PROFILS_SPEC.md` | Modèle "Launcher = Licence" | V1.0 — à archiver |
+| `TRANQUILITY_LAUNCHER_SESSION_SPEC.md` | Protocole session.json | V1.0 — à archiver |
 | `TRANQUILITY_SSO_SPEC.md` | SSO cross-machine — Phase Gemini | V1.0 |
 | `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Patterns backend Electron | V1.0 |
 | `TRANQUILITY_SUITE_MERCURY_OPENING.md` | Norme splash screen | V1.0 |
 | `TRANQUILITY_SUITE_MISSION_PATCHES_STATUT.md` | État des patches | V1.0 |
-
-> **Note :** `TRANQUILITY_LAUNCHER_SESSION_SPEC.md` est partiellement obsolète depuis la Session & Profils Spec V1.1. À archiver ou fusionner lors d'une prochaine session.
 
 ---
 
@@ -153,6 +168,6 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 ---
 
-*Plan Directeur V2.8 — 31 mars 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V2.7*
-*Prochaine mise à jour : à la fin du chantier ARK*
+*Plan Directeur V2.9 — 1er avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V2.8*
+*Prochaine mise à jour : fin de la Phase 1 (session-profile.js)*
