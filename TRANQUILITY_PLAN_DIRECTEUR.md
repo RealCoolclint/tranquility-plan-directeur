@@ -1,13 +1,21 @@
-# Plan Directeur Tranquility Suite — V3.2
-*Mise à jour le 2 avril 2026 — Cellule Vidéo L'Étudiant*
+# Tranquility Suite — Plan Directeur
+## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-> *"Omnia in ordine."*
+*Version 3.3 — 2 avril 2026*
+
+---
+
+## Vision
+
+La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidéo de L'Étudiant. Chaque outil répond à un besoin précis de production, de post-production ou d'organisation. L'ensemble forme un système cohérent, maintenu par Martin Pavloff, utilisé quotidiennement par l'équipe.
+
+**Principe central :** GitHub = cloud de la Tranquility Suite.
 
 ---
 
 ## Phase Mercury — État du programme
 
-**Progression : 93%**
+**Progression : 98%**
 
 | État | Définition |
 |------|-----------|
@@ -23,7 +31,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | # | App | Type | Condition minimale | État |
 |---|-----|------|--------------------|------|
-| 1 | **Launcher** | Desktop | Hub opérationnel, MASTER Équipe, Session V1.1 writer | 🔵 En construction |
+| 1 | **Launcher** | Desktop | Hub opérationnel, MASTER Équipe, Session V1.1 writer | 🟣 En orbite |
 | 2 | **BackUpFlow** | Desktop | Workflow complet, Session V1.1 ✅, build ✅ | 🟣 En orbite |
 | 3 | **Transporter** | Desktop | Workflow valise complet, Session V1.1 ✅, design aligné | 🟣 En orbite |
 | 4 | **ARK** | Desktop | Session V1.1 ✅, tests ✅, build ✅ | 🟣 En orbite |
@@ -38,7 +46,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | # | Outil | Version | Notes |
 |---|-------|---------|-------|
-| 1 | **Launcher V2** | v1.29.03.26 | MASTER Équipe ✅, Profil Passeport ✅, Alertes Resend ✅ — Session V1.1 writer en cours |
+| 1 | **Launcher V2** | v1.02.04.26 | Session V1.1 ✅, MASTER ✅, CSP avatars ✅, profils propres ✅ |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, 1440×1050 ✅ |
 | 3 | **BackUpFlow** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
@@ -63,43 +71,41 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 ---
 
-## Feuille de route Mercury — Phases restantes
+## Feuille de route Mercury — Phases
 
 | Phase | Chantier | État |
 |-------|----------|------|
 | 1 | Module unifié `session-profile.js` | ✅ Terminée |
-| 2 | Launcher — migration Session V1.1 | 🔵 En cours — prochaine session |
-| 3 | BackUpFlow — migration Session V1.1 + build | ✅ Terminée |
-| 4 | Transporter — migration Session V1.1 | ✅ Terminée |
+| 2 | Launcher — Session V1.1 | ✅ Terminée |
+| 3 | BackUpFlow — Session V1.1 + build | ✅ Terminée |
+| 4 | Transporter — Session V1.1 | ✅ Terminée |
 | 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
 | 6 | Reviewer + Manifest — sessions web | En attente |
 | 7 | Tests d'intégration | En attente |
 | 8 | Documentation équipe + clôture Mercury | En attente |
 
-> **Ordre prochaines sessions :** Launcher Session V1.1 → Reviewer + Manifest web → Mercury exit
+> **Prochaine session :** Phase 6 — Reviewer + Manifest sessions web (localStorage)
 
 ---
 
 ## Points ouverts — à traiter
 
 ### 🔴 Prioritaire
-1. **Launcher — Session V1.1** — Phase 2, migration écriture `session.json`
-2. **Launcher — grille profils** — profils inconnus (Sam, Nina, Marion) à investiguer
+1. **Phase 6 — Reviewer + Manifest** — sessions web localStorage
 
 ### 🟠 À ne pas oublier
-3. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings`
-4. **`session-reader.js`** dans BackUpFlow/modules/ — peut être supprimé
-5. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
-6. **Reviewer + Manifest** — sessions web localStorage (Phase 6)
+2. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings`
+3. **`session-reader.js`** dans BackUpFlow/modules/ — peut être supprimé
+4. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
 
 ### 🔵 Gemini — priorité haute
-7. **`session-profile.js` + Keychain** — enrichir le module pour lire les clés API directement depuis le Keychain macOS, sans dépendance à Launcher. Chaque app autonome sur les clés.
+5. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS, sans dépendance à Launcher. Chaque app autonome sur les clés.
 
-### 🔵 Gemini — ARK UX (notés session 2 avril)
-8. **Barre de progression** — améliorer mise en forme, gamification
-9. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-10. **Écran bilan** — écran dédié post-archivage avec résumé + GIFs
-11. **Nommage fichier archivé** — utiliser le nom normé Monday (comme BackUpFlow)
+### 🔵 Gemini — ARK UX
+6. **Barre de progression** — améliorer mise en forme, gamification
+7. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+8. **Écran bilan** — écran dédié post-archivage avec résumé + GIFs
+9. **Nommage fichier archivé** — utiliser le nom normé Monday (comme BackUpFlow)
 
 ---
 
@@ -107,8 +113,19 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 
-**Apps migrées :** Transporter ✅ · BackUpFlow ✅ · ARK ✅
-**Apps restantes :** Launcher (architecture src/ différente)
+**Apps migrées :** Launcher ✅ · Transporter ✅ · BackUpFlow ✅ · ARK ✅
+**Toutes les apps desktop Mercury sont migrées.**
+
+---
+
+## Leçon clé — Nettoyage profils Launcher
+
+Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel** (interface officielle). Nettoyer uniquement GitHub ou uniquement le local est insuffisant — GithubSync re-pollue au démarrage.
+
+Sources à nettoyer simultanément si nettoyage manuel requis :
+1. `profiles.json` GitHub (`launcher-profiles`)
+2. `config.json` dans `~/Library/Application Support/launcher-v2/`
+3. `profiles-cache.json` dans `~/Library/Application Support/launcher-v2/`
 
 ---
 
@@ -152,10 +169,14 @@ Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 - **Standard fenêtre** — 1440×1050, un seul profil pour toute la suite.
 
 ### Actées le 2 avril 2026
-- **Clés API dans session.json** — quand une app écrit la session sans passer par Launcher, les `apiKeys` sont absentes. Décision : enrichir `session-profile.js` pour lire le Keychain directement — planifié Gemini priorité haute.
-- **Monday colonne "État Rushs"** — `column_id: color_mm219hny` — 4 statuts : Dispo / Archivé / Pas de rushs / N/R. ARK y écrit "Archivé" en fin d'archivage.
-- **HandBrake streaming** — `execFile` → `spawn` + split `\r` pour le suivi temps réel. Pattern à réutiliser dans toute app utilisant HandBrakeCLI.
+- **Format session.json V2** — champs plats, pas d'apiKeys, pas d'allProfiles, `expiresAt` ISO.
+- **Expiration session** — calculée via `expiresAt` (ISO) et non `expiresAfterHours`.
+- **MASTER password** — stocké dans Keychain macOS, machine-spécifique. À configurer sur chaque Mac.
+- **Nettoyage profils Launcher** — toujours via MASTER panel. Nettoyage manuel = 3 sources simultanées.
+- **Monday colonne "État Rushs"** — `column_id: color_mm219hny` — 4 statuts : Dispo / Archivé / Pas de rushs / N/R.
+- **HandBrake streaming** — `execFile` → `spawn` + split `\r`. Pattern à réutiliser.
 - **ARK drag & drop** — `webUtils.getPathForFile(file)` obligatoire avec `contextIsolation: true`.
+- **`session-profile.js` + Keychain** — enrichissement planifié Gemini priorité haute.
 
 ---
 
@@ -163,16 +184,16 @@ Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.29.03.26 | 🔵 Session V1.1 en cours |
+| Launcher V2 | `RealCoolclint/Launcher` | v1.02.04.26 | 🟣 En orbite |
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.01.04.26 | 🟣 En orbite |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
 | Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🟣 En orbite |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ |
-| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 8 profils |
+| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 6 profils |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.2 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.3 |
 
 ---
 
@@ -205,6 +226,6 @@ Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 
 ---
 
-*Plan Directeur V3.2 — 2 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.1*
-*Prochaine mise à jour : après Launcher Session V1.1*
+*Plan Directeur V3.3 — 2 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.2*
+*Prochaine mise à jour : après Phase 6 Reviewer + Manifest sessions web*
