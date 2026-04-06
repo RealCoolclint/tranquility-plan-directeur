@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 3.3 — 2 avril 2026*
+*Version 3.4 — 6 avril 2026*
 
 ---
 
@@ -15,7 +15,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ## Phase Mercury — État du programme
 
-**Progression : 98%**
+**Progression : 99%**
 
 | État | Définition |
 |------|-----------|
@@ -35,8 +35,8 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 2 | **BackUpFlow** | Desktop | Workflow complet, Session V1.1 ✅, build ✅ | 🟣 En orbite |
 | 3 | **Transporter** | Desktop | Workflow valise complet, Session V1.1 ✅, design aligné | 🟣 En orbite |
 | 4 | **ARK** | Desktop | Session V1.1 ✅, tests ✅, build ✅ | 🟣 En orbite |
-| 5 | **Reviewer** | Web | Design aligné, session web à implémenter | 🟣 En orbite |
-| 6 | **Manifest** | Web | Design aligné, session web à implémenter | 🟣 En orbite |
+| 5 | **Reviewer** | Web | WebProfileSelector ✅, localStorage ✅, profiles-public.json ✅ | 🟣 En orbite |
+| 6 | **Manifest** | Web | WebProfileSelector à implémenter | 🔵 Lancement |
 
 ---
 
@@ -50,8 +50,8 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, 1440×1050 ✅ |
 | 3 | **BackUpFlow** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
-| 5 | **Reviewer** | GitHub Pages | Mercury Design ✅, tranquility-core.css ✅ |
-| 6 | **Manifest** | v1.30.03.26 | Mercury Design ✅, repo renommé ✅ |
+| 5 | **Reviewer** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, tranquility-core.css ✅ |
+| 6 | **Manifest** | v1.30.03.26 | Mercury Design ✅ — WebProfileSelector à implémenter |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -80,18 +80,36 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 3 | BackUpFlow — Session V1.1 + build | ✅ Terminée |
 | 4 | Transporter — Session V1.1 | ✅ Terminée |
 | 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
-| 6 | Reviewer + Manifest — sessions web | En attente |
+| 6 | Reviewer + Manifest — sessions web | 🔵 En cours — Reviewer ✅ · Manifest à faire |
 | 7 | Tests d'intégration | En attente |
 | 8 | Documentation équipe + clôture Mercury | En attente |
 
-> **Prochaine session :** Phase 6 — Reviewer + Manifest sessions web (localStorage)
+> **Prochaine session :** Phase 6 — Manifest WebProfileSelector localStorage
+
+---
+
+## Infrastructure GitHub
+
+| App | Repo | Release | État |
+|-----|------|---------|------|
+| Launcher V2 | `RealCoolclint/Launcher` | v1.02.04.26 | 🟣 En orbite |
+| Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
+| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.01.04.26 | 🟣 En orbite |
+| ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
+| Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
+| Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🔵 Lancement |
+| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
+| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 6 profils |
+| Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 6 profils allégés |
+| Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.4 |
 
 ---
 
 ## Points ouverts — à traiter
 
 ### 🔴 Prioritaire
-1. **Phase 6 — Reviewer + Manifest** — sessions web localStorage
+1. **Phase 6 — Manifest** — WebProfileSelector localStorage (prochaine session)
 
 ### 🟠 À ne pas oublier
 2. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings`
@@ -99,13 +117,54 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 4. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
 
 ### 🔵 Gemini — priorité haute
-5. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS, sans dépendance à Launcher. Chaque app autonome sur les clés.
+5. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+6. **Reviewer UI** — amélioration générale de l'interface
+7. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+8. **Modale RGPD** à la première connexion (consentement profils publics)
 
 ### 🔵 Gemini — ARK UX
-6. **Barre de progression** — améliorer mise en forme, gamification
-7. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-8. **Écran bilan** — écran dédié post-archivage avec résumé + GIFs
-9. **Nommage fichier archivé** — utiliser le nom normé Monday (comme BackUpFlow)
+9. **Barre de progression** — améliorer mise en forme, gamification
+10. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+11. **Écran bilan** — écran dédié post-archivage avec résumé
+12. **Nommage fichier archivé** — utiliser le nom normé Monday
+
+---
+
+## Décision architecturale actée — 6 avril 2026
+
+**profiles-public.json — séparation données publiques / privées :**
+- `launcher-profiles/profiles.json` (privé) — source de vérité complète avec emails
+- `tranquility-core/profiles-public.json` (public) — version allégée sans nom complet ni email
+- Les apps web fetchent uniquement la version publique
+- Génération via script Python depuis le repo privé
+- Compatible Gemini/Supabase Auth — pas de dette architecturale
+- RGPD : modale de consentement à ajouter lors de la première connexion
+
+**Pattern WebProfileSelector — validé sur Reviewer :**
+- `show()` appelé AVANT `await syncProfiles()` — jamais d'écran blanc
+- Badge ADMIN en style inline dans le template JS — seule solution stable contre `.dark-theme *`
+- `cloneNode` pour reset les listeners du bouton avatar à chaque session
+- Clé localStorage : `ts_session_[appname]`
+
+---
+
+## Patron de migration — WebProfileSelector web
+
+Validé sur Reviewer. À appliquer sur Manifest (et futures apps web).
+
+**Fichiers à modifier :**
+1. `index.html` (ou fichier principal) — CSP, tranquility-core.css, bloc HTML sélecteur, top-bar-profile, onMercuryComplete
+2. `styles.css` — bloc WebProfileSelector complet
+3. `app.js` / `script.js` — WebProfileSelector IIFE + window.onMercuryComplete
+
+**URL profiles-public.json :**
+```
+https://realcoolclint.github.io/tranquility-core/profiles-public.json
+```
+
+**Clés localStorage par app :**
+- Reviewer → `ts_session_reviewer`
+- Manifest → `ts_session_manifest`
 
 ---
 
@@ -120,9 +179,7 @@ Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 
 ## Leçon clé — Nettoyage profils Launcher
 
-Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel** (interface officielle). Nettoyer uniquement GitHub ou uniquement le local est insuffisant — GithubSync re-pollue au démarrage.
-
-Sources à nettoyer simultanément si nettoyage manuel requis :
+Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel**. Sources à nettoyer simultanément si nettoyage manuel requis :
 1. `profiles.json` GitHub (`launcher-profiles`)
 2. `config.json` dans `~/Library/Application Support/launcher-v2/`
 3. `profiles-cache.json` dans `~/Library/Application Support/launcher-v2/`
@@ -140,60 +197,6 @@ Sources à nettoyer simultanément si nettoyage manuel requis :
 | `center` | `true` |
 | `backgroundColor` | `'#0a0f1e'` |
 | `resizable` | `true` |
-
----
-
-## Décisions produit actées
-
-### Actées le 28 mars 2026
-- **Retriever** — Launcher = source de vérité des secrets. Apps lisent depuis Keychain.
-- **Installation autarcique** — téléchargement + installation 100% dans Launcher, zéro Finder.
-- **Build apps Electron** — `CSC_IDENTITY_AUTO_DISCOVERY=false npx electron-builder`.
-- **Comparaison versions** — par `published_at` GitHub Releases (pas par tag).
-- **Design Reference** — condition de sortie Mercury = checklist complète.
-- **CSP Electron** — `<meta http-equiv="Content-Security-Policy">` dans chaque app.
-
-### Actées le 31 mars 2026
-- **GitHub = cloud de la Tranquility Suite** — profils, avatars, mises à jour, design system.
-- **Chaque app est autonome** — Launcher jamais requis pour lancer une app.
-- **Session unifiée** — `~/Library/Application Support/tranquility-suite/session.json` partagé.
-- **La première app ouverte écrit la session** — les suivantes la lisent.
-- **3 durées de session** — aujourd'hui / 7 jours / toujours.
-- **Profils filtrés par appPermissions** — chaque app n'affiche que les profils autorisés.
-- **Pas de PIN en Mercury** — sélection de profil suffit.
-
-### Actées le 1er avril 2026
-- **`session-profile.js`** — module unifié copié à l'identique dans chaque app desktop.
-- **`bootProfileSelector(forceSelect)`** — pattern validé.
-- **Standard top bar Mercury** — `top-bar-brand` / `top-bar-nav` / `top-bar-actions`.
-- **Standard fenêtre** — 1440×1050, un seul profil pour toute la suite.
-
-### Actées le 2 avril 2026
-- **Format session.json V2** — champs plats, pas d'apiKeys, pas d'allProfiles, `expiresAt` ISO.
-- **Expiration session** — calculée via `expiresAt` (ISO) et non `expiresAfterHours`.
-- **MASTER password** — stocké dans Keychain macOS, machine-spécifique. À configurer sur chaque Mac.
-- **Nettoyage profils Launcher** — toujours via MASTER panel. Nettoyage manuel = 3 sources simultanées.
-- **Monday colonne "État Rushs"** — `column_id: color_mm219hny` — 4 statuts : Dispo / Archivé / Pas de rushs / N/R.
-- **HandBrake streaming** — `execFile` → `spawn` + split `\r`. Pattern à réutiliser.
-- **ARK drag & drop** — `webUtils.getPathForFile(file)` obligatoire avec `contextIsolation: true`.
-- **`session-profile.js` + Keychain** — enrichissement planifié Gemini priorité haute.
-
----
-
-## Infrastructure GitHub
-
-| App | Repo | Release | État |
-|-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.02.04.26 | 🟣 En orbite |
-| Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
-| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.01.04.26 | 🟣 En orbite |
-| ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
-| Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
-| Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🟣 En orbite |
-| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ |
-| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 6 profils |
-| Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.3 |
 
 ---
 
@@ -217,15 +220,17 @@ Sources à nettoyer simultanément si nettoyage manuel requis :
 
 - **`session-profile.js` + Keychain** — autonomie clés API sans Launcher (priorité haute)
 - SSO cross-machine — sync activité via GitHub
-- Reviewer V2 — Supabase, proxy 720p HandBrake, commentaires timestampés
+- Reviewer V2 — Supabase Auth, commentaires timestampés, modèle Frame.io
 - Payload — Desktop + Mobile, Mode 2 (checkout QR), Mode 3 (état matériel)
 - Extensions Premiere — CAPCOM, DATAPAD, BLACKBOX, Telemetry
 - PIN / authentification renforcée sur le sélecteur de profil
 - Manifest — API Monday directe, historique, templates par format
 - ARK UX — écran bilan, filtre Monday, gamification progression, nommage normé
+- Système d'équipes dans le sélecteur de profil
+- Modale RGPD première connexion
 
 ---
 
-*Plan Directeur V3.3 — 2 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.2*
-*Prochaine mise à jour : après Phase 6 Reviewer + Manifest sessions web*
+*Plan Directeur V3.4 — 6 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.3*
+*Prochaine mise à jour : après Phase 6 Manifest*
