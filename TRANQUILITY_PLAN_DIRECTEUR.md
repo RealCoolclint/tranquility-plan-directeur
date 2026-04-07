@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 3.6 — 7 avril 2026*
+*Version 3.7 — 7 avril 2026*
 
 ---
 
@@ -10,6 +10,8 @@
 La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidéo de L'Étudiant. Chaque outil répond à un besoin précis de production, de post-production ou d'organisation. L'ensemble forme un système cohérent, maintenu par Martin Pavloff, utilisé quotidiennement par l'équipe.
 
 **Principe central :** GitHub = cloud de la Tranquility Suite.
+
+**Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier.
 
 ---
 
@@ -104,7 +106,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.6 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.7 |
 
 ---
 
@@ -117,33 +119,60 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 ### 🟠 Dette — avant Phase 7
 3. **`session-reader.js`** dans BackUpFlow/modules/ — peut être supprimé *(Chantier 2)*
 4. **Bug Launcher : suppressions de profils ne se propagent pas sur GitHub** — à investiguer *(Chantier 3)*
-5. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings` *(Chantier 4)*
+5. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via couche `_machines` (voir architecture Vision Produit D3) *(Chantier 4)*
 6. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
 
+### 🔵 Gemini — Vision Produit (décisions actées 7 avril 2026)
+7. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
+8. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
+9. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
+10. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
+11. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
+12. **Architecture settings 2 couches** — portable (GitHub) + `_machines` (chemins locaux par machine)
+
 ### 🔵 Gemini — priorité haute
-7. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-8. **Reviewer UI** — amélioration générale de l'interface
-9. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-10. **Modale RGPD** à la première connexion (consentement profils publics)
-11. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts (scripts, docs, paths)
+13. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+14. **Reviewer UI** — amélioration générale de l'interface
+15. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+16. **Modale RGPD** à la première connexion (consentement profils publics)
+17. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts (scripts, docs, paths)
 
 ### 🔵 Gemini — ARK UX
-12. **Barre de progression** — améliorer mise en forme, gamification
-13. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-14. **Écran bilan** — écran dédié post-archivage avec résumé
-15. **Nommage fichier archivé** — utiliser le nom normé Monday
+18. **Barre de progression** — améliorer mise en forme, gamification
+19. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+20. **Écran bilan** — écran dédié post-archivage avec résumé
+21. **Nommage fichier archivé** — utiliser le nom normé Monday
 
 ---
 
-## Décision architecturale actée — 6 avril 2026
+## Décisions architecturales actées
+
+### 7 avril 2026 — Vision Produit (5 décisions)
+
+**D1 — Launcher est optionnel dans le quotidien, indispensable dans les moments clés**
+Hub optionnel mais précieux. Modèle Adobe Creative Cloud. Jamais obligatoire, toujours désirable.
+
+**D2 — Thomas est acteur de son profil**
+Tout utilisateur peut modifier avatar, couleur, initiales, prénom/nom. Le MASTER garde le contrôle sur rôle, email, permissions, statut.
+
+**D3 — Architecture settings à deux niveaux**
+- Launcher : 10 réglages globaux (identité, session, machine, mises à jour, affichage)
+- Chaque app : ses propres settings dans son interface, portables via GitHub + couche `_machines`
+- Clés API : globales, MASTER uniquement, Keychain macOS service global
+
+**D4 — Onboarding : page vitrine + auto-enregistrement Launcher**
+Page GitHub Pages → téléchargement DMG → auto-enregistrement dans Launcher → profil `pending` → Martin valide + permissions → `active` → notifications Resend dans les deux sens.
+
+**D5 — Modèle C : Launcher hub optionnel mais précieux**
+Trois modèles évalués (A=admin pur, B=obligatoire, C=optionnel précieux). C acté.
+
+### 6 avril 2026 — profiles-public.json
 
 **profiles-public.json — séparation données publiques / privées :**
 - `launcher-profiles/profiles.json` (privé) — source de vérité complète avec emails
 - `tranquility-core/profiles-public.json` (public) — version allégée sans nom complet ni email
 - Les apps web fetchent uniquement la version publique
 - Génération via script Python depuis le repo privé
-- Compatible Gemini/Supabase Auth — pas de dette architecturale
-- RGPD : modale de consentement à ajouter lors de la première connexion
 
 ---
 
@@ -171,17 +200,15 @@ Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
 
 ---
 
-## Leçon clé — Nettoyage profils Launcher
+## Leçons clés
 
+### Nettoyage profils Launcher
 Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel**. Sources à nettoyer simultanément si nettoyage manuel requis :
 1. `profiles.json` GitHub (`launcher-profiles`)
 2. `config.json` dans `~/Library/Application Support/launcher-v2/`
 3. `profiles-cache.json` dans `~/Library/Application Support/launcher-v2/`
 
----
-
-## Leçon clé — Format Passeport dans les renderers
-
+### Format Passeport dans les renderers
 Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDisplay(profile)`** — elle lit `identity.*` en priorité et tombe en fallback sur les champs plats. Ne jamais lire `profile.firstName` directement dans un renderer.
 
 ---
@@ -219,10 +246,11 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 
 | Document | Rôle | Version |
 |----------|------|---------|
-| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité | V1.1 ✅ |
+| `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices — à lire avant tout chantier | V1.0 ✅ |
+| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
 | `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design complète | V2.1 |
-| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format Passeport V1 | V1.0 |
+| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format Passeport | V1.1 ✅ |
 | `TRANQUILITY_LAUNCHER_SESSION_SPEC.md` | Protocole session Launcher | V1.0 |
 | `TRANQUILITY_SSO_SPEC.md` | SSO cross-machine — Phase Gemini | V1.0 |
 | `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Patterns backend Electron | V1.0 |
@@ -233,6 +261,7 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 
 ## Phase Gemini — Horizon
 
+- **Vision Produit** — page vitrine onboarding, auto-enregistrement, onglet Mon Profil, settings par app portables
 - **`session-profile.js` + Keychain** — autonomie clés API sans Launcher (priorité haute)
 - SSO cross-machine — sync activité via GitHub
 - Reviewer V2 — Supabase Auth, commentaires timestampés, modèle Frame.io
@@ -247,6 +276,6 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 
 ---
 
-*Plan Directeur V3.6 — 7 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.5*
+*Plan Directeur V3.7 — 7 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.6*
 *Prochaine mise à jour : après Chantiers 2/3/4 et Phase 7 Tests d'intégration*
