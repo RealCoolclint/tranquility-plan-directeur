@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 3.4 — 6 avril 2026*
+*Version 3.5 — 7 avril 2026*
 
 ---
 
@@ -15,7 +15,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ## Phase Mercury — État du programme
 
-**Progression : 99%**
+**Progression : 100% — En attente de clôture officielle**
 
 | État | Définition |
 |------|-----------|
@@ -36,7 +36,9 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 3 | **Transporter** | Desktop | Workflow valise complet, Session V1.1 ✅, design aligné | 🟣 En orbite |
 | 4 | **ARK** | Desktop | Session V1.1 ✅, tests ✅, build ✅ | 🟣 En orbite |
 | 5 | **Reviewer** | Web | WebProfileSelector ✅, localStorage ✅, profiles-public.json ✅ | 🟣 En orbite |
-| 6 | **Manifest** | Web | WebProfileSelector à implémenter | 🔵 Lancement |
+| 6 | **Manifest** | Web | WebProfileSelector ✅, localStorage ✅, CSP ✅ | 🟣 En orbite |
+
+**✅ Les 6 conditions de sortie Mercury sont remplies.**
 
 ---
 
@@ -51,7 +53,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 3 | **BackUpFlow** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
 | 5 | **Reviewer** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, tranquility-core.css ✅ |
-| 6 | **Manifest** | v1.30.03.26 | Mercury Design ✅ — WebProfileSelector à implémenter |
+| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅ |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -80,11 +82,11 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 3 | BackUpFlow — Session V1.1 + build | ✅ Terminée |
 | 4 | Transporter — Session V1.1 | ✅ Terminée |
 | 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
-| 6 | Reviewer + Manifest — sessions web | 🔵 En cours — Reviewer ✅ · Manifest à faire |
-| 7 | Tests d'intégration | En attente |
-| 8 | Documentation équipe + clôture Mercury | En attente |
+| 6 | Reviewer + Manifest — sessions web | ✅ Terminée |
+| 7 | Tests d'intégration | 🔵 Prochaine étape |
+| 8 | Documentation équipe + clôture Mercury | 🔵 Prochaine étape |
 
-> **Prochaine session :** Phase 6 — Manifest WebProfileSelector localStorage
+> **Prochaine session :** Phase 7 — Tests d'intégration · puis clôture Mercury officielle
 
 ---
 
@@ -97,36 +99,39 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.01.04.26 | 🟣 En orbite |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
-| Manifest | `RealCoolclint/Manifest` | v1.30.03.26 | 🔵 Lancement |
+| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
-| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 6 profils |
-| Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 6 profils allégés |
+| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils |
+| Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.4 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.5 |
 
 ---
 
 ## Points ouverts — à traiter
 
 ### 🔴 Prioritaire
-1. **Phase 6 — Manifest** — WebProfileSelector localStorage (prochaine session)
+1. **Phase 7 — Tests d'intégration** — vérifier la cohérence du flux Launcher → apps desktop + web
+2. **Phase 8 — Documentation équipe + clôture Mercury officielle**
 
 ### 🟠 À ne pas oublier
-2. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings`
-3. **`session-reader.js`** dans BackUpFlow/modules/ — peut être supprimé
-4. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
+3. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via `spLoadSettings`
+4. **`session-reader.js`** dans BackUpFlow/modules/ — peut être supprimé
+5. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
+6. **Antoine sans initiales** — à corriger dans Launcher (MASTER panel)
+7. **Bug Launcher : suppressions de profils ne se propagent pas sur GitHub** — à investiguer en session dédiée
 
 ### 🔵 Gemini — priorité haute
-5. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-6. **Reviewer UI** — amélioration générale de l'interface
-7. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-8. **Modale RGPD** à la première connexion (consentement profils publics)
+8. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+9. **Reviewer UI** — amélioration générale de l'interface
+10. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+11. **Modale RGPD** à la première connexion (consentement profils publics)
 
 ### 🔵 Gemini — ARK UX
-9. **Barre de progression** — améliorer mise en forme, gamification
-10. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-11. **Écran bilan** — écran dédié post-archivage avec résumé
-12. **Nommage fichier archivé** — utiliser le nom normé Monday
+12. **Barre de progression** — améliorer mise en forme, gamification
+13. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+14. **Écran bilan** — écran dédié post-archivage avec résumé
+15. **Nommage fichier archivé** — utiliser le nom normé Monday
 
 ---
 
@@ -140,22 +145,26 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 - Compatible Gemini/Supabase Auth — pas de dette architecturale
 - RGPD : modale de consentement à ajouter lors de la première connexion
 
-**Pattern WebProfileSelector — validé sur Reviewer :**
-- `show()` appelé AVANT `await syncProfiles()` — jamais d'écran blanc
-- Badge ADMIN en style inline dans le template JS — seule solution stable contre `.dark-theme *`
-- `cloneNode` pour reset les listeners du bouton avatar à chaque session
-- Clé localStorage : `ts_session_[appname]`
-
 ---
 
-## Patron de migration — WebProfileSelector web
+## Patron WebProfileSelector — validé sur Reviewer + Manifest
 
-Validé sur Reviewer. À appliquer sur Manifest (et futures apps web).
+**Règles définitives :**
+- `show()` appelé AVANT `syncProfiles()` — jamais d'écran blanc
+- Badge ADMIN en style inline dans le template JS — seule solution stable contre `.dark-theme *`
+- `cloneNode(false)` (shallow) + déplacement manuel des enfants pour reset les listeners — plus sûr que `cloneNode(true)`
+- `changeProfile()` doit toujours appeler `_syncProfiles()` — sinon grille vide
+- Clé localStorage : `ts_session_[appname]`
+- Le champ `avatar` dans `profiles-public.json` contient l'URL complète — **ne jamais préfixer**
+- CSP obligatoire : `img-src` doit contenir `https://raw.githubusercontent.com`
+- CSP obligatoire : `connect-src` doit contenir `https://realcoolclint.github.io`
+- Inline style `#profile-selector-screen` : une seule déclaration `display` — toujours `display:none` (le JS gère l'affichage)
+- Patch dans `.app-header` : toujours `<img>` PNG fixe — jamais `<video>` (la vidéo est réservée au Mercury Opening)
 
 **Fichiers à modifier :**
-1. `index.html` (ou fichier principal) — CSP, tranquility-core.css, bloc HTML sélecteur, top-bar-profile, onMercuryComplete
+1. `[fichier principal].html` — CSP, tranquility-core.css, bloc HTML sélecteur, bouton avatar header, onMercuryComplete
 2. `styles.css` — bloc WebProfileSelector complet
-3. `app.js` / `script.js` — WebProfileSelector IIFE + window.onMercuryComplete
+3. `[script principal].js` — WebProfileSelector IIFE + window.onMercuryComplete
 
 **URL profiles-public.json :**
 ```
@@ -224,13 +233,13 @@ Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel
 - Payload — Desktop + Mobile, Mode 2 (checkout QR), Mode 3 (état matériel)
 - Extensions Premiere — CAPCOM, DATAPAD, BLACKBOX, Telemetry
 - PIN / authentification renforcée sur le sélecteur de profil
-- Manifest — API Monday directe, historique, templates par format
+- Manifest — API Monday directe, historique, templates par format, champ videoManager branché sur profil connecté
 - ARK UX — écran bilan, filtre Monday, gamification progression, nommage normé
 - Système d'équipes dans le sélecteur de profil
 - Modale RGPD première connexion
 
 ---
 
-*Plan Directeur V3.4 — 6 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.3*
-*Prochaine mise à jour : après Phase 6 Manifest*
+*Plan Directeur V3.5 — 7 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.4*
+*Prochaine mise à jour : après Phase 7 Tests d'intégration*
