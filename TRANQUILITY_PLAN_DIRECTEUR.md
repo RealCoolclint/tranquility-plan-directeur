@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 3.9 — 8 avril 2026*
+*Version 4.0 — 8 avril 2026*
 
 ---
 
@@ -139,6 +139,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 ### 🔵 Gemini — BackUpFlow
 18. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
+19. **Robustesse chemin source** — vérifier la disponibilité du volume avant tout chargement de médias (`fs.access` ou équivalent). Si volume distant/instable (ex. T7 via ATEM/HUB sur Mac Studio) : toast d'erreur clair, pas de crash. Voir `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
 
 ---
 
@@ -223,6 +224,12 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 ### BackUpFlow — profils Launcher
 Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfile` local — le profil n'existe pas en local. Utiliser `spSaveSettings` pour tout ce qui est settings.
 
+### BackUpFlow — crash sur volume distant (Mac Studio)
+Sur le Mac Studio, le SSD T7 est connecté via **ATEM → RJ45 → HUB → USB-C** (config permanente). Tout accès à un fichier sur ce volume depuis une opération asynchrone Electron/V8 peut échouer si le chemin est lent ou instable, provoquant un `EXC_BREAKPOINT (SIGTRAP)` sans message d'erreur visible.
+**Règle :** toujours vérifier la disponibilité du volume source avant de tenter une lecture. La couche `_machines` du Mac Studio doit tenir compte du fait que le T7 n'est **pas un SSD directement branché**.
+**Workaround actuel (version pré-Mercury) :** copier les médias en local avant de les charger.
+Ref : `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
+
 ### BackUpFlow — splash version
 `window.APP_VERSION` doit être assigné dans `DOMContentLoaded` avant que `runSplash` soit appelé. La version est fetchée async via `getAppVersion()`.
 
@@ -261,6 +268,7 @@ Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfi
 
 | Document | Rôle | Version |
 |----------|------|---------|
+| `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md` | Diagnostic crash BackUpFlow sur config ATEM/HUB Mac Studio + implications chantiers | 08/04/26 |
 | `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices — à lire avant tout chantier | V1.0 ✅ |
 | `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
@@ -292,6 +300,6 @@ Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfi
 
 ---
 
-*Plan Directeur V3.9 — 8 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.8*
+*Plan Directeur V4.0 — 8 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.9*
 *Prochaine mise à jour : après Phase 7 Tests d'intégration*
