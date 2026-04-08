@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 3.8 — 7 avril 2026*
+*Version 3.9 — 8 avril 2026*
 
 ---
 
@@ -50,9 +50,9 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | # | Outil | Version | Notes |
 |---|-------|---------|-------|
-| 1 | **Launcher V2** | v1.07.04.26 | Session V1.1 ✅, MASTER ✅, initiales éditables ✅, groupes étendus ✅, ROLES_MAP ✅, pagination grille ✅, ARK au catalogue ✅, bug suppression GitHub ✅, filtre archivés ✅ — **build à faire** |
+| 1 | **Launcher V2** | v1.08.04.26 | Session V1.1 ✅, MASTER ✅, initiales éditables ✅, groupes étendus ✅, ROLES_MAP ✅, pagination grille ✅, ARK au catalogue ✅, bug suppression GitHub ✅, filtre archivés ✅, build ✅ |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, 1440×1050 ✅ |
-| 3 | **BackUpFlow** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, build ✅, 1440×1050 ✅ |
+| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, ProfileSelector ✅, couche `_machines` ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
 | 5 | **Reviewer** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, tranquility-core.css ✅ |
 | 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅ |
@@ -88,7 +88,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 7 | Tests d'intégration | 🔵 Prochaine étape |
 | 8 | Documentation équipe + clôture Mercury | 🔵 Prochaine étape |
 
-> **Prochaine session :** Build Launcher → Chantier 4 BackUpFlow `_machines` → Phase 7 Tests d'intégration → clôture Mercury
+> **Prochaine session :** Phase 7 Tests d'intégration → Phase 8 Clôture Mercury
 
 ---
 
@@ -96,9 +96,9 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.07.04.26 | 🟣 En orbite — build à mettre à jour |
+| Launcher V2 | `RealCoolclint/Launcher` | v1.08.04.26 | 🟣 En orbite |
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
-| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.01.04.26 | 🟣 En orbite |
+| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
@@ -106,46 +106,52 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.8 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.9 |
 
 ---
 
 ## Points ouverts — à traiter
 
 ### 🔴 Prioritaire
-1. **Build Launcher** — embarquer les fixes de la session 7 avril (bug suppression, filtre archivés, ARK catalogue)
-2. **Phase 7 — Tests d'intégration** — vérifier la cohérence du flux Launcher → apps desktop + web
-3. **Phase 8 — Documentation équipe + clôture Mercury officielle**
-
-### 🟠 Dette — avant Phase 7
-4. **BackUpFlow `appSettings` couche `_machine`** — SSD1 + NAS via couche `_machines` (voir architecture Vision Produit D3) *(Chantier 4)*
-5. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
+1. **Phase 7 — Tests d'intégration** — vérifier la cohérence du flux Launcher → apps desktop + web
+2. **Phase 8 — Documentation équipe + clôture Mercury officielle**
 
 ### 🔵 Gemini — Vision Produit (décisions actées 7 avril 2026)
-6. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
-7. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
-8. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
-9. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
-10. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
-11. **Architecture settings 2 couches** — portable (GitHub) + `_machines` (chemins locaux par machine)
+3. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
+4. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
+5. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
+6. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
+7. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
 
 ### 🔵 Gemini — priorité haute
-12. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-13. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage. Plus de rebuild pour ajouter une app. *(décidé 7 avril 2026)*
-14. **Reviewer UI** — amélioration générale de l'interface
-15. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-16. **Modale RGPD** à la première connexion (consentement profils publics)
-17. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts (scripts, docs, paths)
+8. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+9. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
+10. **Reviewer UI** — amélioration générale de l'interface
+11. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+12. **Modale RGPD** à la première connexion (consentement profils publics)
+13. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
 
 ### 🔵 Gemini — ARK UX
-18. **Barre de progression** — améliorer mise en forme, gamification
-19. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-20. **Écran bilan** — écran dédié post-archivage avec résumé
-21. **Nommage fichier archivé** — utiliser le nom normé Monday
+14. **Barre de progression** — améliorer mise en forme, gamification
+15. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+16. **Écran bilan** — écran dédié post-archivage avec résumé
+17. **Nommage fichier archivé** — utiliser le nom normé Monday
+
+### 🔵 Gemini — BackUpFlow
+18. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
 
 ---
 
 ## Décisions architecturales actées
+
+### 8 avril 2026 — BackUpFlow couche `_machines`
+
+**Architecture settings portables implémentée :**
+- `ssdPersoPath` : profile-level (portable GitHub, commun à toutes les machines)
+- `ssdStudioPath` / `nasPath` : machine-level via `_machines[os.hostname()]`
+- Lecture au démarrage de session via `spLoadSettings` dans `onSessionReady` (async)
+- Persistance à chaque sauvegarde via `spSaveSettings` dans `saveSettings`
+- Handler IPC `get-machine-name` → `os.hostname()` ajouté dans `main.js`
 
 ### 7 avril 2026 — Vision Produit (5 décisions)
 
@@ -167,15 +173,12 @@ Page GitHub Pages → téléchargement DMG → auto-enregistrement dans Launcher
 Trois modèles évalués (A=admin pur, B=obligatoire, C=optionnel précieux). C acté.
 
 ### 7 avril 2026 — Catalogue dynamique (décision)
-`APPS_CATALOG` hardcodé dans `app.js` du Launcher → à externaliser en JSON sur `tranquility-core` en phase Gemini. Chaque nouvelle app s'ajoute sans rebuild.
+`APPS_CATALOG` hardcodé dans `app.js` du Launcher → à externaliser en JSON sur `tranquility-core` en phase Gemini.
 
 ### 6 avril 2026 — profiles-public.json
-
-**profiles-public.json — séparation données publiques / privées :**
 - `launcher-profiles/profiles.json` (privé) — source de vérité complète avec emails
 - `tranquility-core/profiles-public.json` (public) — version allégée sans nom complet ni email
 - Les apps web fetchent uniquement la version publique
-- Génération via script Python depuis le repo privé
 
 ---
 
@@ -212,10 +215,16 @@ Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel
 3. `profiles-cache.json` dans `~/Library/Application Support/launcher-v2/`
 
 ### Push GitHub dans le Launcher — règle de non-duplication
-Un seul push GitHub par opération. Le push est géré par `saveConfig()` dans le renderer. Le handler `delete-profile` dans `main.js` **ne doit pas** appeler `GithubSync.push()` — c'est une duplication qui crée une race condition sur le SHA. *(Fix 7 avril 2026)*
+Un seul push GitHub par opération. Le push est géré par `saveConfig()` dans le renderer. Le handler `delete-profile` dans `main.js` **ne doit pas** appeler `GithubSync.push()`.
 
 ### Format Passeport dans les renderers
-Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDisplay(profile)`** — elle lit `identity.*` en priorité et tombe en fallback sur les champs plats. Ne jamais lire `profile.firstName` directement dans un renderer.
+Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDisplay(profile)`**.
+
+### BackUpFlow — profils Launcher
+Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfile` local — le profil n'existe pas en local. Utiliser `spSaveSettings` pour tout ce qui est settings.
+
+### BackUpFlow — splash version
+`window.APP_VERSION` doit être assigné dans `DOMContentLoaded` avant que `runSplash` soit appelé. La version est fetchée async via `getAppVersion()`.
 
 ---
 
@@ -283,6 +292,6 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 
 ---
 
-*Plan Directeur V3.8 — 7 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.7*
-*Prochaine mise à jour : après Chantier 4 + Phase 7 Tests d'intégration*
+*Plan Directeur V3.9 — 8 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V3.8*
+*Prochaine mise à jour : après Phase 7 Tests d'intégration*
