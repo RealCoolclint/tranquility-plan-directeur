@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.1 — 9 avril 2026*
+*Version 4.2 — 9 avril 2026*
 
 ---
 
@@ -15,9 +15,9 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ---
 
-## Phase Mercury — État du programme
+## Phase Mercury — ✅ Clôturée — 9 avril 2026
 
-**Progression : 100% — Phase 7 validée — En attente Phase 8 Clôture officielle**
+**Progression : 100% — Toutes les phases terminées.**
 
 | État | Définition |
 |------|-----------|
@@ -27,9 +27,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ---
 
-## Conditions de sortie Mercury
-
-Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et alignées** :
+## Conditions de sortie Mercury — ✅ Toutes remplies
 
 | # | App | Type | Condition minimale | État |
 |---|-----|------|--------------------|------|
@@ -40,8 +38,20 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 5 | **Reviewer** | Web | WebProfileSelector ✅, localStorage ✅, profiles-public.json ✅ | 🟣 En orbite |
 | 6 | **Manifest** | Web | WebProfileSelector ✅, localStorage ✅, CSP ✅, index.html ✅ | 🟣 En orbite |
 
-**✅ Les 6 conditions de sortie Mercury sont remplies.**
-**✅ Phase 7 Tests d'intégration validée — 9 avril 2026.**
+---
+
+## Feuille de route Mercury — Phases
+
+| Phase | Chantier | État |
+|-------|----------|------|
+| 1 | Module unifié `session-profile.js` | ✅ Terminée |
+| 2 | Launcher — Session V1.1 | ✅ Terminée |
+| 3 | BackUpFlow — Session V1.1 + build | ✅ Terminée |
+| 4 | Transporter — Session V1.1 | ✅ Terminée |
+| 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
+| 6 | Reviewer + Manifest — sessions web | ✅ Terminée |
+| 7 | Tests d'intégration | ✅ Terminée — 9 avril 2026 |
+| 8 | Documentation équipe + clôture Mercury | ✅ Terminée — 9 avril 2026 |
 
 ---
 
@@ -76,23 +86,6 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 ---
 
-## Feuille de route Mercury — Phases
-
-| Phase | Chantier | État |
-|-------|----------|------|
-| 1 | Module unifié `session-profile.js` | ✅ Terminée |
-| 2 | Launcher — Session V1.1 | ✅ Terminée |
-| 3 | BackUpFlow — Session V1.1 + build | ✅ Terminée |
-| 4 | Transporter — Session V1.1 | ✅ Terminée |
-| 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
-| 6 | Reviewer + Manifest — sessions web | ✅ Terminée |
-| 7 | Tests d'intégration | ✅ Terminée — 9 avril 2026 |
-| 8 | Documentation équipe + clôture Mercury | 🔴 Prochaine étape |
-
-> **Prochaine session :** Phase 8 — Documentation équipe + Clôture Mercury officielle + Passage Gemini
-
----
-
 ## Infrastructure GitHub
 
 | App | Repo | Release | État |
@@ -104,51 +97,53 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
+| **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta — 9 avril 2026 |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.1 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.2 |
 
 ---
 
-## Points ouverts — à traiter
+## Phase Gemini — Ouverte
 
-### 🔴 Prioritaire
-1. **Phase 8 — Documentation équipe + clôture Mercury officielle**
-   - Guide de démarrage (Thomas, Antoine, Charlyne, Lisa, Maëlle)
-   - Annonce interne de la suite
-   - Clôture officielle Mercury dans les documents fondateurs
-   - Passage en Gemini
+### 🟡 Points ouverts mineurs reportés de Mercury
+1. **ARK : icône Electron par défaut** — configurer l'icône patch dans `electron-builder`
+2. **BackUpFlow `_machines` sur Mac Maison** — valider que les chemins sont bien distincts par hostname
+3. **Antoine Vassas** — initiales non assignées dans le système profils (bug ouvert)
 
-### 🟡 Points ouverts mineurs (Gemini)
-2. **ARK : icône Electron par défaut** — configurer l'icône patch dans `electron-builder`
-3. **BackUpFlow `_machines` sur Mac Maison** — valider que les chemins sont bien distincts par hostname
-4. **Antoine Vassas** — initiales non assignées dans le système profils (bug ouvert)
+### 🔵 Vision Produit (décisions actées 7 avril 2026)
+4. **Vitrine GitHub Pages** — beta déployée le 9 avril 2026 ✅. Version complète (fiches produit, tutos, D.A.) à construire en Gemini
+5. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
+6. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
+7. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
+8. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
 
-### 🔵 Gemini — Vision Produit (décisions actées 7 avril 2026)
-5. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
-6. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
-7. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
-8. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
-9. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
+### 🔵 Priorité haute
+9. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+10. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
+11. **Reviewer UI** — amélioration générale de l'interface
+12. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+13. **Modale RGPD** à la première connexion (consentement profils publics)
+14. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
 
-### 🔵 Gemini — priorité haute
-10. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-11. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
-12. **Reviewer UI** — amélioration générale de l'interface
-13. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-14. **Modale RGPD** à la première connexion (consentement profils publics)
-15. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
-
-### 🔵 Gemini — ARK UX
-16. **Barre de progression** — améliorer mise en forme, gamification
-17. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-18. **Écran bilan** — écran dédié post-archivage avec résumé
-19. **Nommage fichier archivé** — utiliser le nom normé Monday
+### 🔵 ARK UX
+15. **Barre de progression** — améliorer mise en forme, gamification
+16. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+17. **Écran bilan** — écran dédié post-archivage avec résumé
+18. **Nommage fichier archivé** — utiliser le nom normé Monday
 
 ---
 
 ## Décisions architecturales actées
+
+### 9 avril 2026 — Phase 8 Clôture Mercury
+
+**Livrables produits :**
+- `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` V1.0 — guide destiné à l'équipe (Thomas, Antoine, Charlyne, Lisa, Maëlle)
+- Annonce interne envoyée par email avec Virginie de Montard en copie
+- Vitrine beta déployée : `https://realcoolclint.github.io/tranquility-suite/`
+- Plan Directeur V4.2 — clôture Mercury actée
 
 ### 9 avril 2026 — Phase 7 Tests d'intégration validée
 
@@ -288,27 +283,11 @@ Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfi
 | `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Patterns backend Electron | V1.0 |
 | `TRANQUILITY_SUITE_MERCURY_OPENING.md` | Norme splash screen | V1.0 |
 | `TRANQUILITY_SUITE_MISSION_PATCHES_STATUT.md` | État des patches | V1.0 |
+| `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` | Guide de démarrage destiné à l'équipe | V1.0 ✅ |
 
 ---
 
-## Phase Gemini — Horizon
-
-- **Vision Produit** — page vitrine onboarding, auto-enregistrement, onglet Mon Profil, settings par app portables
-- **Catalogue Launcher dynamique** — `APPS_CATALOG` en JSON externe sur `tranquility-core`
-- **`session-profile.js` + Keychain** — autonomie clés API sans Launcher (priorité haute)
-- SSO cross-machine — sync activité via GitHub
-- Reviewer V2 — Supabase Auth, commentaires timestampés, modèle Frame.io
-- Payload — Desktop + Mobile, Mode 2 (checkout QR), Mode 3 (état matériel)
-- Extensions Premiere — CAPCOM, DATAPAD, BLACKBOX, Telemetry
-- PIN / authentification renforcée sur le sélecteur de profil
-- Manifest — API Monday directe, historique, templates par format, champ videoManager branché sur profil connecté
-- ARK UX — écran bilan, filtre Monday, gamification progression, nommage normé
-- Système d'équipes dans le sélecteur de profil
-- Modale RGPD première connexion
-- Renommage `Launcher-v2` → `Launcher` (à évaluer)
-
----
-
-*Plan Directeur V4.1 — 9 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.0*
-*Prochaine mise à jour : après Phase 8 Clôture Mercury officielle*
+*Plan Directeur V4.2 — 9 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.1*
+*Phase Mercury : ✅ Clôturée — 9 avril 2026*
+*Phase Gemini : Ouverte*
