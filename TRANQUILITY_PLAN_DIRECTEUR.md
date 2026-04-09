@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.0 — 8 avril 2026*
+*Version 4.1 — 9 avril 2026*
 
 ---
 
@@ -17,7 +17,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ## Phase Mercury — État du programme
 
-**Progression : 100% — En attente de clôture officielle**
+**Progression : 100% — Phase 7 validée — En attente Phase 8 Clôture officielle**
 
 | État | Définition |
 |------|-----------|
@@ -38,9 +38,10 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 3 | **Transporter** | Desktop | Workflow valise complet, Session V1.1 ✅, design aligné | 🟣 En orbite |
 | 4 | **ARK** | Desktop | Session V1.1 ✅, tests ✅, build ✅ | 🟣 En orbite |
 | 5 | **Reviewer** | Web | WebProfileSelector ✅, localStorage ✅, profiles-public.json ✅ | 🟣 En orbite |
-| 6 | **Manifest** | Web | WebProfileSelector ✅, localStorage ✅, CSP ✅ | 🟣 En orbite |
+| 6 | **Manifest** | Web | WebProfileSelector ✅, localStorage ✅, CSP ✅, index.html ✅ | 🟣 En orbite |
 
 **✅ Les 6 conditions de sortie Mercury sont remplies.**
+**✅ Phase 7 Tests d'intégration validée — 9 avril 2026.**
 
 ---
 
@@ -50,12 +51,12 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | # | Outil | Version | Notes |
 |---|-------|---------|-------|
-| 1 | **Launcher V2** | v1.08.04.26 | Session V1.1 ✅, MASTER ✅, initiales éditables ✅, groupes étendus ✅, ROLES_MAP ✅, pagination grille ✅, ARK au catalogue ✅, bug suppression GitHub ✅, filtre archivés ✅, build ✅ |
+| 1 | **Launcher V2** | v1.18.04.26 | Session V1.1 ✅, MASTER ✅, initiales éditables ✅, groupes étendus ✅, ROLES_MAP ✅, pagination grille ✅, ARK au catalogue ✅, bug suppression GitHub ✅, filtre archivés ✅, URL Manifest corrigée ✅, build ✅ |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, 1440×1050 ✅ |
 | 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, ProfileSelector ✅, couche `_machines` ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
 | 5 | **Reviewer** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, tranquility-core.css ✅ |
-| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅ |
+| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅, index.html ✅ |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -85,10 +86,10 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | 4 | Transporter — Session V1.1 | ✅ Terminée |
 | 5 | ARK — Session V1.1 + tests + build | ✅ Terminée |
 | 6 | Reviewer + Manifest — sessions web | ✅ Terminée |
-| 7 | Tests d'intégration | 🔵 Prochaine étape |
-| 8 | Documentation équipe + clôture Mercury | 🔵 Prochaine étape |
+| 7 | Tests d'intégration | ✅ Terminée — 9 avril 2026 |
+| 8 | Documentation équipe + clôture Mercury | 🔴 Prochaine étape |
 
-> **Prochaine session :** Phase 7 Tests d'intégration → Phase 8 Clôture Mercury
+> **Prochaine session :** Phase 8 — Documentation équipe + Clôture Mercury officielle + Passage Gemini
 
 ---
 
@@ -96,7 +97,7 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.08.04.26 | 🟣 En orbite |
+| Launcher V2 | `RealCoolclint/Launcher` | v1.18.04.26 | 🟣 En orbite |
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
@@ -106,44 +107,59 @@ Mercury est terminée quand ces 6 apps sont **parfaitement opérationnelles et a
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V3.9 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.1 |
 
 ---
 
 ## Points ouverts — à traiter
 
 ### 🔴 Prioritaire
-1. **Phase 7 — Tests d'intégration** — vérifier la cohérence du flux Launcher → apps desktop + web
-2. **Phase 8 — Documentation équipe + clôture Mercury officielle**
+1. **Phase 8 — Documentation équipe + clôture Mercury officielle**
+   - Guide de démarrage (Thomas, Antoine, Charlyne, Lisa, Maëlle)
+   - Annonce interne de la suite
+   - Clôture officielle Mercury dans les documents fondateurs
+   - Passage en Gemini
+
+### 🟡 Points ouverts mineurs (Gemini)
+2. **ARK : icône Electron par défaut** — configurer l'icône patch dans `electron-builder`
+3. **BackUpFlow `_machines` sur Mac Maison** — valider que les chemins sont bien distincts par hostname
+4. **Antoine Vassas** — initiales non assignées dans le système profils (bug ouvert)
 
 ### 🔵 Gemini — Vision Produit (décisions actées 7 avril 2026)
-3. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
-4. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
-5. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
-6. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
-7. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
+5. **Page vitrine GitHub Pages** — onboarding, téléchargement DMG Launcher, fiches produit, tutos, D.A.
+6. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
+7. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
+8. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
+9. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
 
 ### 🔵 Gemini — priorité haute
-8. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-9. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
-10. **Reviewer UI** — amélioration générale de l'interface
-11. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-12. **Modale RGPD** à la première connexion (consentement profils publics)
-13. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
+10. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
+11. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
+12. **Reviewer UI** — amélioration générale de l'interface
+13. **Système d'équipes** dans le sélecteur de profil (scalabilité)
+14. **Modale RGPD** à la première connexion (consentement profils publics)
+15. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
 
 ### 🔵 Gemini — ARK UX
-14. **Barre de progression** — améliorer mise en forme, gamification
-15. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-16. **Écran bilan** — écran dédié post-archivage avec résumé
-17. **Nommage fichier archivé** — utiliser le nom normé Monday
-
-### 🔵 Gemini — BackUpFlow
-18. **ARK splash** — `<img>` → `<video>` MP4 quand ambiance générée
-19. **Robustesse chemin source** — vérifier la disponibilité du volume avant tout chargement de médias (`fs.access` ou équivalent). Si volume distant/instable (ex. T7 via ATEM/HUB sur Mac Studio) : toast d'erreur clair, pas de crash. Voir `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
+16. **Barre de progression** — améliorer mise en forme, gamification
+17. **Liste Monday** — meilleure présentation + filtre/recherche rapide
+18. **Écran bilan** — écran dédié post-archivage avec résumé
+19. **Nommage fichier archivé** — utiliser le nom normé Monday
 
 ---
 
 ## Décisions architecturales actées
+
+### 9 avril 2026 — Phase 7 Tests d'intégration validée
+
+**Flux Launcher → apps desktop :** `session.json` lu correctement par BackUpFlow, Transporter, ARK sans passer par Launcher. Format V1.1 conforme.
+
+**Apps web :** Reviewer et Manifest WebProfileSelector opérationnels. Profils archivés filtrés. localStorage persistant.
+
+**Corrections intégrées au build v1.18.04.26 :**
+- URL Manifest dans `APPS_CATALOG` : `EasyCallSheet` → `Manifest` (`src/renderer/app.js`)
+- `EasyCallSheets.html` renommé `index.html` dans le repo Manifest
+- Remote git Manifest mis à jour : `https://github.com/RealCoolclint/Manifest.git`
 
 ### 8 avril 2026 — BackUpFlow couche `_machines`
 
@@ -224,12 +240,6 @@ Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDispl
 ### BackUpFlow — profils Launcher
 Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfile` local — le profil n'existe pas en local. Utiliser `spSaveSettings` pour tout ce qui est settings.
 
-### BackUpFlow — crash sur volume distant (Mac Studio)
-Sur le Mac Studio, le SSD T7 est connecté via **ATEM → RJ45 → HUB → USB-C** (config permanente). Tout accès à un fichier sur ce volume depuis une opération asynchrone Electron/V8 peut échouer si le chemin est lent ou instable, provoquant un `EXC_BREAKPOINT (SIGTRAP)` sans message d'erreur visible.
-**Règle :** toujours vérifier la disponibilité du volume source avant de tenter une lecture. La couche `_machines` du Mac Studio doit tenir compte du fait que le T7 n'est **pas un SSD directement branché**.
-**Workaround actuel (version pré-Mercury) :** copier les médias en local avant de les charger.
-Ref : `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
-
 ### BackUpFlow — splash version
 `window.APP_VERSION` doit être assigné dans `DOMContentLoaded` avant que `runSplash` soit appelé. La version est fetchée async via `getAppVersion()`.
 
@@ -268,7 +278,6 @@ Ref : `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
 
 | Document | Rôle | Version |
 |----------|------|---------|
-| `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md` | Diagnostic crash BackUpFlow sur config ATEM/HUB Mac Studio + implications chantiers | 08/04/26 |
 | `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices — à lire avant tout chantier | V1.0 ✅ |
 | `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
@@ -300,6 +309,6 @@ Ref : `BACKUPFLOW_MEMO_CRASH_ATEM_HUB_20260408.md`
 
 ---
 
-*Plan Directeur V4.0 — 8 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V3.9*
-*Prochaine mise à jour : après Phase 7 Tests d'intégration*
+*Plan Directeur V4.1 — 9 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.0*
+*Prochaine mise à jour : après Phase 8 Clôture Mercury officielle*
