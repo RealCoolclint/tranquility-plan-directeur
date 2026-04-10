@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.2 — 9 avril 2026*
+*Version 4.3 — 10 avril 2026*
 
 ---
 
@@ -55,7 +55,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 ---
 
-## Inventaire de la flotte — 17 outils
+## Inventaire de la flotte — 18+ outils
 
 ### En orbite 🟣
 
@@ -73,16 +73,24 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | # | Outil | Notes |
 |---|-------|-------|
 | 7 | Payload | Desktop + Mobile, Monday DB |
-| 8 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
-| 9 | Cargo | — |
-| 10 | Hatch | — |
-| 11 | Guidance | — |
-| 12 | Beacon | Web |
-| 13 | Debrief | Web |
-| 14 | Telemetry | Extension Premiere |
-| 15 | CAPCOM | Extension Premiere |
-| 16 | DATAPAD | Extension Premiere |
-| 17 | BLACKBOX | Extension Premiere |
+| 8 | COVENANT | Signature RGPD droit à l'image — spec V1.0 reçue 10/04/2026 |
+| 9 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 10 | Cargo | — |
+| 11 | Hatch | — |
+| 12 | Guidance | — |
+| 13 | Beacon | Web |
+| 14 | Debrief | Web |
+| 15 | Telemetry | Extension Premiere |
+| 16 | CAPCOM | Extension Premiere |
+| 17 | DATAPAD | Extension Premiere |
+| 18 | BLACKBOX | Extension Premiere |
+
+### Idées à creuser (pas encore au catalogue) 💡
+
+| Outil | Concept | Phase estimée |
+|-------|---------|---------------|
+| **Prompteur caméra** | Contrôle et saisie du prompteur depuis laptop/tablet | Apollo ? |
+| **Budget projet** | Budgétisation d'un projet vidéo, intégration Monday | Gemini ? |
 
 ---
 
@@ -101,7 +109,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.2 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.3 |
 
 ---
 
@@ -111,39 +119,75 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 1. **ARK : icône Electron par défaut** — configurer l'icône patch dans `electron-builder`
 2. **BackUpFlow `_machines` sur Mac Maison** — valider que les chemins sont bien distincts par hostname
 3. **Antoine Vassas** — initiales non assignées dans le système profils (bug ouvert)
+4. **Vitrine — lien download Launcher** — à mettre à jour à chaque nouvelle release
 
-### 🔵 Vision Produit (décisions actées 7 avril 2026)
-4. **Vitrine GitHub Pages** — beta déployée le 9 avril 2026 ✅. Version complète (fiches produit, tutos, D.A.) à construire en Gemini
-5. **Écran "Je suis nouveau" dans Launcher** — auto-enregistrement, profil `pending`, notification Resend
-6. **Onglet "Mon profil" dans Launcher** — Thomas édite avatar, couleur, initiales (hors rôle/email/permissions)
-7. **Clés API globales MASTER → Keychain service global** — communes à toute la suite, pas dans les profils individuels
-8. **Écran settings dans chaque app** — accessible après sélection de profil, settings portables via GitHub + couche `_machines`
+### ✅ Corrections appliquées en Gemini
+- **Monday — colonne formule Feuille de service** — URL corrigée : `EasyCallSheet/EasyCallSheets.html` → `Manifest/` — 10 avril 2026
 
-### 🔵 Priorité haute
-9. **`session-profile.js` + Keychain** — enrichir pour lire les clés API directement depuis le Keychain macOS
-10. **Catalogue Launcher dynamique** — externaliser `APPS_CATALOG` en JSON sur `tranquility-core`, fetché au démarrage
-11. **Reviewer UI** — amélioration générale de l'interface
-12. **Système d'équipes** dans le sélecteur de profil (scalabilité)
-13. **Modale RGPD** à la première connexion (consentement profils publics)
-14. **Renommage dossier `Launcher-v2` → `Launcher`** — évaluer impacts
+---
 
-### 🔵 ARK UX
-15. **Barre de progression** — améliorer mise en forme, gamification
-16. **Liste Monday** — meilleure présentation + filtre/recherche rapide
-17. **Écran bilan** — écran dédié post-archivage avec résumé
-18. **Nommage fichier archivé** — utiliser le nom normé Monday
+### 🔵 Bloc A — Réflexion & stratégie (pas de Cursor)
+
+| # | Chantier | Description | Priorité |
+|---|----------|-------------|----------|
+| A1 | **Audit Workflow Tranquility** | Cartographie complète prod/post-prod, arbre de décision, angles morts, arbitrage logiciel oui/non | Haute |
+| A2 | **Fiches produits — toutes les apps** | Documentation officielle par app (format standard à définir) | Haute |
+| A3 | **COVENANT — discussion & arbitrage** | Valider direction, trancher Vue.js vs vanilla JS, positionner dans roadmap | Haute |
+| A4 | **Prompteur caméra — mini-fiche** | Creuser le besoin, rédiger une mini-spec | Moyenne |
+| A5 | **Budget projet — mini-fiche** | Creuser le besoin, intégration Monday, rédiger mini-spec | Moyenne |
+| A6 | **Postes RP/Com de l'Agence** | Mettre en action les profils supplémentaires pour les équipes RP et Com | À clarifier |
+
+### 🔵 Bloc B — Chantiers techniques (Cursor)
+
+| # | Chantier | Description | Priorité |
+|---|----------|-------------|----------|
+| B1 | **Reviewer — ergonomie commentaires** | Modale de navigation/modification des commentaires existants | Haute |
+| B2 | **Reviewer — player max** | Player toujours à la plus grande taille, sans crop, responsive | Haute |
+| B3 | **Landing page Tranquility — enrichissement** | Fiches produit, tutos, D.A. complète sur la vitrine | Moyenne |
+| B4 | **Cartes Launcher — enrichissement** | Style PlayStation, enrichissement visuel des cartes apps | Moyenne |
+| B5 | **Audit section Paramètres** | Revue de la section Paramètres dans chaque app — cohérence, utilité, angles morts | Moyenne |
+
+### 🔵 Infrastructure Gemini (priorité haute)
+
+| # | Chantier | Description |
+|---|----------|-------------|
+| I1 | **`session-profile.js` + Keychain** | Enrichir pour lire les clés API directement depuis le Keychain macOS |
+| I2 | **Catalogue Launcher dynamique** | Externaliser `APPS_CATALOG` en JSON sur `tranquility-core` |
+| I3 | **Écran "Je suis nouveau" dans Launcher** | Auto-enregistrement, profil `pending`, notification Resend |
+| I4 | **Onglet "Mon profil" dans Launcher** | Thomas édite avatar, couleur, initiales (hors rôle/email/permissions) |
+| I5 | **Système d'équipes** | Dans le sélecteur de profil (scalabilité) |
+| I6 | **Modale RGPD** | À la première connexion (consentement profils publics) |
+
+### 🔵 Grands chantiers Gemini
+
+| # | Chantier | Description |
+|---|----------|-------------|
+| G1 | **Reviewer V2** | Supabase Auth, commentaires timestampés, modèle Frame.io |
+| G2 | **Payload** | Desktop + Mobile, Monday DB |
+| G3 | **ARK UX** | Barre de progression gamifiée, écran bilan, filtre Monday, nommage normé |
+| G4 | **Extensions Premiere** | CAPCOM, DATAPAD, BLACKBOX, Telemetry |
 
 ---
 
 ## Décisions architecturales actées
 
+### 10 avril 2026 — Ouverture Phase Gemini
+
+**Backlog Gemini structuré** en trois blocs : Bloc A (réflexion/stratégie), Bloc B (technique Cursor), Infrastructure.
+
+**COVENANT** — fiche produit V1.0 reçue. Signal d'alarme : Vue.js mentionné dans la spec. Décision architecture (vanilla JS vs Vue.js) à trancher en Bloc A avant tout développement.
+
+**Idées nouvelles entrées au radar** : Prompteur caméra, Budget projet — mini-fiches à rédiger en Bloc A.
+
+**Postes RP/Com de l'Agence** — à clarifier (infrastructure profils).
+
 ### 9 avril 2026 — Phase 8 Clôture Mercury
 
 **Livrables produits :**
-- `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` V1.0 — guide destiné à l'équipe (Thomas, Antoine, Charlyne, Lisa, Maëlle)
-- Annonce interne envoyée par email avec Virginie de Montard en copie
+- `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` V1.0
+- Annonce interne email envoyée (Virginie de Montard en copie)
 - Vitrine beta déployée : `https://realcoolclint.github.io/tranquility-suite/`
-- Plan Directeur V4.2 — clôture Mercury actée
+- Plan Directeur V4.2
 
 ### 9 avril 2026 — Phase 7 Tests d'intégration validée
 
@@ -159,38 +203,16 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 ### 8 avril 2026 — BackUpFlow couche `_machines`
 
 **Architecture settings portables implémentée :**
-- `ssdPersoPath` : profile-level (portable GitHub, commun à toutes les machines)
+- `ssdPersoPath` : profile-level (portable GitHub)
 - `ssdStudioPath` / `nasPath` : machine-level via `_machines[os.hostname()]`
-- Lecture au démarrage de session via `spLoadSettings` dans `onSessionReady` (async)
-- Persistance à chaque sauvegarde via `spSaveSettings` dans `saveSettings`
-- Handler IPC `get-machine-name` → `os.hostname()` ajouté dans `main.js`
 
 ### 7 avril 2026 — Vision Produit (5 décisions)
 
-**D1 — Launcher est optionnel dans le quotidien, indispensable dans les moments clés**
-Hub optionnel mais précieux. Modèle Adobe Creative Cloud. Jamais obligatoire, toujours désirable.
-
-**D2 — Thomas est acteur de son profil**
-Tout utilisateur peut modifier avatar, couleur, initiales, prénom/nom. Le MASTER garde le contrôle sur rôle, email, permissions, statut.
-
-**D3 — Architecture settings à deux niveaux**
-- Launcher : 10 réglages globaux (identité, session, machine, mises à jour, affichage)
-- Chaque app : ses propres settings dans son interface, portables via GitHub + couche `_machines`
-- Clés API : globales, MASTER uniquement, Keychain macOS service global
-
-**D4 — Onboarding : page vitrine + auto-enregistrement Launcher**
-Page GitHub Pages → téléchargement DMG → auto-enregistrement dans Launcher → profil `pending` → Martin valide + permissions → `active` → notifications Resend dans les deux sens.
-
-**D5 — Modèle C : Launcher hub optionnel mais précieux**
-Trois modèles évalués (A=admin pur, B=obligatoire, C=optionnel précieux). C acté.
-
-### 7 avril 2026 — Catalogue dynamique (décision)
-`APPS_CATALOG` hardcodé dans `app.js` du Launcher → à externaliser en JSON sur `tranquility-core` en phase Gemini.
-
-### 6 avril 2026 — profiles-public.json
-- `launcher-profiles/profiles.json` (privé) — source de vérité complète avec emails
-- `tranquility-core/profiles-public.json` (public) — version allégée sans nom complet ni email
-- Les apps web fetchent uniquement la version publique
+**D1** — Launcher optionnel dans le quotidien, indispensable dans les moments clés
+**D2** — Thomas est acteur de son profil
+**D3** — Architecture settings à deux niveaux (portable GitHub + couche `_machines`)
+**D4** — Onboarding : page vitrine + auto-enregistrement Launcher
+**D5** — Modèle C : Launcher hub optionnel mais précieux (référence Adobe CC)
 
 ---
 
@@ -198,51 +220,37 @@ Trois modèles évalués (A=admin pur, B=obligatoire, C=optionnel précieux). C 
 
 **Règles définitives :**
 - `show()` appelé AVANT `syncProfiles()` — jamais d'écran blanc
-- Badge ADMIN en style inline dans le template JS — seule solution stable contre `.dark-theme *`
-- `cloneNode(false)` (shallow) + déplacement manuel des enfants pour reset les listeners
-- `changeProfile()` doit toujours appeler `_syncProfiles()` — sinon grille vide
+- Badge ADMIN en style inline dans le template JS
+- `cloneNode(false)` + déplacement manuel des enfants pour reset les listeners
+- `changeProfile()` doit toujours appeler `_syncProfiles()`
 - Clé localStorage : `ts_session_[appname]`
-- Le champ `avatar` dans `profiles-public.json` contient l'URL complète — **ne jamais préfixer**
-- CSP obligatoire : `img-src` doit contenir `https://raw.githubusercontent.com`
-- CSP obligatoire : `connect-src` doit contenir `https://realcoolclint.github.io`
-- Inline style `#profile-selector-screen` : une seule déclaration `display` — toujours `display:none`
+- Le champ `avatar` dans `profiles-public.json` contient l'URL complète — ne jamais préfixer
+- CSP : `img-src` doit contenir `https://raw.githubusercontent.com`
+- CSP : `connect-src` doit contenir `https://realcoolclint.github.io`
 - Patch dans `.app-header` : toujours `<img>` PNG fixe — jamais `<video>`
-
----
-
-## Patron de migration Session V1.1 — validé
-
-Le patron est documenté dans `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md`.
-
-**Apps migrées :** Launcher ✅ · Transporter ✅ · BackUpFlow ✅ · ARK ✅
 
 ---
 
 ## Leçons clés
 
 ### Nettoyage profils Launcher
-Le nettoyage de profils dans Launcher doit toujours passer par le **MASTER panel**. Sources à nettoyer simultanément si nettoyage manuel requis :
-1. `profiles.json` GitHub (`launcher-profiles`)
-2. `config.json` dans `~/Library/Application Support/launcher-v2/`
-3. `profiles-cache.json` dans `~/Library/Application Support/launcher-v2/`
+Toujours passer par le MASTER panel. Sources simultanées : `profiles.json` GitHub, `config.json` local, `profiles-cache.json` local.
 
-### Push GitHub dans le Launcher — règle de non-duplication
-Un seul push GitHub par opération. Le push est géré par `saveConfig()` dans le renderer. Le handler `delete-profile` dans `main.js` **ne doit pas** appeler `GithubSync.push()`.
+### Push GitHub dans Launcher
+Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.js` ne push jamais.
 
 ### Format Passeport dans les renderers
-Toute fonction de rendu qui affiche un profil doit passer par **`getProfileDisplay(profile)`**.
+Toujours passer par `getProfileDisplay(profile)`. Ne jamais lire `profile.firstName` directement.
 
 ### BackUpFlow — profils Launcher
-Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfile` local — le profil n'existe pas en local. Utiliser `spSaveSettings` pour tout ce qui est settings.
+Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — jamais `updateProfile` local.
 
 ### BackUpFlow — splash version
-`window.APP_VERSION` doit être assigné dans `DOMContentLoaded` avant que `runSplash` soit appelé. La version est fetchée async via `getAppVersion()`.
+`window.APP_VERSION` assigné dans `DOMContentLoaded` avant `runSplash`.
 
 ---
 
 ## Groupes et rôles Launcher — validés 7 avril 2026
-
-**`ROLES_MAP` au niveau module dans `app.js` :**
 
 | Groupe | Valeur | Rôles |
 |--------|--------|-------|
@@ -273,7 +281,7 @@ Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfi
 
 | Document | Rôle | Version |
 |----------|------|---------|
-| `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices — à lire avant tout chantier | V1.0 ✅ |
+| `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices | V1.0 ✅ |
 | `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
 | `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design complète | V2.1 |
@@ -287,7 +295,7 @@ Si `state.selectedProfile.fromLauncher === true`, ne jamais appeler `updateProfi
 
 ---
 
-*Plan Directeur V4.2 — 9 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.1*
+*Plan Directeur V4.3 — 10 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.2*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte*
+*Phase Gemini : Ouverte — 10 avril 2026*
