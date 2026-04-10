@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.3 — 10 avril 2026*
+*Version 4.4 — 10 avril 2026*
 
 ---
 
@@ -130,7 +130,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 
 | # | Chantier | Description | Priorité |
 |---|----------|-------------|----------|
-| A1 | **Audit Workflow Tranquility** | Cartographie complète prod/post-prod, arbre de décision, angles morts, arbitrage logiciel oui/non | Haute |
+| A1 | **Audit Workflow Tranquility** | ✅ Terminé — 10 avril 2026 · `WORKFLOW_TRANQUILITY_V1.md` + carte de décision HTML | Haute |
 | A2 | **Fiches produits — toutes les apps** | Documentation officielle par app (format standard à définir) | Haute |
 | A3 | **COVENANT — discussion & arbitrage** | Valider direction, trancher Vue.js vs vanilla JS, positionner dans roadmap | Haute |
 | A4 | **Prompteur caméra — mini-fiche** | Creuser le besoin, rédiger une mini-spec | Moyenne |
@@ -170,6 +170,30 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 ---
 
 ## Décisions architecturales actées
+
+### 10 avril 2026 — A1 Audit Workflow Tranquility
+
+**Cartographie complète** du workflow production/post-production réalisée par audit conversationnel.
+
+**3 régimes identifiés :** Cellule/OPS · Rédaction · SOLO
+
+**9 angles morts documentés :**
+- AM-01 : Backup SOLO non tracé (élevé) → BackUpFlow mobile à envisager
+- AM-02 : Nomenclature non universelle → extension BackUpFlow
+- AM-03 : Planification ressources (moyen) → outil planning Monday à créer
+- AM-04 : Matériel Mojo non tracé → Payload
+- AM-05 : Intégrité copies non vérifiée → Guidance
+- AM-06 : Template Premiere non vérifié → standard documenté
+- AM-07 : Miniature non standardisée → guide retouche équipe
+- AM-08 : Sous-titres dans Reviewer → Reviewer V2
+- AM-09 : Post-diffusion non outillée (élevé) → ARK + chantier dédié
+
+**Nouveaux chantiers identifiés :**
+- Planning ressources équipe connecté à Monday (AM-03) — à positionner dans roadmap
+- BackUpFlow SOLO — extension aux journalistes Mojo (AM-01/02) — à positionner dans roadmap
+- Guide miniature standardisé (AM-07) — quick win documentation
+
+**Livrables :** `WORKFLOW_TRANQUILITY_V1.md` + `workflow_tranquility_arbre_decision.html`
 
 ### 10 avril 2026 — Ouverture Phase Gemini
 
@@ -291,11 +315,11 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 | `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Patterns backend Electron | V1.0 |
 | `TRANQUILITY_SUITE_MERCURY_OPENING.md` | Norme splash screen | V1.0 |
 | `TRANQUILITY_SUITE_MISSION_PATCHES_STATUT.md` | État des patches | V1.0 |
-| `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` | Guide de démarrage destiné à l'équipe | V1.0 ✅ |
+| `WORKFLOW_TRANQUILITY_V1.md` | Cartographie workflow prod/post-prod + 9 angles morts | V1.0 ✅ |
 
 ---
 
-*Plan Directeur V4.3 — 10 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.2*
+*Plan Directeur V4.4 — 10 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.3*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — 10 avril 2026*
+*Phase Gemini : Ouverte — 10 avril 2026 · A1 terminé*
