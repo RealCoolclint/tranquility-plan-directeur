@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.4 — 10 avril 2026*
+*Version 4.7 — 11 avril 2026*
 
 ---
 
@@ -9,7 +9,11 @@
 
 La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidéo de L'Étudiant. Chaque outil répond à un besoin précis de production, de post-production ou d'organisation. L'ensemble forme un système cohérent, maintenu par Martin Pavloff, utilisé quotidiennement par l'équipe.
 
-**Principe central :** GitHub = cloud de la Tranquility Suite.
+**Philosophie centrale : le workflow captif.**
+La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées dans les outils — pas confiées à la mémoire ou à la rigueur individuelle. La conformité est une conséquence de l'usage, pas un effort conscient. Chaque chantier, chaque feature, chaque décision d'architecture est évalué contre cette philosophie avant d'être validé.
+*Référence complète : `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` · Grille opérationnelle : `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`*
+
+**Principe technique :** GitHub = cloud de la Tranquility Suite.
 
 **Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier.
 
@@ -73,7 +77,7 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | # | Outil | Notes |
 |---|-------|-------|
 | 7 | Payload | Desktop + Mobile, Monday DB |
-| 8 | COVENANT | Signature RGPD droit à l'image — spec V1.0 reçue 10/04/2026 |
+| 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 · `FICHE_PRODUIT_COVENANT_V1.md` ✅ |
 | 9 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
 | 10 | Cargo | — |
 | 11 | Hatch | — |
@@ -104,12 +108,13 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
+| COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
 | **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta — 9 avril 2026 |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.3 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.7 |
 
 ---
 
@@ -131,8 +136,8 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | # | Chantier | Description | Priorité |
 |---|----------|-------------|----------|
 | A1 | **Audit Workflow Tranquility** | ✅ Terminé — 10 avril 2026 · `WORKFLOW_TRANQUILITY_V1.md` + carte de décision HTML | Haute |
-| A2 | **Fiches produits — toutes les apps** | Documentation officielle par app (format standard à définir) | Haute |
-| A3 | **COVENANT — discussion & arbitrage** | Valider direction, trancher Vue.js vs vanilla JS, positionner dans roadmap | Haute |
+| A2 | **Fiches produits — toutes les apps** | ✅ Terminé — 11 avril 2026 · 6 fiches apps en orbite · format standard défini | Haute |
+| A3 | **COVENANT — discussion & arbitrage** | ✅ Terminé — 11 avril 2026 · Architecture validée · `FICHE_PRODUIT_COVENANT_V1.md` | Haute |
 | A4 | **Prompteur caméra — mini-fiche** | Creuser le besoin, rédiger une mini-spec | Moyenne |
 | A5 | **Budget projet — mini-fiche** | Creuser le besoin, intégration Monday, rédiger mini-spec | Moyenne |
 | A6 | **Postes RP/Com de l'Agence** | Mettre en action les profils supplémentaires pour les équipes RP et Com | À clarifier |
@@ -166,10 +171,65 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 | G2 | **Payload** | Desktop + Mobile, Monday DB |
 | G3 | **ARK UX** | Barre de progression gamifiée, écran bilan, filtre Monday, nommage normé |
 | G4 | **Extensions Premiere** | CAPCOM, DATAPAD, BLACKBOX, Telemetry |
+| G5 | **COVENANT** | Web app GitHub Pages · signature RGPD terrain · spec architecturale validée |
 
 ---
 
 ## Décisions architecturales actées
+
+### 11 avril 2026 — A3 COVENANT · Architecture validée
+
+**Arbitrages tranchés :**
+- Vue.js → ❌ Refusé — vanilla JS
+- API Anthropic pour templates → ❌ Supprimée — injection locale JS
+- Clés API dans `session-profile.js` → ❌ Violation D3 — Keychain (inapplicable web app : à traiter en phase dev)
+- Power Automate → ❌ Supprimé — autonomie totale
+
+**Architecture retenue :**
+- Web app GitHub Pages (pas Electron) — optimisée iPad/iPhone
+- WebProfileSelector standard (`profiles-public.json`)
+- Monday API GraphQL — projets du jour par défaut, menus rapides
+- Mode manuel avec menus déroulants + champs libres
+- Templates Majeur + Mineur — fichiers extensibles hors code — textes pré-validés juridique
+- `pdf-lib` — génération PDF côté client
+- `signature_pad.js` — capture tactile/souris
+- Téléchargement PDF local systématique — garde-fou légal
+- File d'attente offline `localStorage`/`IndexedDB` + badge persistant
+- Resend → boîte mail studio uniquement (destinataire unique)
+- Nomenclature : `YYMMDD_AUTORISATION_FORMAT_NomPrenom_NomJournaliste.pdf`
+- Objet email : `[COVENANT] YYMMDD — FORMAT — NomPrenom Interviewé`
+- Horodatage visible sur le PDF
+- Template Mineur : nom/prénom/qualité/email représentant légal obligatoires
+- Clé Resend dans le code — repo privé — assumé
+- Écran de confirmation explicite — "Nouvelle signature" / "Terminer"
+
+**Règle permanente COVENANT :** Tout ce qui touche au légal doit avoir un garde-fou.
+
+**Livrables :** `FICHE_PRODUIT_COVENANT_V1.md` · `SESSION_TRAVAIL_20260411_A3_COVENANT.md`
+
+---
+
+### 11 avril 2026 — A2 Fiches Produits
+
+**Format standard défini** — 8 blocs, multi-audience, ton Apple/method acting.
+
+**6 fiches rédigées et validées :**
+
+| App | Devise | Fichier |
+|-----|--------|---------|
+| BackUpFlow | *NULLA DATA PEREUNT* | `FICHE_PRODUIT_BACKUPFLOW_V1.md` |
+| Launcher | *INITIUM EST DIMIDIUM FACTI* | `FICHE_PRODUIT_LAUNCHER_V1.md` |
+| Transporter | *RECTE ET CELERITER* | `FICHE_PRODUIT_TRANSPORTER_V1.md` |
+| ARK | *MEMORIA MANET* | `FICHE_PRODUIT_ARK_V1.md` |
+| Reviewer | *NIHIL NISI PROBATUM* | `FICHE_PRODUIT_REVIEWER_V1.md` |
+| Manifest | *ANTE OMNIA PARARE* | `FICHE_PRODUIT_MANIFEST_V1.md` |
+| COVENANT | *FIDES SCRIPTA MANET* | `FICHE_PRODUIT_COVENANT_V1.md` |
+
+### 11 avril 2026 — Workflow Captif
+
+**Philosophie fondatrice formalisée** — trois lois, grille opérationnelle, instruction permanente JARVIS.
+
+**Livrables :** `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` + `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`
 
 ### 10 avril 2026 — A1 Audit Workflow Tranquility
 
@@ -188,22 +248,11 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 - AM-08 : Sous-titres dans Reviewer → Reviewer V2
 - AM-09 : Post-diffusion non outillée (élevé) → ARK + chantier dédié
 
-**Nouveaux chantiers identifiés :**
-- Planning ressources équipe connecté à Monday (AM-03) — à positionner dans roadmap
-- BackUpFlow SOLO — extension aux journalistes Mojo (AM-01/02) — à positionner dans roadmap
-- Guide miniature standardisé (AM-07) — quick win documentation
-
 **Livrables :** `WORKFLOW_TRANQUILITY_V1.md` + `workflow_tranquility_arbre_decision.html`
 
 ### 10 avril 2026 — Ouverture Phase Gemini
 
 **Backlog Gemini structuré** en trois blocs : Bloc A (réflexion/stratégie), Bloc B (technique Cursor), Infrastructure.
-
-**COVENANT** — fiche produit V1.0 reçue. Signal d'alarme : Vue.js mentionné dans la spec. Décision architecture (vanilla JS vs Vue.js) à trancher en Bloc A avant tout développement.
-
-**Idées nouvelles entrées au radar** : Prompteur caméra, Budget projet — mini-fiches à rédiger en Bloc A.
-
-**Postes RP/Com de l'Agence** — à clarifier (infrastructure profils).
 
 ### 9 avril 2026 — Phase 8 Clôture Mercury
 
@@ -316,10 +365,19 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 | `TRANQUILITY_SUITE_MERCURY_OPENING.md` | Norme splash screen | V1.0 |
 | `TRANQUILITY_SUITE_MISSION_PATCHES_STATUT.md` | État des patches | V1.0 |
 | `WORKFLOW_TRANQUILITY_V1.md` | Cartographie workflow prod/post-prod + 9 angles morts | V1.0 ✅ |
+| `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` | Philosophie fondatrice — trois lois | V1.0 ✅ |
+| `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md` | Grille opérationnelle — avant tout chantier | V1.0 ✅ |
+| `FICHE_PRODUIT_BACKUPFLOW_V1.md` | Fiche produit — BackUpFlow | V1.0 ✅ |
+| `FICHE_PRODUIT_LAUNCHER_V1.md` | Fiche produit — Launcher | V1.0 ✅ |
+| `FICHE_PRODUIT_TRANSPORTER_V1.md` | Fiche produit — Transporter | V1.0 ✅ |
+| `FICHE_PRODUIT_ARK_V1.md` | Fiche produit — ARK | V1.0 ✅ |
+| `FICHE_PRODUIT_REVIEWER_V1.md` | Fiche produit — Reviewer | V1.0 ✅ |
+| `FICHE_PRODUIT_MANIFEST_V1.md` | Fiche produit — Manifest | V1.0 ✅ |
+| `FICHE_PRODUIT_COVENANT_V1.md` | Fiche produit — COVENANT | V1.0 ✅ |
 
 ---
 
-*Plan Directeur V4.4 — 10 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.3*
+*Plan Directeur V4.7 — 11 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.6*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — 10 avril 2026 · A1 terminé*
+*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · Bloc B à démarrer*
