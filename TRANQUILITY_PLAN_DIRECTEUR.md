@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.0 — 12 avril 2026*
+*Version 5.1 — 12 avril 2026*
 
 ---
 
@@ -73,7 +73,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, ProfileSelector ✅, 1440×1050 ✅ |
 | 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, ProfileSelector ✅, couche `_machines` ✅, build ✅, 1440×1050 ✅ |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, tests ✅, build ✅, Monday État Rushs ✅ |
-| 5 | **Reviewer** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, tranquility-core.css ✅ |
+| 5 | **Reviewer** | commit 37113c5 | WebProfileSelector ✅, player adaptatif ✅ (B2), modale liste + détail commentaires ✅ (B1) |
 | 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅, index.html ✅ |
 
 ### En projet Gemini/Apollo ⚫
@@ -105,7 +105,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite |
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite |
-| Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
+| Reviewer | `RealCoolclint/Reviewer` | commit 37113c5 | 🟣 En orbite — B1+B2 ✅ |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
@@ -115,7 +115,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.9 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.1 |
 
 ---
 
@@ -147,8 +147,8 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 
 | # | Chantier | Description | Priorité |
 |---|----------|-------------|----------|
-| B1 | **Reviewer — ergonomie commentaires** | Modale de navigation/modification des commentaires existants | Haute |
-| B2 | **Reviewer — player max** | Player toujours à la plus grande taille, sans crop, responsive | Haute |
+| B1 | **Reviewer — ergonomie commentaires** | ✅ Terminé — 12 avril 2026 · Modale liste + modale détail · commit 37113c5 | Haute |
+| B2 | **Reviewer — player max** | ✅ Terminé — 12 avril 2026 · Player adaptatif responsive · commit 37113c5 | Haute |
 | B3 | **Landing page Tranquility — enrichissement** | Fiches produit, tutos, D.A. complète sur la vitrine | Moyenne |
 | B4 | **Cartes Launcher — enrichissement** | Style PlayStation, enrichissement visuel des cartes apps | Moyenne |
 | B5 | **Audit section Paramètres** | Revue de la section Paramètres dans chaque app — cohérence, utilité, angles morts | Moyenne |
@@ -158,89 +158,25 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | # | Chantier | Description |
 |---|----------|-------------|
 | I1 | **`session-profile.js` + Keychain** | Enrichir pour lire les clés API directement depuis le Keychain macOS |
-| I2 | **Catalogue Launcher dynamique** | Externaliser `APPS_CATALOG` en JSON sur `tranquility-core` |
-| I3 | **Écran "Je suis nouveau" dans Launcher** | Auto-enregistrement, profil `pending`, notification Resend |
-| I4 | **Onglet "Mon profil" dans Launcher** | Thomas édite avatar, couleur, initiales (hors rôle/email/permissions) |
+| I2 | **`APPS_CATALOG` externalisé** | JSON sur `tranquility-core`, fetché au démarrage — élimine rebuild Launcher pour ajouter une app |
+| I3 | **Supabase Auth — Reviewer** | Authentification réelle modèle Frame.io (Gemini) |
+| I4 | **Page vitrine + onboarding** | Showcase GitHub Pages + auto-enregistrement Launcher |
 
 ---
 
-## Journal des décisions — Phase Gemini
+## Journal des décisions — Gemini
 
-### 12 avril 2026 — A6 Agence Tranquility · Manifeste fondateur
+### 12 avril 2026 — B1+B2 Reviewer
 
-**Concept :** L'Agence Tranquility est le mode de travail de la suite — une réorganisation du cerveau en cellules expertes distinctes qui collaborent pour produire quelque chose de meilleur qu'une pensée unique.
+**B2 — Player adaptatif :** surcharges CSS ciblées dans le contexte `.web-app`. `max-width/max-height: 100%` + `aspect-ratio` dynamique JS = sizing natif optimal. Neutralisation des règles legacy `min(280px, 45vw)` et `calc(100vh - 14rem)`.
 
-**Structure validée :**
-- **23 postes** répartis en **6 familles** : Commandement · Création · Réalisation · Garantie · Humain · Rayonnement
-- Martin Pavloff = titulaire unique de tous les postes
-- JARVIS = interface opérationnelle de chaque cellule
-- Poste PRÉSIDENCE ajouté en cours de session — gouvernance absolue, autorité finale
+**B1 — Ergonomie commentaires :** deux niveaux de modale. Modale liste (panoramique, catégories + suppression + export) ouverte depuis sidebar. Modale détail (édition texte, navigation, timecode) ouverte depuis la liste uniquement. `confirm()` natif supprimé. z-index stack : top-bar 1002 · modale liste 1003 · modale détail 1020.
 
-**Familles et postes :**
+### 12 avril 2026 — Agence Tranquility
 
-| Famille | Postes |
-|---------|--------|
-| Commandement | PRÉSIDENCE · MISSION CONTROL · NAVIGATION · DIPLOMATIE |
-| Création | CONCEPTUALISATION · UX ET UI · STUDIO CREA · R&D |
-| Réalisation | CODE · INFRASTRUCTURE · INTÉGRATIONS |
-| Garantie | QUALITÉ · MÉMOIRE · SÉCURITÉ · JURIDIQUE · ÉTHIQUE IA |
-| Humain | TERRAIN · ADOPTION · FORMATION |
-| Rayonnement | COM · RP · BENCHMARK · PROSPECTIVE |
+**23 postes formalisés** en 6 familles. Instruction permanente ajoutée dans les instructions Claude du projet. Martin = titulaire unique. JARVIS = interface opérationnelle. MÉMOIRE, NAVIGATION, MISSION CONTROL permanents.
 
-**Décisions actées :**
-- L'Agence est un mode de travail, pas une org chart de personnes distinctes
-- COM parle de la suite — RP parle de Martin via la suite (distinction fondamentale)
-- NAVIGATION est gardienne des caps fondamentaux (Lois workflow captif incluses)
-- MÉMOIRE est non négociable — toute session sans recap est une session perdue
-- PRÉSIDENCE a le dernier mot sur toute décision. Toujours.
-
-**Livrable :** `AGENCE_TRANQUILITY_MANIFESTE.md` · `SESSION_TRAVAIL_20260412_A6_AGENCE.md`
-
----
-
-### 12 avril 2026 — A5 CAPITAL · Architecture validée
-
-**Nom :** CAPITAL · **Devise :** *EX COMPUTO CLARITAS* (de la clarté par le calcul)
-
-**Décisions architecturales :**
-- Stack : web app GitHub Pages — HTML/CSS/JS vanilla
-- Pas de session Tranquility — outil ponctuel, solo
-- Pas d'intégration Monday V1 — cohabitation édito/commercial à réfléchir en amont
-- Export PDF + sauvegarde JSON
-- Phase Apollo — besoin insuffisamment fréquent pour Gemini
-
-**Livrables :** `FICHE_PRODUIT_CAPITAL_V1.md` · `SESSION_TRAVAIL_20260412_A5_CAPITAL.md`
-
----
-
-### 12 avril 2026 — A4 READBACK · Architecture validée
-
-**Livrables :** `FICHE_PRODUIT_READBACK_V1.md` · `SESSION_TRAVAIL_20260412_A4_READBACK.md`
-
----
-
-### 11 avril 2026 — A3 COVENANT · Architecture validée
-
-**Livrables :** `FICHE_PRODUIT_COVENANT_V1.md` · `SESSION_TRAVAIL_20260411_A3_COVENANT.md`
-
----
-
-### 11 avril 2026 — A2 Fiches Produits
-
-**Format standard défini** — 8 blocs, multi-audience, ton Apple/method acting.
-
-**8 fiches rédigées et validées :**
-
-| App | Devise | Fichier |
-|-----|--------|---------|
-| BackUpFlow | *NULLA DATA PEREUNT* | `FICHE_PRODUIT_BACKUPFLOW_V1.md` |
-| Launcher | *INITIUM EST DIMIDIUM FACTI* | `FICHE_PRODUIT_LAUNCHER_V1.md` |
-| Transporter | *RECTE ET CELERITER* | `FICHE_PRODUIT_TRANSPORTER_V1.md` |
-| ARK | *MEMORIA MANET* | `FICHE_PRODUIT_ARK_V1.md` |
-| Reviewer | *NIHIL NISI PROBATUM* | `FICHE_PRODUIT_REVIEWER_V1.md` |
-| Manifest | *ANTE OMNIA PARARE* | `FICHE_PRODUIT_MANIFEST_V1.md` |
-| COVENANT | *FIDES SCRIPTA MANET* | `FICHE_PRODUIT_COVENANT_V1.md` |
-| CAPITAL | *EX COMPUTO CLARITAS* | `FICHE_PRODUIT_CAPITAL_V1.md` |
+**Livrables :** `AGENCE_TRANQUILITY_MANIFESTE.md` V1.0 · `INSTRUCTION_AGENCE_TRANQUILITY.md`
 
 ### 11 avril 2026 — Workflow Captif
 
@@ -323,6 +259,12 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 
 ## Leçons clés
 
+### Reviewer — z-index stack
+top-bar : 1002 · modale liste : 1003 · modale détail : 1020. Toujours vérifier le z-index de la top-bar avant d'assigner des z-index aux overlays.
+
+### Reviewer — player adaptatif web-app
+Les règles legacy Electron (min/max en px, calc(100vh)) doivent être neutralisées dans le contexte `.web-app` avec des surcharges ciblées. Ne pas modifier les règles globales — elles servent à d'autres contextes.
+
 ### Nettoyage profils Launcher
 Toujours passer par le MASTER panel. Sources simultanées : `profiles.json` GitHub, `config.json` local, `profiles-cache.json` local.
 
@@ -397,7 +339,7 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 
 ---
 
-*Plan Directeur V5.0 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.9*
+*Plan Directeur V5.1 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.0*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — Bloc A ✅ complet (A1→A6) · Bloc B à démarrer*
+*Phase Gemini : Ouverte — Bloc A ✅ complet · Bloc B : B1 ✅ B2 ✅ · B3→B5 à venir*
