@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.9 — 12 avril 2026*
+*Version 5.0 — 12 avril 2026*
 
 ---
 
@@ -12,6 +12,10 @@ La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidé
 **Philosophie centrale : le workflow captif.**
 La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées dans les outils — pas confiées à la mémoire ou à la rigueur individuelle. La conformité est une conséquence de l'usage, pas un effort conscient. Chaque chantier, chaque feature, chaque décision d'architecture est évalué contre cette philosophie avant d'être validé.
 *Référence complète : `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` · Grille opérationnelle : `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`*
+
+**Mode de travail : l'Agence Tranquility.**
+Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule.
+*Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md`*
 
 **Principe technique :** GitHub = cloud de la Tranquility Suite.
 
@@ -137,7 +141,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | A3 | **COVENANT — discussion & arbitrage** | ✅ Terminé — 11 avril 2026 · Architecture validée · `FICHE_PRODUIT_COVENANT_V1.md` | Haute |
 | A4 | **READBACK — prompteur caméra** | ✅ Terminé — 12 avril 2026 · Architecture validée · `FICHE_PRODUIT_READBACK_V1.md` | Moyenne |
 | A5 | **CAPITAL — budget production** | ✅ Terminé — 12 avril 2026 · Architecture validée · `FICHE_PRODUIT_CAPITAL_V1.md` · Phase Apollo | Moyenne |
-| A6 | **Postes RP/Com de l'Agence** | Mettre en action les profils supplémentaires pour les équipes RP et Com | À clarifier |
+| A6 | **Postes RP/Com de l'Agence** | ✅ Terminé — 12 avril 2026 · `AGENCE_TRANQUILITY_MANIFESTE.md` · 23 postes · 6 familles · Bloc A complet | Haute |
 
 ### 🔵 Bloc B — Chantiers techniques (Cursor)
 
@@ -161,6 +165,38 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 ---
 
 ## Journal des décisions — Phase Gemini
+
+### 12 avril 2026 — A6 Agence Tranquility · Manifeste fondateur
+
+**Concept :** L'Agence Tranquility est le mode de travail de la suite — une réorganisation du cerveau en cellules expertes distinctes qui collaborent pour produire quelque chose de meilleur qu'une pensée unique.
+
+**Structure validée :**
+- **23 postes** répartis en **6 familles** : Commandement · Création · Réalisation · Garantie · Humain · Rayonnement
+- Martin Pavloff = titulaire unique de tous les postes
+- JARVIS = interface opérationnelle de chaque cellule
+- Poste PRÉSIDENCE ajouté en cours de session — gouvernance absolue, autorité finale
+
+**Familles et postes :**
+
+| Famille | Postes |
+|---------|--------|
+| Commandement | PRÉSIDENCE · MISSION CONTROL · NAVIGATION · DIPLOMATIE |
+| Création | CONCEPTUALISATION · UX ET UI · STUDIO CREA · R&D |
+| Réalisation | CODE · INFRASTRUCTURE · INTÉGRATIONS |
+| Garantie | QUALITÉ · MÉMOIRE · SÉCURITÉ · JURIDIQUE · ÉTHIQUE IA |
+| Humain | TERRAIN · ADOPTION · FORMATION |
+| Rayonnement | COM · RP · BENCHMARK · PROSPECTIVE |
+
+**Décisions actées :**
+- L'Agence est un mode de travail, pas une org chart de personnes distinctes
+- COM parle de la suite — RP parle de Martin via la suite (distinction fondamentale)
+- NAVIGATION est gardienne des caps fondamentaux (Lois workflow captif incluses)
+- MÉMOIRE est non négociable — toute session sans recap est une session perdue
+- PRÉSIDENCE a le dernier mot sur toute décision. Toujours.
+
+**Livrable :** `AGENCE_TRANQUILITY_MANIFESTE.md` · `SESSION_TRAVAIL_20260412_A6_AGENCE.md`
+
+---
 
 ### 12 avril 2026 — A5 CAPITAL · Architecture validée
 
@@ -335,6 +371,7 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 
 | Document | Rôle | Version |
 |----------|------|---------|
+| `AGENCE_TRANQUILITY_MANIFESTE.md` | Mode de travail — 23 postes · 6 familles · gouvernance | V1.0 ✅ |
 | `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices | V1.0 ✅ |
 | `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
@@ -360,7 +397,7 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 
 ---
 
-*Plan Directeur V4.9 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.8*
+*Plan Directeur V5.0 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.9*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · A4 ✅ · A5 ✅ · A6 + Bloc B à démarrer*
+*Phase Gemini : Ouverte — Bloc A ✅ complet (A1→A6) · Bloc B à démarrer*
