@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.7 — 11 avril 2026*
+*Version 4.8 — 12 avril 2026*
 
 ---
 
@@ -59,7 +59,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 
 ---
 
-## Inventaire de la flotte — 18+ outils
+## Inventaire de la flotte — 19+ outils
 
 ### En orbite 🟣
 
@@ -78,22 +78,22 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 |---|-------|-------|
 | 7 | Payload | Desktop + Mobile, Monday DB |
 | 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 · `FICHE_PRODUIT_COVENANT_V1.md` ✅ |
-| 9 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
-| 10 | Cargo | — |
-| 11 | Hatch | — |
-| 12 | Guidance | — |
-| 13 | Beacon | Web |
-| 14 | Debrief | Web |
-| 15 | Telemetry | Extension Premiere |
-| 16 | CAPCOM | Extension Premiere |
-| 17 | DATAPAD | Extension Premiere |
-| 18 | BLACKBOX | Extension Premiere |
+| 9 | **READBACK** | Desktop Electron · Prompteur caméra + cohabitation ATEM · Spec validée 12/04/2026 · `FICHE_PRODUIT_READBACK_V1.md` ✅ |
+| 10 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 11 | Cargo | — |
+| 12 | Hatch | — |
+| 13 | Guidance | — |
+| 14 | Beacon | Web |
+| 15 | Debrief | Web |
+| 16 | Telemetry | Extension Premiere |
+| 17 | CAPCOM | Extension Premiere |
+| 18 | DATAPAD | Extension Premiere |
+| 19 | BLACKBOX | Extension Premiere |
 
 ### Idées à creuser (pas encore au catalogue) 💡
 
 | Outil | Concept | Phase estimée |
 |-------|---------|---------------|
-| **Prompteur caméra** | Contrôle et saisie du prompteur depuis laptop/tablet | Apollo ? |
 | **Budget projet** | Budgétisation d'un projet vidéo, intégration Monday | Gemini ? |
 
 ---
@@ -109,12 +109,13 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | Reviewer | `RealCoolclint/Reviewer` | GitHub Pages | 🟣 En orbite |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
+| READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
 | **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta — 9 avril 2026 |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.7 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.8 |
 
 ---
 
@@ -136,9 +137,9 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | # | Chantier | Description | Priorité |
 |---|----------|-------------|----------|
 | A1 | **Audit Workflow Tranquility** | ✅ Terminé — 10 avril 2026 · `WORKFLOW_TRANQUILITY_V1.md` + carte de décision HTML | Haute |
-| A2 | **Fiches produits — toutes les apps** | ✅ Terminé — 11 avril 2026 · 6 fiches apps en orbite · format standard défini | Haute |
+| A2 | **Fiches produits — toutes les apps** | ✅ Terminé — 11 avril 2026 · 7 fiches · format standard défini | Haute |
 | A3 | **COVENANT — discussion & arbitrage** | ✅ Terminé — 11 avril 2026 · Architecture validée · `FICHE_PRODUIT_COVENANT_V1.md` | Haute |
-| A4 | **Prompteur caméra — mini-fiche** | Creuser le besoin, rédiger une mini-spec | Moyenne |
+| A4 | **READBACK — prompteur caméra** | ✅ Terminé — 12 avril 2026 · Architecture validée · `FICHE_PRODUIT_READBACK_V1.md` | Moyenne |
 | A5 | **Budget projet — mini-fiche** | Creuser le besoin, intégration Monday, rédiger mini-spec | Moyenne |
 | A6 | **Postes RP/Com de l'Agence** | Mettre en action les profils supplémentaires pour les équipes RP et Com | À clarifier |
 
@@ -177,33 +178,36 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 
 ## Décisions architecturales actées
 
-### 11 avril 2026 — A3 COVENANT · Architecture validée
+### 12 avril 2026 — A4 READBACK · Architecture validée
 
-**Arbitrages tranchés :**
-- Vue.js → ❌ Refusé — vanilla JS
-- API Anthropic pour templates → ❌ Supprimée — injection locale JS
-- Clés API dans `session-profile.js` → ❌ Violation D3 — Keychain (inapplicable web app : à traiter en phase dev)
-- Power Automate → ❌ Supprimé — autonomie totale
+**Besoin :** contrôle et édition du texte prompteur en remote, sans toucher l'iPad sous la caméra. Cohabitation avec ATEM Software Control sur le MacBook.
+
+**Setup existant remplacé :**
+- QuotTeleprompter sur iPad · iPhone Bluetooth télécommande · texte copié-collé depuis Teams
 
 **Architecture retenue :**
-- Web app GitHub Pages (pas Electron) — optimisée iPad/iPhone
-- WebProfileSelector standard (`profiles-public.json`)
-- Monday API GraphQL — projets du jour par défaut, menus rapides
-- Mode manuel avec menus déroulants + champs libres
-- Templates Majeur + Mineur — fichiers extensibles hors code — textes pré-validés juridique
-- `pdf-lib` — génération PDF côté client
-- `signature_pad.js` — capture tactile/souris
-- Téléchargement PDF local systématique — garde-fou légal
-- File d'attente offline `localStorage`/`IndexedDB` + badge persistant
-- Resend → boîte mail studio uniquement (destinataire unique)
-- Nomenclature : `YYMMDD_AUTORISATION_FORMAT_NomPrenom_NomJournaliste.pdf`
-- Objet email : `[COVENANT] YYMMDD — FORMAT — NomPrenom Interviewé`
-- Horodatage visible sur le PDF
-- Template Mineur : nom/prénom/qualité/email représentant légal obligatoires
-- Clé Resend dans le code — repo privé — assumé
-- Écran de confirmation explicite — "Nouvelle signature" / "Terminer"
+- App Electron desktop macOS — même standard build que la suite
+- Serveur Node.js local intégré
+- Hotspot macOS natif (MacBook RJ45 → NAS / Wi-Fi hotspot → iPad/iPhone)
+- WebSocket temps réel — synchronisation texte + état
+- Vue MacBook : éditeur + contrôles + gestion modes
+- Vue iPad : afficheur plein écran Safari — lecture seule
+- Vue iPhone : télécommande légère
+- Trois modes de cohabitation ATEM SC :
 
-**Règle permanente COVENANT :** Tout ce qui touche au légal doit avoir un garde-fou.
+| Mode | Description | Déclencheur |
+|------|-------------|-------------|
+| **FOCUS** | READBACK plein écran — ATEM SC en arrière-plan | Par défaut |
+| **SWITCH** | Bascule instantanée vers ATEM SC | Bouton permanent + raccourci |
+| **SPLIT** | READBACK 60% · ATEM SC 40% | Raccourci clavier |
+
+**Note technique :** librairie `atem-connection` (Node.js) documentée pour usage futur si intégration ATEM native nécessaire.
+
+**Livrables :** `FICHE_PRODUIT_READBACK_V1.md` · `SESSION_TRAVAIL_20260412_A4_READBACK.md`
+
+---
+
+### 11 avril 2026 — A3 COVENANT · Architecture validée
 
 **Livrables :** `FICHE_PRODUIT_COVENANT_V1.md` · `SESSION_TRAVAIL_20260411_A3_COVENANT.md`
 
@@ -213,7 +217,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 
 **Format standard défini** — 8 blocs, multi-audience, ton Apple/method acting.
 
-**6 fiches rédigées et validées :**
+**7 fiches rédigées et validées :**
 
 | App | Devise | Fichier |
 |-----|--------|---------|
@@ -374,10 +378,11 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 | `FICHE_PRODUIT_REVIEWER_V1.md` | Fiche produit — Reviewer | V1.0 ✅ |
 | `FICHE_PRODUIT_MANIFEST_V1.md` | Fiche produit — Manifest | V1.0 ✅ |
 | `FICHE_PRODUIT_COVENANT_V1.md` | Fiche produit — COVENANT | V1.0 ✅ |
+| `FICHE_PRODUIT_READBACK_V1.md` | Fiche produit — READBACK | V1.1 ✅ |
 
 ---
 
-*Plan Directeur V4.7 — 11 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.6*
+*Plan Directeur V4.8 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.7*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · Bloc B à démarrer*
+*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · A4 ✅ · A5 + Bloc B à démarrer*
