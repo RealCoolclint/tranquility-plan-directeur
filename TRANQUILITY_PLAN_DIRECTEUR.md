@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 4.8 — 12 avril 2026*
+*Version 4.9 — 12 avril 2026*
 
 ---
 
@@ -59,7 +59,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 
 ---
 
-## Inventaire de la flotte — 19+ outils
+## Inventaire de la flotte — 20+ outils
 
 ### En orbite 🟣
 
@@ -79,22 +79,17 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | 7 | Payload | Desktop + Mobile, Monday DB |
 | 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 · `FICHE_PRODUIT_COVENANT_V1.md` ✅ |
 | 9 | **READBACK** | Desktop Electron · Prompteur caméra + cohabitation ATEM · Spec validée 12/04/2026 · `FICHE_PRODUIT_READBACK_V1.md` ✅ |
-| 10 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
-| 11 | Cargo | — |
-| 12 | Hatch | — |
-| 13 | Guidance | — |
-| 14 | Beacon | Web |
-| 15 | Debrief | Web |
-| 16 | Telemetry | Extension Premiere |
-| 17 | CAPCOM | Extension Premiere |
-| 18 | DATAPAD | Extension Premiere |
-| 19 | BLACKBOX | Extension Premiere |
-
-### Idées à creuser (pas encore au catalogue) 💡
-
-| Outil | Concept | Phase estimée |
-|-------|---------|---------------|
-| **Budget projet** | Budgétisation d'un projet vidéo, intégration Monday | Gemini ? |
+| 10 | **CAPITAL** | Web app GitHub Pages · Budget production ligne par ligne · Spec validée 12/04/2026 · `FICHE_PRODUIT_CAPITAL_V1.md` ✅ · Phase Apollo |
+| 11 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 12 | Cargo | — |
+| 13 | Hatch | — |
+| 14 | Guidance | — |
+| 15 | Beacon | Web |
+| 16 | Debrief | Web |
+| 17 | Telemetry | Extension Premiere |
+| 18 | CAPCOM | Extension Premiere |
+| 19 | DATAPAD | Extension Premiere |
+| 20 | BLACKBOX | Extension Premiere |
 
 ---
 
@@ -110,12 +105,13 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
+| CAPITAL | `RealCoolclint/Capital` | *(à créer — Phase Apollo)* | ⚫ En conception |
 | tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
 | **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta — 9 avril 2026 |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.8 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V4.9 |
 
 ---
 
@@ -137,10 +133,10 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | # | Chantier | Description | Priorité |
 |---|----------|-------------|----------|
 | A1 | **Audit Workflow Tranquility** | ✅ Terminé — 10 avril 2026 · `WORKFLOW_TRANQUILITY_V1.md` + carte de décision HTML | Haute |
-| A2 | **Fiches produits — toutes les apps** | ✅ Terminé — 11 avril 2026 · 7 fiches · format standard défini | Haute |
+| A2 | **Fiches produits — toutes les apps** | ✅ Terminé — 11 avril 2026 · 8 fiches · format standard défini | Haute |
 | A3 | **COVENANT — discussion & arbitrage** | ✅ Terminé — 11 avril 2026 · Architecture validée · `FICHE_PRODUIT_COVENANT_V1.md` | Haute |
 | A4 | **READBACK — prompteur caméra** | ✅ Terminé — 12 avril 2026 · Architecture validée · `FICHE_PRODUIT_READBACK_V1.md` | Moyenne |
-| A5 | **Budget projet — mini-fiche** | Creuser le besoin, intégration Monday, rédiger mini-spec | Moyenne |
+| A5 | **CAPITAL — budget production** | ✅ Terminé — 12 avril 2026 · Architecture validée · `FICHE_PRODUIT_CAPITAL_V1.md` · Phase Apollo | Moyenne |
 | A6 | **Postes RP/Com de l'Agence** | Mettre en action les profils supplémentaires pour les équipes RP et Com | À clarifier |
 
 ### 🔵 Bloc B — Chantiers techniques (Cursor)
@@ -161,47 +157,27 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | I2 | **Catalogue Launcher dynamique** | Externaliser `APPS_CATALOG` en JSON sur `tranquility-core` |
 | I3 | **Écran "Je suis nouveau" dans Launcher** | Auto-enregistrement, profil `pending`, notification Resend |
 | I4 | **Onglet "Mon profil" dans Launcher** | Thomas édite avatar, couleur, initiales (hors rôle/email/permissions) |
-| I5 | **Système d'équipes** | Dans le sélecteur de profil (scalabilité) |
-| I6 | **Modale RGPD** | À la première connexion (consentement profils publics) |
-
-### 🔵 Grands chantiers Gemini
-
-| # | Chantier | Description |
-|---|----------|-------------|
-| G1 | **Reviewer V2** | Supabase Auth, commentaires timestampés, modèle Frame.io |
-| G2 | **Payload** | Desktop + Mobile, Monday DB |
-| G3 | **ARK UX** | Barre de progression gamifiée, écran bilan, filtre Monday, nommage normé |
-| G4 | **Extensions Premiere** | CAPCOM, DATAPAD, BLACKBOX, Telemetry |
-| G5 | **COVENANT** | Web app GitHub Pages · signature RGPD terrain · spec architecturale validée |
 
 ---
 
-## Décisions architecturales actées
+## Journal des décisions — Phase Gemini
+
+### 12 avril 2026 — A5 CAPITAL · Architecture validée
+
+**Nom :** CAPITAL · **Devise :** *EX COMPUTO CLARITAS* (de la clarté par le calcul)
+
+**Décisions architecturales :**
+- Stack : web app GitHub Pages — HTML/CSS/JS vanilla
+- Pas de session Tranquility — outil ponctuel, solo
+- Pas d'intégration Monday V1 — cohabitation édito/commercial à réfléchir en amont
+- Export PDF + sauvegarde JSON
+- Phase Apollo — besoin insuffisamment fréquent pour Gemini
+
+**Livrables :** `FICHE_PRODUIT_CAPITAL_V1.md` · `SESSION_TRAVAIL_20260412_A5_CAPITAL.md`
+
+---
 
 ### 12 avril 2026 — A4 READBACK · Architecture validée
-
-**Besoin :** contrôle et édition du texte prompteur en remote, sans toucher l'iPad sous la caméra. Cohabitation avec ATEM Software Control sur le MacBook.
-
-**Setup existant remplacé :**
-- QuotTeleprompter sur iPad · iPhone Bluetooth télécommande · texte copié-collé depuis Teams
-
-**Architecture retenue :**
-- App Electron desktop macOS — même standard build que la suite
-- Serveur Node.js local intégré
-- Hotspot macOS natif (MacBook RJ45 → NAS / Wi-Fi hotspot → iPad/iPhone)
-- WebSocket temps réel — synchronisation texte + état
-- Vue MacBook : éditeur + contrôles + gestion modes
-- Vue iPad : afficheur plein écran Safari — lecture seule
-- Vue iPhone : télécommande légère
-- Trois modes de cohabitation ATEM SC :
-
-| Mode | Description | Déclencheur |
-|------|-------------|-------------|
-| **FOCUS** | READBACK plein écran — ATEM SC en arrière-plan | Par défaut |
-| **SWITCH** | Bascule instantanée vers ATEM SC | Bouton permanent + raccourci |
-| **SPLIT** | READBACK 60% · ATEM SC 40% | Raccourci clavier |
-
-**Note technique :** librairie `atem-connection` (Node.js) documentée pour usage futur si intégration ATEM native nécessaire.
 
 **Livrables :** `FICHE_PRODUIT_READBACK_V1.md` · `SESSION_TRAVAIL_20260412_A4_READBACK.md`
 
@@ -217,7 +193,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 
 **Format standard défini** — 8 blocs, multi-audience, ton Apple/method acting.
 
-**7 fiches rédigées et validées :**
+**8 fiches rédigées et validées :**
 
 | App | Devise | Fichier |
 |-----|--------|---------|
@@ -228,6 +204,7 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 | Reviewer | *NIHIL NISI PROBATUM* | `FICHE_PRODUIT_REVIEWER_V1.md` |
 | Manifest | *ANTE OMNIA PARARE* | `FICHE_PRODUIT_MANIFEST_V1.md` |
 | COVENANT | *FIDES SCRIPTA MANET* | `FICHE_PRODUIT_COVENANT_V1.md` |
+| CAPITAL | *EX COMPUTO CLARITAS* | `FICHE_PRODUIT_CAPITAL_V1.md` |
 
 ### 11 avril 2026 — Workflow Captif
 
@@ -379,10 +356,11 @@ Si `state.selectedProfile.fromLauncher === true`, utiliser `spSaveSettings` — 
 | `FICHE_PRODUIT_MANIFEST_V1.md` | Fiche produit — Manifest | V1.0 ✅ |
 | `FICHE_PRODUIT_COVENANT_V1.md` | Fiche produit — COVENANT | V1.0 ✅ |
 | `FICHE_PRODUIT_READBACK_V1.md` | Fiche produit — READBACK | V1.1 ✅ |
+| `FICHE_PRODUIT_CAPITAL_V1.md` | Fiche produit — CAPITAL | V1.0 ✅ |
 
 ---
 
-*Plan Directeur V4.8 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V4.7*
+*Plan Directeur V4.9 — 12 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V4.8*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · A4 ✅ · A5 + Bloc B à démarrer*
+*Phase Gemini : Ouverte — A1 ✅ · A2 ✅ · A3 ✅ · A4 ✅ · A5 ✅ · A6 + Bloc B à démarrer*
