@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.2 — 13 avril 2026*
+*Version 5.3 — 14 avril 2026*
 
 ---
 
@@ -73,7 +73,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, signature valide ✅ |
 | 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
-| 5 | **Reviewer** | commit 37113c5 | WebProfileSelector ✅, player adaptatif ✅ (B2), modale liste + détail commentaires ✅ (B1) |
+| 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ — 14/04/2026 |
 | 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅, index.html ✅ |
 
 ### En projet Gemini/Apollo ⚫
@@ -84,16 +84,17 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 |
 | 9 | **READBACK** | Desktop Electron · Prompteur caméra · Spec validée 12/04/2026 |
 | 10 | **CAPITAL** | Web app GitHub Pages · Phase Apollo |
-| 11 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
-| 12 | Cargo | — |
-| 13 | Hatch | — |
-| 14 | Guidance | — |
-| 15 | Beacon | Web |
-| 16 | Debrief | Web |
-| 17 | Telemetry | Extension Premiere |
-| 18 | CAPCOM | Extension Premiere |
-| 19 | DATAPAD | Extension Premiere |
-| 20 | BLACKBOX | Extension Premiere |
+| 11 | **SCRIPTER** | Plateforme scripts, annotation, versionning · Lien Monday · Session conception à planifier |
+| 12 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 13 | Cargo | — |
+| 14 | Hatch | — |
+| 15 | Guidance | — |
+| 16 | Beacon | Web |
+| 17 | Debrief | Web |
+| 18 | Telemetry | Extension Premiere |
+| 19 | CAPCOM | Extension Premiere |
+| 20 | DATAPAD | Extension Premiere |
+| 21 | BLACKBOX | Extension Premiere |
 
 ---
 
@@ -105,7 +106,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite — signature valide ✅ |
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
-| Reviewer | `RealCoolclint/Reviewer` | commit 37113c5 | 🟣 En orbite — B1+B2 ✅ |
+| Reviewer | `RealCoolclint/Reviewer` | commit 57ec8d3 | 🟣 En orbite — bugs Safari + mémoire session ✅ — 14/04/2026 |
 | Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
@@ -115,7 +116,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.2 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.3 |
 
 ---
 
@@ -128,8 +129,21 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 4. **Vitrine — lien download Launcher** — à mettre à jour à chaque nouvelle release
 
 ### ✅ Corrections appliquées en Gemini
-- **Monday — colonne formule Feuille de service** — URL corrigée — 10 avril 2026
-- **Signature apps desktop** — Launcher, BackUpFlow, ARK rebuildés avec signature ad-hoc — 13 avril 2026
+
+| Date | Correction |
+|------|-----------|
+| 10 avril 2026 | Monday — colonne formule Feuille de service — URL corrigée |
+| 13 avril 2026 | Signature apps desktop — Launcher, BackUpFlow, ARK rebuildés avec signature ad-hoc |
+| 14 avril 2026 | Reviewer — bug overlay patch, Safari fond noir/vitesse/bords, mémoire de session |
+
+### 🔴 Bugs en attente — prochaine session
+
+| # | App | Sujet |
+|---|-----|-------|
+| 1 | Manifest | Chrome — zéro responsable affiché |
+| 2 | Launcher | "Installer" ouvre un dossier Finder au lieu de télécharger le DMG |
+| 3 | Launcher | "Signaler un problème" — envoi Resend cassé |
+| 4 | Manifest | Safari — autocomplete pioche dans les contacts Mac sur le champ Responsable |
 
 ---
 
@@ -166,6 +180,21 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 ---
 
 ## Journal des décisions — Gemini
+
+### 14 avril 2026 — Corrections Reviewer + mémoire de session
+
+**Bugs corrigés (commit `57ec8d3`) :**
+
+- **Overlay patch** : suppression du `localStorage.setItem('reviewerDefaultOverlay')` qui persistait tout PNG importé comme overlay par défaut, y compris le patch de l'app.
+- **Safari fond blanc** : ajout de `background: #000` sur `#videoPlayer` et les overrides `.web-app`, `background: #0a0a0a` sur `.player-row`. Suppression de `body:not(.dark-theme)` qui forçait `#ffffff`.
+- **Safari vitesse Apple** : remplacement de `'SF Pro Display', -apple-system` par `'Lato', sans-serif` + `-webkit-appearance: none` sur `.speed-selector`.
+- **Bords arrondis** : `border-radius: 0` sur `#videoPlayer`, `.player-row .video-container`, `.player-section.player-block`.
+
+**Feature mémoire de session :**
+- Sauvegarde automatique en localStorage : nom du fichier + position + notes (toutes les 5s + à chaque note)
+- Restauration silencieuse au re-dépôt d'une vidéo avec le même nom
+- Toast "SESSION RESTAUREE — X NOTE(S)"
+- Clé : `reviewer_memory` + `reviewer_memory_filename`
 
 ### 13 avril 2026 — Audit signature Gatekeeper
 
@@ -236,6 +265,9 @@ La signature ad-hoc est obligatoire dans tout build Tranquility Suite. Electron-
 ### Reviewer — z-index stack
 top-bar : 1002 · modale liste : 1003 · modale détail : 1020.
 
+### Reviewer — Safari
+`-webkit-appearance: none` obligatoire sur tout `<select>` custom. `background: #000` doit être posé sur `#videoPlayer` ET sur ses overrides `.web-app` plus spécifiques. Ne jamais utiliser `body:not(.dark-theme)` pour forcer un fond clair — cette règle s'applique en Safari même avec la classe présente.
+
 ### Push GitHub dans Launcher
 Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.js` ne push jamais.
 
@@ -299,7 +331,7 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 
 ---
 
-*Plan Directeur V5.2 — 13 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.1*
+*Plan Directeur V5.3 — 14 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.2*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
 *Phase Gemini : Ouverte — Bloc A ✅ · B1 ✅ · B2 ✅ · B3→B5 à venir*
