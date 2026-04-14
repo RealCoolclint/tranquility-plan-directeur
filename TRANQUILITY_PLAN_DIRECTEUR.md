@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.3 — 14 avril 2026*
+*Version 5.4 — 14 avril 2026*
 
 ---
 
@@ -74,7 +74,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
 | 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ — 14/04/2026 |
-| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, patch PNG ✅, index.html ✅ |
+| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, fetch robuste ✅, Safari autocomplete ✅ — 14/04/2026 |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -107,7 +107,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
 | ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
 | Reviewer | `RealCoolclint/Reviewer` | commit 57ec8d3 | 🟣 En orbite — bugs Safari + mémoire session ✅ — 14/04/2026 |
-| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
+| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite — fetch robuste + Safari autocomplete ✅ — 14/04/2026 |
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
 | CAPITAL | `RealCoolclint/Capital` | *(à créer — Phase Apollo)* | ⚫ En conception |
@@ -116,7 +116,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.3 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.4 |
 
 ---
 
@@ -135,15 +135,15 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 10 avril 2026 | Monday — colonne formule Feuille de service — URL corrigée |
 | 13 avril 2026 | Signature apps desktop — Launcher, BackUpFlow, ARK rebuildés avec signature ad-hoc |
 | 14 avril 2026 | Reviewer — bug overlay patch, Safari fond noir/vitesse/bords, mémoire de session |
+| 14 avril 2026 | Manifest — fetch Chrome robuste (no-cache + validation array + état chargement + bouton RÉESSAYER) |
+| 14 avril 2026 | Manifest — Safari autocomplete contacts Mac supprimé (renommage attributs `name`) |
 
 ### 🔴 Bugs en attente — prochaine session
 
 | # | App | Sujet |
 |---|-----|-------|
-| 1 | Manifest | Chrome — zéro responsable affiché |
-| 2 | Launcher | "Installer" ouvre un dossier Finder au lieu de télécharger le DMG |
-| 3 | Launcher | "Signaler un problème" — envoi Resend cassé |
-| 4 | Manifest | Safari — autocomplete pioche dans les contacts Mac sur le champ Responsable |
+| 1 | Launcher | "Installer" ouvre un dossier Finder au lieu de télécharger le DMG |
+| 2 | Launcher | "Signaler un problème" — envoi Resend cassé |
 
 ---
 
@@ -164,11 +164,11 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 |---|----------|-------------|----------|
 | B1 | **Reviewer — ergonomie commentaires** | ✅ Terminé — 12 avril 2026 · commit 37113c5 | Haute |
 | B2 | **Reviewer — player max** | ✅ Terminé — 12 avril 2026 · commit 37113c5 | Haute |
-| B3 | **Landing page Tranquility — enrichissement** | Fiches produit, tutos, D.A. complète sur la vitrine | Moyenne |
-| B4 | **Cartes Launcher — enrichissement** | Style PlayStation, enrichissement visuel des cartes apps | Moyenne |
-| B5 | **Audit section Paramètres** | Revue de la section Paramètres dans chaque app | Moyenne |
+| B3 | **Landing page Tranquility — enrichissement** | Fiches produit, tutos, D.A. | Moyenne |
+| B4 | **Launcher — cartes style PlayStation** | Refonte visuelle des cartes apps | Moyenne |
+| B5 | **Audit section Paramètres** | Cohérence cross-apps | Basse |
 
-### 🔵 Infrastructure Gemini (priorité haute)
+### 🔵 Chantiers d'infrastructure Gemini
 
 | # | Chantier | Description |
 |---|----------|-------------|
@@ -176,10 +176,27 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | I2 | **`APPS_CATALOG` externalisé** | JSON sur `tranquility-core`, fetché au démarrage |
 | I3 | **Supabase Auth — Reviewer** | Authentification réelle modèle Frame.io |
 | I4 | **Page vitrine + onboarding** | Showcase GitHub Pages + auto-enregistrement Launcher |
+| I5 | **`managers.json` sur `tranquility-core`** | Responsables projet Manifest synchronisés cross-navigateurs · MASTER write via push Terminal |
 
 ---
 
 ## Journal des décisions — Gemini
+
+### 14 avril 2026 — Corrections Manifest
+
+**Bug Chrome — fetch profils fragile :**
+- `fetch()` passe en `{ cache: 'no-cache' }` pour éviter le cache agressif Chrome
+- Validation `Array.isArray(data) && data.length > 0` après `res.json()`
+- État de chargement "CHARGEMENT..." visible dans `#ps-grid` pendant le fetch
+- Bouton RÉESSAYER affiché si aucun profil après fetch échoué
+
+**Bug Safari — autocomplete contacts Mac :**
+- `name="managerName"` → `name="manager-contact"`
+- `name="videoManagerName"` → `name="video-manager-contact"`
+- Webkit ignore `autocomplete="off"` si l'attribut `name` contient un mot reconnu comme champ de contact
+
+**Décision architecture — managers.json :**
+Les responsables projet/vidéo sont actuellement en localStorage (cloisonné par navigateur). Chantier Gemini I5 créé : héberger `managers.json` sur `tranquility-core`, pattern identique à `profiles-public.json`. Solution immédiate : export/import CSV disponible dans Manifest.
 
 ### 14 avril 2026 — Corrections Reviewer + mémoire de session
 
@@ -254,6 +271,8 @@ gh release upload vX.XX.XX.XX "dist/NomApp-V1.JJ.MM.AA.dmg" --repo RealCoolclint
 - Le champ `avatar` dans `profiles-public.json` contient l'URL complète — ne jamais préfixer
 - CSP : `img-src` doit contenir `https://raw.githubusercontent.com`
 - CSP : `connect-src` doit contenir `https://realcoolclint.github.io`
+- `fetch(PROFILES_URL, { cache: 'no-cache' })` — obligatoire pour éviter le cache Chrome
+- Toujours valider `Array.isArray(data) && data.length > 0` après `res.json()`
 
 ---
 
@@ -267,6 +286,12 @@ top-bar : 1002 · modale liste : 1003 · modale détail : 1020.
 
 ### Reviewer — Safari
 `-webkit-appearance: none` obligatoire sur tout `<select>` custom. `background: #000` doit être posé sur `#videoPlayer` ET sur ses overrides `.web-app` plus spécifiques. Ne jamais utiliser `body:not(.dark-theme)` pour forcer un fond clair — cette règle s'applique en Safari même avec la classe présente.
+
+### Manifest — Safari autocomplete
+Safari ignore `autocomplete="off"` si l'attribut `name` contient un mot reconnu comme champ de contact (`name`, `email`, `phone`, etc.). Solution : renommer l'attribut `name` avec un terme neutre (`manager-contact`, `video-manager-contact`).
+
+### Manifest — fetch Chrome
+Toujours passer `{ cache: 'no-cache' }` au fetch de `profiles-public.json`. Chrome met en cache agressivement les JSON GitHub Pages. Toujours valider que la réponse est un tableau non vide avant de l'assigner.
 
 ### Push GitHub dans Launcher
 Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.js` ne push jamais.
@@ -331,7 +356,7 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 
 ---
 
-*Plan Directeur V5.3 — 14 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.2*
+*Plan Directeur V5.4 — 14 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.3*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — Bloc A ✅ · B1 ✅ · B2 ✅ · B3→B5 à venir*
+*Phase Gemini : Ouverte — Bloc A ✅ · B1 ✅ · B2 ✅ · B3→B5 à venir · Bugs Launcher en attente*
