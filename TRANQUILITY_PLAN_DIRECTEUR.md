@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.4 — 14 avril 2026*
+*Version 5.5 — 15 mai 2026*
 
 ---
 
@@ -14,8 +14,8 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 *Référence complète : `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` · Grille opérationnelle : `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`*
 
 **Mode de travail : l'Agence Tranquility.**
-Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule.
-*Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md`*
+Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule. Depuis mai 2026, chaque poste est un agent IA opérationnel avec sa personnalité, son regard et ses réflexes, consultable via le skill Agence Tranquility Council en trois modes : Solo, Cellule, Conseil.
+*Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md` · Agents : `AGENCE_TRANQUILITY_AGENTS.md` · Protocole : `AGENCE_TRANQUILITY_COUNCIL_SKILL.md`*
 
 **Principe technique :** GitHub = cloud de la Tranquility Suite.
 
@@ -116,7 +116,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.4 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.5 |
 
 ---
 
@@ -157,6 +157,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | A4 | READBACK — prompteur caméra | ✅ Terminé — 12 avril 2026 |
 | A5 | CAPITAL — budget production | ✅ Terminé — 12 avril 2026 |
 | A6 | Agence Tranquility — Manifeste | ✅ Terminé — 12 avril 2026 |
+| A7 | Agence Tranquility — Council Skill | ✅ Terminé — 15 mai 2026 |
 
 ### 🔵 Bloc B — Chantiers techniques (Cursor)
 
@@ -181,6 +182,19 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 ---
 
 ## Journal des décisions — Gemini
+
+### 15 mai 2026 — Agence Tranquility Council
+
+**Skill de consultation multi-agents créé.** Les 23 postes de l'Agence sont désormais des agents IA opérationnels avec personnalités distinctes (ton, vocabulaire, réflexes, red flags), consultables en trois modes :
+- **Solo** — Un poste, un regard ("QUALITE ?")
+- **Cellule** — 2-6 postes + synthèse ("Cellule : X, Y, Z")
+- **Conseil** — Tour de table complet ("Tour de table")
+
+**Documents créés :** `AGENCE_TRANQUILITY_AGENTS.md` (23 fiches agents) · `AGENCE_TRANQUILITY_COUNCIL_SKILL.md` (protocole)
+**Instruction permanente ajoutée** dans le projet Claude.
+**Principe de vulgarisation acté :** chaque poste parle pour la PRESIDENCE, pas pour un expert.
+**Concept :** LLM Council (Karpathy) adapté à l'Agence. Framework Markdown portable vers tout LLM.
+**Test réalisé :** Conseil complet sur le chantier I5 (managers.json) — 10 postes — validé.
 
 ### 14 avril 2026 — Corrections Manifest
 
@@ -330,6 +344,8 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 | Document | Rôle | Version |
 |----------|------|---------|
 | `AGENCE_TRANQUILITY_MANIFESTE.md` | Mode de travail — 23 postes · 6 familles | V1.0 ✅ |
+| `AGENCE_TRANQUILITY_AGENTS.md` | Fiches agents — 23 personnalités, regards, réflexes | V1.0 ✅ |
+| `AGENCE_TRANQUILITY_COUNCIL_SKILL.md` | Skill consultation multi-agents — Solo/Cellule/Conseil | V1.0 ✅ |
 | `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision UX + décisions fondatrices | V1.0 ✅ |
 | `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Session & profils — source de vérité technique | V1.1 ✅ |
 | `TRANQUILITY_PATRON_MIGRATION_SESSION_V1.md` | Patron de migration Session V1.1 | V1.0 ✅ |
@@ -356,7 +372,7 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 
 ---
 
-*Plan Directeur V5.4 — 14 avril 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.3*
+*Plan Directeur V5.5 — 15 mai 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.4*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — Bloc A ✅ · B1 ✅ · B2 ✅ · B3→B5 à venir · Bugs Launcher en attente*
+*Phase Gemini : Ouverte — Bloc A ✅ (A1→A7) · B1 ✅ · B2 ✅ · B3→B5 à venir · Bugs Launcher en attente*
