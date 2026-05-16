@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.5 — 15 mai 2026*
+*Version 5.6 — 16 mai 2026*
 
 ---
 
@@ -20,6 +20,29 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 **Principe technique :** GitHub = cloud de la Tranquility Suite.
 
 **Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier.
+
+---
+
+## Shared Data Layer — Pattern architectural officiel
+
+Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seule de la suite. Tout fichier JSON hébergé à sa racine constitue une donnée partagée accessible par toutes les apps, sur tous les navigateurs, sur tous les Mac.
+
+**Règles :**
+- **Lecture :** toute app, tout navigateur, tout Mac
+- **Écriture :** MASTER uniquement, via push Terminal sur le repo `tranquility-core` (branche `master`)
+- **Fetch :** toujours `{ cache: 'no-cache' }`, validation du type de réponse (`Array.isArray()` ou équivalent), fallback gracieux si le fetch échoue
+- **Emplacement :** racine du repo (réorganisation en sous-dossier `data/` quand le nombre de fichiers le justifiera — chantier dédié)
+
+**Inventaire :**
+
+| Fichier | URL | Rôle | État |
+|---------|-----|------|------|
+| `tranquility-core.css` | `https://realcoolclint.github.io/tranquility-core/tranquility-core.css` | Design system — tokens, typographie, couleurs | ✅ En production |
+| `profiles-public.json` | `https://realcoolclint.github.io/tranquility-core/profiles-public.json` | Profils allégés (prénoms, avatars) | ✅ En production |
+| `managers.json` | `https://realcoolclint.github.io/tranquility-core/managers.json` | Responsables projet/vidéo (noms complets, téléphones) | ⚫ À implémenter (I5) |
+| `apps-catalog.json` | `https://realcoolclint.github.io/tranquility-core/apps-catalog.json` | Catalogue des apps de la suite | ⚫ À implémenter (I2) |
+
+*Décision actée le 16 mai 2026 — arbitrage PRESIDENCE.*
 
 ---
 
@@ -111,12 +134,12 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
 | CAPITAL | `RealCoolclint/Capital` | *(à créer — Phase Apollo)* | ⚫ En conception |
-| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ + profiles-public.json |
+| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ Shared Data Layer — CSS + profiles-public.json |
 | **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.5 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.6 |
 
 ---
 
@@ -138,7 +161,7 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 | 14 avril 2026 | Manifest — fetch Chrome robuste (no-cache + validation array + état chargement + bouton RÉESSAYER) |
 | 14 avril 2026 | Manifest — Safari autocomplete contacts Mac supprimé (renommage attributs `name`) |
 
-### 🔴 Bugs en attente — prochaine session
+### 🔴 Bugs en attente — prochaine session technique
 
 | # | App | Sujet |
 |---|-----|-------|
@@ -171,17 +194,31 @@ Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du
 
 ### 🔵 Chantiers d'infrastructure Gemini
 
-| # | Chantier | Description |
-|---|----------|-------------|
-| I1 | **`session-profile.js` + Keychain** | Lire les clés API depuis le Keychain macOS |
-| I2 | **`APPS_CATALOG` externalisé** | JSON sur `tranquility-core`, fetché au démarrage |
-| I3 | **Supabase Auth — Reviewer** | Authentification réelle modèle Frame.io |
-| I4 | **Page vitrine + onboarding** | Showcase GitHub Pages + auto-enregistrement Launcher |
-| I5 | **`managers.json` sur `tranquility-core`** | Responsables projet Manifest synchronisés cross-navigateurs · MASTER write via push Terminal |
+| # | Chantier | Description | État conception |
+|---|----------|-------------|-----------------|
+| I1 | **`session-profile.js` + Keychain** | Lire les clés API depuis le Keychain macOS | — |
+| I2 | **`APPS_CATALOG` externalisé** | JSON sur `tranquility-core` (Shared Data Layer), fetché au démarrage | — |
+| I3 | **Supabase Auth — Reviewer** | Authentification réelle modèle Frame.io | — |
+| I4 | **Page vitrine + onboarding** | Showcase GitHub Pages + auto-enregistrement Launcher | — |
+| I5 | **`managers.json` sur `tranquility-core`** | Responsables projet Manifest synchronisés cross-navigateurs · Shared Data Layer · MASTER write via push Terminal | ✅ Conception terminée — arbitrages 16/05/2026 |
 
 ---
 
 ## Journal des décisions — Gemini
+
+### 16 mai 2026 — Arbitrages I5 + Shared Data Layer + SSD
+
+**Trois arbitrages PRESIDENCE tranchés pour le chantier I5 (managers.json) :**
+
+| # | Question | Décision |
+|---|----------|----------|
+| 1 | Emplacement dans `tranquility-core` | Racine — comme `profiles-public.json`. Réorganisation en `data/` reportée. |
+| 2 | Contenu du fichier | Noms complets + téléphone. Document professionnel, zéro ambiguïté. |
+| 3 | Formalisation du Shared Data Layer | Oui — `tranquility-core` officiellement hub de données en lecture seule. Pattern formalisé. |
+
+**Shared Data Layer formalisé** comme pattern architectural officiel de la suite. Section dédiée ajoutée dans le Plan Directeur avec inventaire des fichiers, règles de lecture/écriture et conventions de fetch.
+
+**SSD BACKUP PRO défaillant.** Le disque de travail principal est partiellement défaillant (monte encore mais erreurs, lenteurs, fichiers corrompus). Situé au bureau, récupérable le 21 mai. Protocole de récupération rédigé (`PROTOCOLE_RECUPERATION_SSD.md`). Nouveau SSD en discussion avec le service informatique. Même nom `BACKUP PRO` conservé pour le remplaçant (zéro migration de chemins).
 
 ### 15 mai 2026 — Agence Tranquility Council
 
@@ -360,6 +397,7 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 | `WORKFLOW_TRANQUILITY_V1.md` | Cartographie workflow prod/post-prod | V1.0 ✅ |
 | `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` | Philosophie fondatrice — trois lois | V1.0 ✅ |
 | `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md` | Grille opérationnelle | V1.0 ✅ |
+| `PROTOCOLE_RECUPERATION_SSD.md` | Protocole récupération/migration SSD BACKUP PRO | V1.0 ✅ |
 | `FICHE_PRODUIT_BACKUPFLOW_V1.md` | Fiche produit — BackUpFlow | V1.0 ✅ |
 | `FICHE_PRODUIT_LAUNCHER_V1.md` | Fiche produit — Launcher | V1.0 ✅ |
 | `FICHE_PRODUIT_TRANSPORTER_V1.md` | Fiche produit — Transporter | V1.0 ✅ |
@@ -372,7 +410,7 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 
 ---
 
-*Plan Directeur V5.5 — 15 mai 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.4*
+*Plan Directeur V5.6 — 16 mai 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.5*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — Bloc A ✅ (A1→A7) · B1 ✅ · B2 ✅ · B3→B5 à venir · Bugs Launcher en attente*
+*Phase Gemini : Ouverte — Bloc A ✅ (A1→A7) · B1 ✅ · B2 ✅ · B3→B5 à venir · I5 conception ✅ · Bugs Launcher en attente*
