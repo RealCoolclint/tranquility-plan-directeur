@@ -26,7 +26,7 @@ Tous les repos actifs vivent dans ce dossier. Même structure, même emplacement
 ## Repos actifs — à cloner sur chaque nouveau Mac
 
 ```bash
-cd ~/Documents/GitHub && git clone https://github.com/RealCoolclint/tranquility-plan-directeur && git clone https://github.com/RealCoolclint/tranquility-core && git clone https://github.com/RealCoolclint/Launcher && git clone https://github.com/RealCoolclint/Manifest && git clone https://github.com/RealCoolclint/Reviewer && git clone https://github.com/RealCoolclint/launcher-profiles
+cd ~/Documents/GitHub && git clone https://github.com/RealCoolclint/tranquility-plan-directeur && git clone https://github.com/RealCoolclint/tranquility-core && git clone https://github.com/RealCoolclint/Launcher && git clone https://github.com/RealCoolclint/Manifest && git clone https://github.com/RealCoolclint/Reviewer && git clone https://github.com/RealCoolclint/launcher-profiles && git clone https://github.com/RealCoolclint/true-me # (privé — données personnelles)
 ```
 
 > À faire une seule fois par Mac. Ensuite, le protocole Pull/Push suffit.
