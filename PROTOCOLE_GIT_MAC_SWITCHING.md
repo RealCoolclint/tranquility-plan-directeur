@@ -1,7 +1,7 @@
 # Protocole Git — Mac Switching
 ## Tranquility Suite · Martin Pavloff
 
-*Version 1.0 — 30 mai 2026*
+*Version 1.1 — 30 mai 2026*
 
 ---
 
@@ -129,6 +129,28 @@ cd ~/Documents/GitHub && git clone https://github.com/RealCoolclint/tranquility-
 ```bash
 cd ~/Documents/GitHub/NOM_DU_REPO && git status
 ```
+
+---
+
+## Hazel — Mac Maison uniquement (martinpavloff)
+
+Hazel tourne en permanence sur Mac Maison et intercepte automatiquement les fichiers dès qu'ils arrivent dans ~/Downloads. Règles actives vérifiées le 30 mai 2026 :
+
+| Règle | Condition | Destination |
+|-------|-----------|-------------|
+| MarkDowns | Extension .md | ~/Downloads/Markdowns/ |
+| Claude Skills | Extension .skill | ~/Downloads/Skills/ |
+| Tranquility Files | Nom contient TRANQUILITY, APOLLO, GEMINI, MERCURY, Backupflow, ARK, Reviewer, Transporter, Launcher, Covenant | ~/Downloads/Tranquility files/ |
+| Vidéos | Extension vidéo | ~/Downloads/Vidéos/ |
+| Images | Extension image | ~/Downloads/Images/ |
+| PDF | Extension .pdf | ~/Downloads/PDF/ |
+
+Conséquence directe pour JARVIS : quand un fichier est téléchargé depuis Claude sur Mac Maison, il n'est jamais dans ~/Downloads/ directement. Il faut chercher dans le bon sous-dossier selon son extension ou son nom.
+
+Commande de secours si on ne sait pas où Hazel a mis un fichier :
+find ~/Downloads -name "NOM_DU_FICHIER" 2>/dev/null
+
+Mac Bureau (mpavloff) : pas de Hazel confirmé — les fichiers restent dans ~/Downloads/ directement.
 
 ---
 
