@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.6 — 16 mai 2026*
+*Version 5.14 — 2 juin 2026*
 
 ---
 
@@ -17,7 +17,13 @@ La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées
 Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule. Depuis mai 2026, chaque poste est un agent IA opérationnel avec sa personnalité, son regard et ses réflexes, consultable via le skill Agence Tranquility Council en trois modes : Solo, Cellule, Conseil.
 *Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md` · Agents : `AGENCE_TRANQUILITY_AGENTS.md` · Protocole : `AGENCE_TRANQUILITY_COUNCIL_SKILL.md`*
 
+**Skills universels JARVIS.**
+En parallèle de la suite, un catalogue de skills universels est en construction — des réflexes de travail qui suivent Martin dans toutes ses conversations, pas seulement sur la Tranquility Suite. Principe de gouvernance : si la valeur est universelle → skill Claude. Si la valeur est contextuelle → fichier projet.
+*Catalogue complet documenté dans le journal des décisions du 30 mai 2026.*
+
 **Principe technique :** GitHub = cloud de la Tranquility Suite.
+
+**Workflow Git — Mac Switching :** `PROTOCOLE_GIT_MAC_SWITCHING.md` — clone dans `~/Documents/GitHub/` sur chaque Mac, pull au début, push à la fin. Toujours.
 
 **Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier.
 
@@ -39,7 +45,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 |---------|-----|------|------|
 | `tranquility-core.css` | `https://realcoolclint.github.io/tranquility-core/tranquility-core.css` | Design system — tokens, typographie, couleurs | ✅ En production |
 | `profiles-public.json` | `https://realcoolclint.github.io/tranquility-core/profiles-public.json` | Profils allégés (prénoms, avatars) | ✅ En production |
-| `managers.json` | `https://realcoolclint.github.io/tranquility-core/managers.json` | Responsables projet/vidéo (noms complets, téléphones) | ⚫ À implémenter (I5) |
+| `managers.json` | `https://realcoolclint.github.io/tranquility-core/managers.json` | Responsables projet/vidéo (noms complets, téléphones) | ✅ En production — commit `a622e12` — 02/06/2026 |
 | `apps-catalog.json` | `https://realcoolclint.github.io/tranquility-core/apps-catalog.json` | Catalogue des apps de la suite | ⚫ À implémenter (I2) |
 
 *Décision actée le 16 mai 2026 — arbitrage PRESIDENCE.*
@@ -92,19 +98,19 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 | # | Outil | Version | Notes |
 |---|-------|---------|-------|
-| 1 | **Launcher V2** | v1.18.04.26 | Session V1.1 ✅, MASTER ✅, signature ad-hoc ✅ — 13/04/2026 |
+| 1 | **Launcher V2** | v1.18.04.26 | Session V1.1 ✅, MASTER ✅, signature ad-hoc ✅ — ARK intégré APPS_CATALOG ✅ — 31/05/2026 |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, signature valide ✅ |
-| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
-| 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — 13/04/2026 |
-| 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ — 14/04/2026 |
-| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, fetch robuste ✅, Safari autocomplete ✅ — 14/04/2026 |
+| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ |
+| 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅, dans APPS_CATALOG Launcher ✅ — 31/05/2026 |
+| 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ |
+| 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, fetch robuste ✅, Safari autocomplete ✅ |
 
 ### En projet Gemini/Apollo ⚫
 
 | # | Outil | Notes |
 |---|-------|-------|
 | 7 | Payload | Desktop + Mobile, Monday DB |
-| 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 |
+| 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 · Priorité à réévaluer |
 | 9 | **READBACK** | Desktop Electron · Prompteur caméra · Spec validée 12/04/2026 |
 | 10 | **CAPITAL** | Web app GitHub Pages · Phase Apollo |
 | 11 | **SCRIPTER** | Plateforme scripts, annotation, versionning · Lien Monday · Session conception à planifier |
@@ -125,172 +131,147 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | v1.18.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
+| Launcher V2 | `RealCoolclint/Launcher` | commit 153229d | 🟣 En orbite — ARK APPS_CATALOG ✅ — 31/05/2026 |
 | Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite — signature valide ✅ |
 | BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
-| ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
-| Reviewer | `RealCoolclint/Reviewer` | commit 57ec8d3 | 🟣 En orbite — bugs Safari + mémoire session ✅ — 14/04/2026 |
-| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite — fetch robuste + Safari autocomplete ✅ — 14/04/2026 |
-| COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception |
+| ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite — dans APPS_CATALOG Launcher ✅ |
+| Reviewer | `RealCoolclint/Reviewer` | commit 57ec8d3 | 🟣 En orbite |
+| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
+| COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception — priorité à réévaluer |
 | READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
 | CAPITAL | `RealCoolclint/Capital` | *(à créer — Phase Apollo)* | ⚫ En conception |
-| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ Shared Data Layer — CSS + profiles-public.json |
-| **tranquility-suite** | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta |
+| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ Shared Data Layer — CSS + profiles-public.json + managers.json |
+| tranquility-suite | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta |
 | Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
 | Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
 | Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.6 |
+| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.14 |
 
 ---
 
-## Phase Gemini — Ouverte
+## Mac — État des machines
 
-### 🟡 Points ouverts mineurs reportés de Mercury
-1. **ARK : icône Electron par défaut** — configurer l'icône patch dans `electron-builder`
-2. **BackUpFlow `_machines` sur Mac Maison** — valider que les chemins sont bien distincts par hostname
-3. **Antoine Vassas** — initiales non assignées dans le système profils (bug ouvert)
-4. **Vitrine — lien download Launcher** — à mettre à jour à chaque nouvelle release
-
-### ✅ Corrections appliquées en Gemini
-
-| Date | Correction |
-|------|-----------|
-| 10 avril 2026 | Monday — colonne formule Feuille de service — URL corrigée |
-| 13 avril 2026 | Signature apps desktop — Launcher, BackUpFlow, ARK rebuildés avec signature ad-hoc |
-| 14 avril 2026 | Reviewer — bug overlay patch, Safari fond noir/vitesse/bords, mémoire de session |
-| 14 avril 2026 | Manifest — fetch Chrome robuste (no-cache + validation array + état chargement + bouton RÉESSAYER) |
-| 14 avril 2026 | Manifest — Safari autocomplete contacts Mac supprimé (renommage attributs `name`) |
-
-### 🔴 Bugs en attente — prochaine session technique
-
-| # | App | Sujet |
-|---|-----|-------|
-| 1 | Launcher | "Installer" ouvre un dossier Finder au lieu de télécharger le DMG |
-| 2 | Launcher | "Signaler un problème" — envoi Resend cassé |
+| Machine | Login | GitHub cloné | Identité Git | État |
+|---------|-------|-------------|--------------|------|
+| Mac Maison | martinpavloff | ✅ `~/Documents/GitHub/` | ✅ | ✅ Opérationnel |
+| Mac Bureau | mpavloff | ✅ `~/Documents/GitHub/` — 02/06/2026 | ✅ mpavloff@letudiant.fr — 02/06/2026 | ✅ Opérationnel |
+| Mac Studio | — | ⚫ À configurer | ⚫ | ⚫ |
 
 ---
 
-### 🔵 Bloc A — Réflexion & stratégie ✅ Complet
+## Phase Gemini — En cours
 
-| # | Chantier | État |
-|---|----------|------|
-| A1 | Audit Workflow Tranquility | ✅ Terminé — 10 avril 2026 |
-| A2 | Fiches produits — toutes les apps | ✅ Terminé — 11 avril 2026 |
-| A3 | COVENANT — discussion & arbitrage | ✅ Terminé — 11 avril 2026 |
-| A4 | READBACK — prompteur caméra | ✅ Terminé — 12 avril 2026 |
-| A5 | CAPITAL — budget production | ✅ Terminé — 12 avril 2026 |
-| A6 | Agence Tranquility — Manifeste | ✅ Terminé — 12 avril 2026 |
-| A7 | Agence Tranquility — Council Skill | ✅ Terminé — 15 mai 2026 |
+### Chantiers infrastructure
 
-### 🔵 Bloc B — Chantiers techniques (Cursor)
+| ID | Chantier | État |
+|----|----------|------|
+| I1 | Profiles sync Python script | ✅ Terminé |
+| I2 | `apps-catalog.json` sur tranquility-core | ⚫ À planifier |
+| I3 | Launcher bugs (Installer + Resend) | ✅ Terminé — commit d71d4a7 — 30/05/2026 |
+| I4 | Agence Tranquility Council skill | ✅ Terminé — mai 2026 |
+| I5 | `managers.json` sur tranquility-core | ✅ Terminé — commit a622e12 — 02/06/2026 |
+| I6 | ARK dans APPS_CATALOG Launcher | ✅ Terminé — commit 153229d — 31/05/2026 |
+| I7 | Intégrer managers.json dans Manifest | ⚫ À planifier |
 
-| # | Chantier | Description | Priorité |
-|---|----------|-------------|----------|
-| B1 | **Reviewer — ergonomie commentaires** | ✅ Terminé — 12 avril 2026 · commit 37113c5 | Haute |
-| B2 | **Reviewer — player max** | ✅ Terminé — 12 avril 2026 · commit 37113c5 | Haute |
-| B3 | **Landing page Tranquility — enrichissement** | Fiches produit, tutos, D.A. | Moyenne |
-| B4 | **Launcher — cartes style PlayStation** | Refonte visuelle des cartes apps | Moyenne |
-| B5 | **Audit section Paramètres** | Cohérence cross-apps | Basse |
+### Skills universels JARVIS
 
-### 🔵 Chantiers d'infrastructure Gemini
+| # | Skill | Tier | État |
+|---|-------|------|------|
+| 1 | Context Loader | 1 — Fondateur | ✅ Construit |
+| 2 | Multi-Perspective Council | 2 — Haute valeur | ✅ Construit |
+| 3 | Session Recap | 1 — Fondateur | ✅ Construit — SKILL.md V1.3 — 31/05/2026 |
+| 4 | Audit Complétude | 1 — Fondateur | ✅ Construit — SKILL.md V1.0 |
+| 5 | **True Me** | 1 — Fondateur | ✅ Construit — SKILL.md V1.0 + TRUE_ME.md V1.0 |
 
-| # | Chantier | Description | État conception |
-|---|----------|-------------|-----------------|
-| I1 | **`session-profile.js` + Keychain** | Lire les clés API depuis le Keychain macOS | — |
-| I2 | **`APPS_CATALOG` externalisé** | JSON sur `tranquility-core` (Shared Data Layer), fetché au démarrage | — |
-| I3 | **Supabase Auth — Reviewer** | Authentification réelle modèle Frame.io | — |
-| I4 | **Page vitrine + onboarding** | Showcase GitHub Pages + auto-enregistrement Launcher | — |
-| I5 | **`managers.json` sur `tranquility-core`** | Responsables projet Manifest synchronisés cross-navigateurs · Shared Data Layer · MASTER write via push Terminal | ✅ Conception terminée — arbitrages 16/05/2026 |
+### Autres projets Martin (hors suite)
+
+| Projet | Nature | État |
+|--------|--------|------|
+| Cookbook formats vidéo | Référentiel interne L'Étudiant | ⚫ À démarrer |
+| Studio de tournage | Développement physique | ⚫ À démarrer |
+| Réorganisation équipe | Management | ⚫ À démarrer |
+| Aura | Vitrine personnelle — levier carrière | ⚫ À démarrer |
 
 ---
 
-## Journal des décisions — Gemini
+## Prochaines étapes prioritaires
 
-### 16 mai 2026 — Arbitrages I5 + Shared Data Layer + SSD
+1. **Session stratégique** — réévaluer la priorisation des apps Gemini (COVENANT vs READBACK vs autre)
+2. **I7** — Intégrer `managers.json` dans Manifest (fetch à la place du localStorage)
+3. **Automatisation Hazel fin de session** — chantier dédié
+4. **Mac Studio** — cloner les repos dans `~/Documents/GitHub/`
 
-**Trois arbitrages PRESIDENCE tranchés pour le chantier I5 (managers.json) :**
+---
 
-| # | Question | Décision |
-|---|----------|----------|
-| 1 | Emplacement dans `tranquility-core` | Racine — comme `profiles-public.json`. Réorganisation en `data/` reportée. |
-| 2 | Contenu du fichier | Noms complets + téléphone. Document professionnel, zéro ambiguïté. |
-| 3 | Formalisation du Shared Data Layer | Oui — `tranquility-core` officiellement hub de données en lecture seule. Pattern formalisé. |
+## Journal des décisions
 
-**Shared Data Layer formalisé** comme pattern architectural officiel de la suite. Section dédiée ajoutée dans le Plan Directeur avec inventaire des fichiers, règles de lecture/écriture et conventions de fetch.
+### 2 juin 2026 — I5 + Mac Bureau setup
 
-**SSD BACKUP PRO défaillant.** Le disque de travail principal est partiellement défaillant (monte encore mais erreurs, lenteurs, fichiers corrompus). Situé au bureau, récupérable le 21 mai. Protocole de récupération rédigé (`PROTOCOLE_RECUPERATION_SSD.md`). Nouveau SSD en discussion avec le service informatique. Même nom `BACKUP PRO` conservé pour le remplaçant (zéro migration de chemins).
+**I5 — managers.json en production ✅**
+Fichier créé et pushé sur `tranquility-core` (commit `a622e12`). 8 entrées : Martin Pavloff + Antoine Paley (responsables vidéo), Hadrien Fond + Emma Tissier + Pascale Bunout + Anas Chetoui + Jade Kinkela + Edgar Pernez (responsables projet). Schema : `id`, `firstName`, `lastName`, `phone`, `role`. Shared Data Layer compte désormais 3 fichiers en production.
+
+**Mac Bureau opérationnel ✅**
+6 repos clonés dans `~/Documents/GitHub/`. Identité Git configurée : `Martin Pavloff / mpavloff@letudiant.fr`.
+
+**Priorisation apps Gemini à réévaluer**
+COVENANT n'est pas nécessairement la prochaine app à développer — session stratégique dédiée à planifier.
+
+### 31 mai 2026 — ARK APPS_CATALOG + Protocole fin de session
+
+**ARK intégré dans APPS_CATALOG Launcher ✅**
+Entrée `ark` ajoutée dans `APPS_CATALOG` (src/renderer/app.js). Entrée ARK retirée de `SUGG_EXTRA`. Patch récupéré depuis `raw.githubusercontent.com/RealCoolclint/ARK/main/assets/patch.png`. Ambiance PIKA `nebula` créée et intégrée. Commit `153229d`.
+
+**Protocole fin de session V1.0 formalisé ✅**
+Circuit Hazel Mac Maison documenté : `~/Downloads/` → `~/Markdowns/` → `~/Markdowns/Tranquility files/` (~2 sec). Commande Terminal avec `sleep 3` intégrée. SKILL.md Session Recap corrigé V1.3 (chemin source). `PROTOCOLE_FIN_DE_SESSION.md` créé.
+
+**Leçons :**
+- Assets Launcher dans `src/renderer/assets/` — pas dans `assets/` racine. Ne pas supposer la structure sans vérifier.
+- Récupération asset binaire GitHub : `curl -L -o [dest] "https://raw.githubusercontent.com/[repo]/main/[path]"`
+- `gh api` avec `?` dans l'URL : toujours quoter avec `'...'` en zsh
+- Idée widget fin de session + automatisation Hazel : notée, chantier dédié à planifier
+
+### 30 mai 2026 (soir) — Chantier I3 — Bugs Launcher
+
+**Bug 1 — Bouton Installer ✅**
+`dmgUrl` ajouté dans `APPS_CATALOG` pour BackUpFlow et Transporter. Commit `d71d4a7`.
+
+**Bug 2 — Resend signalement ✅**
+Option C actée : clé Resend dans `config.json` comme fallback. Testé et validé en prod.
+
+**Leçons :**
+- Claude Desktop bloqué → fix : `sudo codesign --force --deep --sign - /Applications/Claude.app`
+- Cowork : sandbox Linux isolé — pas de `gh` CLI ni outils macOS
+- `index.html` Launcher dans `src/renderer/`, pas à la racine
+- `npm install` requis sur tout nouveau clone Launcher
+
+### 30 mai 2026 (soir) — Skills Session Recap + Audit Complétude + True Me
+
+Session Recap V1.1 ✅ · Audit Complétude V1.0 ✅ · True Me V1.0 ✅
+Workflow Git Mac Switching acté. `PROTOCOLE_GIT_MAC_SWITCHING.md` V1.2.
+
+### 16 mai 2026 — Arbitrages I5 + SSD
+
+Chantier I5 (`managers.json`) : conception terminée, prêt pour Bloc B.
 
 ### 15 mai 2026 — Agence Tranquility Council
 
-**Skill de consultation multi-agents créé.** Les 23 postes de l'Agence sont désormais des agents IA opérationnels avec personnalités distinctes (ton, vocabulaire, réflexes, red flags), consultables en trois modes :
-- **Solo** — Un poste, un regard ("QUALITE ?")
-- **Cellule** — 2-6 postes + synthèse ("Cellule : X, Y, Z")
-- **Conseil** — Tour de table complet ("Tour de table")
+23 agents IA opérationnels. Skill Council installé.
 
-**Documents créés :** `AGENCE_TRANQUILITY_AGENTS.md` (23 fiches agents) · `AGENCE_TRANQUILITY_COUNCIL_SKILL.md` (protocole)
-**Instruction permanente ajoutée** dans le projet Claude.
-**Principe de vulgarisation acté :** chaque poste parle pour la PRESIDENCE, pas pour un expert.
-**Concept :** LLM Council (Karpathy) adapté à l'Agence. Framework Markdown portable vers tout LLM.
-**Test réalisé :** Conseil complet sur le chantier I5 (managers.json) — 10 postes — validé.
+### 14 avril 2026 — Bugs Reviewer + Manifest
 
-### 14 avril 2026 — Corrections Manifest
+Reviewer : 5 bugs corrigés (commit 57ec8d3). Manifest : Chrome + Safari corrigés.
 
-**Bug Chrome — fetch profils fragile :**
-- `fetch()` passe en `{ cache: 'no-cache' }` pour éviter le cache agressif Chrome
-- Validation `Array.isArray(data) && data.length > 0` après `res.json()`
-- État de chargement "CHARGEMENT..." visible dans `#ps-grid` pendant le fetch
-- Bouton RÉESSAYER affiché si aucun profil après fetch échoué
+### 13 avril 2026 — Audit signature + builds
 
-**Bug Safari — autocomplete contacts Mac :**
-- `name="managerName"` → `name="manager-contact"`
-- `name="videoManagerName"` → `name="video-manager-contact"`
-- Webkit ignore `autocomplete="off"` si l'attribut `name` contient un mot reconnu comme champ de contact
-
-**Décision architecture — managers.json :**
-Les responsables projet/vidéo sont actuellement en localStorage (cloisonné par navigateur). Chantier Gemini I5 créé : héberger `managers.json` sur `tranquility-core`, pattern identique à `profiles-public.json`. Solution immédiate : export/import CSV disponible dans Manifest.
-
-### 14 avril 2026 — Corrections Reviewer + mémoire de session
-
-**Bugs corrigés (commit `57ec8d3`) :**
-
-- **Overlay patch** : suppression du `localStorage.setItem('reviewerDefaultOverlay')` qui persistait tout PNG importé comme overlay par défaut, y compris le patch de l'app.
-- **Safari fond blanc** : ajout de `background: #000` sur `#videoPlayer` et les overrides `.web-app`, `background: #0a0a0a` sur `.player-row`. Suppression de `body:not(.dark-theme)` qui forçait `#ffffff`.
-- **Safari vitesse Apple** : remplacement de `'SF Pro Display', -apple-system` par `'Lato', sans-serif` + `-webkit-appearance: none` sur `.speed-selector`.
-- **Bords arrondis** : `border-radius: 0` sur `#videoPlayer`, `.player-row .video-container`, `.player-section.player-block`.
-
-**Feature mémoire de session :**
-- Sauvegarde automatique en localStorage : nom du fichier + position + notes (toutes les 5s + à chaque note)
-- Restauration silencieuse au re-dépôt d'une vidéo avec le même nom
-- Toast "SESSION RESTAUREE — X NOTE(S)"
-- Clé : `reviewer_memory` + `reviewer_memory_filename`
-
-### 13 avril 2026 — Audit signature Gatekeeper
-
-**Problème :** electron-builder produisait une signature partielle cassée sur Launcher, BackUpFlow, ARK. macOS Gatekeeper bloquait l'ouverture sans recours.
-
-**Solution : signature ad-hoc** (`codesign --force --deep --sign -`) appliquée après le build, avant le DMG. Gratuite, sans Apple Developer account. L'utilisateur passe par Réglages Système → Confidentialité et sécurité → Ouvrir quand même, une seule fois par machine.
-
-**Résultat audit :**
-- Launcher ❌ → ✅ rebuild
-- BackUpFlow ❌ → ✅ rebuild
-- Transporter ✅ → inchangé
-- ARK ❌ → ✅ rebuild
-
-**Documents mis à jour :** `WORKFLOW_RELEASE_TRANQUILITY_SUITE.md` V2 · `TRANQUILITY_GUIDE_DEMARRAGE_EQUIPE.md` V1.1
-
-### 12 avril 2026 — B1+B2 Reviewer
-
-**B2 — Player adaptatif :** surcharges CSS ciblées `.web-app`. Sizing natif optimal.
-
-**B1 — Ergonomie commentaires :** deux niveaux de modale. Modale liste + modale détail. `confirm()` natif supprimé. z-index stack : top-bar 1002 · liste 1003 · détail 1020.
+Signature ad-hoc validée sur Launcher, BackUpFlow, ARK.
 
 ### 12 avril 2026 — Agence Tranquility
 
-**23 postes formalisés** en 6 familles. Instruction permanente ajoutée dans Claude.
+23 postes formalisés en 6 familles.
 
 ### 11 avril 2026 — Workflow Captif
 
-**Philosophie fondatrice formalisée** — trois lois, grille opérationnelle.
+Philosophie fondatrice formalisée — trois lois, grille opérationnelle.
 
 ### 9 avril 2026 — Clôture Mercury
 
@@ -329,23 +310,44 @@ gh release upload vX.XX.XX.XX "dist/NomApp-V1.JJ.MM.AA.dmg" --repo RealCoolclint
 
 ## Leçons clés
 
+### Git — Mac Switching
+Pull avant de toucher quoi que ce soit. Push avant de fermer le Mac. Un oubli = une session perdue sur l'autre Mac.
+
+### Hazel — Mac Maison (martinpavloff)
+Les fichiers `.md` téléchargés depuis Claude passent par deux étapes (~2 sec total) : `~/Downloads/` → `~/Markdowns/` → `~/Markdowns/Tranquility files/`. Toujours utiliser `sleep 3` dans la commande Terminal de fin de session.
+
+### Assets Launcher
+Les assets (patches, ambiances) sont dans `src/renderer/assets/`, pas dans `assets/` à la racine. Pour récupérer un asset depuis un repo GitHub : `curl -L -o [dest] "https://raw.githubusercontent.com/RealCoolclint/[repo]/main/[path]"`.
+
+### Cursor — Mac Maison
+`cursor` n'est pas dans le PATH. Utiliser `open -a Cursor chemin/fichier` à la place.
+
+### Repos privés
+Tout repo contenant des données personnelles, stratégiques ou sensibles = privé par défaut.
+
 ### Signature desktop macOS
-La signature ad-hoc est obligatoire dans tout build Tranquility Suite. Electron-builder sans certificat produit une signature cassée — pire que pas de signature du tout. Toujours appliquer `codesign --force --deep --sign -` après le build.
+La signature ad-hoc est obligatoire dans tout build Tranquility Suite. Toujours appliquer `codesign --force --deep --sign -` après le build.
 
 ### Reviewer — z-index stack
 top-bar : 1002 · modale liste : 1003 · modale détail : 1020.
 
 ### Reviewer — Safari
-`-webkit-appearance: none` obligatoire sur tout `<select>` custom. `background: #000` doit être posé sur `#videoPlayer` ET sur ses overrides `.web-app` plus spécifiques. Ne jamais utiliser `body:not(.dark-theme)` pour forcer un fond clair — cette règle s'applique en Safari même avec la classe présente.
+`-webkit-appearance: none` obligatoire sur tout `<select>` custom.
 
 ### Manifest — Safari autocomplete
-Safari ignore `autocomplete="off"` si l'attribut `name` contient un mot reconnu comme champ de contact (`name`, `email`, `phone`, etc.). Solution : renommer l'attribut `name` avec un terme neutre (`manager-contact`, `video-manager-contact`).
+Safari ignore `autocomplete="off"` si l'attribut `name` contient un mot reconnu comme champ de contact.
 
 ### Manifest — fetch Chrome
-Toujours passer `{ cache: 'no-cache' }` au fetch de `profiles-public.json`. Chrome met en cache agressivement les JSON GitHub Pages. Toujours valider que la réponse est un tableau non vide avant de l'assigner.
+Toujours passer `{ cache: 'no-cache' }` au fetch de `profiles-public.json`.
 
 ### Push GitHub dans Launcher
 Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.js` ne push jamais.
+
+### zsh — URL avec `?`
+Toujours quoter avec `'...'` dans `gh api` quand l'URL contient `?recursive=1` ou similaire.
+
+### managers.json — schema
+`id`, `firstName`, `lastName`, `phone`, `role` — deux valeurs de rôle : `"Responsable vidéo"` et `"Responsable projet"`.
 
 ---
 
@@ -398,6 +400,8 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 | `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` | Philosophie fondatrice — trois lois | V1.0 ✅ |
 | `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md` | Grille opérationnelle | V1.0 ✅ |
 | `PROTOCOLE_RECUPERATION_SSD.md` | Protocole récupération/migration SSD BACKUP PRO | V1.0 ✅ |
+| `PROTOCOLE_GIT_MAC_SWITCHING.md` | Workflow Git sans SSD — clone/pull/push · Hazel Mac Maison | V1.2 ✅ |
+| `PROTOCOLE_FIN_DE_SESSION.md` | Circuit Hazel · commande Terminal · checklist ressources Claude | V1.0 ✅ |
 | `FICHE_PRODUIT_BACKUPFLOW_V1.md` | Fiche produit — BackUpFlow | V1.0 ✅ |
 | `FICHE_PRODUIT_LAUNCHER_V1.md` | Fiche produit — Launcher | V1.0 ✅ |
 | `FICHE_PRODUIT_TRANSPORTER_V1.md` | Fiche produit — Transporter | V1.0 ✅ |
@@ -407,10 +411,16 @@ Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.j
 | `FICHE_PRODUIT_COVENANT_V1.md` | Fiche produit — COVENANT | V1.0 ✅ |
 | `FICHE_PRODUIT_READBACK_V1.md` | Fiche produit — READBACK | V1.1 ✅ |
 | `FICHE_PRODUIT_CAPITAL_V1.md` | Fiche produit — CAPITAL | V1.0 ✅ |
+| `TRANQUILITY_SUITE_COM_MARKETING.md` | Bible de communication — base factuelle COM | V1.1 ✅ |
+| `BIBLE_COM_ADDENDUM_MAI_2026.md` | Addendum Bible COM — corrections mai 2026 | V1.0 ✅ |
+| `TRANQUILITY_WORKFLOW_ASSIST.md` | Skill projet — trois automatismes JARVIS | V1.0 ✅ |
+| `FICHE_PROFIL_ANTOINE_PALEY.md` | Fiche profil — Antoine Paley | V1.0 ✅ |
+| `SKILL.md` (Session Recap) | Skill universel — Session Recap | V1.3 ✅ |
+| `SKILL.md` (True Me) | Skill universel — True Me | V1.0 ✅ |
 
 ---
 
-*Plan Directeur V5.6 — 16 mai 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.5*
+*Plan Directeur V5.14 — 2 juin 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*Remplace V5.13*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — Bloc A ✅ (A1→A7) · B1 ✅ · B2 ✅ · B3→B5 à venir · I5 conception ✅ · Bugs Launcher en attente*
+*Phase Gemini : Ouverte — I5 ✅ · Mac Bureau ✅ · Priorisation apps à réévaluer*
