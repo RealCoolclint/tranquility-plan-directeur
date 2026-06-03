@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.14 — 2 juin 2026*
+*Version 5.16 — 3 juin 2026*
 
 ---
 
@@ -92,7 +92,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 ---
 
-## Inventaire de la flotte — 20+ outils
+## Inventaire de la flotte — 21 outils
 
 ### En orbite 🟣
 
@@ -100,21 +100,26 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 |---|-------|---------|-------|
 | 1 | **Launcher V2** | v1.18.04.26 | Session V1.1 ✅, MASTER ✅, signature ad-hoc ✅ — ARK intégré APPS_CATALOG ✅ — 31/05/2026 |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, signature valide ✅ |
-| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ |
+| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — ⚠️ DETTE : defaultPreset 'Fast 1080p30' → corriger en 'Fast 1080p25' |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅, dans APPS_CATALOG Launcher ✅ — 31/05/2026 |
 | 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ |
 | 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, fetch robuste ✅, Safari autocomplete ✅ |
+
+### En développement Gemini 🟡
+
+| # | Outil | Priorité | Notes |
+|---|-------|----------|-------|
+| 7 | **ROVER** | 1 — En cours | Commit `8c207e4` — fetchMetadata ✅, startDownload ✅, progression temps réel ✅, onboarding destination ✅, historique SQLite ✅, vue historique dédiée ✅, TikTok sans watermark ✅, YouTube/Instagram/TikTok/Facebook validés ✅ — Prochains chantiers : session/profils, splash, versioning, asarUnpack, build |
 
 ### En projet Gemini/Apollo ⚫
 
 | # | Outil | Notes |
 |---|-------|-------|
-| 7 | Payload | Desktop + Mobile, Monday DB |
-| 8 | **COVENANT** | Web app GitHub Pages · Spec architecturale validée 11/04/2026 · Priorité à réévaluer |
-| 9 | **READBACK** | Desktop Electron · Prompteur caméra · Spec validée 12/04/2026 |
-| 10 | **CAPITAL** | Web app GitHub Pages · Phase Apollo |
-| 11 | **SCRIPTER** | Plateforme scripts, annotation, versionning · Lien Monday · Session conception à planifier |
-| 12 | Rover | Spec complète dans `ROVER_DOCUMENTATION_PROJET.md` |
+| 8 | **COVENANT** | Web app GitHub Pages · Spec validée · Dépendance juridique résolue par archi · Priorité 2 Gemini |
+| 9 | **READBACK** | Desktop Electron · Prompteur caméra · Spec validée · Priorité 3 Gemini |
+| 10 | **PAYLOAD** | Desktop + Mobile, Monday DB · Priorité 4 Gemini |
+| 11 | **CAPITAL** | Web app GitHub Pages · Phase Apollo |
+| 12 | **SCRIPTER** | Plateforme scripts, annotation, versionning · Lien Monday |
 | 13 | Cargo | — |
 | 14 | Hatch | — |
 | 15 | Guidance | — |
@@ -127,155 +132,60 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 ---
 
+## Priorisation Gemini — actée le 2 juin 2026
+
+| Priorité | App | Nature | Complexité | Statut |
+|----------|-----|--------|------------|--------|
+| 1 | **ROVER** | Desktop Electron | ⭐⭐ | 🟡 En développement |
+| 2 | **COVENANT** | Web GitHub Pages | ⭐⭐⭐ | ⚫ En projet |
+| 3 | **READBACK** | Desktop Electron | ⭐⭐⭐ | ⚫ En projet |
+| 4 | **PAYLOAD** | Desktop + Mobile | ⭐⭐⭐⭐⭐ | ⚫ En projet |
+
+---
+
 ## Infrastructure GitHub
 
 | App | Repo | Release | État |
 |-----|------|---------|------|
-| Launcher V2 | `RealCoolclint/Launcher` | commit 153229d | 🟣 En orbite — ARK APPS_CATALOG ✅ — 31/05/2026 |
-| Transporter | `RealCoolclint/Transporter` | v1.01.04.26 | 🟣 En orbite — signature valide ✅ |
-| BackUpFlow | `RealCoolclint/BackUpFlow` | v1.02.04.26 | 🟣 En orbite — signature ad-hoc ✅ |
-| ARK | `RealCoolclint/ARK` | v1.02.04.26 | 🟣 En orbite — dans APPS_CATALOG Launcher ✅ |
-| Reviewer | `RealCoolclint/Reviewer` | commit 57ec8d3 | 🟣 En orbite |
-| Manifest | `RealCoolclint/Manifest` | GitHub Pages | 🟣 En orbite |
-| COVENANT | `RealCoolclint/COVENANT` | *(à créer)* | ⚫ En conception — priorité à réévaluer |
-| READBACK | `RealCoolclint/READBACK` | *(à créer)* | ⚫ En conception |
-| CAPITAL | `RealCoolclint/Capital` | *(à créer — Phase Apollo)* | ⚫ En conception |
-| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | ✅ Shared Data Layer — CSS + profiles-public.json + managers.json |
-| tranquility-suite | `RealCoolclint/tranquility-suite` | GitHub Pages | ✅ Vitrine beta |
-| Profiles | `RealCoolclint/launcher-profiles` | `profiles.json` | ✅ 9 profils actifs |
-| Profiles public | `RealCoolclint/tranquility-core` | `profiles-public.json` | ✅ 9 profils allégés |
-| Avatars | `RealCoolclint/tranquility-avatars` | 28 avatars | ✅ |
-| Plan Directeur | `RealCoolclint/tranquility-plan-directeur` | `TRANQUILITY_PLAN_DIRECTEUR.md` | ✅ V5.14 |
+| Launcher | `RealCoolclint/launcher` | ✅ | En orbite |
+| BackUpFlow | `RealCoolclint/backupflow` | ✅ | En orbite |
+| Transporter | `RealCoolclint/transporter` | ✅ | En orbite |
+| ARK | `RealCoolclint/ARK` | ✅ | En orbite |
+| Reviewer | `RealCoolclint/reviewer` | GitHub Pages | En orbite |
+| Manifest | `RealCoolclint/manifest` | GitHub Pages | En orbite |
+| ROVER | `RealCoolclint/ROVER` | ⚫ À créer | En développement |
+| tranquility-core | `RealCoolclint/tranquility-core` | GitHub Pages | Shared Data Layer |
+| tranquility-plan-directeur | `RealCoolclint/tranquility-plan-directeur` | — | Plan Directeur |
+| tranquility-avatars | `RealCoolclint/tranquility-avatars` | — | 28 avatars NASA-style |
+| tranquility-quotes | `RealCoolclint/tranquility-quotes` | — | Citations inspirantes |
+| launcher-profiles | `RealCoolclint/launcher-profiles` (privé) | — | Profils équipe |
 
 ---
 
-## Mac — État des machines
+## Chantiers infrastructure Gemini ouverts
 
-| Machine | Login | GitHub cloné | Identité Git | État |
-|---------|-------|-------------|--------------|------|
-| Mac Maison | martinpavloff | ✅ `~/Documents/GitHub/` | ✅ | ✅ Opérationnel |
-| Mac Bureau | mpavloff | ✅ `~/Documents/GitHub/` — 02/06/2026 | ✅ mpavloff@letudiant.fr — 02/06/2026 | ✅ Opérationnel |
-| Mac Studio | — | ⚫ À configurer | ⚫ | ⚫ |
-
----
-
-## Phase Gemini — En cours
-
-### Chantiers infrastructure
-
-| ID | Chantier | État |
-|----|----------|------|
-| I1 | Profiles sync Python script | ✅ Terminé |
-| I2 | `apps-catalog.json` sur tranquility-core | ⚫ À planifier |
-| I3 | Launcher bugs (Installer + Resend) | ✅ Terminé — commit d71d4a7 — 30/05/2026 |
-| I4 | Agence Tranquility Council skill | ✅ Terminé — mai 2026 |
-| I5 | `managers.json` sur tranquility-core | ✅ Terminé — commit a622e12 — 02/06/2026 |
-| I6 | ARK dans APPS_CATALOG Launcher | ✅ Terminé — commit 153229d — 31/05/2026 |
-| I7 | Intégrer managers.json dans Manifest | ⚫ À planifier |
-
-### Skills universels JARVIS
-
-| # | Skill | Tier | État |
-|---|-------|------|------|
-| 1 | Context Loader | 1 — Fondateur | ✅ Construit |
-| 2 | Multi-Perspective Council | 2 — Haute valeur | ✅ Construit |
-| 3 | Session Recap | 1 — Fondateur | ✅ Construit — SKILL.md V1.3 — 31/05/2026 |
-| 4 | Audit Complétude | 1 — Fondateur | ✅ Construit — SKILL.md V1.0 |
-| 5 | **True Me** | 1 — Fondateur | ✅ Construit — SKILL.md V1.0 + TRUE_ME.md V1.0 |
-
-### Autres projets Martin (hors suite)
-
-| Projet | Nature | État |
-|--------|--------|------|
-| Cookbook formats vidéo | Référentiel interne L'Étudiant | ⚫ À démarrer |
-| Studio de tournage | Développement physique | ⚫ À démarrer |
-| Réorganisation équipe | Management | ⚫ À démarrer |
-| Aura | Vitrine personnelle — levier carrière | ⚫ À démarrer |
+| ID | Chantier | Priorité | État |
+|----|----------|----------|------|
+| I1 | Session SSO cross-machine | Haute | ⚫ À démarrer |
+| I2 | Externaliser APPS_CATALOG sur tranquility-core | Moyenne | ⚫ À démarrer |
+| I3 | Bugs Launcher — DMG + Resend | Haute | ⚫ À démarrer |
+| I4 | BackUpFlow dette — defaultPreset 1080p25 | Moyenne | ⚫ À démarrer |
+| I5 | managers.json sur tranquility-core | ✅ | ✅ Terminé — 2 juin 2026 |
 
 ---
 
-## Prochaines étapes prioritaires
+## Standard fenêtre Electron — Tranquility Suite
 
-1. **Session stratégique** — réévaluer la priorisation des apps Gemini (COVENANT vs READBACK vs autre)
-2. **I7** — Intégrer `managers.json` dans Manifest (fetch à la place du localStorage)
-3. **Automatisation Hazel fin de session** — chantier dédié
-4. **Mac Studio** — cloner les repos dans `~/Documents/GitHub/`
+| Propriété | Valeur par défaut |
+|-----------|-------------------|
+| `width` | `900` |
+| `height` | `700` |
+| `titleBarStyle` | `'hiddenInset'` |
+| `center` | `true` |
+| `backgroundColor` | `'#0a0f1e'` |
+| `resizable` | `true` |
 
----
-
-## Journal des décisions
-
-### 2 juin 2026 — I5 + Mac Bureau setup
-
-**I5 — managers.json en production ✅**
-Fichier créé et pushé sur `tranquility-core` (commit `a622e12`). 8 entrées : Martin Pavloff + Antoine Paley (responsables vidéo), Hadrien Fond + Emma Tissier + Pascale Bunout + Anas Chetoui + Jade Kinkela + Edgar Pernez (responsables projet). Schema : `id`, `firstName`, `lastName`, `phone`, `role`. Shared Data Layer compte désormais 3 fichiers en production.
-
-**Mac Bureau opérationnel ✅**
-6 repos clonés dans `~/Documents/GitHub/`. Identité Git configurée : `Martin Pavloff / mpavloff@letudiant.fr`.
-
-**Priorisation apps Gemini à réévaluer**
-COVENANT n'est pas nécessairement la prochaine app à développer — session stratégique dédiée à planifier.
-
-### 31 mai 2026 — ARK APPS_CATALOG + Protocole fin de session
-
-**ARK intégré dans APPS_CATALOG Launcher ✅**
-Entrée `ark` ajoutée dans `APPS_CATALOG` (src/renderer/app.js). Entrée ARK retirée de `SUGG_EXTRA`. Patch récupéré depuis `raw.githubusercontent.com/RealCoolclint/ARK/main/assets/patch.png`. Ambiance PIKA `nebula` créée et intégrée. Commit `153229d`.
-
-**Protocole fin de session V1.0 formalisé ✅**
-Circuit Hazel Mac Maison documenté : `~/Downloads/` → `~/Markdowns/` → `~/Markdowns/Tranquility files/` (~2 sec). Commande Terminal avec `sleep 3` intégrée. SKILL.md Session Recap corrigé V1.3 (chemin source). `PROTOCOLE_FIN_DE_SESSION.md` créé.
-
-**Leçons :**
-- Assets Launcher dans `src/renderer/assets/` — pas dans `assets/` racine. Ne pas supposer la structure sans vérifier.
-- Récupération asset binaire GitHub : `curl -L -o [dest] "https://raw.githubusercontent.com/[repo]/main/[path]"`
-- `gh api` avec `?` dans l'URL : toujours quoter avec `'...'` en zsh
-- Idée widget fin de session + automatisation Hazel : notée, chantier dédié à planifier
-
-### 30 mai 2026 (soir) — Chantier I3 — Bugs Launcher
-
-**Bug 1 — Bouton Installer ✅**
-`dmgUrl` ajouté dans `APPS_CATALOG` pour BackUpFlow et Transporter. Commit `d71d4a7`.
-
-**Bug 2 — Resend signalement ✅**
-Option C actée : clé Resend dans `config.json` comme fallback. Testé et validé en prod.
-
-**Leçons :**
-- Claude Desktop bloqué → fix : `sudo codesign --force --deep --sign - /Applications/Claude.app`
-- Cowork : sandbox Linux isolé — pas de `gh` CLI ni outils macOS
-- `index.html` Launcher dans `src/renderer/`, pas à la racine
-- `npm install` requis sur tout nouveau clone Launcher
-
-### 30 mai 2026 (soir) — Skills Session Recap + Audit Complétude + True Me
-
-Session Recap V1.1 ✅ · Audit Complétude V1.0 ✅ · True Me V1.0 ✅
-Workflow Git Mac Switching acté. `PROTOCOLE_GIT_MAC_SWITCHING.md` V1.2.
-
-### 16 mai 2026 — Arbitrages I5 + SSD
-
-Chantier I5 (`managers.json`) : conception terminée, prêt pour Bloc B.
-
-### 15 mai 2026 — Agence Tranquility Council
-
-23 agents IA opérationnels. Skill Council installé.
-
-### 14 avril 2026 — Bugs Reviewer + Manifest
-
-Reviewer : 5 bugs corrigés (commit 57ec8d3). Manifest : Chrome + Safari corrigés.
-
-### 13 avril 2026 — Audit signature + builds
-
-Signature ad-hoc validée sur Launcher, BackUpFlow, ARK.
-
-### 12 avril 2026 — Agence Tranquility
-
-23 postes formalisés en 6 familles.
-
-### 11 avril 2026 — Workflow Captif
-
-Philosophie fondatrice formalisée — trois lois, grille opérationnelle.
-
-### 9 avril 2026 — Clôture Mercury
-
-Vitrine beta · Guide équipe V1.0 · Tests intégration validés.
+*Exception ROVER : 700×680px, resizable: false — app compacte utilitaire.*
 
 ---
 
@@ -328,6 +238,30 @@ Tout repo contenant des données personnelles, stratégiques ou sensibles = priv
 ### Signature desktop macOS
 La signature ad-hoc est obligatoire dans tout build Tranquility Suite. Toujours appliquer `codesign --force --deep --sign -` après le build.
 
+### tranquility-core.css — Apps Electron
+Ne jamais charger tranquility-core.css depuis le CDN dans une app Electron — la CSP en `file://` bloque le chargement. Toujours copier le fichier en local dans `src/renderer/assets/tranquility-core.css`.
+
+### Tokens CSS — tranquility-core.css
+Les vrais tokens sont : `--bg-primary`, `--bg-secondary`, `--bg-tertiary`, `--bg-elevated`, `--bg-card`, `--text-primary`, `--text-secondary`, `--text-tertiary`, `--accent`, `--accent-hover`, `--accent-light`, `--border`, `--border-hover`. Ne jamais utiliser `--bg`, `--text`, `--text-muted` — ces variables n'existent pas.
+
+### SQLite — Apps Electron (node v22+)
+`better-sqlite3` est incompatible avec node v25+ sur Mac Maison (erreur `climits` / node-gyp). Utiliser `sql.js` à la place (WebAssembly, zéro compilation native).
+
+### ROVER — yt-dlp + ffmpeg
+Toujours passer `--ffmpeg-location FFMPEG_PATH` explicitement dans tous les args yt-dlp. Le PATH système n'est pas fiable en Electron packagé.
+
+### ROVER — Instagram
+Sélecteur de format : `bestvideo[height<=H]+bestaudio/bestvideo[height<=H]/best`. Ne jamais contraindre le codec (`[ext=mp4]`) sur Instagram — yt-dlp choisit le format progressif natif avec audio intégré.
+
+### ROVER — TikTok watermark
+Suppression du watermark TikTok via `--extractor-args "tiktok:api_hostname=api16-normal-c-useast1a.tiktokv.com"`. Fonctionne uniquement depuis Electron (TikTok bloque les IP Terminal hors navigateur).
+
+### ROVER — Migration SQLite
+Toujours entourer les `ALTER TABLE` d'un `try/catch` silencieux. Ne jamais recréer la table — les données existantes seraient perdues.
+
+### ROVER — Instagram thumbnail CORS
+`ERR_BLOCKED_BY_RESPONSE.NotSameOrigin` sur les CDN Meta en Electron. Pas de solution côté renderer. Prévoir un proxy via main process en V2 si nécessaire.
+
 ### Reviewer — z-index stack
 top-bar : 1002 · modale liste : 1003 · modale détail : 1020.
 
@@ -364,20 +298,6 @@ Toujours quoter avec `'...'` dans `gh api` quand l'URL contient `?recursive=1` o
 
 ---
 
-## Standard fenêtre Tranquility Suite
-
-| Paramètre | Valeur |
-|---|---|
-| `width` | `1440` |
-| `height` | `1050` |
-| `minWidth` | `1440` |
-| `minHeight` | `1050` |
-| `center` | `true` |
-| `backgroundColor` | `'#0a0f1e'` |
-| `resizable` | `true` |
-
----
-
 ## Ressources du projet
 
 | Document | Rôle | Version |
@@ -411,16 +331,17 @@ Toujours quoter avec `'...'` dans `gh api` quand l'URL contient `?recursive=1` o
 | `FICHE_PRODUIT_COVENANT_V1.md` | Fiche produit — COVENANT | V1.0 ✅ |
 | `FICHE_PRODUIT_READBACK_V1.md` | Fiche produit — READBACK | V1.1 ✅ |
 | `FICHE_PRODUIT_CAPITAL_V1.md` | Fiche produit — CAPITAL | V1.0 ✅ |
+| `FICHE_PRODUIT_ROVER_V1.md` | Fiche produit — ROVER | V1.0 ✅ |
 | `TRANQUILITY_SUITE_COM_MARKETING.md` | Bible de communication — base factuelle COM | V1.1 ✅ |
 | `BIBLE_COM_ADDENDUM_MAI_2026.md` | Addendum Bible COM — corrections mai 2026 | V1.0 ✅ |
 | `TRANQUILITY_WORKFLOW_ASSIST.md` | Skill projet — trois automatismes JARVIS | V1.0 ✅ |
 | `FICHE_PROFIL_ANTOINE_PALEY.md` | Fiche profil — Antoine Paley | V1.0 ✅ |
-| `SKILL.md` (Session Recap) | Skill universel — Session Recap | V1.3 ✅ |
+| `SKILL.md` (Session Recap) | Skill universel — Session Recap | V1.4 ✅ |
 | `SKILL.md` (True Me) | Skill universel — True Me | V1.0 ✅ |
 
 ---
 
-*Plan Directeur V5.14 — 2 juin 2026 — Tranquility Suite · Cellule Vidéo L'Étudiant*
-*Remplace V5.13*
+*Plan Directeur V5.16 — 3 juin 2026 — Tranquility Suite · Pôle Vidéo L'Étudiant*
+*Remplace V5.15*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — I5 ✅ · Mac Bureau ✅ · Priorisation apps à réévaluer*
+*Phase Gemini : Ouverte — I5 ✅ · ROVER commit `8c207e4` — fetchMetadata/startDownload/historique/vue dédiée validés*
