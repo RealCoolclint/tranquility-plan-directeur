@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.17 — 3 juin 2026 (soir)*
+*Version 5.18 — 4 juin 2026*
 
 ---
 
@@ -109,7 +109,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 | # | Outil | Priorité | Notes |
 |---|-------|----------|-------|
-| 7 | **ROVER** | 1 — En cours | Patch ✅ · Ambiance Pika ✅ · Splash Mercury ✅ (timer 2900ms) — Prochains chantiers : session/profils, versioning, asarUnpack, build |
+| 7 | **ROVER** | 1 — En cours | **V1.04.06.26** ✅ — Session/profils ✅ · versioning ✅ · binaires standalone ✅ · Git LFS ✅ · build + DMG + release ✅ · interface améliorée ✅ — Prochains chantiers : HandBrakeCLI compression MP4, ajout APPS_CATALOG Launcher |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -165,7 +165,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 | ARK | — | — | — |
 | Reviewer | ✅ | — | — |
 | Manifest | ✅ | — | — |
-| ROVER | ✅ patch PNG · ✅ ambiance Pika | ✅ | Splash intégré ✅ |
+| ROVER | ✅ patch PNG · ✅ ambiance Pika | ✅ | Splash ✅ · Topbar ✅ |
 
 ---
 
@@ -200,7 +200,22 @@ Les vrais tokens sont : `--bg-primary`, `--bg-secondary`, `--bg-tertiary`, `--bg
 `better-sqlite3` est incompatible avec node v25+ sur Mac Maison (erreur `climits` / node-gyp). Utiliser `sql.js` à la place (WebAssembly, zéro compilation native).
 
 ### ROVER — yt-dlp + ffmpeg
-Toujours passer `--ffmpeg-location FFMPEG_PATH` explicitement dans tous les args yt-dlp. Le PATH système n'est pas fiable en Electron packagé.
+Toujours passer `--ffmpeg-location FFMPEG_DIR` (dossier, pas fichier) explicitement dans tous les args yt-dlp. Le PATH système n'est pas fiable en Electron packagé.
+
+### ROVER — Binaires standalone obligatoires
+- `yt-dlp` Homebrew = script wrapper Python → télécharger le binaire depuis GitHub releases (`yt-dlp_macos`)
+- `ffmpeg` Homebrew = stub 444KB inutilisable → télécharger depuis evermeet.cx (76 Mo)
+- `deno` = copier depuis `/opt/homebrew/bin/deno` après `brew install deno` (131 Mo)
+
+### ROVER — Git LFS
+- `git-lfs` doit être installé sur chaque Mac avant tout clone/pull : `brew install git-lfs && git lfs install`
+- Séquence démarrage obligatoire : `git pull origin main && git lfs pull` — jamais l'un sans l'autre
+- Sans `git lfs pull`, ffmpeg et deno sont des pointeurs texte ~133 bytes — le merge audio/vidéo échoue silencieusement
+- Après `git lfs migrate`, les binaires locaux deviennent des pointeurs → toujours `git lfs pull` immédiatement après
+
+### ROVER — YouTube / codec
+- `deno` requis pour résoudre les challenges JavaScript YouTube — sans lui, formats DASH souvent manquants
+- Codec AV1 (`av01`) non supporté par QuickLook macOS → forcer `[vcodec^=avc1]` en priorité dans le sélecteur
 
 ### ROVER — Instagram
 Sélecteur de format : `bestvideo[height<=H]+bestaudio/bestvideo[height<=H]/best`. Ne jamais contraindre le codec (`[ext=mp4]`) sur Instagram — yt-dlp choisit le format progressif natif avec audio intégré.
@@ -239,7 +254,7 @@ Toujours passer `{ cache: 'no-cache' }` au fetch de `profiles-public.json`.
 Un seul push par opération. Géré par `saveConfig()` dans le renderer. `main.js` ne push jamais.
 
 ### zsh — URL avec `?`
-Toujours quoter avec `'...'` dans `gh api` quand l'URL contient `?recursive=1` ou similaire.
+Toujours quoter avec `"..."` en Terminal quand l'URL contient `?` (ex: URLs YouTube).
 
 ### managers.json — schema
 `id`, `firstName`, `lastName`, `phone`, `role` — deux valeurs de rôle : `"Responsable vidéo"` et `"Responsable projet"`.
@@ -302,7 +317,7 @@ Toujours quoter avec `'...'` dans `gh api` quand l'URL contient `?recursive=1` o
 
 ---
 
-*Plan Directeur V5.17 — 3 juin 2026 (soir) — Tranquility Suite · Pôle Vidéo L'Étudiant*
-*Remplace V5.16*
+*Plan Directeur V5.18 — 4 juin 2026 — Tranquility Suite · Pôle Vidéo L'Étudiant*
+*Remplace V5.17*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — ROVER patch ✅ · ambiance Pika ✅ · splash Mercury ✅*
+*Phase Gemini : Ouverte — ROVER V1.04.06.26 ✅ buildé, signé, release GitHub*
