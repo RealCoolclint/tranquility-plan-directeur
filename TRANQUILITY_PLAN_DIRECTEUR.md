@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.18 — 4 juin 2026*
+*Version 5.19 — 5 juin 2026*
 
 ---
 
@@ -100,7 +100,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 |---|-------|---------|-------|
 | 1 | **Launcher V2** | v1.18.04.26 | Session V1.1 ✅, MASTER ✅, signature ad-hoc ✅ — ARK intégré APPS_CATALOG ✅ — 31/05/2026 |
 | 2 | **Transporter** | v1.01.04.26 | Session V1.1 ✅, signature valide ✅ |
-| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — ⚠️ DETTE : defaultPreset 'Fast 1080p30' → corriger en 'Fast 1080p25' · ⚠️ DETTE STRUCTURE : fichiers à la racine → migration vers src/main/ + src/renderer/ (chantier dédié) |
+| 3 | **BackUpFlow** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅ — ⚠️ DETTE STRUCTURE : fichiers à la racine → migration vers src/main/ + src/renderer/ (chantier dédié) — preset HandBrake : `Fast 1080p30` est le bon preset (Fast 1080p25 n'existe pas dans HB 1.11.1) |
 | 4 | **ARK** | v1.02.04.26 | Session V1.1 ✅, signature ad-hoc ✅, dans APPS_CATALOG Launcher ✅ — 31/05/2026 |
 | 5 | **Reviewer** | commit 57ec8d3 | WebProfileSelector ✅, player adaptatif ✅, modale commentaires ✅, bugs Safari ✅, mémoire de session ✅ |
 | 6 | **Manifest** | GitHub Pages | WebProfileSelector ✅, localStorage ✅, CSP ✅, fetch robuste ✅, Safari autocomplete ✅ |
@@ -109,7 +109,7 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 | # | Outil | Priorité | Notes |
 |---|-------|----------|-------|
-| 7 | **ROVER** | 1 — En cours | **V1.04.06.26** ✅ — Session/profils ✅ · versioning ✅ · binaires standalone ✅ · Git LFS ✅ · build + DMG + release ✅ · interface améliorée ✅ — Prochains chantiers : HandBrakeCLI compression MP4, ajout APPS_CATALOG Launcher |
+| 7 | **ROVER** | 1 — En cours | **V1.04.06.26** ✅ — Session/profils ✅ · versioning ✅ · binaires standalone ✅ · Git LFS ✅ · build + DMG + release ✅ · interface améliorée ✅ — Compression abandonnée (décision 5/06/2026) — Prochains chantiers : ajout APPS_CATALOG Launcher |
 
 ### En projet Gemini/Apollo ⚫
 
@@ -134,58 +134,40 @@ Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seul
 
 ## Priorisation Gemini — actée le 2 juin 2026
 
-| Priorité | App | Nature | Complexité | Statut |
-|----------|-----|--------|------------|--------|
-| 1 | **ROVER** | Desktop Electron | ⭐⭐ | 🟡 En développement |
-| 2 | **COVENANT** | Web GitHub Pages | ⭐⭐⭐ | ⚫ En projet |
-| 3 | **READBACK** | Desktop Electron | ⭐⭐⭐ | ⚫ En projet |
-| 4 | **PAYLOAD** | Desktop + Mobile | ⭐⭐⭐⭐ | ⚫ En projet |
+| Priorité | Chantier | Type | État |
+|----------|----------|------|------|
+| 1 | **ROVER** — téléchargeur vidéo web | Nouvelle app | 🟡 En cours |
+| 2 | **COVENANT** — contrats de cession | Nouvelle app | ⚫ En projet |
+| 3 | **READBACK** — prompteur caméra | Nouvelle app | ⚫ En projet |
+| 4 | **PAYLOAD** — gestion productions | Nouvelle app | ⚫ En projet |
+| I1 | **Launcher bugs** — DMG + Resend | Infrastructure | ⚫ À faire |
+| I2 | **APPS_CATALOG externalisé** — JSON tranquility-core | Infrastructure | ⚫ À faire |
+| I3 | **managers.json** — Shared Data Layer | Infrastructure | ✅ Terminé — 02/06/2026 |
+| I4 | **SSD recovery** — protocole migration | Infrastructure | ⚫ À faire |
+| I5 | **managers.json** — arbitrages + schema | Infrastructure | ✅ Terminé — 02/06/2026 |
 
 ---
 
-## Chantiers Gemini — Infrastructure
+## Carnet de pièges Gemini — actifs
 
-| # | Chantier | État | Notes |
-|---|----------|------|-------|
-| I1 | Launcher bugs (DMG + Resend) | ⚫ À faire | Fichiers src/renderer/app.js + src/main/main.js requis |
-| I2 | Externaliser APPS_CATALOG en JSON tranquility-core | ⚫ À faire | Élimine rebuild Launcher à chaque nouvelle app |
-| I3 | Launcher bugs — session 30 mai 2026 | ✅ Traité | |
-| I4 | — | ⚫ À faire | |
-| I5 | managers.json sur tranquility-core | ✅ Terminé | 3 décisions PRESIDENCE · commit a622e12 · 02/06/2026 |
-
----
-
-## Missions patches — État
-
-| App | Patch | Ambiance | Statut |
-|-----|-------|----------|--------|
-| Launcher | ✅ | ✅ | En orbite |
-| BackUpFlow | ✅ | ✅ | En orbite |
-| Transporter | ✅ | — | En orbite |
-| ARK | — | — | — |
-| Reviewer | ✅ | — | — |
-| Manifest | ✅ | — | — |
-| ROVER | ✅ patch PNG · ✅ ambiance Pika | ✅ | Splash ✅ · Topbar ✅ |
+| App | Piège | Solution |
+|-----|-------|----------|
+| ROVER | Fichier source YouTube déjà optimisé (700 kbps) → toute recompression produit un fichier plus lourd | Ne pas compresser les fichiers web — compression réservée aux rushes bruts (BackUpFlow) |
+| ROVER | HandBrake — preset `Fast 1080p25` inexistant dans HB 1.11.1 | Preset disponible : `Fast 1080p30` |
+| ROVER | HandBrake — stderr bufferisée en mode non-TTY | Timer filesystem sur taille du fichier tmp pour progression approximative |
+| ROVER | ffmpeg — probe `ffmpeg -f null -` trop lente sur gros fichiers | Utiliser `-show_entries format=duration` sur les métadonnées |
+| ROVER | ffmpeg — bitrate cible 2000k sur contenu web (700 kbps source) | Fichier plus lourd — ne jamais cibler un bitrate supérieur au bitrate source |
+| ROVER | HandBrake DMG — nom du fichier macOS | Le DMG universel s'appelle `HandBrakeCLI-X.X.X.dmg` sans suffixe architecture |
+| ROVER | `[Merger]` dans stdout yt-dlp | Capturé correctement mais `proc.on('close')` peut arriver avant le flush complet — fallback par fichier .mp4 le plus récent |
+| Launcher | `dmgUrl` absent dans `APPS_CATALOG` | Bouton "Installer" ouvre Finder au lieu de télécharger le DMG |
+| Launcher | Resend endpoint cassé | IPC handler `signaler-probleme` à vérifier dans `main.js` |
 
 ---
 
-## Carnet de pièges — Tranquility Suite
+## Règles d'architecture — non négociables
 
-### Git
-- Pull avant de toucher quoi que ce soit. Push avant de fermer le Mac. Un oubli = une session perdue sur l'autre Mac.
-- **tranquility-plan-directeur** : toujours `git pull origin main` avant tout push. Conflit détecté Mac Bureau vs Mac Maison (juin 2026) — résolu par force push. Ne jamais sauter le pull.
-
-### Hazel — Mac Maison (martinpavloff)
-Les fichiers `.md` téléchargés depuis Claude passent par deux étapes (~2 sec total) : `~/Downloads/` → `~/Markdowns/` → `~/Markdowns/Tranquility files/`. Toujours utiliser `sleep 3` dans la commande Terminal de fin de session.
-
-### Assets Launcher
-Les assets (patches, ambiances) sont dans `src/renderer/assets/`, pas dans `assets/` à la racine. Pour récupérer un asset depuis un repo GitHub : `curl -L -o [dest] "https://raw.githubusercontent.com/RealCoolclint/[repo]/main/[path]"`.
-
-### Cursor — Mac Maison
-`cursor` n'est pas dans le PATH. Utiliser `open -a Cursor chemin/fichier` à la place.
-
-### Repos privés
-Tout repo contenant des données personnelles, stratégiques ou sensibles = privé par défaut.
+### GitHub = seul cloud
+Tout fichier de configuration, profil, catalogue est versionné sur GitHub. Aucun cloud tiers.
 
 ### Signature desktop macOS
 La signature ad-hoc est obligatoire dans tout build Tranquility Suite. Toujours appliquer `codesign --force --deep --sign -` après le build.
@@ -235,8 +217,14 @@ Phase 5 (flash + disparition) : `2900ms` — légèrement plus long que le stand
 ### ROVER — Pika export path
 L'export Pika atterrit dans `~/Downloads/Vidéos/` (sous-dossier), pas directement dans `~/Downloads/`. Toujours vérifier le chemin exact avant le `cp`.
 
+### ROVER — Compression abandonnée
+Les fichiers web téléchargés (YouTube, Instagram, TikTok) sont déjà optimisés à la source. Toute recompression produit soit un fichier plus lourd, soit une dégradation sans bénéfice. Compression réservée à BackUpFlow (rushes bruts). Décision actée le 5 juin 2026.
+
 ### BackUpFlow — Structure fichiers
 `index.html` est à la racine du repo, pas dans `src/renderer/`. Dette technique identifiée — chantier de migration à planifier en Gemini.
+
+### BackUpFlow — Preset HandBrake
+`Fast 1080p30` est le preset natif HandBrake correct. `Fast 1080p25` n'existe pas dans HandBrake 1.11.1. Dette annulée.
 
 ### Reviewer — z-index stack
 top-bar : 1002 · modale liste : 1003 · modale détail : 1020.
@@ -317,7 +305,7 @@ Toujours quoter avec `"..."` en Terminal quand l'URL contient `?` (ex: URLs YouT
 
 ---
 
-*Plan Directeur V5.18 — 4 juin 2026 — Tranquility Suite · Pôle Vidéo L'Étudiant*
-*Remplace V5.17*
+*Plan Directeur V5.19 — 5 juin 2026 — Tranquility Suite · Pôle Vidéo L'Étudiant*
+*Remplace V5.18*
 *Phase Mercury : ✅ Clôturée — 9 avril 2026*
-*Phase Gemini : Ouverte — ROVER V1.04.06.26 ✅ buildé, signé, release GitHub*
+*Phase Gemini : Ouverte — ROVER V1.04.06.26 ✅ — compression abandonnée 5/06/2026*
