@@ -1,0 +1,338 @@
+# Tranquility Suite — Plan Directeur
+## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
+
+*Version 5.25 — 7 juin 2026*
+
+---
+
+## Vision
+
+La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidéo de L'Étudiant. Chaque outil répond à un besoin précis de production, de post-production ou d'organisation. L'ensemble forme un système cohérent, maintenu par Martin Pavloff, utilisé quotidiennement par l'équipe.
+
+**Philosophie centrale : le workflow captif.**
+La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées dans les outils — pas confiées à la mémoire ou à la rigueur individuelle. La conformité est une conséquence de l'usage, pas un effort conscient. Chaque chantier, chaque feature, chaque décision d'architecture est évalué contre cette philosophie avant d'être validé.
+*Référence complète : `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` · Grille opérationnelle : `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`*
+
+**Mode de travail : l'Agence Tranquility.**
+Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule.
+*Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md` · Agents : `AGENCE_TRANQUILITY_AGENTS.md` · Protocole : `AGENCE_TRANQUILITY_COUNCIL_SKILL.md`*
+
+**Points Présidence — sessions régulières.**
+Des sessions de bilan d'alignement et de pilotage général sont institutionnalisées. Elles ne sont pas greffées sur des sessions techniques — elles ont leur propre espace. Fréquence cible : trimestrielle minimum. Première session réalisée le 7 juin 2026.
+
+**Principe technique :** GitHub = cloud de la Tranquility Suite.
+
+**Workflow Git — Mac Switching :** `PROTOCOLE_GIT_MAC_SWITCHING.md` — clone dans `~/Documents/GitHub/` sur chaque Mac, pull au début, push à la fin. Toujours.
+
+**Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier. ⚠️ Révision nécessaire — potentiellement obsolète sur plusieurs points depuis avril 2026.
+
+---
+
+## Shared Data Layer — Pattern architectural officiel
+
+Le repo `tranquility-core` (GitHub Pages) est le hub de données en lecture seule de la suite. Tout fichier JSON hébergé à sa racine constitue une donnée partagée accessible par toutes les apps, sur tous les navigateurs, sur tous les Mac.
+
+**Règles :**
+- **Lecture :** toute app, tout navigateur, tout Mac
+- **Écriture :** MASTER uniquement, via push Terminal sur le repo `tranquility-core` (branche `master`)
+- **Fetch :** toujours `{ cache: 'no-cache' }`, validation du type de réponse (`Array.isArray()` ou équivalent), fallback gracieux si le fetch échoue
+
+**Inventaire :**
+
+| Fichier | URL | Rôle | État |
+|---------|-----|------|------|
+| `tranquility-core.css` | `https://realcoolclint.github.io/tranquility-core/tranquility-core.css` | Design system | ✅ En production |
+| `profiles-public.json` | `https://realcoolclint.github.io/tranquility-core/profiles-public.json` | Profils allégés | ✅ En production |
+| `managers.json` | `https://realcoolclint.github.io/tranquility-core/managers.json` | Responsables projet/vidéo | ✅ En production — `a622e12` |
+| `apps-catalog.json` | — | Catalogue apps | ⚫ Conditionnel — 10+ apps en orbite |
+
+---
+
+## Phase Mercury — ✅ Clôturée — 9 avril 2026
+
+**Progression : 100%**
+
+---
+
+## Phase Gemini — Active
+
+### Inventaire de flotte Gemini
+
+| # | App | Type | État |
+|---|-----|------|------|
+| 1 | **ROVER** | Desktop | 🟣 En orbite — V1.04.06.26 |
+| 2 | **COVENANT** | Web | 🔵 En lancement — C1→C6 ✅ · C7+C9 ⚫ |
+| 3 | **READBACK** | Desktop | ⚫ En projet |
+| 4 | **PAYLOAD** | Desktop + Mobile | ⚫ En projet |
+
+### Chantiers d'infrastructure Gemini
+
+| # | Chantier | Type | État |
+|---|----------|------|------|
+| I1 | **Launcher bugs** — DMG + Resend | Infrastructure | ✅ Terminé — 06/06/2026 |
+| I2 | **APPS_CATALOG externalisé** | Infrastructure | ⚫ Conditionnel — 10+ apps en orbite |
+| I3 | **managers.json** — Shared Data Layer | Infrastructure | ✅ Terminé — 02/06/2026 |
+| I4 | **SSD recovery** — protocole migration | Infrastructure | ⚫ À faire |
+| I5 | **managers.json** — arbitrages + schema | Infrastructure | ✅ Terminé — 02/06/2026 |
+| I6 | **tranquility-web-template** | Infrastructure | ⚫ Décision PRESIDENCE requise — Gemini ou Apollo |
+
+---
+
+## COVENANT — État des chantiers
+
+| # | Chantier | État | Commit |
+|---|----------|------|--------|
+| C1 | Scaffolding HTML + CSP | ✅ | `b33194c` → `59c6545` |
+| C2 | WebProfileSelector | ✅ | `c533925` |
+| C2b | Proxy Netlify (Resend) | ✅ | `musical-tanuki-a691a5` |
+| C3 | Projets Monday | ✅ Supprimé | — |
+| C4 | Templates JSON majeur/mineur | ✅ | `b9d4f66` |
+| C5 | Interface wizard + splash Mercury | ✅ | `dedd751` |
+| C6 | Génération PDF | ✅ | `e7c8e6b` → `6a6de03` |
+| C7 | Téléchargement + envoi Resend | ⚫ | — |
+| C8 | Mise à jour Monday | ✅ Supprimé | — |
+| C9 | File d'attente offline | ⚫ | — |
+
+---
+
+## Plan d'alignement — Chantiers issus du Point Présidence du 7 juin 2026
+
+Ces chantiers sont distincts des chantiers de développement produit. Ils concernent la méthode, l'architecture documentaire, les specs et la communication.
+
+### Famille A — Méthode et outillage JARVIS
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| A1 | **TRANQUILITY COMPASS** — document d'orientation JARVIS permanent | 🔴 Critique | ⚫ À faire |
+| A2 | **Workflow Assist** — blocs contexte ROVER + COVENANT | 🔴 Critique | ⚫ À faire |
+| A3 | **Grille Workflow Captif** — format verdict 6 lignes | 🟠 Haute | ⚫ À faire |
+| A4 | **Poste TERRAIN** — institutionnalisé, collecte mensuelle | 🟡 Moyenne | ⚫ À faire |
+| A5 | **Automatisme COM post-chantier** — 3 questions en fin de livraison | 🟡 Moyenne | ⚫ À faire |
+
+### Famille B — Architecture et specs
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| B1 | **TRANQUILITY_SERVICES_TIERS.md** — inventaire services critiques | 🔴 Critique | ⚫ À faire |
+| B2 | **Arbitrage I6** — web template Gemini ou Apollo | 🔴 Critique | ⚫ Décision requise |
+| B3 | **`appPermissions`** — documenté dans spec Profil Passeport | 🟠 Haute | ⚫ À faire |
+| B4 | **Mode dégradé** — documentation résilience GitHub down | 🟡 Moyenne | ⚫ À faire |
+| B5 | **Migration identité Manifest** — repo + URL + fichier vers "Manifest" | 🟡 Moyenne | ⚫ À faire |
+| B6 | **Politique mise à jour yt-dlp** — fréquence, signal, procédure | 🟡 Moyenne | ⚫ À faire |
+
+### Famille C — Profils et utilisateurs
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| C1 | **Spec Profil Passeport V1.2** — 7 familles, 5 rôles, appPermissions | 🔴 Critique | ⚫ À faire |
+| C2 | **Groupe utilisateur dans COMPASS** — question systématique avant tout chantier | 🟠 Haute | ⚫ À faire (lié A1) |
+| C3 | **Durée de vie profils temporaires** — champ `expiresAt` ou archivage manuel | 🟡 Moyenne | ⚫ Décision requise |
+| C4 | **Session présentation collective équipe** — onboarding de la suite | 🟡 Moyenne | ⚫ À planifier |
+
+### Famille D — Communication et marketing
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| D1 | **Bible COM V2** — mise à jour complète, pas en addendum | 🟠 Haute | ⚫ À faire |
+| D2 | **Calendrier com livraisons** — signal formalisé à chaque mise en orbite | 🟡 Moyenne | ⚫ À faire |
+| D3 | **Récit par phase** — Mercury / Gemini / Apollo dans Bible COM V2 | 🟡 Moyenne | ⚫ À faire (lié D1) |
+| D4 | **Guide de passation** — 3 pages, niveau "directeur entrant" | 🟡 Moyenne | ⚫ À faire |
+
+### Famille E — Apps et flotte
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| E1 | **Dette BackUpFlow** — `Fast 1080p25` | 🔴 Critique | ⚫ À faire |
+| E2 | **COVENANT C7 + C9** — mise en orbite V1 | 🔴 Critique | 🔵 En cours |
+| E3 | **Politique maintenance flotte** — revue trimestrielle | 🟠 Haute | ⚫ À faire |
+| E4 | **Écran politique d'usage ROVER** — onboarding premier lancement | 🟡 Moyenne | ⚫ À faire |
+| E5 | **Sound design référentiel** — section Design Reference V2.1 | 🟡 Moyenne | ⚫ À faire |
+| E6 | **Versioning V1 vs V2 Gemini** — décision + Design Reference | 🟡 Moyenne | ⚫ Décision requise |
+| E7 | **Historique SQLite ROVER** — limitation portable documentée | 🟡 Moyenne | ⚫ À faire |
+
+### Session brainstorm dédiée
+
+| # | Chantier | État |
+|---|----------|------|
+| BR | **Session brainstorm** — 8 idées capturées le 7 juin | ⚫ À planifier après COVENANT V1 |
+
+**Idées à traiter :** App fil conducteur Premiere · Protocole Beta testing · Inventaire documents · Points Présidence (institutionnalisé) · Inscription en ligne · Évolution grille profils · Back office profils · Outil admin dédié en ligne
+
+---
+
+## Séquencement acté — Plan d'alignement
+
+**Immédiatement (avant de reprendre COVENANT) :**
+A1 (COMPASS) → A2 (Workflow Assist ROVER+COVENANT)
+
+**Dans la foulée de COVENANT V1 :**
+E2 → B1 → C1 → B2
+
+**Avant READBACK :**
+B3 · C2 · E3 · D1
+
+**Chantiers courts en parallèle :**
+E1 · E6 · E7 · B6
+
+**À planifier :**
+A4 · C4 · D4 · B5 · Session brainstorm
+
+---
+
+## COVENANT — Règles d'architecture
+
+**Profil :** mémorisé en `localStorage` (clé `ts_session_covenant`), sans expiration, confirmation au démarrage sur iPad partagé.
+
+**Lieu de tournage :** champ obligatoire saisi à l'étape PROJET — injecté comme "FAIT À" dans la zone signature du PDF.
+
+**PDF :** généré côté client avec `pdf-lib` — logo L'Étudiant centré, textes légaux majeur/mineur, format injecté dans "Vidéo « [format] »", signature embarquée, horodatage. Téléchargement automatique via blob. `window.print()` et `jsPDF` = exclus (incompatibles iPad/Safari).
+
+**`app.js` chargé une seule fois** via `document.write` avec cache-bust.
+
+**Monday :** supprimé. Archivage via Resend → boîte mail studio uniquement.
+
+**Proxy Netlify :** `musical-tanuki-a691a5` — variables secrètes via CLI uniquement (`npx netlify env:set --force`).
+
+---
+
+## Carnet de pièges Gemini — actifs
+
+| App | Piège | Solution |
+|-----|-------|----------|
+| ROVER | Fichier source YouTube déjà optimisé → recompression produit fichier plus lourd | Ne pas compresser les fichiers web — compression réservée aux rushes bruts |
+| ROVER | HandBrake — preset `Fast 1080p25` inexistant dans HB 1.11.1 | Preset disponible : `Fast 1080p30` |
+| ROVER | HandBrake — stderr bufferisée en mode non-TTY | Timer filesystem sur taille du fichier tmp |
+| ROVER | ffmpeg probe trop lente sur gros fichiers | Utiliser `-show_entries format=duration` sur les métadonnées |
+| ROVER | ffmpeg — bitrate cible supérieur au bitrate source | Fichier plus lourd — ne jamais cibler bitrate > source |
+| ROVER | `[Merger]` dans stdout yt-dlp | `proc.on('close')` peut arriver avant flush — fallback fichier .mp4 le plus récent |
+| Launcher | `openInstallModal` — IDs fantômes | Guards défensifs `if (el)` sur tout `getElementById` |
+| Launcher | Resend hors mode Master | Clé accessible via `getKeys()` uniquement |
+| Launcher | Assets dans `src/renderer/assets/` — pas à la racine | Utiliser `find` pour localiser |
+| Launcher | Triple mise à jour obligatoire par app | `APPS_CATALOG` + `AMBIANCE_VIDEOS` + `TRANQUILITY_TOOLS` |
+| COVENANT | `gh repo create --clone` ne clone pas toujours | Vérifier `ls -la`, cloner manuellement si nécessaire |
+| COVENANT | GitHub Pages nécessite repo public | Repos privés = Pages bloquées sans GitHub Enterprise |
+| COVENANT | Branche `master` — pas `main` | Toujours `git push origin master` |
+| COVENANT | Interface Netlify tronque les longues clés | Toujours `npx netlify env:set "valeur" --force` |
+| COVENANT | IP Netlify bloquée par Monday (HTTP 403) | Monday bloque tous les clouds publics |
+| COVENANT | CORS bloqué sur appels Monday directs | Monday supprimé de COVENANT |
+| COVENANT | `app.js` chargé deux fois → SyntaxError | Vérifier absence de `<script src="app.js">` en doublon |
+| COVENANT | `window.print()` / `jsPDF` incompatibles iPad Safari | Utiliser `pdf-lib` + blob download uniquement |
+| Apps web | Cache GitHub Pages masque les corrections | Toujours tester en navigation privée après push |
+| METHODE | Grille Workflow Captif consultée comme document, pas appliquée comme filtre | Format verdict 6 lignes avant tout chantier de conception |
+| METHODE | Règles rappelées en session non rétro-injectées immédiatement | Ajout au carnet de pièges en temps réel |
+| PROFILS | `appPermissions` existe dans le code mais pas dans la spec | Spec V1.2 à créer — toute app qui implémente des permissions improvise |
+| PROFILS | Profil "Invité" disparu de la spec V2 sans décision | Régression silencieuse — à corriger dans V1.2 |
+
+---
+
+## Règles d'architecture — non négociables
+
+### GitHub = seul cloud
+Tout fichier de configuration, profil, catalogue est versionné sur GitHub. Aucun cloud tiers.
+
+### Signature desktop macOS
+`CSC_IDENTITY_AUTO_DISCOVERY=false npx electron-builder --mac dir` → codesign ad-hoc → hdiutil. Dans cet ordre, sans exception.
+
+### Session JSON
+Format V2 — champs plats, `expiresAt` ISO, `writtenBy` = nom de l'app. N'importe quelle app peut écrire `session.json`. Launcher n'est jamais requis.
+
+### Settings par app
+Chaque app lit son propre bloc `appSettings.<appname>`. La couche `_machines` gère les chemins locaux. Clés API dans le Keychain global via `keytar`.
+
+### Portabilité
+Aucun chemin en dur. Tout fichier local doit fonctionner sur Mac Maison, Mac Bureau, Mac Studio sans modification.
+
+### Les 4 contrats architecturaux (formalisés le 7 juin 2026)
+À vérifier sur chaque app, sans exception :
+- **Design** : `tranquility-core.css` first, zéro token local, dark theme, uppercase, zéro emoji
+- **Identité** : `session.json` V2, Launcher optionnel, n'importe quelle app peut écrire la session
+- **Portabilité** : settings dans profil GitHub, couche `_machines` pour chemins locaux, clés API dans Keychain global
+- **Vérité** : shared data layer `tranquility-core`, fetch `no-cache`, MASTER only pour écriture
+
+### Apps web — Reviewer = référence absolue
+Pour toute nouvelle app web Tranquility : copier la structure de Reviewer. Ne jamais improviser.
+
+### Apps web — Splash Mercury
+`window.onMercuryComplete` = seul point d'entrée. Jamais `DOMContentLoaded`, jamais `window.load`.
+
+### Apps web — Cache-bust
+Toujours versionner `style.css` et `app.js` avec `?v=APP_VERSION`.
+
+### Apps web — tranquility-core.css
+⚠️ Décision PRESIDENCE requise (I6) — les apps web redéfinissent actuellement les variables localement.
+
+### ROVER — Sélecteur de format yt-dlp
+`bestvideo[height<=H]+bestaudio/bestvideo[height<=H]/best`. Ne jamais contraindre le codec sur Instagram.
+
+### ROVER — TikTok watermark
+`--extractor-args "tiktok:api_hostname=api16-normal-c-useast1a.tiktokv.com"`. Fonctionne uniquement depuis Electron.
+
+### ROVER — Migration SQLite
+Toujours entourer les `ALTER TABLE` d'un `try/catch` silencieux.
+
+### managers.json — schema
+`id`, `firstName`, `lastName`, `phone`, `role` — deux valeurs : `"Responsable vidéo"` et `"Responsable projet"`.
+
+### Launcher — Protocole ajout app
+Workflow complet en 5 phases dans `LAUNCHER_PROTOCOLE_AJOUT_APP.md`. Sans exception.
+
+### COVENANT — Monday
+Monday = supprimé. Archivage via Resend → boîte mail studio uniquement.
+
+---
+
+## Flotte complète — 21 outils
+
+| # | Nom | Catégorie | État |
+|---|-----|-----------|------|
+| 1 | BackUpFlow | Desktop | 🟣 En orbite — dette `Fast 1080p25` ouverte |
+| 2 | Transporter | Desktop | 🟣 En orbite |
+| 3 | Reviewer | Web | 🟣 En orbite |
+| 4 | Manifest | Web | 🟣 En orbite — identity crisis (repo EasyCallSheet) |
+| 5 | Launcher V2 | Desktop | 🟣 En orbite |
+| 6 | ARK | Desktop | 🟣 En orbite |
+| 7 | ROVER | Desktop | 🟣 En orbite — V1.04.06.26 |
+| 8 | COVENANT | Web | 🔵 En lancement — C7+C9 à faire |
+| 9 | READBACK | Desktop | ⚫ En projet |
+| 10 | CAPITAL | Desktop | ⚫ En projet |
+| 11 | PAYLOAD | Desktop + Mobile | ⚫ En projet |
+| 12 | Cargo | Desktop | ⚫ En projet |
+| 13 | Hatch | Web | ⚫ En projet |
+| 14 | Guidance | Web | ⚫ En projet |
+| 15 | Beacon | Desktop | ⚫ En projet |
+| 16 | Debrief | Web | ⚫ En projet |
+| 17 | Telemetry | Web | ⚫ En projet |
+| 18 | CAPCOM | Extension | ⚫ En projet |
+| 19 | DATAPAD | Extension | ⚫ En projet |
+| 20 | BLACKBOX | Extension | ⚫ En projet |
+| 21 | Scripter | À définir | ⚫ En idée |
+
+---
+
+## Ressources du projet
+
+| Document | Rôle | Version |
+|----------|------|---------|
+| `AGENCE_TRANQUILITY_MANIFESTE.md` | Mode de travail Agence | V1 |
+| `AGENCE_TRANQUILITY_AGENTS.md` | 23 postes — personnalités et réflexes | V1 |
+| `AGENCE_TRANQUILITY_COUNCIL_SKILL.md` | Protocole consultation multi-agents | V1 |
+| `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision produit — 5 décisions fondatrices | V2 ⚠️ Révision nécessaire |
+| `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design — règles UI non négociables | V2 |
+| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format profils — architecture settings | V1.1 ⚠️ V1.2 à produire |
+| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Protocole session — sync GitHub — 12 règles | V1 |
+| `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` | Les trois lois du workflow captif | V1 |
+| `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md` | Grille d'évaluation opérationnelle | V1 |
+| `TRANQUILITY_WORKFLOW_ASSIST.md` | Trois automatismes JARVIS | V1 ⚠️ ROVER+COVENANT à ajouter |
+| `TRANQUILITY_INSTRUCTION_VISION_ANCRAGE.md` | Checklist avant tout prompt Cursor | V1 |
+| `PROTOCOLE_GIT_MAC_SWITCHING.md` | Workflow Git inter-Mac | V1 |
+| `LAUNCHER_PROTOCOLE_AJOUT_APP.md` | Workflow ajout app au Launcher — 5 phases | V1 |
+| `TRANQUILITY_SUITE_ELECTRON_SKILL.md` | Skill développement Electron | V1 |
+| `TRANQUILITY_SUITE_UX_DESIGN_SKILL.md` | Skill UX/Design | V1 |
+| `TRANQUILITY_COMPASS.md` | Document d'orientation JARVIS permanent | ⚫ À créer — A1 |
+| `TRANQUILITY_SERVICES_TIERS.md` | Inventaire services tiers critiques | ⚫ À créer — B1 |
+| `TRANQUILITY_SUITE_COM_MARKETING_V2.md` | Bible COM mise à jour | ⚫ À créer — D1 |
+
+---
+
+*Plan Directeur V5.25 · Tranquility Suite · Cellule Vidéo L'Étudiant · 7 juin 2026*
+*Mise à jour issue du Point Présidence — Bilan d'alignement général*
