@@ -105,7 +105,7 @@ Lire dans l'ordre : `TRANQUILITY_COMPASS.md` → `TRANQUILITY_PLAN_DIRECTEUR.md`
 |------|---------|------|
 | `tranquility-core` | `master` | Shared data layer — CSS + JSON |
 | `Reviewer` | `main` | App web en orbite |
-| `EasyCallSheet` | `main` | App web Manifest (dette B5 — renommage) |
+| `Manifest` | `main` | App web Manifest ✅ |
 | `COVENANT` | `master` | App web COVENANT |
 | `tranquility-plan-directeur` | `main` | Roadmap officielle |
 | `tranquility-web-template` | `main` | Template GitHub — base apps web ✅ |
