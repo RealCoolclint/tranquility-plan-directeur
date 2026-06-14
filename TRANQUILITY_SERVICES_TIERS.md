@@ -2,7 +2,7 @@
 ## Inventaire des dépendances externes critiques
 ### Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 1.2 — 9 juin 2026*
+*Version 1.3 — 14 juin 2026 · +1 section : Outils IA locaux — Phase Apollo*
 
 ---
 
@@ -25,28 +25,33 @@ Tous les comptes critiques de la Tranquility Suite (GitHub, Netlify, Resend) son
 
 ---
 
-### Solution actée — Chantier B7
+### Solution actée — Chantier B7 ✅ Terminé (13 juin 2026)
 
 **Décision PRESIDENCE — 9 juin 2026**
 
 | Champ | Valeur |
 |-------|--------|
 | **Outil retenu** | Bitwarden — gestionnaire de mots de passe |
-| **Plan** | Free (suffisant — partage avec 1 personne inclus) |
+| **Plan** | Free |
 | **Coffre dédié** | "Tranquility Suite" |
-| **Comptes à y déposer** | GitHub · Netlify · Resend · Monday |
-| **Email de création Bitwarden** | À décider — `mpavloff@letudiant.fr` recommandé (rattachement institutionnel) |
-| **Sécurité du compte Bitwarden** | Mot de passe maître fort + code de récupération imprimé, rangé physiquement au bureau |
-| **Statut** | ⚫ À faire |
+| **Compte** | `mpavloff@letudiant.fr` |
+| **Code de récupération** | Imprimé + rangé physiquement au bureau |
+| **Statut** | ✅ Terminé — 5 entrées |
 
-**Pourquoi Bitwarden :**
-- Gratuit et open source (audité publiquement)
-- Coffres partageables — transfert à un successeur en un clic
-- Disponible Mac, iPhone, navigateur
-- Exportable si changement d'outil
+**5 entrées Bitwarden :**
+1. `GitHub — RealCoolclint` — identifiant + MDP
+2. `Netlify — musical-tanuki-a691a5` — email Gmail perso + MDP
+3. `Resend — Tranquility Suite` — mpavloff@letudiant.fr + MDP
+4. `Resend — Clé API active` — Note sécurisée
+5. `GitHub CLI — Token gh (Mac Bureau)` — Note sécurisée (protocole, pas valeur brute)
+
+**Périmètre délibérément limité :**
+- Gofile = API anonyme → hors scope
+- Monday = Retriever Launcher → hors scope
+- Clés API desktop = Retriever Launcher → hors scope
 
 **Objectif à long terme (Apollo) :**
-Migrer les comptes GitHub, Netlify et Resend vers une adresse institutionnelle ou un compte "rôle" dédié à la cellule (ex. `tranquility@letudiant.fr`). Aujourd'hui : Option B (documentation + protocole de transfert). Demain : Option A (compte rôle).
+Migrer les comptes GitHub, Netlify et Resend vers une adresse institutionnelle ou un compte "rôle" dédié à la cellule (ex. `tranquility@letudiant.fr`).
 
 ---
 
@@ -89,9 +94,9 @@ Lire dans l'ordre : `TRANQUILITY_COMPASS.md` → `TRANQUILITY_PLAN_DIRECTEUR.md`
 | **Apps dépendantes** | Toute la suite sans exception |
 | **Plan** | Free (GitHub Pages public uniquement) |
 | **Identifiant** | Email Gmail personnel Martin |
-| **MDP** | Keychain Mac Bureau (`mpavloff`) → à migrer vers Bitwarden (B7) |
+| **MDP** | Bitwarden — coffre "Tranquility Suite" ✅ |
 | **Authentification CLI** | `gh` CLI — token stocké en Keychain macOS · authentifié sur Mac Maison + Mac Bureau |
-| **Limite connue** | GitHub Pages = repos publics uniquement — COVENANT et covenant-proxy sont publics par nécessité |
+| **Limite connue** | GitHub Pages = repos publics uniquement — COVENANT est public par nécessité |
 | **URL de statut** | https://www.githubstatus.com |
 
 **Repos critiques en production :**
@@ -101,9 +106,9 @@ Lire dans l'ordre : `TRANQUILITY_COMPASS.md` → `TRANQUILITY_PLAN_DIRECTEUR.md`
 | `tranquility-core` | `master` | Shared data layer — CSS + JSON |
 | `Reviewer` | `main` | App web en orbite |
 | `EasyCallSheet` | `main` | App web Manifest (dette B5 — renommage) |
-| `covenant` | `master` | App web COVENANT |
-| `covenant-proxy` | `master` | Proxy Netlify Resend |
+| `COVENANT` | `master` | App web COVENANT |
 | `tranquility-plan-directeur` | `main` | Roadmap officielle |
+| `tranquility-web-template` | `main` | Template GitHub — base apps web ✅ |
 | `launcher-profiles` | — | Profils privés — sync cross-Mac |
 | `ROVER` | `main` | App desktop (Git LFS actif) |
 | `true-me` | — | Données TRUE_ME (privé) |
@@ -123,7 +128,7 @@ Apps desktop fonctionnent en local si déjà installées. Apps web (Reviewer, Ma
 | **Criticité** | 🟠 Haute — COVENANT ne peut pas envoyer d'email si Netlify est down |
 | **Plan** | Free |
 | **Identifiant** | Email Gmail personnel Martin |
-| **MDP** | Keychain Mac Bureau (`mpavloff`) → à migrer vers Bitwarden (B7) |
+| **MDP** | Bitwarden — coffre "Tranquility Suite" ✅ |
 | **Authentification CLI** | `npx netlify` — token stocké localement sur Mac Maison |
 | **Limite connue** | Interface Netlify tronque les longues valeurs d'env → toujours `npx netlify env:set "valeur" --force` en CLI |
 | **URL de statut** | https://www.netlifystatus.com |
@@ -142,8 +147,8 @@ Triple sécurité COVENANT dégrade proprement : PDF local téléchargeable (niv
 | **Criticité** | 🟠 Haute |
 | **Plan** | Free — 100 emails/jour · 3 000 emails/mois |
 | **Identifiant** | Email Gmail personnel Martin |
-| **MDP** | Keychain Mac Bureau (`mpavloff`) → à migrer vers Bitwarden (B7) |
-| **Clé API** | Netlify env vars (COVENANT) + Keychain macOS via Launcher MASTER (BackUpFlow) — jamais dans le code |
+| **MDP** | Bitwarden — coffre "Tranquility Suite" ✅ |
+| **Clé API** | Bitwarden (Note sécurisée) + Netlify env vars (COVENANT) + Keychain macOS via Launcher MASTER (BackUpFlow) — jamais dans le code |
 | **Limite connue** | 100 emails/jour en plan Free — suffisant en conditions normales. Surveiller après journée intense de tournages avec beaucoup de contrats COVENANT. |
 | **URL de statut** | https://resend.com/status |
 
@@ -267,7 +272,104 @@ BackUpFlow continue en copie brute sans compression. Secours compression : `ffmp
 
 ---
 
-## 4. Politique de mise à jour
+## 4. Outils IA locaux — Phase Apollo
+
+Ces outils ne sont pas encore intégrés dans la suite. Ils sont documentés ici en anticipation de la Phase Apollo, conformément à la règle des points d'entrée actée le 14 juin 2026.
+
+**Règle commune :** statut "Surveillé" jusqu'à intégration effective. L'intégration ne peut intervenir qu'après validation des 4 critères définis dans `TRANQUILITY_IA_STRATEGIE.md` : stabilité 3 mois, binding Node.js ou interface Electron documentée, valeur mesurable sur un usage réel, versionnage dans ce document.
+
+**Si l'IA est absente ou non configurée : comportement identique à aujourd'hui. Aucune feature IA n'est bloquante.**
+
+---
+
+### Whisper (OpenAI — open source)
+
+| Champ | Valeur |
+|-------|--------|
+| **Rôle** | Transcription audio/vidéo — parole vers texte horodaté |
+| **Licence** | MIT — usage commercial libre |
+| **Hébergement** | 100% local — offline |
+| **Coût** | Zéro |
+| **Modèle de référence** | `medium` — bon équilibre précision/vitesse Apple Silicon |
+| **Intégration Electron** | `whisper-node-addon` — binding Node.js pré-compilé (Approche A) |
+| **Statut** | Surveillé — candidat prioritaire Phase Apollo |
+| **Apps concernées** | ROVER · ARK |
+| **Points d'entrée actés** | `postProcess(videoPath)` dans ROVER · `enrichArchive()` dans ARK |
+| **Signal de mise à jour** | Nouvelle version majeure Whisper ou mise à jour binding Node.js |
+| **Source** | https://github.com/openai/whisper |
+
+**Contrainte :** transcription d'un fichier long (>30 min) peut prendre plusieurs minutes sur Apple Silicon sans GPU. Opt-in obligatoire, jamais automatique sur les gros fichiers.
+
+---
+
+### Ollama (runtime LLM local)
+
+| Champ | Valeur |
+|-------|--------|
+| **Rôle** | Serveur LLM local — résumé, reformulation, extraction, génération de texte |
+| **Licence** | MIT — open source |
+| **Hébergement** | 100% local — offline après installation du modèle |
+| **Coût** | Zéro |
+| **Version de référence** | 0.19+ (moteur MLX sur Apple Silicon) |
+| **API** | REST locale `http://localhost:11434` — compatible OpenAI |
+| **Modèle de référence** | Mistral 7B — excellent français, rapide |
+| **Intégration Electron** | Approche C — serveur local externe, requêtes HTTP depuis l'app |
+| **Statut** | Surveillé — candidat Phase Apollo |
+| **Apps concernées** | ROVER · ARK · READBACK · BackUpFlow · SIGNAL |
+| **Points d'entrée actés** | `processIncomingText()` dans READBACK · `generateMailBody()` dans BackUpFlow |
+| **Signal de mise à jour** | Nouveau modèle français plus léger et plus précis · Apple Foundation Models accessible Node.js |
+| **Source** | https://ollama.com |
+
+**Contrainte :** Ollama doit être installé sur le Mac de l'utilisateur. Décision PRESIDENCE requise avant déploiement équipe : qui installe, quel modèle, quel protocole de mise à jour.
+
+---
+
+### Demucs (Meta — open source)
+
+| Champ | Valeur |
+|-------|--------|
+| **Rôle** | Séparation de stems audio — isolation voix / bruit de fond |
+| **Licence** | MIT — usage commercial libre |
+| **Hébergement** | 100% local — offline |
+| **Coût** | Zéro |
+| **Modèle de référence** | `htdemucs` — meilleure qualité |
+| **Intégration** | Python (Approche B) — Mac Studio uniquement |
+| **Statut** | Surveillé — usage interne Martin/Antoine uniquement |
+| **Apps concernées** | Aucune app distribuée — usage ligne de commande |
+| **Signal de mise à jour** | Version MLX Apple Silicon accélérée disponible · binding Node.js émergent |
+| **Source** | https://github.com/facebookresearch/demucs |
+
+---
+
+### Apple Foundation Models (Apple)
+
+| Champ | Valeur |
+|-------|--------|
+| **Rôle** | LLM on-device — summarisation, extraction, compréhension texte |
+| **Licence** | Gratuit pour apps macOS 26+ |
+| **Hébergement** | 100% local — Neural Engine Apple Silicon |
+| **Coût** | Zéro |
+| **Disponibilité** | macOS 26+ — Swift API uniquement aujourd'hui |
+| **Intégration Electron** | Bloquée — pont Swift ↔ Node.js en développement communautaire |
+| **Statut** | Surveillance renforcée — intégration possible dès que pont Node.js disponible |
+| **Signal de mise à jour** | Pont Swift ↔ Node.js stable et documenté publié |
+
+---
+
+### Tableau de synthèse — outils IA surveillés
+
+| Outil | Approche | Statut | Apps concernées | Priorité Apollo |
+|-------|----------|--------|-----------------|-----------------|
+| Whisper | A (Node.js natif) | Surveillé | ROVER · ARK | Haute |
+| Ollama + Mistral 7B | C (serveur local) | Surveillé | ROVER · ARK · READBACK · BackUpFlow · SIGNAL | Haute |
+| Apple Foundation Models | — (bloqué Swift) | Surveillance renforcée | TBD | Haute dès disponible |
+| Demucs | B (Python interne) | Surveillé | Interne seulement | Basse |
+
+*Référence complète : `TRANQUILITY_IA_STRATEGIE.md` · `TRANQUILITY_VEILLE_IA.md`*
+
+---
+
+## 5. Politique de mise à jour
 
 | Service | Fréquence | Déclencheur | Responsable |
 |---------|-----------|-------------|-------------|
@@ -276,6 +378,7 @@ BackUpFlow continue en copie brute sans compression. Secours compression : `ffmp
 | **yt-dlp** | Mensuelle ou immédiate sur rupture | Site majeur qui échoue | Martin |
 | **HandBrakeCLI** | Sur bug bloquant uniquement | Compression en erreur | Martin |
 | **Node.js / npm** | Par chantier — jamais en production isolée | Incompatibilité signalée | Martin |
+| **Whisper / Ollama / Demucs** | Sur signal veille IA mensuelle | Nouvelle version majeure | Martin |
 
 ### Signaux d'alerte
 
@@ -292,7 +395,7 @@ BackUpFlow continue en copie brute sans compression. Secours compression : `ffmp
 
 ---
 
-## 5. Scénarios de panne
+## 6. Scénarios de panne
 
 ### GitHub down
 **Impact :** Apps web inaccessibles. Profils non chargés. **Action :** Attendre — pannes rarement > 1h. https://www.githubstatus.com
@@ -321,18 +424,23 @@ BackUpFlow continue en copie brute sans compression. Secours compression : `ffmp
 
 | Service | Apps | Criticité | Plan | Identifiant | MDP |
 |---------|------|-----------|------|-------------|-----|
-| **GitHub** | Toute la suite | 🔴 | Free | Gmail perso Martin | Keychain Mac Bureau → Bitwarden (B7) |
-| **Netlify** | COVENANT | 🟠 | Free | Gmail perso Martin | Keychain Mac Bureau → Bitwarden (B7) |
-| **Resend** | BackUpFlow · COVENANT | 🟠 | Free 100/j | Gmail perso Martin | Keychain Mac Bureau → Bitwarden (B7) |
+| **GitHub** | Toute la suite | 🔴 | Free | Gmail perso Martin | Bitwarden ✅ |
+| **Netlify** | COVENANT | 🟠 | Free | Gmail perso Martin | Bitwarden ✅ |
+| **Resend** | BackUpFlow · COVENANT | 🟠 | Free 100/j | Gmail perso Martin | Bitwarden ✅ |
 | **Monday.com** | BackUpFlow · Transporter | 🟡 | Entreprise | `mpavloff@letudiant.fr` | Compte IT L'Étudiant |
 | **Gofile.io** | BackUpFlow · Transporter | 🟡 | Free anonyme | Aucun | — |
 | **yt-dlp** | ROVER | 🔴 | Open source | — | — |
 | **HandBrakeCLI** | BackUpFlow · ROVER | 🟠 | Open source | — | — |
 | **ffmpeg** | ROVER | 🟠 | Open source | — | — |
 | **Node.js** | Toutes desktop | 🔴 | Open source | — | — |
+| **Whisper** | ROVER · ARK (Apollo) | ⚫ Surveillé | Open source | — | — |
+| **Ollama** | ROVER · ARK · READBACK · BackUpFlow · SIGNAL (Apollo) | ⚫ Surveillé | Open source | — | — |
+| **Demucs** | Interne (Apollo) | ⚫ Surveillé | Open source | — | — |
+| **Apple Foundation Models** | TBD (Apollo) | ⚫ Bloqué | Gratuit macOS 26+ | — | — |
 
 ---
 
-*TRANQUILITY_SERVICES_TIERS.md · V1.2 · 9 juin 2026*
+*TRANQUILITY_SERVICES_TIERS.md · V1.3 · 14 juin 2026*
 *Document fondateur — Tranquility Suite · Cellule Vidéo L'Étudiant*
+*+1 section : Outils IA locaux — Phase Apollo (Whisper, Ollama, Demucs, Apple Foundation Models)*
 *À mettre à jour à chaque ajout ou suppression d'un service tiers dans la suite*
