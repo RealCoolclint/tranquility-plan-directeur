@@ -1,4 +1,4 @@
-# RENDEZVOUS — Spec Technique V1.1
+# RENDEZVOUS — Spec Technique V1.2
 ## Tranquility Suite · Cellule Vidéo L'Étudiant
 
 *Contrat d'API · Architecture · Formats · Protocoles*
@@ -22,11 +22,11 @@ Ce document est le contrat de référence pour construire et faire évoluer REND
 | Composant | Choix |
 |---|---|
 | **Frontend** | HTML5 / CSS3 / Vanilla JS — GitHub Pages |
-| **Proxy backend** | Netlify Functions (Node.js) — instance dédiée `rendezvous-proxy-tranquility.netlify.app`, repo privé `RealCoolclint/rendezvous-proxy` (séparé du site COVENANT) |
+| **Proxy backend** | Netlify Functions (Node.js) — instance dédiée `rendezvous-proxy-tranquility.netlify.app`, repo privé `RealCoolclint/rendezvous-proxy` (séparé du site COVENANT) — **zéro dépendance npm**, fetch natif uniquement (confirmé : pas de `package.json` dans le repo) |
 | **Stockage profils public** | `profiles-public.json` — repo `RealCoolclint/tranquility-core` (public) |
 | **Stockage profils privé** | `profiles-private.json` — repo privé dédié `RealCoolclint/rendezvous-profiles-private` (confirmé R4, D8) |
 | **Email** | Resend — domaine dédié vérifié et activé `mail.tranquilitysuite.com` (D10, B13) — notifications admin + utilisateur |
-| **Tokens** | JWT — signés côté proxy, vérifiés côté apps |
+| **Tokens** | JWT — signés côté proxy via module natif `crypto` (HMAC SHA-256, à la main) — pas de lib `jsonwebtoken`, cohérence zéro dépendance |
 | **Denylist** | Fichier JSON versionné sur CDN GitHub Pages |
 | **Design** | `tranquility-core.css` — CDN `realcoolclint.github.io` — seule source de vérité pour les tokens (voir Design Reference) |
 
@@ -70,6 +70,8 @@ Deux fichiers de profils coexistent en permanence. Ils sont **toujours synchrone
 **Champs autorisés :** `id`, `firstName`, `initials`, `avatarId`, `color`, `level`, `status`, `apps`
 **Champs interdits :** email, nom de famille, données RGPD, token
 
+*(Ce fichier n'est pas encore alimenté en production — la bascule `pending` → `active` qui l'écrirait pour la première fois est prévue à R7. Le schéma ci-dessus reste donc, à ce stade, un schéma cible non encore vérifié contre du code réel.)*
+
 ### `profiles-private.json` — données sensibles
 
 **Emplacement :** repo privé dédié `RealCoolclint/rendezvous-profiles-private` (créé et opérationnel — R4, 20/06/2026)
@@ -103,6 +105,25 @@ Deux fichiers de profils coexistent en permanence. Ils sont **toujours synchrone
 ```
 
 **Champs RGPD :** `consentGiven`, `consentDate`, `createdAt`, `activatedAt`, `deactivatedAt`, `deleteScheduledAt`
+
+> ### ⚠️ Écart documenté entre ce schéma et le code réel (découverte 21/06/2026, A11)
+>
+> Le JSON ci-dessus est le **schéma cible**, pensé en anglais dès D1, le 16/06/2026 — avant que R4 soit réellement codé. Le code livré en production (`submit-inscription.js`) utilise une convention différente pour le profil à l'étape `pending`. **C'est cette convention réelle qui fait foi**, pas l'exemple ci-dessus.
+>
+> | Champ schéma cible (D1, anglais) | Champ réel en production | Remarque |
+> |---|---|---|
+> | `id` (`uuid-v4`) | `id` (`"p_" + Date.now()`) | **Pas un UUID** — chaîne préfixée par un timestamp en millisecondes. Suffisant comme clé unique tant que le volume reste celui d'une suite interne ; collision théorique uniquement si deux inscriptions arrivent à la même milliseconde — risque résiduel non traité, à garder en tête si le volume explose un jour |
+> | `firstName` | `prenom` | — |
+> | `lastName` | `nom` | **Collecté et requis depuis l'origine** — corrigé dans `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` le 20/06/2026 ; cette spec ne l'avait jamais répercuté avant V1.2 |
+> | `status` | `statut` | valeur identique (`"pending"`) |
+> | `createdAt` | `soumisLe` | — |
+> | `consentGiven` | `rgpdAccepte` | — |
+> | `consentDate` | `rgpdTimestamp` | — |
+> | `videoRelation` | `lienVideo` | — |
+> | `daemonType` | *(absent)* | **Pas collecté à l'inscription** — n'apparaît pas dans `requiredFields` du code réel. Probablement prévu pour l'onboarding daemon guidé (D5/R7), pas pour le formulaire d'inscription lui-même |
+> | `level`, `activatedAt`, `deactivatedAt`, `deleteScheduledAt` | *(absents)* | Cohérent avec D8 — ces champs n'ont de sens qu'à partir de la validation admin (R7), pas à la création `pending` |
+>
+> **Décision actée (21/06/2026) :** la convention française (`statut`, `prenom`, `nom`, `rgpdAccepte`, `rgpdTimestamp`, `soumisLe`, `lienVideo`) est le standard officiel pour `profiles-private.json`. Pas de migration du code existant vers l'anglais — le code en production fait foi, le document s'aligne sur lui, jamais l'inverse. **Tout développement futur (R5, R7) utilise ces noms réels.** La réconciliation complète du schéma (ajout de `level`, `daemonType`, `activatedAt` etc. au moment de la validation R7) reste portée par le chantier B10/D8, pas par cette correction documentaire.
 
 ### Opération d'écriture atomique
 
@@ -175,6 +196,8 @@ Proxy RENDEZVOUS vérifie l'email dans profiles-private.json
 }
 ```
 
+*(Ce payload est un nouvel artefact créé par R5 — pas de code existant à respecter ici, donc pas de conflit de convention. Les noms de claims JWT standards (`sub`, `iat`, `exp`) restent en anglais par convention technique internationale ; les champs métier (`firstName`, etc.) seront à reconstruire depuis `profiles-public.json` au moment de l'implémentation R5/R6 — donc en anglais, cohérent avec ce fichier-là, qui n'a pas encore divergé puisqu'il n'est pas encore écrit en production.)*
+
 ### Fallback offline 48h
 
 Les apps stockent le dernier token valide en cache local.
@@ -239,16 +262,19 @@ Sur les postes partagés (Mac Studio), RENDEZVOUS affiche un sélecteur de profi
 
 ### Données collectées — minimisation à la source
 
-| Champ | Justification | Conservation |
+| Champ (nom réel en production) | Justification | Conservation |
 |---|---|---|
-| `firstName` | Identification dans la suite | Durée d'activité |
+| `prenom` | Identification dans la suite | Durée d'activité |
+| `nom` | Identification administrative à l'inscription + notification admin (email RENDEZVOUS) — **collecté et requis depuis l'origine, corrigé en V1.2** | Durée d'activité |
 | `email` | Lien magique + notifications | Durée d'activité |
 | `role` | Validation accès | Durée d'activité |
-| `level` | Attribution accès apps | Durée d'activité |
-| `consentGiven` + `consentDate` | Traçabilité RGPD | Durée d'activité + 1 an |
-| `createdAt` / `activatedAt` | Audit | Durée d'activité + 1 an |
+| `level` *(ajouté à R7, pas à l'inscription)* | Attribution accès apps | Durée d'activité |
+| `rgpdAccepte` + `rgpdTimestamp` | Traçabilité RGPD | Durée d'activité + 1 an |
+| `soumisLe` / `activatedAt` *(R7)* | Audit | Durée d'activité + 1 an |
 
-**Données jamais collectées :** nom de famille (optionnel, non stocké), téléphone, poste exact, manager, données RH.
+**Données jamais collectées :** téléphone, poste exact, manager, données RH.
+
+*(Le nom de famille a été retiré de cette liste en V1.2 — il était listé ici par erreur depuis V1.0, alors qu'il est requis dans le code depuis l'origine. Voir la table de correspondance complète sous D1.)*
 
 ### Suppression — opération atomique
 
@@ -413,6 +439,8 @@ Deux modèles de données coexistent actuellement sans réconciliation :
 
 Plutôt que de trancher cette réconciliation à l'aveugle pendant la construction du proxy R4, la décision est de la **différer à R7** — au moment de la validation admin, quand le profil bascule réellement de `pending` à `active` et doit recevoir un niveau et des permissions concrètes. C'est à ce moment précis que les deux modèles doivent se rencontrer, pas avant.
 
+> **Complément V1.2 :** la réconciliation R7 devra aussi absorber l'écart de convention de nommage documenté sous D1 (français vs anglais) — pas seulement le modèle `role`/`appPermissions` vs `N1`→`N4`. Trois choses à faire au même moment, pas trois chantiers séparés : niveau, permissions, et nommage des champs.
+
 ### Ce que ça signifie pour R5→R8
 
 - R5 (authentification) : le lien magique ne peut être émis que pour un profil déjà `active` — un profil `pending` n'a pas d'accès, par construction (voir D2, cycle de vie du token)
@@ -530,31 +558,41 @@ Tous les endpoints sont exposés par la Netlify Function dédiée RENDEZVOUS.
 
 **Statut :** ✅ Livré et testé en production (R4, commits `9f1964e`, `0b83ec5`, `ca7b5ab`)
 
-**Payload entrant :**
+> **Section corrigée en V1.2** — le payload, les actions et la réponse ci-dessous décrivaient un comportement qui ne correspondait pas exactement au code réel de `submit-inscription.js`. Corrigé pour refléter l'implémentation telle qu'elle tourne en production aujourd'hui.
+
+**Payload entrant (réel) :**
 ```json
 {
-  "firstName": "Anne",
+  "prenom": "Anne",
+  "nom": "Martin",
   "email": "anne.martin@letudiant.fr",
   "role": "Journaliste vidéo",
-  "videoRelation": "Je tourne 2 sujets par semaine",
-  "consentGiven": true,
-  "daemonType": "bureau"
+  "lienVideo": "Je tourne 2 sujets par semaine",
+  "rgpdAccepte": true
 }
 ```
 
-**Actions proxy :**
-1. Valide les champs requis
-2. Vérifie que l'email se termine par `@letudiant.fr`
-3. Génère un `uuid-v4` unique
-4. Crée l'entrée dans `profiles-private.json` (statut `pending`) — **uniquement ce fichier (D8)**
-5. *(profiles-public.json non touché à ce stade — voir D8)*
-6. Envoie notification email à l'admin via Resend (`notifierAdmin()`, ex-`notifierMartin()` — D12) depuis `notifications@mail.tranquilitysuite.com` (D10, B13) : "Nouvelle demande en attente"
-7. Envoie email à l'utilisateur : "Demande reçue — en attente de validation"
+*(`daemonType` n'est pas collecté à ce stade — voir table de correspondance sous D1.)*
 
-**Réponse :**
+**Actions proxy (réelles) :**
+1. Valide que `prenom`, `nom`, `email`, `role`, `lienVideo` sont des chaînes non vides
+2. Vérifie le **format générique** de l'email (regex `^[^\s@]+@[^\s@]+\.[^\s@]+$`) — ⚠️ **pas de restriction au domaine `@letudiant.fr`** dans le code actuel, contrairement à ce que cette spec affirmait en V1.0/V1.1. Voir note de vigilance ci-dessous.
+3. Vérifie que `rgpdAccepte === true`
+4. Génère un `id` (`"p_" + Date.now()` — pas un UUID, voir D1)
+5. Crée l'entrée dans `profiles-private.json` (statut `pending`) — **uniquement ce fichier (D8)**
+6. *(`profiles-public.json` non touché à ce stade — voir D8)*
+7. Envoie notification email à l'admin via Resend (`notifierAdmin()`, ex-`notifierMartin()` — D12) depuis `notifications@mail.tranquilitysuite.com` (D10, B13), contenant prénom, nom, email, rôle et lien vidéo
+
+**Réponse (réelle) :**
 ```json
-{ "status": "pending", "message": "Demande reçue — l'équipe vous contactera sous 48h" }
+{ "success": true }
 ```
+
+*(Et non `{ "status": "pending", "message": "..." }` comme l'affirmait la version précédente de cette spec — le message de confirmation utilisateur vit côté front-end, pas dans la réponse du proxy.)*
+
+> ### ⚠️ Note de vigilance — restriction de domaine non appliquée (découverte V1.2, non corrigée dans le code)
+>
+> La Vision Produit de RENDEZVOUS suppose une ouverture à "tout L'Étudiant" via filtre sémantique + validation admin comme double protection. Le filtre sémantique mentionné est la validation manuelle admin — mais le code actuel n'impose **aucune restriction de domaine email** à l'inscription : n'importe quelle adresse au format valide est acceptée en `pending`. Le risque réel est limité (un profil `pending` n'a aucun accès tant qu'il n'est pas validé manuellement — D8), mais ce n'est pas ce que cette spec décrivait. **Décision à prendre :** corriger le code pour restreindre à `@letudiant.fr` (cohérent avec l'intention d'origine), ou documenter explicitement que la double protection repose entièrement sur la validation admin, sans filtre technique en amont. Non traité dans ce patch V1.2 — à trancher avant ou pendant R5.
 
 ---
 
@@ -624,7 +662,7 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 
 ## SCHÉMA RGPD — REGISTRE DES TRAITEMENTS
 
-*Ce bloc alimente le registre des traitements à remettre à Audrey Weiss. Voir `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` pour la version complète et à jour (nom de famille + périmètre Resend corrigés).*
+*Ce bloc alimente le registre des traitements à remettre à Audrey Weiss. Voir `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` pour la version complète et à jour (nom de famille + périmètre Resend corrigés, c'est la version qui fait foi).*
 
 | Champ | Valeur |
 |---|---|
@@ -632,8 +670,8 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 | **Responsable de traitement** | L'Étudiant — représenté par Martin Pavloff |
 | **Finalité** | Gestion des accès aux outils internes de production vidéo |
 | **Base légale** | Intérêt légitime (article 6.1.f RGPD) |
-| **Données traitées** | Prénom, email professionnel, rôle, niveau d'accès, horodatage consentement |
-| **Données NON traitées** | Nom de famille, téléphone, données RH, géolocalisation |
+| **Données traitées** | Prénom, **nom**, email professionnel, rôle, niveau d'accès, horodatage consentement |
+| **Données NON traitées** | Téléphone, données RH, géolocalisation |
 | **Destinataires** | Martin Pavloff (admin) — Resend, domaine dédié `mail.tranquilitysuite.com` (email transactionnel) — GitHub (stockage) |
 | **Transfert hors UE** | GitHub (USA) — couvert par DPA GitHub / clauses contractuelles types |
 | **Durée de conservation** | Durée d'activité du profil + 1 an pour données d'audit |
@@ -660,12 +698,13 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 | Version | Date | Changements |
 |---|---|---|
 | V1.0 | 18/06/2026 | Création — D1→D6 traduits en spec technique |
-| V1.1 | 21/06/2026 | Intégration D7→D13 : Glass Drawer (D7), écriture pending différée (D8), domaine Resend sandbox→dédié (D9/D10), vocabulaire de rôle dans le code (D12), renvoi croisé design (D11/D13) ; corrections factuelles : emplacement réel `profiles-private.json` (`rendezvous-profiles-private`), Base URL proxy confirmée (`rendezvous-proxy-tranquility.netlify.app`) |
+| V1.1 | 21/06/2026 | Intégration D7→D13 : Glass Drawer (D7), écriture pending différée (D8), domaine Resend sandbox→dédié (D9/D10), vocabulaire de rôle dans le code (D12), renvoi croisé design (D11/D13) ; corrections : emplacement réel `profiles-private.json`, Base URL proxy confirmée |
+| V1.2 | 21/06/2026 | **Correction RGPD** : nom de famille listé par erreur en "non collecté" en V1.0/V1.1 — corrigé (collecté et requis depuis l'origine, déjà fixé dans `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` le 20/06, jamais répercuté ici avant aujourd'hui). **Table de correspondance ajoutée** sous D1 : schéma cible illustratif (D1, anglais) vs schéma réel en production (français — `statut`, `prenom`, `nom`, `rgpdAccepte`, `rgpdTimestamp`, `soumisLe`, `lienVideo`) — convention française actée comme standard officiel, pas de migration du code existant. **Endpoint `/register` corrigé** : payload, actions et réponse réécrits pour correspondre exactement au code réel (`{ "success": true }`, pas `{ "status": "pending", ... }`). **Note de vigilance ajoutée** : pas de restriction de domaine `@letudiant.fr` dans la validation email actuelle — décision à prendre, non traitée dans ce patch. |
 
 *Ce document évolue avec chaque décision architecturale actée par la PRÉSIDENCE.*
 *Toute modification doit être validée contre les treize décisions fondatrices D1→D13.*
 
 ---
 
-*Spec Technique · RENDEZVOUS · V1.1 · Tranquility Suite · Cellule Vidéo L'Étudiant · 21 juin 2026*
+*Spec Technique · RENDEZVOUS · V1.2 · Tranquility Suite · Cellule Vidéo L'Étudiant · 21 juin 2026*
 *Martin Pavloff · JARVIS*
