@@ -1,4 +1,4 @@
-# RENDEZVOUS — Spec Technique V1.2
+# RENDEZVOUS — Spec Technique V1.3
 ## Tranquility Suite · Cellule Vidéo L'Étudiant
 
 *Contrat d'API · Architecture · Formats · Protocoles*
@@ -556,9 +556,7 @@ Tous les endpoints sont exposés par la Netlify Function dédiée RENDEZVOUS.
 
 ### Endpoint inscription — `POST /register`
 
-**Statut :** ✅ Livré et testé en production (R4, commits `9f1964e`, `0b83ec5`, `ca7b5ab`)
-
-> **Section corrigée en V1.2** — le payload, les actions et la réponse ci-dessous décrivaient un comportement qui ne correspondait pas exactement au code réel de `submit-inscription.js`. Corrigé pour refléter l'implémentation telle qu'elle tourne en production aujourd'hui.
+**Statut :** ✅ Livré et testé en production (R4, commits `9f1964e`, `0b83ec5`, `ca7b5ab`) — **restriction de domaine ajoutée et vérifiée le 21/06/2026 (commit `2149ff5`)**
 
 **Payload entrant (réel) :**
 ```json
@@ -576,23 +574,24 @@ Tous les endpoints sont exposés par la Netlify Function dédiée RENDEZVOUS.
 
 **Actions proxy (réelles) :**
 1. Valide que `prenom`, `nom`, `email`, `role`, `lienVideo` sont des chaînes non vides
-2. Vérifie le **format générique** de l'email (regex `^[^\s@]+@[^\s@]+\.[^\s@]+$`) — ⚠️ **pas de restriction au domaine `@letudiant.fr`** dans le code actuel, contrairement à ce que cette spec affirmait en V1.0/V1.1. Voir note de vigilance ci-dessous.
-3. Vérifie que `rgpdAccepte === true`
-4. Génère un `id` (`"p_" + Date.now()` — pas un UUID, voir D1)
-5. Crée l'entrée dans `profiles-private.json` (statut `pending`) — **uniquement ce fichier (D8)**
-6. *(`profiles-public.json` non touché à ce stade — voir D8)*
-7. Envoie notification email à l'admin via Resend (`notifierAdmin()`, ex-`notifierMartin()` — D12) depuis `notifications@mail.tranquilitysuite.com` (D10, B13), contenant prénom, nom, email, rôle et lien vidéo
+2. Vérifie le format générique de l'email (regex `^[^\s@]+@[^\s@]+\.[^\s@]+$`)
+3. **Vérifie que l'email se termine par `@letudiant.fr`** (insensible à la casse) — sinon `jsonResponse(400, { error: "Seules les adresses email @letudiant.fr sont acceptées." })`. Ajouté le 21/06/2026, vérifié en conditions réelles (rejet confirmé sur domaine externe, acceptation confirmée sur `@letudiant.fr`)
+4. Vérifie que `rgpdAccepte === true`
+5. Génère un `id` (`"p_" + Date.now()` — pas un UUID, voir D1)
+6. Crée l'entrée dans `profiles-private.json` (statut `pending`) — **uniquement ce fichier (D8)**
+7. *(`profiles-public.json` non touché à ce stade — voir D8)*
+8. Envoie notification email à l'admin via Resend (`notifierAdmin()`, ex-`notifierMartin()` — D12) depuis `notifications@mail.tranquilitysuite.com` (D10, B13), contenant prénom, nom, email, rôle et lien vidéo
 
 **Réponse (réelle) :**
 ```json
 { "success": true }
 ```
 
-*(Et non `{ "status": "pending", "message": "..." }` comme l'affirmait la version précédente de cette spec — le message de confirmation utilisateur vit côté front-end, pas dans la réponse du proxy.)*
+*(Et non `{ "status": "pending", "message": "..." }` comme l'affirmait une version antérieure de cette spec — le message de confirmation utilisateur vit côté front-end, pas dans la réponse du proxy.)*
 
-> ### ⚠️ Note de vigilance — restriction de domaine non appliquée (découverte V1.2, non corrigée dans le code)
+> ### ✅ Résolu en V1.3 — restriction de domaine
 >
-> La Vision Produit de RENDEZVOUS suppose une ouverture à "tout L'Étudiant" via filtre sémantique + validation admin comme double protection. Le filtre sémantique mentionné est la validation manuelle admin — mais le code actuel n'impose **aucune restriction de domaine email** à l'inscription : n'importe quelle adresse au format valide est acceptée en `pending`. Le risque réel est limité (un profil `pending` n'a aucun accès tant qu'il n'est pas validé manuellement — D8), mais ce n'est pas ce que cette spec décrivait. **Décision à prendre :** corriger le code pour restreindre à `@letudiant.fr` (cohérent avec l'intention d'origine), ou documenter explicitement que la double protection repose entièrement sur la validation admin, sans filtre technique en amont. Non traité dans ce patch V1.2 — à trancher avant ou pendant R5.
+> V1.2 documentait l'absence de filtre de domaine comme un point ouvert non traité. **C'est désormais corrigé** : le code restreint l'inscription aux adresses `@letudiant.fr`, conforme à l'intention d'origine de la Vision Produit. Vérifié en conditions réelles le 21/06/2026 — rejet 400 sur domaine externe, acceptation 200 sur `@letudiant.fr`, profils de test nettoyés de `rendezvous-profiles-private` après vérification.
 
 ---
 
@@ -670,14 +669,14 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 | **Responsable de traitement** | L'Étudiant — représenté par Martin Pavloff |
 | **Finalité** | Gestion des accès aux outils internes de production vidéo |
 | **Base légale** | Intérêt légitime (article 6.1.f RGPD) |
-| **Données traitées** | Prénom, **nom**, email professionnel, rôle, niveau d'accès, horodatage consentement |
+| **Données traitées** | Prénom, nom, email professionnel, rôle, niveau d'accès, horodatage consentement |
 | **Données NON traitées** | Téléphone, données RH, géolocalisation |
 | **Destinataires** | Martin Pavloff (admin) — Resend, domaine dédié `mail.tranquilitysuite.com` (email transactionnel) — GitHub (stockage) |
 | **Transfert hors UE** | GitHub (USA) — couvert par DPA GitHub / clauses contractuelles types |
 | **Durée de conservation** | Durée d'activité du profil + 1 an pour données d'audit |
 | **Droits des personnes** | Accès, rectification, effacement (suppression atomique D4), opposition |
 | **DPO requis** | Non — L'Étudiant < 250 employés, traitement non à grande échelle |
-| **Mesures de sécurité** | Données sensibles en repo privé GitHub dédié — tokens JWT signés — denylist — HTTPS — domaine d'envoi dédié et vérifié |
+| **Mesures de sécurité** | Données sensibles en repo privé GitHub dédié — tokens JWT signés — denylist — HTTPS — domaine d'envoi dédié et vérifié — inscription restreinte au domaine `@letudiant.fr` |
 
 ---
 
@@ -690,6 +689,7 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 5. **Le PAT GitHub du proxy** est dans les variables d'environnement Netlify — jamais dans le code
 6. **Les domaines autorisés** pour les requêtes proxy : `realcoolclint.github.io` uniquement (CORS strict)
 7. **Le domaine corporate `letudiant.fr` n'est jamais vérifié sur Resend** — autonomie technique de la suite, refus explicite et assumé (D9)
+8. **L'inscription est restreinte aux emails `@letudiant.fr`** — vérifié en code depuis le 21/06/2026, confirmé en conditions réelles (commit `2149ff5`)
 
 ---
 
@@ -699,12 +699,13 @@ if (!payload.apps.includes(APP_KEY)) { showUnauthorized(); return; }
 |---|---|---|
 | V1.0 | 18/06/2026 | Création — D1→D6 traduits en spec technique |
 | V1.1 | 21/06/2026 | Intégration D7→D13 : Glass Drawer (D7), écriture pending différée (D8), domaine Resend sandbox→dédié (D9/D10), vocabulaire de rôle dans le code (D12), renvoi croisé design (D11/D13) ; corrections : emplacement réel `profiles-private.json`, Base URL proxy confirmée |
-| V1.2 | 21/06/2026 | **Correction RGPD** : nom de famille listé par erreur en "non collecté" en V1.0/V1.1 — corrigé (collecté et requis depuis l'origine, déjà fixé dans `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` le 20/06, jamais répercuté ici avant aujourd'hui). **Table de correspondance ajoutée** sous D1 : schéma cible illustratif (D1, anglais) vs schéma réel en production (français — `statut`, `prenom`, `nom`, `rgpdAccepte`, `rgpdTimestamp`, `soumisLe`, `lienVideo`) — convention française actée comme standard officiel, pas de migration du code existant. **Endpoint `/register` corrigé** : payload, actions et réponse réécrits pour correspondre exactement au code réel (`{ "success": true }`, pas `{ "status": "pending", ... }`). **Note de vigilance ajoutée** : pas de restriction de domaine `@letudiant.fr` dans la validation email actuelle — décision à prendre, non traitée dans ce patch. |
+| V1.2 | 21/06/2026 | Correction RGPD (nom de famille collecté, pas "non stocké") ; table de correspondance schéma réel (français) vs schéma illustratif (anglais, D1) ; endpoint `/register` corrigé (payload, actions, réponse réels) ; note de vigilance sur l'absence de restriction de domaine |
+| V1.3 | 21/06/2026 | **Clôture de la note de vigilance V1.2** : restriction `@letudiant.fr` codée, déployée et vérifiée en conditions réelles (commit `2149ff5`, repo `rendezvous-proxy`) — rejet 400 confirmé sur domaine externe, acceptation 200 confirmée sur `@letudiant.fr`. Profils de test nettoyés de `rendezvous-profiles-private` (5 entrées supprimées, dont 2 antérieures à la session, non liées à ce correctif). Règle de sécurité n°8 ajoutée. |
 
 *Ce document évolue avec chaque décision architecturale actée par la PRÉSIDENCE.*
 *Toute modification doit être validée contre les treize décisions fondatrices D1→D13.*
 
 ---
 
-*Spec Technique · RENDEZVOUS · V1.2 · Tranquility Suite · Cellule Vidéo L'Étudiant · 21 juin 2026*
+*Spec Technique · RENDEZVOUS · V1.3 · Tranquility Suite · Cellule Vidéo L'Étudiant · 21 juin 2026*
 *Martin Pavloff · JARVIS*
