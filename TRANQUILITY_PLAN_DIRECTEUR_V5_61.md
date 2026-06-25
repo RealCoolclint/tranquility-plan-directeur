@@ -1,0 +1,455 @@
+# Tranquility Suite — Plan Directeur
+## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
+
+*Version 5.61 — 25 juin 2026*
+
+---
+
+## Vision
+
+La Tranquility Suite est un écosystème d'outils internes pour la Cellule Vidéo de L'Étudiant. Chaque outil répond à un besoin précis de production, de post-production ou d'organisation. L'ensemble forme un système cohérent, maintenu par Martin Pavloff, utilisé quotidiennement par l'équipe.
+
+**Philosophie centrale : le workflow captif.**
+La suite est conçue pour que les bonnes pratiques de l'équipe soient encodées dans les outils — pas confiées à la mémoire ou à la rigueur individuelle. La conformité est une conséquence de l'usage, pas un effort conscient. Chaque chantier, chaque feature, chaque décision d'architecture est évalué contre cette philosophie avant d'être validé.
+*Référence complète : `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` · Grille opérationnelle : `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md`*
+
+**Mode de travail : l'Agence Tranquility.**
+Travailler sur la suite, c'est opérer en mode Agence — une réorganisation du cerveau en 23 cellules expertes réparties en 6 familles : Commandement, Création, Réalisation, Garantie, Humain, Rayonnement. Martin Pavloff est le titulaire unique de tous les postes. JARVIS est l'interface opérationnelle de chaque cellule.
+*Référence complète : `AGENCE_TRANQUILITY_MANIFESTE.md` · Agents : `AGENCE_TRANQUILITY_AGENTS.md` · Protocole : `AGENCE_TRANQUILITY_COUNCIL_SKILL.md`*
+
+**Points Présidence — sessions régulières.**
+Des sessions de bilan d'alignement et de pilotage général sont institutionnalisées. Elles ne sont pas greffées sur des sessions techniques — elles ont leur propre espace. Fréquence cible : trimestrielle minimum. Première session réalisée le 7 juin 2026.
+
+**Principe technique :** GitHub = cloud de la Tranquility Suite.
+
+**Workflow Git — Mac Switching :** `PROTOCOLE_GIT_MAC_SWITCHING.md` — clone dans `~/Documents/GitHub/` sur chaque Mac, pull au début, push à la fin. Toujours.
+
+**Vision produit complète :** `TRANQUILITY_SUITE_VISION_PRODUIT.md` — document fondateur, à lire avant tout chantier. ⚠️ Révision nécessaire — potentiellement obsolète sur plusieurs points depuis avril 2026.
+
+**Identité de la suite — vocabulaire de rôle (D12).** Le code et les textes visibles par l'utilisateur ne portent jamais de nom personnel. Le rôle (ADMIN, équipe) prime sur la personne, même quand Martin est aujourd'hui l'unique titulaire des postes — la suite doit paraître portée par une équipe, pas par un individu.
+
+---
+
+## Architecture Identité & Portail — Décisions PRESIDENCE
+
+### RENDEZVOUS — Portail web public de la suite
+
+**RENDEZVOUS** est le 23e outil de la flotte. Portail web public GitHub Pages. Porte d'entrée officielle de la Tranquility Suite pour tout collaborateur de L'Étudiant ayant un rapport à la vidéo.
+
+**Devise :** *HIC OMNIA INCIPIUNT · Ici tout commence* — actée 18/06/2026
+
+**Phrase fondatrice :** *"Un rendez-vous raté, c'est toute une mission qui s'arrête."*
+
+**Principe directeur :** simple, efficace, sécurisé. Dans cet ordre.
+
+**Deux états :**
+- Non connecté → vitrine de la suite, présentation de la flotte, formulaire d'inscription
+- Connecté → profil, apps disponibles selon niveau, statut d'accès par app, nouveautés
+
+**Périmètre — ce que RENDEZVOUS fait :**
+- Vitrine publique de la suite — présentation de la flotte et de la philosophie
+- Inscription avec validation admin obligatoire
+- État connecté : profil visible + apps accessibles + statut + section nouveautés
+- Back-office Martin : validation des `pending`, gestion des profils, attribution des niveaux N1→N4
+- Onboarding daemon guidé pour les profils N1 — trois parcours selon type de poste (Mac bureau / Mac perso / Mac partagé)
+- Autorité unique de gouvernance des profils — proxy RENDEZVOUS = seul point d'écriture autorisé
+
+**Périmètre — ce que RENDEZVOUS ne fait pas :**
+- Modifier des settings d'apps (→ chaque app gère ses propres settings)
+- Remplacer les apps en orbite
+- Devenir un intranet ou un hub de communication quotidien
+
+**Modèle d'inscription :** public + validation admin obligatoire. Modèle SAS. Invitation bidirectionnelle. Email restreint au domaine `@letudiant.fr` depuis le 22/06/2026 (B15).
+
+**Ouverture utilisateurs :** tout L'Étudiant (120 collaborateurs max). Critère unique : rapport réel à la vidéo. Filtre technique de domaine (`@letudiant.fr`, B15) + validation admin = double protection réellement en place depuis le 22/06/2026 (auparavant, seule la validation admin protégeait — le filtre technique manquait).
+
+**Admin unique :** Martin Pavloff. Délégation = Phase Apollo.
+
+**RGPD :** case à cocher obligatoire à l'inscription. Consentement explicite et traçable.
+
+**Communication :** réunions managers trimestrielles L'Étudiant = vecteur naturel de présentation.
+
+**Idée notée, non planifiée (21/06/2026) :** la vitrine publique manque de personnalité visuelle — trop sobre. Chantier croisé DESIGN + COM/MARKETING (postes STUDIO CREA/UX ET UI + COM/RP), à programmer au bon moment plutôt qu'improvisé.
+
+**Session stratégique R6 — squelette de page validé (23/06/2026) :** la session de réflexion/schématisation annoncée le 22/06 a eu lieu. Squelette de la page connectée validé en deux passes (V1 → V2 après benchmark externe) : en-tête avec profil réduit en coin, bloc *Mes apps* dominant (cartes accessibles puis verrouillées, groupées dans la même section), bloc *Nouveautés* en pied de page — héritage du dashboard Launcher V2 (cartes, favoris, badge maj) explicitement repris sous forme organique, pas copié. Benchmark UX externe (Adobe Creative Cloud, Steam, Netflix, Spotify, Linear, Notion, GitHub, 1Password) passé au Conseil — convergences retenues : page unique sans sous-pages, "Mes apps" dominant visuellement, onboarding invisible, ordre forcé en résonance directe avec la Loi 1 du Workflow Captif.
+
+**Pivot architectural majeur — D17, D18, D19 (23/06/2026) :** en testant le squelette, Martin a proposé de retourner la contrainte d'accès en levier d'engagement plutôt que de la subir. Trois décisions actées dans la foulée (voir table des décisions ci-dessous). Conséquence directe : la matrice accès app × niveau perd son état "❌ Invisible", remplacé par un état unique "🔒 Verrouillé" — visible, accès débloqué par demande de montée de niveau (jamais app par app).
+
+**Combinaisons métier — examen exhaustif de l'organigramme L'Étudiant terminé (25/06/2026) :** 7 kits construits — COLUMBIA (Cadreur/Monteur, N1, D20) · GUMDROP (Rédaction vidéo, N2, D21) · CHARLIE BROWN (Réseaux sociaux, N2, D23) · YANKEE CLIPPER (DA/Studio, N2, D24) · ODYSSEY (Opérations spéciales, N2, D25) · CASPER (Édition web et print, N2, D27) · KITTY HAWK (Marchés hors captifs, N2, D31). 4 métiers passés en revue et explicitement exclus, faute de besoin concret identifié avec Martin : Audience et marketing automation (D26) · Promotion salons (D28) · Conférences et contenus (D29) · Digital/Marchés captifs (D30). Voir table récapitulative sous la table des décisions. Un seul nom Apollo CSM reste disponible dans la plage 7→16 : ENDEAVOUR (Apollo 15). **Rate limiting B18 livré le 25/06/2026 (D32)** — reste avant la reprise du code R6 : le wording final remplaçant "niveau requis" (à construire avec COM, piste actée : "combinaison").
+
+**Identité visuelle :**
+- Mission patch validé — `assets/patch_RENDEZVOUS.jpg` — commit `ec63e49` — 18/06/2026
+- Ambiance animée — `assets/ambiance_RENDEZVOUS.mp4` — commit `c7cde72` — 18/06/2026
+
+### Grille de profils RENDEZVOUS (actée PRÉSIDENCE — 14 juin 2026)
+
+| Niveau | Nom | Qui | Rapport vidéo | Accès apps |
+|--------|-----|-----|--------------|------------|
+| ADMIN | Martin Pavloff | Martin uniquement | Détenteur de la suite | Total |
+| N1 | OPÉRATEURS | Cellule vidéo — ~10 personnes | Usage quotidien | Apps assignées — visibles uniquement + daemon requis |
+| N2 | PÉRIPHÉRIQUES | Touchent à la vidéo par ricochet — ~20 personnes | Usage ponctuel ou partiel | Apps web uniquement — sur demande |
+| N3 | OBSERVATEURS | Direction, IT, développeurs | Supervision, maintenance | Lecture — pas d'apps de production |
+| N4 | INSTITUTIONNELS | Juridique, RH, financiers, direction générale | Vision stratégique | Vitrine uniquement |
+
+**Règles transverses :**
+- **Visibilité verrouillée par défaut (D17 — 23/06/2026, remplace la règle d'invisibilité actée le 14/06/2026)** : toute app de la flotte est visible dans l'état connecté, même hors du périmètre de l'utilisateur — verrouillée (badge + action) tant qu'elle n'est pas débloquée
+- **Déblocage par niveau, jamais par app (D18 — 23/06/2026)** : une seule demande de montée de niveau débloque toute la combinaison d'apps du niveau visé — pas de déblocage app par app
+- **Niveau = gouvernance interne, jamais affiché · Combinaison = ce que voit l'utilisateur (D19 — 23/06/2026)** : N1→N4 restent un outil de validation pour Martin ; le terme visible côté utilisateur est la *combinaison* — un kit d'apps cohérent avec un métier (ex. Monteur, Rédaction), pas un rang administratif. **Contenu réel des 7 combinaisons construit et acté les 23-25/06/2026 (D20→D31, décisions transverses D22/D26/D28-D30 incluses)** — voir table récapitulative
+- Vitrine flotte visible même connecté : statut par app — *disponible · sur demande · réservé*
+- Mobilité entre niveaux : demande utilisateur + validation Martin, sans délai de réponse annoncé — décision sur mesure, au cas par cas (acté 23/06/2026)
+- Grille vivante — s'ajuste à l'usage réel
+- **Daemon Launcher = N1 uniquement** — N2/N3/N4 : apps web exclusivement, aucun daemon requis
+- **Les combinaisons priment sur la matrice générique (D22 — 24/06/2026)** : chaque combinaison métier définit sa propre liste d'apps, indépendamment du niveau générique ci-dessous — la matrice reste une référence par défaut, pas une contrainte stricte
+
+### Matrice accès app × niveau (actée PRÉSIDENCE — 14 juin 2026, état simplifié par D17/D18 — 23 juin 2026)
+
+| App | N1 Opérateurs | N2 Périphériques | N3 Observateurs | N4 Institutionnels |
+|-----|:---:|:---:|:---:|:---:|
+| BackUpFlow | ✅ | 🔒 | 🔒 | 🔒 |
+| Transporter | ✅ | 🔒 | 🔒 | 🔒 |
+| Reviewer | ✅ | ✅ | 🔒 | 🔒 |
+| Manifest | ✅ | ✅ | 🔒 | 🔒 |
+| ARK | ✅ | 🔒 | 🔒 | 🔒 |
+| ROVER | ✅ | 🔒 | 🔒 | 🔒 |
+| COVENANT | ✅ | ✅ | ✅ | 🔒 |
+| Launcher (daemon) | ✅ N1 uniquement | 🔒 | 🔒 | 🔒 |
+
+*✅ Accès complet · 🔒 Verrouillé — visible dans l'état connecté, débloqué par une demande de montée de niveau (D17, D18) — jamais par app individuelle, jamais invisible*
+
+**⚠️ Depuis D22 (24/06/2026) :** cette matrice n'est plus la règle stricte qui borne le contenu d'une combinaison métier construite — elle reste la référence par défaut pour un niveau qui n'a pas encore de combinaison dédiée. Voir D22 et la table des combinaisons ci-dessous.
+
+### Architecture technique RENDEZVOUS
+
+```
+GitHub Pages (repo public RENDEZVOUS)
+  → Formulaire inscription + RGPD checkbox + filtre domaine @letudiant.fr (B15)
+  → Proxy Netlify dédié RENDEZVOUS (seul point d'écriture autorisé — D1)
+  → API GitHub — écriture atomique profiles-public.json + profiles-private.json
+  → Resend — notification mail admin "nouvelle demande pending" (notifierAdmin — D12)
+       ↓
+  Martin valide dans back-office RENDEZVOUS (R7) — ou via validate-profile.js (B16, mini-R7 temporaire)
+       ↓
+  → API GitHub — profil passe "active" + niveau N1/N2/N3/N4 assigné
+  → Resend — notification mail utilisateur "accès accordé"
+  [Si N1] → Onboarding daemon guidé — parcours selon type de poste
+       ↓
+  Profil "active" → POST /auth/magic-link → token signé (15 min) → email avec lien
+       ↓
+  GET /auth/verify → session établie (R5.2 ✅)
+       ↓
+  Frontend lit ?token=, stocke la session, affiche l'email connecté (R5.3 ✅ — 22/06/2026)
+```
+
+**État d'implémentation (22/06/2026) :** le bloc d'écriture initial (formulaire → proxy → `profiles-private.json`) est opérationnel et testé en production, désormais avec restriction de domaine `@letudiant.fr` (B15). La notification Resend admin (`notifierAdmin()`, ex-`notifierMartin()`) envoie depuis le domaine dédié `notifications@mail.tranquilitysuite.com` (B13), testée de bout en bout. Un mécanisme temporaire de validation manuelle (`validate-profile.js`, B16) permet de faire passer un profil `pending` → `active` en attendant le vrai R7. Le module de signature de tokens (`_shared/jwt.js`), l'endpoint `POST /auth/magic-link` et l'endpoint `GET /auth/verify` sont livrés et testés en conditions réelles de bout en bout. **R5.3 (intégration frontend) est désormais livré et testé en conditions réelles de bout en bout** (commits `ab6c4da`, `99ade19`, `e5be7a6`, repo `RENDEZVOUS`) : le tiroir de connexion demande un lien par email, le retour `?token=` est vérifié automatiquement, une session réelle de 48h est stockée et affichée dans l'en-tête (email), la déconnexion est locale (D16). Le texte visible par l'utilisateur final dans les emails (objet, expéditeur, corps) a été harmonisé sur « Tranquility Suite » — « RENDEZVOUS » reste un nom de code de production, jamais exposé (B17). Repos concrets : `rendezvous-proxy` (fonction Netlify, privé) et `rendezvous-profiles-private` (données sensibles, privé), tous deux distincts des repos COVENANT. **Reste à construire :** le vrai R7 (back-office, remplace B16). **Rate limiting livré le 25/06/2026 (B18, D32)** — module in-memory `_shared/rate-limiter.js`, intégré sur les deux endpoints. **Profil de test nettoyé (B20, 25/06/2026)** — entrée retirée de `profiles-private.json`, absente de `profiles-public.json`. **R6 :** la session de schématisation a eu lieu (23/06, D17-D19) et l'examen exhaustif des combinaisons métier est terminé — 7 kits construits (D20→D31, 23-25/06) — reste le wording COM et l'implémentation code du déblocage réel par combinaison dans l'interface.
+
+### Trente-deux décisions architecturales fondatrices RENDEZVOUS (D1→D32)
+
+| # | Décision | Essence | Acté |
+|---|----------|---------|------|
+| D1 | Double fichier + proxy seul écrivain | `profiles-public.json` (public) + `profiles-private.json` (privé) — cohérence atomique — proxy RENDEZVOUS seul point d'écriture | 16/06/2026 |
+| D2 | Tokens signés + fallback 48h + denylist | RENDEZVOUS autorité centrale — tokens courts — cache local 48h — denylist CDN vérifiée au démarrage | 16/06/2026 |
+| D3 | 3 modes session — le plus strict gagne | `persistent` / `bounded` / `ephemeral` — mode encodé dans le token — apps appliquent sans décider | 16/06/2026 |
+| D4 | RGPD natif — minimisation + suppression atomique | Intérêt légitime — données minimisées à la source — suppression simultanée des deux fichiers | 16/06/2026 |
+| D5 | Launcher daemon — RENDEZVOUS autorité unique | Launcher = agent de fond macOS, icône barre de menu, zéro interface. MASTER archivé. Launcher en lecture seule sur profils partagés. Intégrité par architecture, non par discipline individuelle. | 17/06/2026 |
+| D6 | Heartbeat progressif — indicateur puis bloquant | Daemon ping proxy RENDEZVOUS. R6 : indicateur informatif. R8 : bloquant optionnel avec fallback 48h. Bascule = décision PRÉSIDENCE. | 17/06/2026 |
+| D7 | Inscription et connexion en modales **Glass Drawer** partagées (pas de page séparée) | **Renverse la décision D7 initiale du 19/06 (page séparée `inscription.html`)**, elle-même renversement de la décision R3 du 19/06 matin (in-page). Page séparée construite intégralement (6 prompts Cursor, 4 appliqués + Mercury conditionnel par session) puis abandonnée après travail en direct Martin/Cursor hors protocole JARVIS, à visée exploratoire assumée ("disruption créative volontaire"). Glass Drawer : module générique `glass-drawer.js` partagé par `#connect-drawer` et `#inscription-drawer`, morph organique depuis le bouton cliqué, hauteur mesurée avant ouverture (anti-saut de position), exclusion mutuelle stricte, backdrop modal bloquant. Mercury Opening conditionnel par session (construit lors de la phase page séparée) conservé intact — règle transverse survivant au changement d'architecture. Validé par Martin en usage réel ("totalement convaincu"). **Construit et validé localement le 19/06, mais jamais commité ni poussé — déployé en production pour la première fois le 20/06**, après découverte fortuite lors de la reprise de session sur R4. Itération page séparée documentée comme abandonnée, non effacée — voir `SESSION_TRAVAIL_20260619_RENDEZVOUS_D7_GLASS_DRAWER.md`. | 19/06/2026 (décidé) · 20/06/2026 (déployé) |
+| D8 | R4 — écriture exclusive dans `profiles-private.json`, schéma public différé | Le proxy R4 n'écrit jamais dans `profiles-public.json` à l'étape `pending` — une inscription en attente n'est pas un profil actif. La réconciliation entre le modèle existant (`role` + `appPermissions`) et le modèle niveau N1→N4 de D1 est reportée à R7, au moment de la validation admin, plutôt que tranchée à l'aveugle pendant la construction du proxy. **Complément 21-22/06/2026 (A11) :** R7 devra aussi réconcilier la convention de nommage — le code réel de `profiles-private.json` (français : `statut`, `prenom`, `nom`, `rgpdAccepte`, `rgpdTimestamp`, `soumisLe`, `lienVideo`) a divergé sans jamais être réconcilié avec le schéma anglais illustratif posé par D1 le 16/06. Décision actée : la convention française du code fait foi, aucune migration vers l'anglais — la spec technique a été corrigée pour refléter la réalité (V1.2/V1.3), pas l'inverse. | 20/06/2026 |
+| D9 | Domaine d'envoi Resend — bac à sable pour notifications internes, domaine dédié pour R5 | `letudiant.fr` n'a jamais été vérifié sur le compte Resend de la suite ("No domains yet") — découvert en diagnostiquant l'échec de la notification R4. Les notifications BackUpFlow/COVENANT, documentées comme envoyées depuis `noreply@letudiant.fr`, utilisent en réalité le bac à sable Resend `onboarding@resend.dev` (vérifié en ouvrant un email réel) — la doc ne reflète pas le comportement réel, à corriger un jour dans `TRANQUILITY_SUITE_ELECTRON_SKILL.md`. Ce mécanisme fonctionne uniquement parce que le destinataire est toujours le compte Resend lui-même (`mpavloff@letudiant.fr`) — Resend bloque tout envoi vers un tiers sans domaine vérifié. Décision : la notification admin R4 reste sur `onboarding@resend.dev` (cas d'usage valide, destinataire = Martin). **Refus explicite de vérifier `letudiant.fr`** — domaine corporate, hors périmètre suite, l'IT de L'Étudiant n'est pas sollicitée pour préserver l'autonomie de la suite, même si ça impose des limites à court terme. Un domaine dédié à la Tranquility Suite (acheté et contrôlé par Martin, comme GitHub/Netlify/Bitwarden) sera vérifié sur Resend au moment de R5, qui nécessitera d'envoyer de vrais emails à des utilisateurs autres que Martin. | 20/06/2026 |
+| D10 | Domaine Resend dédié vérifié — `mail.tranquilitysuite.com` | Domaine `tranquilitysuite.com` acheté via Cloudflare (registrar + DNS unifiés). Sous-domaine d'envoi dédié `mail.tranquilitysuite.com` choisi plutôt que le domaine racine, pour isoler la réputation d'envoi et garder la racine libre pour un usage futur non lié à l'email. Vérifié via le bouton "Auto configure" de Resend — intégration **Cloudflare Domain Connect**, autorisation à usage unique explicitement affichée ("ne permet pas à Resend d'effectuer de futures modifications") — pas d'OAuth permanent, aucune révocation d'accès à prévoir. Trois enregistrements DNS posés automatiquement en mode "DNS uniquement" (MX `feedback-smtp`, TXT DKIM, TXT SPF). Domaine passé en statut **Verified** en 9 minutes (23h57 → 00h06). Lève le blocage D9 pour R5. | 21/06/2026 |
+| D11 | RENDEZVOUS n'a pas de sidebar — convention `--topbar-*` | RENDEZVOUS n'a jamais eu de sidebar dans sa conception (confirmé : `grep -rln "sidebar" *.html` vide). Les variables `--sidebar-bg`, `--sidebar-bg-hover`, `--sidebar-text`, `--sidebar-text-hover`, `--sidebar-border` trouvées dans `style.css` (chacune définie jusqu'à 3 fois, probable copié-collé depuis Reviewer) ne servaient en réalité qu'à `.top-bar`/`.nav-btn`. Renommées en `--topbar-text`, `--topbar-text-hover`, `--topbar-border`, `--topbar-bg`, consolidées en une seule définition propre par variable (suppression des doublons en hex dur et des références fantômes). Convention actée : toute variable CSS exclusive à la barre du haut de RENDEZVOUS porte le préfixe `--topbar-*`, jamais `--sidebar-*`. | 21/06/2026 |
+| D12 | Vocabulaire de rôle — jamais de nom personnel dans le code ou l'identité visible de la suite | Découvert sur `notifierMartin()` (renommé `notifierAdmin()` — la fonction notifie qui détient le rôle ADMIN, pas Martin nommément) puis une deuxième fois le même jour sur le texte de confirmation inscription ("Ta demande a bien été reçue. Martin reviendra vers toi par email sous 48h." → "...L'équipe reviendra..."). Le rôle prime sur la personne, même quand Martin est l'unique titulaire — la suite doit paraître portée par une équipe. Principe suite-wide, pas spécifique à RENDEZVOUS — audit à mener un jour sur COVENANT/BackUpFlow (noté, non traité). | 21/06/2026 |
+| D13 | RENDEZVOUS aligné sur les valeurs officielles de `tranquility-core.css` — le core évolue par sessions dédiées | Diff exhaustif token par token entre `:root` de `style.css` et `:root` de `tranquility-core.css` : 25 tokens dupliqués localement (chiffre exact — ni 6 comme estimé initialement, ni 24 comme estimé en rescope), dont 14 avec des valeurs divergentes du core (fonds, `--success`, `--border`, `--shadow-md`/`-lg`, `--radius-md`/`-lg`). Décision : RENDEZVOUS abandonne ses valeurs locales au profit des valeurs officielles du core — changement visuel accepté consciemment plutôt que de figer une divergence silencieuse. Principe complémentaire acté : le core ne doit pas évoluer en correctif réactif au fil d'un chantier d'app — des sessions dédiées, ponctuelles, calées sur les grandes phases du programme (type de chantier **DESIGN + R&D**), seront programmées pour le faire évoluer si besoin. | 21/06/2026 |
+| D14 | Token de session R5.2 — payload minimal, enrichissement différé à R6/R7 | La spec D2 prévoit un payload complet (`level`, `apps`, `avatarId`, `color`...), mais ces champs sont normalement attribués par le vrai R7 (validation admin), qui n'existe pas encore — `validate-profile.js` (B16) ne fait que basculer `pending` → `active`, sans rien assigner de plus. Décision : émettre dès R5.2 un token minimal (`sub`, `email`, `type: "session"`, durée 48h), et documenter l'écart avec D2 comme une déviation consciente et tracée (Loi 3 du Workflow Captif) plutôt que de bloquer R5.2 en attendant R7. | 22/06/2026 |
+| D15 | Nom public de la suite — « Tranquility Suite », jamais « RENDEZVOUS » | RENDEZVOUS est un nom de code de production (repo, URL technique, identifiants internes) — il ne doit jamais apparaître dans un texte lu par l'utilisateur final. L'identité visible de la vitrine (patch, devise *Ici tout commence*) est déjà celle de la Tranquility Suite ; seuls les emails transactionnels (`request-magic-link.js`, `submit-inscription.js`) avaient dérivé en exposant « RENDEZVOUS » comme nom de marque (objet, expéditeur, corps). Corrigé (B17). | 22/06/2026 |
+| D16 | RENDEZVOUS abandonne le sélecteur de profil générique (`WebProfileSelector`) — authentification réelle uniquement par lien magique | Le tiroir "Se connecter" affichait une grille de profils cliquables héritée du template `tranquility-web-template` (I6) — pattern pensé pour des apps internes où chacun choisit son profil sur une machine déjà connue, incompatible avec le modèle d'authentification publique de RENDEZVOUS (R5). Remplacé par un formulaire de demande de lien magique (email → backend), module renommé `MagicLinkAuth`. Déconnexion implémentée en local uniquement pour l'instant (efface la session sur l'appareil) — l'invalidation côté serveur (`/auth/logout`, denylist) reste un chantier à part, non urgent. | 22/06/2026 |
+| D17 | Visibilité verrouillée remplace l'invisibilité par défaut — appliquée uniformément à toute la flotte | Martin a proposé de retourner la contrainte d'accès en levier d'engagement : une app hors périmètre de l'utilisateur reste visible dans l'état connecté, verrouillée avec un badge et une action de demande, plutôt que d'être masquée. Risque sécurité jugé faible par le Conseil (SECURITE) : la vitrine non connectée expose déjà toute la flotte publiquement, l'existence d'une app n'est pas une donnée sensible — seules les données utilisateur/opérationnelles restent hors d'une carte verrouillée. Décision appliquée à **toutes les apps sans exception** (cohérence suite, Loi 2 du Workflow Captif), pas au cas par cas. Remplace la règle d'invisibilité actée le 14/06/2026 — reversion consciente et tracée (Loi 3). | 23/06/2026 |
+| D18 | La demande de déblocage porte sur le niveau, jamais sur une app individuelle | L'accès réservé par niveau ne se débloque pas app par app : une seule demande de montée de niveau ouvre toute la combinaison d'apps du niveau visé. Donne enfin un déclencheur concret à la règle "Mobilité entre niveaux : demande utilisateur + validation Martin", actée le 14/06/2026 mais jamais reliée à une action d'interface jusqu'ici. Réponse à la demande sans délai annoncé — décision sur mesure, au cas par cas, gardée par Martin. | 23/06/2026 |
+| D19 | Vocabulaire utilisateur : "combinaison" remplace "niveau" — N1→N4 redevient un outil de gouvernance interne, jamais affiché | "Niveau N1 requis" sonne administratif, pas désirable — et surtout, Martin a noté que l'accès pertinent dépend du métier (un monteur et un journaliste n'ont pas besoin de la même combinaison d'apps), pas seulement d'un rang de confiance. Niveau (N1→N4) reste l'outil de validation de Martin en interne. *Combinaison* devient le seul terme visible par l'utilisateur — un kit d'apps cohérent avec un métier (ex. Monteur, Rédaction). Trouvaille de COM : "combinaison" porte déjà la métaphore spatiale de la suite (la combinaison qu'on enfile pour la mission) sans avoir besoin d'en inventer une nouvelle. **Contenu réel des combinaisons non défini à ce stade** — à construire en session dédiée avec la cellule vidéo et les métiers périphériques de L'Étudiant. | 23/06/2026 |
+| D20 | COLUMBIA — Première combinaison métier : Cadreur/Monteur | Niveau interne N1 (OPÉRATEURS, conforme à la grille du 14/06). Un seul profil pour toute la Cellule Vidéo, sans distinction de statut (permanents/alternants). 7 apps : BackUpFlow · TransPorter · Manifest · Reviewer · ARK · Rover · Covenant — déjà toutes en accès complet à N1 dans la matrice existante, aucune modification nécessaire. Une inversion N1/N3 proposée en session a été détectée et corrigée avant documentation (Loi 3). Construction volontairement progressive : cellule vidéo d'abord, cercles périphériques ensuite. | 23/06/2026 |
+| D21 | GUMDROP — Combinaison Rédaction vidéo + nomenclature Apollo CSM | Niveau N2 (PÉRIPHÉRIQUES). 7 profils : Antoine Vassas (lead) · Clémentine Brault · Rachel Rodrigues · Willane Djermoune · Sébastien Zabbah · Marco Bossut · Louis Sovran. 5 apps : TransPorter · Reviewer · ARK · Rover · Covenant — révision collaborative + assets, pas BackUpFlow/Manifest (ops techniques réservées Cellule Vidéo). **Nomenclature Apollo CSM actée à cette occasion** : les kits de combinaisons sont nommés d'après les Command/Service Modules des missions Apollo 7→16, en ordre chronologique — logique : le CSM porte tout l'équipement vital de la mission, comme le kit sauve le quotidien des équipes. | 23/06/2026 |
+| D22 | Les combinaisons métier priment sur la matrice générique d'accès (Lecture A) | Confirmé en construisant CHARLIE BROWN : chaque combinaison définit son propre kit d'apps, indépendamment de la matrice N1→N4 actée le 14/06/2026 — déjà observé de facto dans GUMDROP (D21), qui inclut TransPorter/ARK/Rover malgré leur statut 🔒 en N2 dans la matrice, sans que ce soit documenté comme un choix conscient au moment de D21. Reversion consciente et tracée (Loi 3 du Workflow Captif) : la matrice du 14/06 reste une référence historique et un défaut pour les niveaux sans combinaison dédiée, mais n'est plus la règle stricte qui borne le contenu d'une combinaison construite. | 24/06/2026 |
+| D23 | CHARLIE BROWN — Combinaison Réseaux sociaux | Niveau N2 (PÉRIPHÉRIQUES). 4 profils actuels + 1 place réservée : Lelia Onyszko (responsable) · Chloé Bardin · Charlotte Courjaud · Mégane Duronsoy · *(alternante non définie, arrivée septembre 2026)*. 2 apps : Reviewer · Covenant — révision des contenus qui les concernent + recueil d'autorisations image lors de leurs propres captations terrain. Pas de production technique (BackUpFlow/TransPorter/ARK/Rover), pas de gestion d'assets bruts (Manifest). | 24/06/2026 |
+| D24 | YANKEE CLIPPER — Combinaison DA/Studio | Niveau N2 (PÉRIPHÉRIQUES) — un niveau N3 a été envisagé puis écarté : les 4 apps demandées sont des apps de production active, incompatibles avec la définition N3 ("lecture — pas d'apps de production"), cohérence avec Charlie Brown/Gumdrop (Loi 2). 2 profils : Etienne Daugy (responsable) · Olivier Gimenez. 4 apps : Reviewer · Transporter · ROVER · Manifest — usage ponctuel mais besoins vidéo concrets (révision, récupération de fichiers, téléchargement, accès aux assets). Extension du daemon Launcher à tous les niveaux envisagée puis explicitement écartée (ratio effort de maintenance/bénéfice disproportionné pour un titulaire unique ; aucune app desktop ne dépend du daemon pour fonctionner pleinement) — réaffirme D5 sans le modifier. | 24/06/2026 |
+| D25 | ODYSSEY — Combinaison Opérations spéciales (OPS) | Niveau N2 (PÉRIPHÉRIQUES). Responsable Hadrien Fond · équipe : Pascale Burnout, Emma Tassin, Maeva Soenen. 3 apps : Reviewer · Covenant · Manifest — révision/validation des montages commandés à la Cellule, gestion des autorisations et des feuilles de service de tournage liées aux productions OPS. Première extension du périmètre des combinaisons au-delà des 4 métiers identifiés le 23/06 — déclenchée par un balayage exhaustif de l'organigramme L'Étudiant à la demande de Martin. | 25/06/2026 |
+| D26 | Audience et marketing automation — pas de combinaison | Niveau N2 envisagé par défaut, mais aucun besoin concret identifié avec Martin : la collaboration (responsable Mathieu Pype, équipe Alexander Peters/Laura Bij) porte sur la data, le VSEO et les recommandations de sujets à forte audience — pas sur la manipulation de fichiers vidéo. Décision actée : pas de kit pour l'instant, à reconsidérer si un besoin émerge. | 25/06/2026 |
+| D27 | CASPER — Combinaison Édition web et print | Niveau N2 (PÉRIPHÉRIQUES). Responsable Anne Champomier · équipe : Harold Decailot, Jonathan Petit, Emma Faury, Amélie Petitdemange. 2 apps : Covenant · Reviewer — Covenant déjà en usage réel antérieur à la formalisation du kit (ces journalistes l'utilisaient sur le terrain pour leurs propres interviews/captations avant même qu'un kit existe) ; Reviewer ajouté pour la révision des montages avant publication. | 25/06/2026 |
+| D28 | Promotion salons — pas de combinaison | Aucun besoin concret identifié avec Martin (responsable Sullivan Keller, équipe). Décision actée : pas de kit. | 25/06/2026 |
+| D29 | Conférences et contenus — pas de combinaison | Aucun besoin concret identifié avec Martin (responsable Laura Mareglia, équipe). Décision actée : pas de kit. | 25/06/2026 |
+| D30 | Digital / Marchés captifs — pas de combinaison | Aucun besoin concret identifié avec Martin (responsable Sophie Mariani, équipe). Décision actée : pas de kit. | 25/06/2026 |
+| D31 | KITTY HAWK — Combinaison Marchés hors captifs | Niveau N2 (PÉRIPHÉRIQUES). Responsable Matthieu Legrand · équipe : Youldi Bilka, Anaïs Chettouh, Jade Kinkela, Molka Touati (+ Marketing Rage, Lyna Ouahi). 2 apps : Reviewer · Covenant — révision de contenus + autorisations, même logique que Charlie Brown/Casper. Clôt le balayage exhaustif de l'organigramme L'Étudiant lancé le 25/06/2026 — seul ENDEAVOUR (Apollo 15) reste disponible dans la nomenclature pour un futur métier. | 25/06/2026 |
+| D32 | B18 — Rate limiting in-memory, pas de store partagé | Module `_shared/rate-limiter.js` (Netlify, repo `rendezvous-proxy`) : `Map` au niveau module, fenêtre glissante par clé. Seuils : 20 req/15min par IP sur `/auth/magic-link` et `/auth/verify`, 5 req/15min par email sur `/auth/magic-link`. Option retenue sur trois (in-memory · stockage GitHub · service tiers type Upstash) — cohérente avec le principe directeur RENDEZVOUS *"simple, efficace, sécurisé"* et le trafic réel attendu (120 utilisateurs internes). Limite acceptée consciemment et documentée (Loi 3) : pas de garantie de persistance entre cold starts, et **les deux fonctions Netlify ne partagent pas leur mémoire** malgré l'import du même module partagé — chaque fonction embarque sa propre instance au build. Si un abus réel est constaté, durcissement vers un store partagé (GitHub ou service tiers) — décision consciente à ce moment-là, pas une impasse aujourd'hui. | 25/06/2026 |
+
+### Combinaisons métier — récapitulatif (7 kits actés)
+
+Nomenclature Apollo CSM : les kits sont nommés d'après les Command/Service Modules Apollo 7→16, en ordre chronologique.
+
+| Kit | Apollo | Niveau | Métier | Décision | Statut |
+|-----|--------|--------|--------|----------|--------|
+| GUMDROP | 9 | N2 | Rédaction vidéo | D21 | ✅ |
+| CHARLIE BROWN | 10 | N2 | Réseaux sociaux | D23 | ✅ |
+| COLUMBIA | 11 | N1 | Cadreur/Monteur | D20 | ✅ |
+| YANKEE CLIPPER | 12 | N2 | DA/Studio | D24 | ✅ |
+| ODYSSEY | 13 | N2 | Opérations spéciales (OPS) | D25 | ✅ |
+| KITTY HAWK | 14 | N2 | Marchés hors captifs | D31 | ✅ |
+| CASPER | 16 | N2 | Édition web et print | D27 | ✅ |
+
+*Apollo 15 (ENDEAVOUR) reste disponible — dernier nom non utilisé de la nomenclature 7→16.*
+
+**Métiers examinés, sans combinaison retenue (25/06/2026) :** Audience et marketing automation (D26) · Promotion salons (D28) · Conférences et contenus (D29) · Digital/Marchés captifs (D30) — aucun besoin concret identifié à ce stade auprès de Martin, à reconsidérer si la situation évolue. Métiers jugés d'emblée hors périmètre, jamais soumis individuellement (Marketing data, Data Intelligence, Digital Factory, RH, Finance, Juridique, Logistique, ventes...) — aucun rapport vidéo identifiable.
+
+---
+
+### Roadmap de build RENDEZVOUS (R1→R8) — révisée 22/06/2026
+
+| # | Chantier | Estimation | État |
+|---|----------|-----------|------|
+| R1 | Fondations — scaffolding, GitHub Pages, Design Reference | 1 session | ✅ Livré — commit `8f15923` |
+| R2 | Vitrine publique — présentation flotte, fiches app | 2 sessions | ✅ Livré — commits f1c7c86 + d2551ae + 9b6bc6f |
+| R3 | Formulaire d'inscription + RGPD | 1 session | ✅ Livré — formulaire + RGPD + accessibilité, migré en modale Glass Drawer (D7), déployé en production le 20/06 |
+| R4 | Proxy Netlify + API GitHub (double fichier D1) + notification admin | 2-3 sessions | ✅ **Livré** — proxy + écriture `pending` + notification Resend admin (D9), testés en production de bout en bout (repos `rendezvous-proxy` + `rendezvous-profiles-private`) — commits `9f1964e`, `0b83ec5`, `ca7b5ab` · **restriction domaine `@letudiant.fr` ajoutée le 22/06 (B15)** — commit `2149ff5` |
+| R5 | Authentification — lien magique par email | 2 sessions | ✅ **Livré — 22/06/2026** : R5.1+R5.2 (module de signature `_shared/jwt.js`, `POST /auth/magic-link`, `GET /auth/verify`, token de session minimal 48h — D14, protection anti-réutilisation via `dernierLienConsommeA`) + **R5.3** (intégration frontend — ancien sélecteur de profil `WebProfileSelector` remplacé par `MagicLinkAuth`, D16 ; lecture du `?token=` au retour ; session réelle stockée et affichée dans le header ; déconnexion locale) — testé en conditions réelles de bout en bout en production (`https://realcoolclint.github.io/RENDEZVOUS/`), commits `ab6c4da`, `99ade19`, `e5be7a6` (repo `RENDEZVOUS`). **Rate limiting toujours non traité** — accepté consciemment, à faire avant R6 |
+| R6 | État connecté — profil + flotte + statuts + heartbeat indicateur (D6) | 2 sessions | 🟢 **Examen exhaustif des combinaisons métier terminé** (D20→D31, 23-25/06/2026) — 7 kits construits (Columbia N1 ; Gumdrop, Charlie Brown, Yankee Clipper, Odyssey, Kitty Hawk, Casper en N2), 4 métiers exclus. Squelette de page déjà validé (D17-D19). **Rate limiting B18 livré (D32, 25/06/2026)**. Reste avant code : wording COM (remplacer "niveau N1 requis") |
+| R7 | Back-office MASTER admin Martin | 2-3 sessions | ⚫ À faire — devra réconcilier le schéma `profiles-public.json` existant avec le modèle niveau N1→N4 (D8) et la convention de nommage français/anglais (complément D8, A11) — **doit remplacer `validate-profile.js` (B16), pas coexister avec lui** |
+| R8 | Polish + tests tous devices + heartbeat bloquant optionnel (D6) + communication + lancement | 1-2 sessions | ⚫ À faire — inclut la protection anti-spam du formulaire d'inscription (non bloquant en usage interne actuel) |
+
+**Estimation totale : 13 à 16 sessions avant V1.**
+
+---
+
+## Launcher — Redéfinition daemon (D5 — actée 17/06/2026)
+
+Launcher n'est plus une application avec interface utilisateur. Il est devenu un daemon macOS — agent de fond, icône barre de menu, zéro fenêtre principale. MASTER archivé dans le code (non supprimé). RENDEZVOUS = autorité unique de gouvernance des profils. Launcher = lecture seule sur profils partagés.
+
+**Fiche produit réécrite :** `FICHE_PRODUIT_LAUNCHER_V2.md` — commit `3f8c45a` — 18/06/2026
+
+**Confirmation 24/06/2026 :** l'extension du daemon à tous les niveaux (N2→N4) a été envisagée pendant la construction de YANKEE CLIPPER, puis explicitement écartée — coût de maintenance disproportionné pour un titulaire unique face à un usage ponctuel, sans bénéfice technique réel puisque toute app desktop reste pleinement fonctionnelle en mode standalone sans le daemon. D5 reste inchangée, réaffirmée consciemment plutôt que simplement non questionnée.
+
+---
+
+## Pièges techniques récurrents
+
+**Electron / Desktop**
+
+**`session.json` — chemin canonique**
+- `SUITE_DIR` = `~/Library/Application Support/tranquility-suite/` — jamais `~/.backupflow/`
+
+**Cache `profiles-cache.json` — amorçage sur nouveau Mac**
+- `session-profile.js` utilise `https.get` sans auth → repo `launcher-profiles` privé → 404 silencieux
+- Amorçage manuel requis : `gh api repos/RealCoolclint/launcher-profiles/contents/profiles.json --jq '.content' | base64 -d > ~/Library/Application\ Support/tranquility-suite/profiles-cache.json`
+
+**Deux registres de profils non réconciliés (découvert 20/06/2026)**
+- `tranquility-core/profiles-public.json` (apps web, format `role` + `appPermissions`) et `launcher-profiles/profiles.json` (apps desktop, lu via `session-reader.js`) coexistent sans synchronisation connue
+- Aucun des deux n'est aligné avec le modèle niveau N1→N4 de RENDEZVOUS/D1
+- Réconciliation prévue à R7 (D8), pas avant
+
+**Documents fondateurs d'une app web ≠ forcément dans le repo de cette app (découvert 20/06/2026)**
+- `FICHE_PRODUIT_RENDEZVOUS_V1.md`, `SPEC_TECHNIQUE_RENDEZVOUS_V1.md`, `REGISTRE_TRAITEMENTS_RGPD_V1.md` vivent dans `tranquility-plan-directeur`, pas dans `RENDEZVOUS` — logique pour des documents internes (dont un registre RGPD), mais source de confusion lors d'une vérification git
+- Avant de conclure qu'un commit annoncé n'a jamais eu lieu, vérifier tous les repos plausibles, pas seulement le plus évident
+
+**Domaine d'envoi Resend de toute la suite (découvert 20/06/2026 — D9, résolu 21/06/2026 — D10, activé 21/06/2026 — B13)**
+- `letudiant.fr` n'a jamais été vérifié sur le compte Resend — toutes les notifications de la suite passent en réalité par `onboarding@resend.dev`, restreint à l'envoi vers l'adresse du compte Resend lui-même
+- Résolu : domaine dédié `mail.tranquilitysuite.com` acheté et vérifié (D10), puis effectivement activé dans le code (`notifierAdmin()`, ex-`notifierMartin()` — B13/D12)
+- Nouveau sujet ouvert par l'activation : réputation/délivrabilité du domaine neuf (voir B14 ci-dessous)
+
+**CSS — cascade de variables dupliquées (découvert 21/06/2026 — B8)**
+- Plusieurs déclarations de la même variable CSS dans un même fichier → seule la dernière dans l'ordre du fichier s'applique, les précédentes sont silencieusement ignorées (syntaxiquement valides mais inertes)
+- Toujours grep TOUTES les occurrences d'une définition avant de diagnostiquer une variable comme cassée ou de proposer un remplacement — ne pas s'arrêter à la première trouvée
+
+**Contamination CSS inter-apps (confirmé une deuxième fois 21/06/2026, résidu purgé le 21/06/2026 — B9)**
+- Du CSS copié-collé depuis une autre app de la suite (Reviewer → RENDEZVOUS, confirmé deux fois) peut survivre indéfiniment si le sélecteur ne correspond à rien dans le HTML actuel
+- Vérification systématique avant suppression : `grep` le nom de classe suspect dans tous les `*.html` du repo — si vide, suppression sûre
+- Résidu RENDEZVOUS entièrement purgé (B9) : `.comments-title`, `.empty-note`, `.note-item`, `.note-timecode` retirés de `style.css`. Vérification des autres apps web (Reviewer source, Manifest, COVENANT, BackUpFlow) toujours non faite
+
+**Cloudflare Domain Connect ≠ OAuth classique (découvert 21/06/2026 — D10)**
+- Le bouton "Auto configure" de Resend pour un domaine Cloudflare est une autorisation à usage unique, pas un accès permanent — aucune révocation nécessaire après vérification du domaine
+- Tout enregistrement DNS posé par un tiers sur un domaine Cloudflare doit être en mode "DNS uniquement" (nuage gris), jamais "Proxied" (nuage orange) — un enregistrement proxié ne sera jamais lu correctement par le service tiers, l'échec est silencieux
+- **Complément découvert 21/06/2026 (B14) :** l'auto-configure ne pose pas systématiquement tout ce que Resend recommande — le DMARC (`_dmarc` TXT) était listé dans l'email de vérification mais absent des enregistrements réellement posés sur Cloudflare. Ajouté manuellement.
+
+**Réputation d'un domaine d'envoi neuf (découvert 21/06/2026 — B14)**
+- Un domaine vérifié sur Resend avec SPF/DKIM/MX corrects peut quand même être classé en spam par défaut chez les gros fournisseurs (Microsoft 365/Outlook notamment) — "Delivered" côté Resend signifie seulement que le serveur destinataire a accepté le message, pas qu'il atterrit en boîte de réception
+- Comportement attendu pour un domaine sans historique d'envoi, pas un bug de configuration — un chauffage de réputation dans le temps est nécessaire avant un envoi à grande échelle (R5)
+
+**Schéma de données illustratif (D1, anglais) jamais confronté au code réel (découvert 21-22/06/2026 — A11)**
+- La spec technique décrivait `profiles-private.json` avec des noms de champs anglais (`firstName`, `status`, `createdAt`...) jamais comparés au code réel une fois R4 livré
+- Le code en production utilise une convention française entièrement différente (`prenom`, `statut`, `soumisLe`, `rgpdAccepte`, `rgpdTimestamp`, `lienVideo`) et un `id` non-UUID (`"p_" + Date.now()`)
+- Décision actée : la convention française du code fait foi, spec corrigée pour refléter la réalité — toute évolution future utilise ces noms réels, pas ceux de l'exemple D1 d'origine
+
+**Rate limiting absent sur l'authentification (découvert 22/06/2026 — R5.1, résolu 25/06/2026 — B18/D32)**
+- `POST /auth/magic-link` n'avait aucune limite de fréquence — un acteur malveillant pouvait spammer des emails vers une adresse `@letudiant.fr` active, ou saturer les quotas Resend/GitHub API
+- Résolu : module `_shared/rate-limiter.js` (in-memory, D32), intégré sur `/auth/magic-link` (IP + email) et `/auth/verify` (IP)
+
+**Trois pièges découverts pendant l'implémentation de B18 (25/06/2026)**
+- Une clé `"ip:" + IP` retombe sur `"ip:unknown"` si les headers `x-nf-client-connection-ip`/`client-ip` sont absents — tous les clients sans IP détectable partagent alors le même quota, avec un risque de blocage collectif en cas de proxy mal configuré. Non bloquant à ce stade (trafic interne, IP quasi toujours présente), mais à surveiller si un comportement de blocage groupé est rapporté
+- Le header `Retry-After` renvoyé en 429 n'est pas lisible par un client JS en cross-origin sans `Access-Control-Expose-Headers: Retry-After` côté CORS — non corrigé car non bloquant : l'UX actuelle lit déjà le message d'erreur dans le corps JSON, pas besoin du header
+- **Deux fonctions Netlify distinctes qui importent le même fichier `_shared/` ne partagent jamais leur état mémoire** — chaque fonction est empaquetée et exécutée dans son propre environnement Lambda séparé au build. Une analyse automatisée (Cursor) avait supposé à tort que `request-magic-link.js` et `verify-magic-link.js` partageaient le même compteur IP via le module importé — corrigé avant documentation (Loi 3). Piège méthode généralisable : ne jamais supposer un partage de runtime entre fonctions serverless distinctes du seul fait d'un import de fichier commun
+
+**CORS local impossible à contourner sur le proxy RENDEZVOUS (découvert 22/06/2026 — R5.3)**
+- Tout test d'un endpoint du proxy (`request-magic-link.js`, `verify-magic-link.js`...) depuis `localhost` échoue systématiquement en CORS — `Access-Control-Allow-Origin` est codé en dur sur `https://realcoolclint.github.io`, par sécurité
+- Pas un bug à corriger : le test doit toujours se faire depuis la vraie URL GitHub Pages, après un `git push` — jamais en local pour un appel touchant le proxy
+
+---
+
+## Phase Mercury — ✅ Clôturée — 9 avril 2026
+
+**Progression : 100%**
+
+---
+
+## Phase Gemini — Active
+
+### Inventaire de flotte Gemini
+
+| # | App | Type | État |
+|---|-----|------|------|
+| 1 | **ROVER** | Desktop | 🟣 En orbite — V1.04.06.26 |
+| 2 | **COVENANT** | Web | 🟣 En orbite — C1→C7 ✅ · C9 ✅ · C11 ✅ · C12 ✅ · PWA ✅ · C10 ⚫ fermé |
+| 3 | **READBACK** | Desktop | ⚫ En projet |
+| 4 | **PAYLOAD** | Desktop + Mobile | ⚫ En projet |
+| 5 | **RENDEZVOUS** | Web | 🟢 R1→R5 ✅ — lien magique + frontend testés en production de bout en bout (R5.3, D16) · naming public harmonisé (B17, D15) · squelette R6 validé (D17-D19) · **examen exhaustif des combinaisons terminé** (D20→D31, 23-25/06) : 7 kits construits (Columbia, Gumdrop, Charlie Brown, Yankee Clipper, Odyssey, Kitty Hawk, Casper), 4 métiers exclus · reste wording COM (rate limiting B18 livré le 25/06, D32) |
+
+### Chantiers d'infrastructure Gemini
+
+| # | Chantier | Type | État |
+|---|----------|------|------|
+| I1 | **Launcher bugs** — DMG + Resend | Infrastructure | ✅ Terminé — 06/06/2026 |
+| I2 | **APPS_CATALOG externalisé** | Infrastructure | ⚫ Conditionnel — 10+ apps en orbite |
+| I3 | **managers.json** — Shared Data Layer | Infrastructure | ✅ Terminé — 02/06/2026 |
+| I4 | **SSD recovery** — protocole migration | Infrastructure | ⚫ À faire — nouveau SSD requis |
+| I5 | **managers.json** — arbitrages + schema | Infrastructure | ✅ Terminé — 02/06/2026 |
+| I6 | **tranquility-web-template** | Infrastructure | ✅ Terminé — commit `a9733ed` — 14/06/2026 |
+| I7 | **RENDEZVOUS** — portail public + redéfinition Launcher daemon | Infrastructure | 🟢 R1→R5 ✅ — lien magique + frontend testés en production (R5.3, D16) · naming public harmonisé (B17) · squelette R6 validé (D17-D19) · **examen exhaustif des combinaisons terminé** (D20→D31) — 7 kits, 4 exclusions · reste wording COM (rate limiting B18 livré le 25/06, D32) |
+
+---
+
+## Chantiers ouverts — Vue consolidée
+
+### Famille A — Documentation fondatrice
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| A1 | **Audit Workflow** — cartographie + 26 chantiers | 🔴 Critique | ✅ Terminé — 10/04/2026 |
+| A2 | **Fiches produit** — BackUpFlow → Manifest | 🟠 Important | ✅ Terminé — 11/04/2026 |
+| A3 | **Fiche produit COVENANT** | 🟠 Important | ✅ Terminé — 11/04/2026 |
+| A4 | **READBACK + CAPITAL** — fiches produit + spec complète | 🟠 Important | ✅ Terminé — 12/04/2026 |
+| A5 | **Agence Tranquility** — manifeste + agents + council skill | 🔴 Critique | ✅ Terminé — 12/04/2026 |
+| A6 | **RENDEZVOUS** — spec complète | 🔴 Critique | ✅ Terminé — 14/06/2026 |
+| A7 | **RENDEZVOUS** — fiche produit V1.1 + spec technique D1→D6 | 🔴 Critique | ✅ Terminé — 18/06/2026 — commits `a0bb1d7` + `e747b4b` (repo `tranquility-plan-directeur`) |
+| A8 | **Launcher** — fiche produit réécrite (daemon) | 🟠 Important | ✅ Terminé — 18/06/2026 — commit `3f8c45a` |
+| A9 | **Registre traitements RGPD** — livrable Audrey Weiss | 🟠 Important | ✅ Terminé — 18/06/2026, **corrigé en V1.1 le 20/06/2026** — commit `e80aabf` puis `de23620` (repo `tranquility-plan-directeur`) |
+| A10 | **RENDEZVOUS R3** — formulaire inscription + RGPD + Council Sécurité architecture d'accès | 🔴 Critique | ✅ Terminé — 19/06/2026 |
+| A11 | **SPEC_TECHNIQUE_RENDEZVOUS** — intégration D7→D13 | 🟡 Mineur | ✅ **Terminé — 21-22/06/2026** — V1.1 (D7→D13), V1.2 (correction RGPD nom de famille + table de correspondance schéma réel/illustratif + correction endpoint `/register`), V1.3 (clôture note de vigilance après B15) — commits `a0507f8`, `b1f047b`, `b3b526a` (repo `tranquility-plan-directeur`) |
+| A12 | **Combinaisons métier** — construction des 4 kits (Columbia, Gumdrop, Charlie Brown, Yankee Clipper), confirmation D22 (combinaisons priment sur la matrice générique), Fiche Produit RENDEZVOUS mise à jour en V1.3 | 🔴 Critique | ✅ Terminé — 23-24/06/2026 |
+| A13 | **Audit + reconstruction Plan Directeur** — détection d'une perte d'information majeure entre V5.57 (406 lignes) et V5.58 (88 lignes : D1-D19, matrice d'accès, pièges techniques, chantiers Famille A/B/I, flotte complète et ressources du projet disparus). Reconstruction complète en V5.59 à partir du texte intégral de V5.57, lu directement depuis le repo GitHub plutôt que reconstruit depuis la mémoire de session | 🔴 Critique | ✅ Terminé — 24/06/2026 |
+| A14 | **Extension combinaisons métier** — balayage exhaustif de l'organigramme L'Étudiant à la demande de Martin, au-delà des 4 métiers identifiés le 23/06. 3 nouveaux kits construits (ODYSSEY/Opérations spéciales D25, CASPER/Édition web et print D27, KITTY HAWK/Marchés hors captifs D31), 4 métiers explicitement exclus faute de besoin concret (D26, D28, D29, D30). Fiche Produit RENDEZVOUS mise à jour en V1.5 | 🔴 Critique | ✅ Terminé — 25/06/2026 |
+| A15 | **B20 + B18 — Clôture des deux derniers chantiers critiques avant code R6** : nettoyage du profil de test `pavloffmartin@gmail.com` (retiré de `profiles-private.json`, absent de `profiles-public.json` — schéma sans champ `email`, découverte de session) ; rate limiting in-memory sur `/auth/magic-link` (IP + email) et `/auth/verify` (IP), module `_shared/rate-limiter.js` (D32). Trois pièges méthode découverts pendant l'implémentation (voir Pièges techniques récurrents). Fiche Produit RENDEZVOUS mise à jour en V1.6, Plan Directeur V5.61 | 🔴 Critique | ✅ Terminé — 25/06/2026 |
+
+### Famille B — Architecture et infrastructure
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| B1 | **TRANQUILITY_SERVICES_TIERS.md** | 🟠 Important | ✅ V1.3 — 14/06/2026 — commit `353c05a` |
+| B2 | **Reviewer** — référence apps web | 🔴 Critique | ✅ Assainissement + corrections UI terminés |
+| B7 | **Bitwarden** — vault "Tranquility Suite" | 🟠 Important | ✅ Terminé — 8 entrées (ADMIN_SECRET, JWT_SECRET ajoutés 22/06) |
+| B8 | **Audit transversal CSS mort RENDEZVOUS** — `--color-primary` résiduel, `--info` fantôme, `--sidebar-*` consolidé en `--topbar-*` (D11), contamination Reviewer (1ère passe) | 🟠 Important | ✅ Terminé — 21/06/2026 — commits `4fa40a8`, `e4646f3`, `69ded96`, `0d2e292` (repo `RENDEZVOUS`) |
+| B9 | **Audit tokens CSS RENDEZVOUS vs Core** — terminé en trois passes le 21/06/2026 : (1) nettoyage de `:root` — 25 tokens dupliqués du core supprimés (chiffre exact), 13 tokens propres à RENDEZVOUS conservés ; (2) fusion des deux blocs `.dark-theme` en un seul (3 tokens réels : `--border-light`, `--shadow-xl` — `--shadow-sm` retiré, inutilisé) ; (3) purge complète de la contamination Reviewer résiduelle (`.comments-title`, `.empty-note`, `.note-item`, `.note-timecode`). Décision D13 actée à cette occasion. Validé visuellement en navigation privée. Portée sur les autres apps web (Reviewer, Manifest, COVENANT, BackUpFlow) toujours non vérifiée | 🟠 Important | ✅ **Terminé — 21/06/2026** — commits `855427a`, `42c6919`, `29396e7`, `847fdab` (repo `RENDEZVOUS`) |
+| B10 | **Réconciliation profils** — `tranquility-core/profiles-public.json` (role/appPermissions) vs `launcher-profiles/profiles.json` vs modèle niveau N1→N4 de RENDEZVOUS/D1, **+ convention de nommage français/anglais (A11)** | 🟠 Important | 🔵 Chantier à part — non démarré, prévu pour R7 (D8) |
+| B11 | **Domaine Resend dédié Tranquility Suite** — `tranquilitysuite.com` acheté via Cloudflare, sous-domaine `mail.tranquilitysuite.com` vérifié via Domain Connect en 9 minutes (D10) | 🟠 Important | ✅ Terminé — 21/06/2026 (D10) |
+| B12 | **Correction `TRANQUILITY_SUITE_ELECTRON_SKILL.md`** — section Resend documente `from: 'BackUpFlow <noreply@letudiant.fr>'` alors que la valeur réelle en production est `onboarding@resend.dev` | 🟡 Mineur | 🔵 Chantier à part — non démarré (D9) |
+| B13 | **Activation domaine RENDEZVOUS** — `notifierMartin()` renommé `notifierAdmin()` (D12), `from` basculé vers `notifications@mail.tranquilitysuite.com`. Testé en conditions réelles (curl + vérification Resend dashboard + nettoyage profil test dans `rendezvous-profiles-private`). Email confirmé Delivered mais initialement classé en spam (réputation domaine neuf, pas un bug) — a déclenché l'ouverture de B14 | 🟠 Important | ✅ **Terminé — 21/06/2026** — commit `f5dcd55` (repo `rendezvous-proxy`) |
+| B14 | **Réputation et délivrabilité du domaine d'envoi** — diagnostic : Resend recommandait 4 enregistrements DNS à la vérification du domaine (D10), seuls 3 posés par l'auto-configure (MX, DKIM, SPF) — le DMARC manquait. Ajouté manuellement (`_dmarc.tranquilitysuite.com`, `v=DMARC1; p=none;`), propagation confirmée par `dig`. Reste : chauffage de réputation dans le temps, à surveiller avant que R5 envoie des liens magiques à de vrais utilisateurs | 🟠 Important | 🟡 **Ouvert — 21/06/2026** — DMARC posé, chauffage du domaine à suivre dans le temps |
+| B15 | **Restriction domaine `@letudiant.fr` à l'inscription** — `submit-inscription.js` n'imposait aucune restriction de domaine malgré l'intention de la Vision Produit (filtre sémantique + validation admin = double protection) — découvert en rédigeant A11. Corrigé via Cursor (comparaison de suffixe insensible à la casse), testé en conditions réelles dans les deux sens (rejet 400 domaine externe, acceptation 200 `@letudiant.fr`), profils de test nettoyés | 🟠 Important | ✅ **Terminé — 22/06/2026** — commit `2149ff5` (repo `rendezvous-proxy`) |
+| B16 | **Mini-R7 — `validate-profile.js`** — R5 suppose l'existence d'un profil `"active"`, mais aucun mécanisme ne fait jamais passer `pending` → `active` (le vrai R7 n'existe pas). Endpoint temporaire construit pour débloquer le test de R5 : protégé par secret partagé (`ADMIN_SECRET`), bascule un profil en `active` en passant par le proxy (respecte D1, pas d'édition manuelle de fichier). Testé en conditions réelles. **Solution temporaire — à remplacer par le vrai R7, jamais à étendre** | 🟡 Mineur | ✅ **Terminé — 22/06/2026** — commit `c5628de` (repo `rendezvous-proxy`) |
+| B17 | **Naming public — RENDEZVOUS → Tranquility Suite (D15)** — emails utilisateur (`request-magic-link.js`, `submit-inscription.js`) affichaient « RENDEZVOUS » comme nom de marque visible (objet, expéditeur, corps, lien), alors que la décision produit veut que le public ne voie que « Tranquility Suite » — RENDEZVOUS est un nom de code de production. Audité et corrigé via Cursor en mode agent sur tout le repo (6 remplacements, 2 fichiers, aucun cas ambigu) ; vitrine publique (repo `RENDEZVOUS`) vérifiée déjà conforme — aucune correction nécessaire côté frontend | 🟡 Mineur | ✅ **Terminé — 22/06/2026** — commit `4103b91` (repo `rendezvous-proxy`) |
+| B18 | **Rate limiting** sur `/auth/magic-link` et `/auth/verify` | 🔴 Critique | ✅ **Terminé — 25/06/2026 (D32)** — module `_shared/rate-limiter.js` (in-memory), intégré sur les deux endpoints (IP + email sur magic-link, IP sur verify), 3 pièges découverts (voir Pièges techniques récurrents) — commits `9cf68ed`, `e86cfe3`, `2a1bf2c` (repo `rendezvous-proxy`) |
+| B19 | **Audit texte hardcodé en majuscules + CSS mort `.ps-*`** — relevé par Cursor pendant R5.3 (audit naming) et pendant le remplacement du connect-drawer | 🟡 Mineur | ⚫ À faire |
+| B20 | **Nettoyage profil de test** (`pavloffmartin@gmail.com`, `profiles-private.json`) | 🟡 Mineur | ✅ **Terminé — 25/06/2026** — entrée retirée de `profiles-private.json` (commit `17c2d5c`, repo `rendezvous-profiles-private`) ; absente de `profiles-public.json` (schéma sans champ `email`, `emailPrefix` uniquement — découverte de session, rien à nettoyer côté public) |
+
+### Famille I — Infrastructure produit
+
+| # | Chantier | Priorité | État |
+|---|----------|---------|------|
+| I6 | **tranquility-web-template** | 🟠 Important | ✅ Terminé — commit `a9733ed` — 14/06/2026 |
+| I7 | **RENDEZVOUS** — build R1→R8 | 🔴 Critique | 🟢 R1→R5 ✅ (R5.3 testé en production, D16) · naming public harmonisé (B17, D15) · squelette R6 validé (D17-D19) · **examen exhaustif des combinaisons terminé** (D20→D31) — 7 kits construits, 4 métiers exclus · reste wording COM (rate limiting B18 livré le 25/06, D32) |
+
+---
+
+## Carnet de pièges — Référence
+
+`CARNET_PIEGES_V23.md` — 23 juin 2026
+
+---
+
+## Flotte complète — 23 outils
+
+| # | Nom | Catégorie | État |
+|---|-----|-----------|------|
+| 1 | BackUpFlow | Desktop | 🟣 En orbite — V1.12.06.26 — Migration Session V1.1 ✅ — commit `77c5e34` |
+| 2 | Transporter | Desktop | 🟣 En orbite |
+| 3 | Reviewer | Web | 🟣 En orbite — assainissement CSS ✅ · corrections UI ✅ · bugs marqueurs + minuscules ✅ |
+| 4 | Manifest | Web | 🟣 En orbite — identity crisis ✅ soldée 14/06/2026 — repo renommé `Manifest` |
+| 5 | Launcher | Desktop daemon | 🟣 En orbite — redéfini daemon macOS — zéro interface — icône barre de menu — N1 uniquement — fiche V2.0 ✅ |
+| 6 | ARK | Desktop | 🟣 En orbite |
+| 7 | ROVER | Desktop | 🟣 En orbite — V1.04.06.26 |
+| 8 | COVENANT | Web | 🟣 En orbite — C9 ✅ · PWA ✅ · C10 ⚫ fermé |
+| 9 | READBACK | Desktop | ⚫ En projet |
+| 10 | CAPITAL | Desktop | ⚫ En projet |
+| 11 | PAYLOAD | Desktop + Mobile | ⚫ En projet |
+| 12 | Cargo | Desktop | ⚫ En projet |
+| 13 | Hatch | Web | ⚫ En projet — Organizer multicam — rôle original conservé |
+| 14 | Guidance | Web | ⚫ En projet |
+| 15 | Beacon | Desktop | ⚫ En projet |
+| 16 | Debrief | Web | ⚫ En projet |
+| 17 | Telemetry | Web | ⚫ En projet |
+| 18 | CAPCOM | Extension | ⚫ En projet |
+| 19 | DATAPAD | Extension | ⚫ En projet |
+| 20 | BLACKBOX | Extension | ⚫ En projet |
+| 21 | Scripter | À définir | ⚫ En idée |
+| 22 | **SIGNAL** | Web | ⚫ En idée — Phase Apollo — vue pilotage flotte + résumé Ollama · *OMNIA CONSPICUA* |
+| 23 | **RENDEZVOUS** | Web | 🟢 R1→R5 ✅ — lien magique + intégration frontend testés en production de bout en bout (22/06, R5.3, D16) · naming public « Tranquility Suite » harmonisé (22/06, B17, D15) · squelette page connectée validé (23/06, D17-D19) · **examen exhaustif des combinaisons métier terminé** (23-25/06, D20→D31) : 7 kits construits (Columbia, Gumdrop, Charlie Brown, Yankee Clipper, Odyssey, Kitty Hawk, Casper), 4 métiers exclus · reste wording COM (rate limiting B18 livré le 25/06, D32) |
+
+---
+
+## Ressources du projet
+
+| Document | Rôle | Version |
+|----------|------|---------|
+| `AGENCE_TRANQUILITY_MANIFESTE.md` | Mode de travail Agence | V1 |
+| `AGENCE_TRANQUILITY_AGENTS.md` | 23 postes — personnalités et réflexes | V1 |
+| `AGENCE_TRANQUILITY_COUNCIL_SKILL.md` | Protocole consultation multi-agents | V1 |
+| `TRANQUILITY_SUITE_VISION_PRODUIT.md` | Vision produit — 5 décisions fondatrices | V2 ⚠️ Révision nécessaire |
+| `TRANQUILITY_SUITE_DESIGN_REFERENCE.md` | Charte design — règles UI non négociables | V2 |
+| `TRANQUILITY_PROFIL_PASSEPORT_SPEC.md` | Format profils — architecture settings | V1.1 ⚠️ V1.2 à produire — impactée par RENDEZVOUS et par B10 |
+| `TRANQUILITY_SESSION_PROFILS_SPEC.md` | Protocole session — sync GitHub — 12 règles | V1 |
+| `TRANQUILITY_WORKFLOW_CAPTIF_MANIFESTE.md` | Les trois lois du workflow captif | V1 |
+| `TRANQUILITY_WORKFLOW_CAPTIF_GRILLE.md` | Grille d'évaluation opérationnelle | V1 |
+| `TRANQUILITY_WORKFLOW_ASSIST.md` | Trois automatismes JARVIS | V3 — 08/06/2026 |
+| `TRANQUILITY_COMPASS.md` | Orientation permanente JARVIS | V1 — 07/06/2026 |
+| `TRANQUILITY_SERVICES_TIERS.md` | Services tiers — inventaire + règles | V1.3 — commit `353c05a` |
+| `TRANQUILITY_IA_STRATEGIE.md` | Stratégie IA — 3 approches + règles | V1 — 14/06/2026 |
+| `TRANQUILITY_VEILLE_IA.md` | Veille IA — process permanent | V1 — 14/06/2026 |
+| `CARNET_PIEGES_V24.md` | Carnet de pièges empirique | V24 — 25/06/2026 ⚠️ **Patch produit cette session** (`PATCH_CARNET_PIEGES_V23_VERS_V24.md`) — à appliquer manuellement par Martin (voir Actions restantes) |
+| `FICHE_PRODUIT_RENDEZVOUS_V1.md` | Fiche produit RENDEZVOUS | V1.6 — 25/06/2026 ✅ B18 (rate limiting, D32) et B20 (nettoyage profil test) clôturés, roadmap et métriques corrigées — généré, **non pushé sur GitHub** (décision Martin : ressources projet uniquement) |
+| `FICHE_PRODUIT_LAUNCHER_V2.md` | Fiche produit Launcher daemon | V2.0 — 18/06/2026 ✅ |
+| `SPEC_TECHNIQUE_RENDEZVOUS_V1_3.md` | Spec technique RENDEZVOUS D1→D13 | V1.3 — 22/06/2026 ⚠️ **gap connu : seule la V1_2 est présente dans les ressources du projet Claude** |
+| `REGISTRE_TRAITEMENTS_RGPD_V1_1.md` | Registre RGPD — article 30 | V1.1 — 20/06/2026 ✅ nom de famille corrigé + périmètre Resend mis à jour |
+| `TRANQUILITY_COMITE_EXTERNE_DESIGN.md` | Comité externe design — 3 voix (Emil Kowalski · Impeccable · Taste-skill), synthèse vanilla CSS/JS, complète la Design Reference | V1.0 — 19/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260619_RENDEZVOUS_D7_GLASS_DRAWER.md` | Récap session — D7 page séparée (abandonnée) puis bascule Glass Drawer, découverte B9 | 19/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260620_RENDEZVOUS_R4_GLASS_DRAWER_DEPLOY.md` | Récap session (matin) — R4 démarré, déploiement effectif du Glass Drawer, fix CSP, sauvetage `profiles-public.json` | 20/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260620_RENDEZVOUS_R4_RESEND_RGPD.md` | Récap session (soir) — R4 livré (notification Resend), Registre RGPD V1.1, découverte domaine Resend (D9) | 20/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260621_RENDEZVOUS_B11_B8.md` | Récap session (matin) — B11 livré (domaine dédié vérifié, D10), B8 livré avec portée étendue (D11, renommage `--topbar-*`), B9 rescopé | 21/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260621_RENDEZVOUS_B13_B9_D12_D13.md` | Récap session (après-midi) — B13 livré (domaine activé), B14 ouvert (DMARC posé), B9 clôturé (D13), D12 acté et appliqué 2x | 21/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260622_RENDEZVOUS_A11_R5_MAGICLINK.md` | Récap session — A11 clos (V1.1→V1.3), restriction domaine (B15), mini-R7 (B16), R5.1 livré (JWT + magic-link), 9 pièges découverts | 22/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260622_RENDEZVOUS_R5_2_VERIFY_NAMING.md` | Récap session — R5.2 livré (GET /auth/verify, token session D14, anti-réutilisation), naming public Tranquility Suite harmonisé (B17, D15), nouvelle règle Cursor agent mode pour audits transverses | 22/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260622_RENDEZVOUS_R5_3_FRONTEND.md` | Récap session — R5.3 livré (formulaire email, vérification du lien, session réelle, header, déconnexion locale — D16), testé en production de bout en bout ; détour stratégique sur la vision RENDEZVOUS/héritage Launcher | 22/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260623_RENDEZVOUS_R6_SQUELETTE_VISIBILITE.md` | Récap session — squelette de page connectée validé (V1→V2 après benchmark), Conseil sur benchmark UX externe, pivot D17 (visibilité verrouillée) · D18 (déblocage par niveau, jamais par app) · D19 (vocabulaire "combinaison" remplace "niveau") | 23/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260623_RENDEZVOUS_COMBINAISONS_CELLULE.md` | Récap session — première combinaison métier construite (Cadreur/Monteur, N1, 7 apps), correction d'une inversion N1/N3 avant qu'elle ne se propage (Loi 3), Fiche Produit RENDEZVOUS mise à jour en V1.2, piège méthode découvert sur l'accès aux ressources projet (recherche fragmentée, pas lecture intégrale) | 23/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260623_RENDEZVOUS_COMBINAISONS_GUMDROP.md` | Récap session — D21 GUMDROP (Rédaction vidéo) actée, nomenclature Apollo CSM actée pour les 4 kits, fin de la méthode patch chirurgical (retour au rewrite complet pour les docs fondateurs) | 23/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260624_CHARLIE_YANKEE_AUDIT_PLAN_DIRECTEUR.md` | Récap session — D23 CHARLIE BROWN et D24 YANKEE CLIPPER actées, D22 confirmée (combinaisons priment sur la matrice), extension du daemon Launcher envisagée puis écartée (réaffirme D5), détection d'une perte d'information V5.57→V5.58 et reconstruction complète en V5.59 (commit `f2a2207`), nouvelle règle de méthode actée (rewrite depuis le texte intégral GitHub raw, jamais de la mémoire de session) | 24/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260625_RENDEZVOUS_COMBINAISONS_EXTENSION.md` | Récap session — balayage exhaustif de l'organigramme L'Étudiant à la demande de Martin, 3 nouveaux kits construits (ODYSSEY/OPS D25, CASPER/Édition web-print D27, KITTY HAWK/Marchés hors captifs D31), 4 métiers explicitement exclus (D26, D28, D29, D30), Fiche Produit RENDEZVOUS V1.5, Plan Directeur V5.60 | 25/06/2026 ✅ |
+| `SESSION_TRAVAIL_20260625_RENDEZVOUS_B20_B18_CLOTURE.md` | Récap session — B20 clôturé (profil test retiré de `profiles-private.json`, absent de `profiles-public.json`), B18 clôturé (rate limiting in-memory, D32, module `_shared/rate-limiter.js`, intégré sur les deux endpoints), 3 pièges méthode découverts, Fiche Produit RENDEZVOUS V1.6, Plan Directeur V5.61 | 25/06/2026 ✅ |
+| `TRUE_ME.md` | Connaissance progressive Martin | Living document |
+
+---
+
+*Plan Directeur V5.61 · Tranquility Suite · Cellule Vidéo L'Étudiant · 25 juin 2026*
+*Mise à jour — clôture de B20 et B18, les deux derniers chantiers critiques avant la reprise du code R6. **B20** : le profil de test `pavloffmartin@gmail.com` a été retiré de `profiles-private.json` (commit `17c2d5c`) ; il n'a jamais existé dans `profiles-public.json`, dont le schéma ne contient aucun champ `email` (uniquement `emailPrefix`) — découverte de session qui a corrigé une hypothèse initiale erronée (écriture atomique ≠ même schéma de champs). **B18** : rate limiting livré sur `/auth/magic-link` (IP + email) et `/auth/verify` (IP) via un module in-memory partagé `_shared/rate-limiter.js` (D32) — option retenue sur trois après analyse, cohérente avec le principe directeur RENDEZVOUS *"simple, efficace, sécurisé"*. Trois pièges méthode découverts pendant l'implémentation, dont une correction d'une analyse automatisée erronée (deux fonctions Netlify distinctes ne partagent jamais leur mémoire, même en important le même fichier `_shared/`). Reste avant le code R6 : le wording COM (remplacer "niveau N1 requis" par "combinaison"). Rewrite effectué depuis le texte intégral lu via `raw.githubusercontent.com`, conformément à la règle de méthode actée le 24/06/2026.*
