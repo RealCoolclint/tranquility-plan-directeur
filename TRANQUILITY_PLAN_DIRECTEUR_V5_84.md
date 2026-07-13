@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.83 — 9 juillet 2026*
+*Version 5.84 — 10 juillet 2026*
 
 ---
 
