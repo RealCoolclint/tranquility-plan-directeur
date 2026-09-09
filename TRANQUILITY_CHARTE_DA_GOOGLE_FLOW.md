@@ -11,7 +11,7 @@
 
 ### Pourquoi ce chantier existe
 
-Google Flow n'est pas un générateur de patches — c'est **l'agence créa de la Suite**, sur toute l'identité visuelle : patches, documents, icônes de plateforme, vidéos et campagnes de communication. Le moodboard est le brief créatif qui précède n'importe laquelle de ces productions, pas seulement un patch. L'exemple le plus concret du risque à éviter reste patch : Manifest et Reviewer ont chacun nécessité deux générations rejetées avant validation, faute d'avoir fixé la direction en amont (cf. session du 4 mars 2026) — mais ce piège n'est pas propre aux patches, il vaut pour tout ce que Flow produit.
+Google Flow n'est pas un simple générateur de patches — c'est l'atelier d'exécution visuelle de la Suite, sur toute l'identité visuelle : patches, documents, icônes de plateforme, vidéos et campagnes de communication. Toute production passe par la validation du Brand Brain (JARVIS — voir TRANQUILITY_BRAND_OS.md et TRANQUILITY_BRAND_BRAIN_SKILLS.md) avant PRÉSIDENCE : Flow exécute, il ne décide pas. Le moodboard est le brief créatif qui précède n'importe laquelle de ces productions, pas seulement un patch. L'exemple le plus concret du risque à éviter reste patch : Manifest et Reviewer ont chacun nécessité deux générations rejetées avant validation, faute d'avoir fixé la direction en amont (cf. session du 4 mars 2026) — mais ce piège n'est pas propre aux patches, il vaut pour tout ce que Flow produit.
 
 ### Quand un moodboard est obligatoire
 
