@@ -1,7 +1,7 @@
 # Tranquility Suite — Plan Directeur
 ## Cellule Vidéo L'Étudiant · Direction Martin Pavloff
 
-*Version 5.94 — 3 septembre 2026*
+*Version 5.95 — 9 septembre 2026*
 
 ---
 
@@ -252,6 +252,40 @@ Nomenclature Apollo CSM : les kits sont nommés d'après les Command/Service Mod
 | R8 | Polish + tests tous devices + heartbeat bloquant optionnel (D6) + communication + lancement | 1-2 sessions | ⚫ À faire — inclut la protection anti-spam du formulaire d'inscription (non bloquant en usage interne actuel) |
 
 **Estimation totale : reste uniquement R8 avant V1** (R1→R7 tous clôturés — R5-bis, R6 et R7 complets).
+
+---
+
+## Google Flow — De l'agence créa au studio d'exécution (D83 → D95)
+
+Session du 4 septembre 2026 : Google Flow est positionné comme l'agence créa centralisée de la Suite, sur toute l'identité visuelle (patches, documents, icônes, campagnes) — remplace intégralement le pipeline NotebookLM. Session du 9 septembre 2026 : ce rôle est révisé après test réel. Flow reste un excellent exécutant mais n'a ni mémoire ni jugement stratégique de marque dans le temps — nouvelle architecture actée : Brand OS (mémoire documentaire) + Brand Brain (JARVIS, 6 skills de raisonnement) + Flow rétrogradé en studio d'exécution pur.
+
+**D83 (APPROVED, 04/09/2026)** — Flow devient l'agence créa unique de la Suite pour toute production visuelle et audiovisuelle, moodboards inclus, remplaçant intégralement NotebookLM (vidéo et podcast compris). Documenté dans TRANQUILITY_AUDIT_MIGRATION_GOOGLE_FLOW_V2_20260904.md §1. **Révisé par D92 (09/09/2026) — voir plus bas.**
+
+**D84 (APPROVED, 04/09/2026)** — Découverte des GIFs de réaction sous droits (Transporter, BackUpFlow) : restent en l'état, risque juridique assumé consciemment, sort du périmètre Google Flow. Documenté dans l'audit §4.
+
+**D85 (PROPOSED puis non tranché, 04/09/2026)** — Duplication des avatars (tranquility-avatars / BackUpFlow / Launcher) : mécanisme de synchronisation ou duplication assumée à trancher — pas une décision prise seul par JARVIS. Documenté dans l'audit §5, repris en Chantier 5 de la Charte DA (non rédigé à ce stade).
+
+**D86 (APPROVED, 04/09/2026)** — Icônes de plateforme reconnues comme catégorie DA jamais spécifiée à ce jour (favicon, PWA, Dock, extensions Premiere) — à combler en Chantier 2 de la Charte DA. Documenté dans l'audit §6.
+
+**D87 (PROPOSED puis non tranché, 04/09/2026)** — Trois découpages d'audience non réconciliés (Bible COM 4 registres / Session Marketing 3 cercles / cadrage Flow 4 usages) — décision PRÉSIDENCE nécessaire avant le Chantier 4 de la Charte DA. Documenté dans l'audit §8.
+
+**D88 (APPROVED, 04/09/2026)** — Chantier 0 de la Charte DA verrouillé : moodboard obligatoire avant toute production dans les catégories identité/documents/plateforme/communication, sauf reproduction dans un registre déjà validé. Repo dédié tranquility-flow (moodboards/ + masters/) proposé pour centraliser, plutôt que la dispersion déjà constatée (Launcher notamment).
+
+**D89 (APPROVED, 04/09/2026)** — Brief initial Google Flow rédigé (TRANQUILITY_BRIEF_INITIAL_GOOGLE_FLOW.md), ADN visuel complet (patch + UI + registres documents), table de la flotte pour cohérence. **Section "YOUR ROLE" révisée par D95 — voir plus bas.**
+
+**D90 (APPROVED, 04/09/2026)** — Consignes génériques patch animé actées (TRANQUILITY_CONSIGNES_PATCH_ANIME.md) : seuls les éléments atmosphériques bougent, mouvement lent et continu, jamais de rebond — cohérent avec la Design Reference.
+
+**D91 (APPROVED, 04/09/2026)** — Deux agents formalisés : Agent D.A. de Marque (autorité sur l'image, filtre avant intégration) et Agent Directeur de la Communication (autorité sur le message, filtre avant diffusion) — formalisent et élargissent les postes STUDIO CREA et COM de l'Agence Tranquility sans les remplacer.
+
+**D92 (APPROVED, 09/09/2026) — Pivot architectural, révise D83.** Après un premier test réel (patch READBACK), Martin constate que Flow est un bon exécutant mais pas un cerveau stratégique de marque. Nouvelle architecture actée : Brand OS (mémoire documentaire, appartient à la Suite, jamais à un outil) → Brand Brain (JARVIS, remplaçable par nature) → Flow (studio d'exécution pur, ne décide plus rien). Le workflow moodboard (D88) ne change pas — seule l'autorité de validation change. Reversion consciente et tracée (Loi 3 du Workflow Captif) : D83 reste documenté comme décision historique, non supprimé.
+
+**D93 (APPROVED, 09/09/2026)** — Création de TRANQUILITY_BRAND_OS.md : gouvernance du Brand Brain, carte des sources (aucun contenu dupliqué, chaque sujet a une seule source de vérité).
+
+**D94 (APPROVED, 09/09/2026)** — Création de TRANQUILITY_BRAND_BRAIN_SKILLS.md : 6 skills de raisonnement (VISUAL_IDENTITY_GUARDIAN, ART_DIRECTION, FLOW_PROMPTING, VISUAL_CRITIQUE, BRAND_QA, DECISION_ARCHIVIST), réduits et challengés depuis une proposition initiale à 6 skills différents soumise à ChatGPT pour contre-analyse. Chaque skill renvoie vers un document source existant, ne contient aucune règle en dur.
+
+**D95 (APPROVED, 09/09/2026)** — Correction du rôle affiché de Flow dans TRANQUILITY_CHARTE_DA_GOOGLE_FLOW.md (Chantier 0) et TRANQUILITY_BRIEF_INITIAL_GOOGLE_FLOW.md (section "YOUR ROLE") : Flow n'est plus décrit comme l'autorité créative mais comme le studio d'exécution, validé par le Brand Brain avant PRÉSIDENCE. Commits appliqués via Cursor, diffs vérifiés avant commit.
+
+**Nouveau piège méthode découvert cette session (Carnet V44)** : un heredoc bash contenant un bloc de code entre triple-backticks referme silencieusement le heredoc — TRANQUILITY_BRAND_OS.md n'a pas été créé au premier essai malgré une commande sans erreur visible, détecté uniquement par vérification explicite avant commit.
 
 ---
 
@@ -549,7 +583,9 @@ Passées au filtre de `TRANQUILITY_IA_STRATEGIE.md` (zéro IA payante avant mod�
 | `TRANQUILITY_IA_STRATEGIE.md` | Stratégie IA — 3 approches + règles | V1 — 14/06/2026 |
 | `TRANQUILITY_VEILLE_IA.md` | Veille IA — process permanent | V1 — 14/06/2026 |
 | `TRANQUILITY_VEILLE_OUTILS.md` | Veille projets open source — process permanent | V1.0 — 05/07/2026 — 7 projets examinés en session fondatrice, ntfy retenu et ouvert en chantier I8 |
-| `CARNET_PIEGES_V42.md` | Carnet de pièges empirique | V42 — sur GitHub (repo `tranquility-carnet-pieges`) et ressources projet Claude. V41 (clôture trouvailles Mac Bureau) puis V42 (piège READBACK, D78) poussées le 03/09/2026 |
+| `CARNET_PIEGES_V44.md` | Carnet de pièges empirique | V44 — sur GitHub (repo `tranquility-carnet-pieges`) et ressources projet Claude. V41 (clôture trouvailles Mac Bureau) puis V42 (piège READBACK, D78) poussées le 03/09/2026, V44 (piège heredoc bash / triple-backticks, D95) le 09/09/2026 |
+| `TRANQUILITY_BRAND_OS.md` | Gouvernance Brand Brain — carte des sources, architecture Brand OS/Brand Brain/Flow | V1 — 09/09/2026 |
+| `TRANQUILITY_BRAND_BRAIN_SKILLS.md` | 6 skills de raisonnement du Brand Brain (Guardian/Art Direction/Flow Prompting/Critique/QA/Archivist) | V1 — 09/09/2026 |
 | `JARVIS_INSTRUCTIONS_PERMANENTES.md` | Instructions permanentes JARVIS — posture, méthode Cursor, Agence, Workflow Assist/Captif | V2.1 — 05/07/2026 ✅ sur GitHub (repo dédié `tranquility-jarvis-instructions`), doublé d'un skill actif (`jarvis-methode`) |
 | `FICHE_PRODUIT_RENDEZVOUS_V1.md` | Fiche produit RENDEZVOUS | V1.6 — 25/06/2026 — **dette documentaire croissante, toujours non traitée** : roadmap et métriques ne reflètent ni R5-bis, ni R6, ni R7 (tous complets depuis), ni D79→D82 — généré, **non pushé sur GitHub** (décision Martin : ressources projet uniquement) |
 | `FICHE_PRODUIT_LAUNCHER_V2.md` | Fiche produit Launcher daemon | V2.0 — 18/06/2026 ✅ |
@@ -640,3 +676,6 @@ Passées au filtre de `TRANQUILITY_IA_STRATEGIE.md` (zéro IA payante avant mod�
 
 
 *Mise à jour V5.94 — Session RENDEZVOUS, R6 clos et R7 enrichi (03/09/2026, Mac Bureau). Priorité de session actée par Martin : boucler RENDEZVOUS avant tout autre chantier de la Suite — READBACK mis en pause consciemment en conséquence (diagnostic D78 laissé en l'état, instrumentation `[PERF]` toujours à recréer sur Mac Maison + iPad). **D79 actée — R6 complet** : le CTA "Demander une affectation", jusque-là un texte statique sans effet réel, est branché sur un nouvel endpoint `request-affectation.js` (repo `rendezvous-proxy`) — vérifie le JWT de session, confirme le profil `active` en relisant GitHub, valide `appId` contre une liste blanche des 7 apps réelles, notifie l'admin par email (Resend). Option A (email simple, pas de nouvel écran) retenue consciemment pour rester cohérent avec l'objectif de clôture rapide. Testé en production de bout en bout (deux demandes distinctes, BackUpFlow et Manifest). **D80 actée** : lien direct `admin.html?profileId=` dans l'email de notification — ouverture automatique du panneau détail du bon profil après connexion, avec bascule d'onglet selon le statut réel et nettoyage de l'URL après ouverture (`history.replaceState`) pour éviter une réouverture en boucle lors des revérifications de session. **D81 actée** : secret admin mémorisé 30 jours en `localStorage` (au lieu de `sessionStorage` par onglet), partagé entre tous les onglets — le secret reste strictement obligatoire, seul le mécanisme de mémorisation change. **D82 actée** : nouvelle action `modifier` sur `admin-update-profile.js`, permet de changer l'affectation d'un profil `active` sans passer par le cycle archiver→réactiver (qui coupe l'accès jusqu'à 5 minutes, D44) — aucun changement de statut, aucun email. Bouton dédié dans l'admin, distinct visuellement d'ARCHIVER via la convention couleur `var(--warning)` déjà en place (aucun nouveau token CSS), les deux boutons rendus côte à côte avec sélection mutuellement exclusive après un premier retour de Martin sur une mise en page à corriger. **R1 à R7 sont désormais tous complets — seul R8 reste avant V1.** **Incident de méthode détecté et résolu en cours de session** : une tentative de récupération du Plan Directeur "le plus récent" a d'abord ciblé le fichier `TRANQUILITY_PLAN_DIRECTEUR_V5_90.md` par son nom exact (vu dans les ressources du projet Claude) sans lister au préalable le contenu réel du repo GitHub — erreur corrigée par téléchargement de l'archive complète du repo (`codeload.github.com`, contourne le rate-limit de l'API GitHub non authentifiée), révélant que V5.91/V5.92/V5.93 existaient déjà et étaient à jour. Aucun trou réel n'existait — nouveau piège Méthode documenté en conséquence (voir Carnet de Pièges, à intégrer en V43). **Corrections de cohérence documentaire au passage** : trois occurrences de "prochain chantier : Reviewer" / "cadrage B21", restées périmées depuis la clôture effective de B21/B22 (D63, 14/07/2026), corrigées en "prochain chantier : R8" ; référence au Carnet de Pièges (deux emplacements) mise à jour de V41 vers V42. Reste ouvert, non traité cette session : `FICHE_PRODUIT_RENDEZVOUS_V1.md` toujours en V1.6 (25/06), dette documentaire désormais large (R5-bis/R6/R7 absents, D79→D82 absentes) ; chantier READBACK (saccades de défilement iPad, D78, instrumentation `[PERF]` à recréer) ; chantier de conception de la migration Launcher→RENDEZVOUS (D77, non cadré). Rewrite effectué à partir du texte intégral V5.93 lu via `raw.githubusercontent.com`/`codeload.github.com` (vérifié identique aux ressources du projet Claude), conformément à la règle de méthode actée le 24/06/2026 — aucun patch partiel, réécriture complète du document.*
+
+
+*Mise à jour V5.95 — Session Google Flow, pivot Brand OS (09/09/2026, Mac Bureau). Intégration des décisions D83→D91 (Google Flow agence créa, 04/09/2026), jamais reportées dans le Plan Directeur jusqu'à cette session — écart détecté en ouverture de session, corrigé dans le même mouvement que la révision elle-même plutôt qu'en deux passes séparées. **D92 actée — pivot architectural** : après un premier test réel (patch READBACK, 2 directions sur 3 retenues), Martin juge Flow bon exécutant mais pas cerveau stratégique de marque. Nouvelle architecture : Brand OS (mémoire documentaire, TRANQUILITY_BRAND_OS.md, D93) → Brand Brain (JARVIS, 6 skills de raisonnement, TRANQUILITY_BRAND_BRAIN_SKILLS.md, D94, réduits depuis une proposition à 6 skills différents soumise à ChatGPT pour contre-analyse) → Flow (studio d'exécution pur). **D95 actée** : correction du rôle affiché de Flow dans la Charte DA et le Brief Initial, deux fichiers qui affirmaient encore que Flow était l'autorité créative. Reversion consciente de D83 (Loi 3 du Workflow Captif) — non supprimée, documentée comme historique. **Nouveau piège méthode découvert et documenté (Carnet V44)** : un heredoc bash contenant un bloc de code entre triple-backticks referme silencieusement le heredoc sans erreur visible — TRANQUILITY_BRAND_OS.md non créé au premier essai, détecté par vérification explicite (cat) avant commit plutôt que supposé réussi. Reste ouvert, non traité cette session : chantiers 1 à 5 de la Charte DA (READBACK, icônes, uniformisation patches, documents/communication, duplication avatars) toujours à rédiger ; chantier READBACK (saccades D78) ; migration Launcher→RENDEZVOUS (D77) ; FICHE_PRODUIT_RENDEZVOUS_V1.md toujours en V1.6. Rewrite effectué par patch ciblé via Cursor (méthode D52), diffs vérifiés avant chaque commit, conformément à la règle de méthode actée le 24/06/2026 — pas de réécriture complète du document, volume total trop important pour un heredoc fiable.*
