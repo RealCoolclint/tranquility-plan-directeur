@@ -22,6 +22,9 @@ Règles 11 et 12, sections « Lecture d'une piste » (quatre niveaux de lecture,
 ### Veilles en V2, Plan Directeur V5_111, Workflow Assist
 `VEILLE_OUTILS` devient un renvoi ; `VEILLE_IA` ne garde que le tableau des points d'entrée IA (seule copie existante), SIGNAL et l'historique de juin. Plan Directeur V5_111 dérivé de la V5_110 par script (8 lignes modifiées, 5 ajoutées, contrôle par diff). `TRANQUILITY_WORKFLOW_ASSIST.md` reçoit la consultation du labo dans l'automatisme 1.
 
+### Suite de la session : arbitrages de PRÉSIDENCE
+Après la fusion, Martin a tranché ses quatre décisions en suspens et les trois points d'arbitrage laissés ouverts. Paiements : toute piste qui exige un nouveau paiement est abandonnée d'office (règle 13), les services déjà payés restent utilisables, billion-context passe en abandon. REA : périmètre arrêté (nos builds, outils commerciaux par inspiration), règle 10 réécrite avec une alerte « Continuer / Mettre en pause » et une trace en une ligne. Schémas : tout en Mermaid, hors Google Flow. HyperFrames : prototype validé en principe, lancement en session dédiée ; ntfy : prototype, test après la phase Gemini. SIGNAL : D136 prime, le transit IMAP n'est pas retenu. Chemin du Launcher corrigé dans `WORKFLOW_ASSIST`. Carnet de pièges V55 poussé (+16). `.DS_Store` retiré du suivi de `tranquility-plan-directeur`.
+
 ---
 
 ## Décisions actées
@@ -33,6 +36,12 @@ Règles 11 et 12, sections « Lecture d'une piste » (quatre niveaux de lecture,
 - Le tableau des points d'entrée IA reste dans `TRANQUILITY_VEILLE_IA.md` (nom de fichier inchangé : `IA_STRATEGIE` et `SERVICES_TIERS` le citent).
 - Un document volumineux se versionne par insertions scriptées à partir du texte GitHub, contrôlées par `diff`, jamais retapé.
 - ntfy : fiche en « prototype », chantier I8 laissé inchangé (« chantier ouvert »).
+- Aucune piste ne demande un nouveau paiement (abonnement ou clé API) ; les services déjà payés restent utilisables (règle 13, D158).
+- REA : cibles = nos builds et des outils commerciaux par inspiration ; avant toute cible non couverte, alerte « Continuer / Mettre en pause », « Continuer » tracé en une ligne (règle 10, D159).
+- Tous les schémas et diagrammes se font en Mermaid, hors Google Flow (D160).
+- HyperFrames : prototype validé en principe, lancement en session dédiée ; ntfy : prototype, test après la phase Gemini (D161).
+- SIGNAL : D136 prime (app Electron) ; le transit par e-mail IMAP est une hypothèse non retenue, à retrancher à la conception (D162).
+- Prochain chantier : RENDEZVOUS R8, dernier chantier avant la V1.
 
 ---
 
@@ -44,11 +53,19 @@ Règles 11 et 12, sections « Lecture d'une piste » (quatre niveaux de lecture,
 | `tranquility-rd/fiches/` : 5 fiches IA (commit `8d2ca83`) | fiches | ✅ pushé |
 | `tranquility-rd/README.md` : règles 11-12, revue du labo, règle d'intégration (`0dc6202`) | doc | ✅ pushé |
 | `tranquility-rd/README.md` : Lecture d'une piste (`5950e16`) | doc | ✅ pushé |
-| `TRANQUILITY_VEILLE_OUTILS.md` V2.0 | doc fondateur | 🟡 écrit, à pousser |
-| `TRANQUILITY_VEILLE_IA.md` V2.0 | doc fondateur | 🟡 écrit, à pousser |
-| `TRANQUILITY_PLAN_DIRECTEUR_V5_111.md` | doc fondateur | 🟡 écrit, à pousser |
-| `TRANQUILITY_WORKFLOW_ASSIST.md` (consultation du labo) | skill | 🟡 écrit, à pousser |
-| `SESSION_TRAVAIL_20261017_TRANQUILITY_RD_FUSION.md` | récap | 🟡 écrit, à pousser |
+| `TRANQUILITY_VEILLE_OUTILS.md` V2.0 | doc fondateur | ✅ pushé (`ff876fc`) |
+| `TRANQUILITY_VEILLE_IA.md` V2.0 | doc fondateur | ✅ pushé (`ff876fc`) ; 🟡 phrase SIGNAL retouchée (D162), à pousser |
+| `TRANQUILITY_PLAN_DIRECTEUR_V5_111.md` | doc fondateur | ✅ pushé (`ff876fc`) |
+| `TRANQUILITY_WORKFLOW_ASSIST.md` (consultation du labo) | skill | ✅ pushé (`ff876fc`) ; 🟡 chemin du Launcher corrigé, à pousser |
+| `SESSION_TRAVAIL_20261017_TRANQUILITY_RD_FUSION.md` | récap | ✅ pushé (`ff876fc`) ; 🟡 complété (suite de la session), à pousser |
+| `TRANQUILITY_PLAN_DIRECTEUR_V5_112.md` | doc fondateur | 🟡 écrit, à pousser |
+| `tranquility-rd` : règle 13, billion-context en abandon (`5be38a6`) | doc, fiche | ✅ pushé |
+| `tranquility-rd` : REA, règle 10 (`8b47f48`) | doc, fiche | ✅ pushé |
+| `tranquility-rd` : Anatomy, schémas = Mermaid (`4cc76dc`) | fiche | ✅ pushé |
+| `tranquility-rd` : HyperFrames (`78d5f28`), ntfy (`35c28ac`) | fiches | ✅ pushé |
+| `tranquility-plan-directeur` : `.gitignore` et `.DS_Store` retiré du suivi (`6ceb150`) | ménage | ✅ pushé |
+| `tranquility-carnet-pieges` : `CARNET_PIEGES_V55.md` (`288b4fe`) | carnet | ✅ pushé |
+| Skill `tranquility-rd` mis à jour (liste de fiches remplacée par une règle) | skill | 🟡 proposé à la sauvegarde ; à repasser en 13 règles |
 
 ---
 
@@ -74,18 +91,18 @@ git add TRANQUILITY_PLAN_DIRECTEUR_V5_111.md TRANQUILITY_VEILLE_IA.md TRANQUILIT
 - [VEILLE] Références de juin périmées : Ollama « 0.19+ » (v0.40.5), dépôt Meta de Demucs (archivé), moondream2 (Moondream 3, BSL 1.1), binding Whisper (inactif depuis 07/2025).
 - [WORKFLOW_ASSIST] Le fichier cite encore `/Volumes/BACKUP PRO/...` (SSD abandonné le 04/07/2026) et son en-tête date du 30/05, alors que le Plan Directeur le note V3 du 08/06 → écart documentaire non traité.
 - [LICENCE] Typebot et Dub : GitHub ne classe pas la licence (NOASSERTION) → lire le texte avant tout usage au-delà de l'inspiration.
+- [SYSTÈME] `.DS_Store` suivi dans `tranquility-plan-directeur` : apparaissait modifié à chaque ouverture du dossier → `.gitignore` + `git rm --cached .DS_Store` (`6ceb150`). Même piège que RENDEZVOUS et Reviewer ; repris dans le carnet V55.
 
 ---
 
 ## Prochaines étapes
 
-1. Pousser les 5 fichiers de la session (commandes ci-dessus).
-2. Mettre à jour le carnet de pièges (repo `tranquility-carnet-pieges`) avec les entrées des récaps du 16/10 et du 17/10.
-3. Trancher les décisions en suspens de PRÉSIDENCE : schémas techniques sous Google Flow ou non ; apps à étudier avec REA ; Claude Code par abonnement ou clé API.
-4. Valider ou décliner le prototype HyperFrames (20 à 30 s, 16:9 et 9:16, avant toute installation) ; skill `tranquility-documentation` (manuel ARK) bloqué par l'accès au code d'ARK.
-5. Arbitrer SIGNAL (D136 contre le texte de `VEILLE_IA` V2), le verdict de `RD_NTFY_V1` contre I8, et l'écart documentaire de `WORKFLOW_ASSIST`.
-6. Mettre à jour le skill `tranquility-rd` : sa liste « fiches existantes au 16/10/2026 » ne cite que 5 fiches sur 17.
-7. À la prochaine revue IA : vérifier la publication du framework Foundation Models d'Apple et l'existence d'un pont Node.js.
+1. Pousser la mise à jour du dépôt `tranquility-plan-directeur` : Plan Directeur V5_112, `VEILLE_IA`, `WORKFLOW_ASSIST`, ce récap.
+2. Repasser le skill `tranquility-rd` en 13 règles (il en cite encore 12) et le sauvegarder.
+3. RENDEZVOUS R8, dernier chantier avant la V1 : reprendre au dernier récap RENDEZVOUS (29/09, lot 3 cadrage).
+4. Sessions dédiées à planifier : REA (builds propres et outils commerciaux, alerte avant toute cible non couverte) ; lancement du prototype HyperFrames. Test de ntfy après la phase Gemini. Skill `tranquility-documentation` (manuel ARK) toujours bloqué par l'accès au code d'ARK.
+5. Revue IA du mois (premier lundi, 15 minutes) : vérifier la publication du framework Foundation Models d'Apple et l'existence d'un pont Node.js ; revoir les recommandations de modèles Ollama et les alternatives de binding Whisper.
+6. Vérifier si les autres repos (`tranquility-rd`, `tranquility-carnet-pieges`, etc.) suivent un `.DS_Store`.
 
 ---
 

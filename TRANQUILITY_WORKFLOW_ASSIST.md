@@ -137,7 +137,7 @@ Au démarrage d'une session sur une app spécifique, JARVIS charge le contexte d
 
 ### LAUNCHER
 **Repo :** `RealCoolclint/Launcher`
-**Chemin local :** `/Volumes/BACKUP PRO/Outils/App Persos/Launcher-v2/`
+**Chemin local :** `~/Documents/GitHub/Launcher` (ancien SSD abandonné le 04/07/2026)
 **Nature :** App Electron — hub central de la suite
 **Rôle :** Authentification, gestion des profils, distribution des apps, Retriever (clés API)
 

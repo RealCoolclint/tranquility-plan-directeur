@@ -54,7 +54,7 @@ Ce tableau recense les portes ouvertes dans les apps existantes pour une connexi
 **Architecture à valider :** les apps web (COVENANT, Reviewer, Manifest) ne peuvent pas écrire en local — transit par email structuré à une boîte dédiée, lue par SIGNAL via IMAP
 **Devise proposée :** *OMNIA CONSPICUA · Tout est visible*
 
-**Écart documentaire connu (17/10/2026) :** le Plan Directeur (D136) décrit SIGNAL comme une app Electron à lancer juste après la V1 de RENDEZVOUS, construite sur Surveyor et son radar. Cette fiche, plus ancienne, décrit une architecture par e-mail structuré lu en IMAP. Les deux textes sont conservés tels quels ; l'arbitrage reste à faire.
+**Écart documentaire arbitré (17/10/2026) :** le Plan Directeur (D136) fixe SIGNAL comme une app Electron, lancée juste après la V1 de RENDEZVOUS et construite sur Surveyor et son radar : cette décision prime. Le transit par e-mail structuré lu en IMAP, décrit plus haut, est requalifié en hypothèse non retenue, à retrancher à la conception de SIGNAL (piste notée en regard : événements déposés dans GitHub, cohérent avec « GitHub = seul cloud de travail » ; faisabilité pour COVENANT, Reviewer et Manifest non vérifiée).
 
 ---
 
