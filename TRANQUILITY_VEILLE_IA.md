@@ -1,138 +1,29 @@
 # TRANQUILITY_VEILLE_IA
 ## Tranquility Suite · Cellule Vidéo L'Étudiant
 
-*Version 1.0 — 14 juin 2026*
+*Version 2.0 — 17 octobre 2026 · remplace la V1.0 du 14 juin 2026*
 *Document fondateur — complément de `TRANQUILITY_IA_STRATEGIE.md`*
 
 ---
 
 ## Rôle de ce document
 
-Ce document est la mémoire IA de la Tranquility Suite. Il contient le panorama de référence des technologies IA gratuites pertinentes pour notre activité, les familles surveillées, les outils de référence actifs, les points d'entrée actés dans chaque app, et l'historique des revues mensuelles.
+Depuis le 17 octobre 2026 (D156), la veille IA ne vit plus ici. Toute la veille, l'analyse et la consignation des outils open source et des solutions IA sont réunies dans un seul endroit : le repo privé `RealCoolclint/tranquility-rd` (laboratoire R&D). Ce document ne garde que ce qui n'est pas de la R&D : les **points d'entrée IA actés dans les apps** et la fiche de l'app **SIGNAL**.
 
-Il est mis à jour lors de chaque revue mensuelle et lors de chaque audit semestriel. Il est poussé sur `tranquility-plan-directeur` à chaque mise à jour.
-
-**JARVIS consulte ce document silencieusement à chaque démarrage de session Tranquility Suite.**
+**Consultation :** JARVIS consulte ce document quand un chantier touche ROVER, ARK, READBACK ou BackUpFlow (au mini-plan), et non plus à chaque démarrage de session. La recherche web automatique de démarrage (ancien niveau 1) est supprimée (D157).
 
 ---
 
-## Process de veille — 3 niveaux
+## Où est passé le contenu de la V1.0
 
-### Niveau 1 — Veille passive (permanente, automatisée par JARVIS)
+| Contenu de la V1.0 | Où le trouver |
+|---|---|
+| Les 5 familles surveillées (transcription, LLM locaux, audio, Apple Foundation Models, vision) | Une fiche chacune dans `tranquility-rd/fiches/` : `RD_WHISPER_V1`, `RD_OLLAMA_V1`, `RD_DEMUCS_V1`, `RD_APPLE_FOUNDATION_MODELS_V1`, `RD_MOONDREAM_V1`. La famille est portée par le mot-clé `famille-...` |
+| Règle d'intégration en 4 critères (stabilité, intégration, valeur, traçabilité) | README du labo, section « Règle d'intégration » |
+| Revue mensuelle (« revue IA du mois ») et audit semestriel | README du labo, section « Revue du labo » |
+| Variantes et modèles à connaître | Section « Alternatives et comparaison » de chaque fiche. Les listes de modèles de juin 2026 (Phi-3 Mini, LLaMA 3.1 8B, Apple Foundation Models 3B) ne sont pas reprises : à revérifier à la prochaine revue |
 
-À chaque démarrage de session Tranquility Suite, JARVIS lance une recherche web ciblée sur les 5 familles surveillées et signale en 3 lignes maximum : *"RAS"* ou *"Signal détecté sur [famille] — [résumé en une phrase]"*. Aucune action requise de Martin sauf si un signal est mentionné.
-
-**Sources de référence :**
-- simonwillison.net — tracker d'outils IA open source, haut signal/bruit
-- huggingface.co/blog — nouveaux modèles open source dès leur sortie
-- The Batch (deeplearning.ai) — synthèse hebdomadaire orientée pratique
-
-### Niveau 2 — Revue mensuelle (premier lundi du mois, 15 minutes)
-
-Déclencheur : Martin dit *"revue IA du mois"*. JARVIS lance les recherches sur les 5 familles, compare avec l'état documenté ici, et produit le rapport en format fixe ci-dessous. Martin valide, corrige, ou déclenche une action.
-
-**Format fixe de la revue mensuelle :**
-```
-REVUE IA — [mois année]
-
-1. NOUVEAUTÉS PERTINENTES
-   Quoi de neuf dans nos familles depuis le mois dernier ?
-
-2. IMPACT SUR LES DÉCISIONS ACTÉES
-   Est-ce que quelque chose change une décision qu'on a prise ?
-
-3. IMPACT SUR LES POINTS D'ENTRÉE
-   Est-ce qu'un point d'entrée doit être mis à jour ?
-
-4. À SURVEILLER LE MOIS PROCHAIN
-   Un signal faible à confirmer.
-```
-
-Output : 10 lignes max. Intégré au Plan Directeur si une décision change.
-
-### Niveau 3 — Audit semestriel (janvier et juillet, session dédiée)
-
-Deux fois par an, révision complète du panorama. On vérifie que les familles sont à jour, que les technos choisies sont toujours les bonnes, que rien de majeur n'a été raté. C'est la session où on peut décider d'ouvrir un chantier Apollo ou de modifier un point d'entrée.
-
----
-
-## Règle d'intégration — non négociable
-
-Avant d'intégrer une technologie IA dans la suite :
-
-1. **Stabilité :** la technologie doit être stable depuis au moins 3 mois — pas un projet GitHub d'une semaine
-2. **Intégration :** elle doit avoir un binding Node.js ou une interface Electron documentée — pas juste Python
-3. **Valeur :** elle doit apporter une valeur mesurable sur un usage réel de l'équipe — pas une démonstration technique
-4. **Traçabilité :** elle est versionnée dans `TRANQUILITY_SERVICES_TIERS.md` au moment de l'intégration
-
----
-
-## Les 5 familles surveillées
-
-### Famille 1 — Transcription audio/vidéo
-
-**Outil de référence :** Whisper (OpenAI, open source)
-**Version de référence :** medium — bon équilibre précision/vitesse sur Apple Silicon
-**Intégration Electron :** `whisper-node-addon` — binding Node.js pré-compilé, zéro compilation manuelle
-**Statut :** Surveillé — candidat prioritaire pour intégration Apollo (ROVER, ARK)
-
-**Signal d'alerte :** nouvelle version majeure de Whisper, mise à jour du binding Node.js, nouveau modèle plus léger avec même précision.
-
-**Variantes à connaître :**
-- `faster-whisper` — 4x plus rapide, Python uniquement
-- `sherpa-onnx` — streaming temps réel, latence réduite
-- `macOS Speech Recognition` — natif Apple, moins précis en français
-
----
-
-### Famille 2 — LLM locaux (raisonnement texte → texte)
-
-**Outil de référence :** Ollama + Mistral 7B
-**Version de référence :** Ollama 0.19+ (moteur MLX sur Apple Silicon depuis mars 2026)
-**API :** REST locale `http://localhost:11434` — compatible OpenAI
-**Statut :** Surveillé — Approche C (serveur local, dépendance déclarée)
-
-**Signal d'alerte :** nouveau modèle français plus léger et plus précis que Mistral 7B, Apple Foundation Models accessible depuis Node.js.
-
-**Modèles à connaître :**
-- Mistral 7B — excellent français, rapide, choix par défaut
-- Phi-3 Mini (3.8B) — très léger, MacBook avec peu de RAM
-- LLaMA 3.1 8B — bon généraliste, fort en raisonnement structuré
-- Apple Foundation Models (3B) — Neural Engine, Swift uniquement pour l'instant
-
----
-
-### Famille 3 — Séparation et nettoyage audio
-
-**Outil de référence :** Demucs (Meta, open source)
-**Intégration :** Python (Approche B) — Mac Studio uniquement
-**Statut :** Surveillé — usage interne Martin/Antoine, pas distribué à l'équipe
-
-**Signal d'alerte :** version MLX Apple Silicon accélérée disponible, binding Node.js émergent.
-
-**Variantes à connaître :**
-- RNNoise — suppression bruit temps réel, léger, Node.js disponible
-- Ultimate Vocal Remover — app graphique open source, plus simple
-
----
-
-### Famille 4 — Apple Foundation Models
-
-**Outil de référence :** Apple Foundation Models framework (macOS 26)
-**Statut :** Surveillé — Swift uniquement aujourd'hui, pont Node.js en développement par la communauté
-**Intérêt :** Neural Engine, zéro consommation GPU, zéro batterie, zéro coût, offline
-
-**Signal d'alerte :** pont Swift ↔ Node.js stable et documenté disponible.
-
----
-
-### Famille 5 — Vision multimodale
-
-**Outil de référence :** moondream2 (1.8B, léger, CPU)
-**Statut :** Surveillance légère — usage potentiel ARK (description automatique de frames)
-**Contrainte :** Lourd dès qu'on monte en qualité (LLaVA, Qwen2.5-VL nécessitent 8GB+)
-
-**Signal d'alerte :** modèle léger (<2B) atteignant une précision suffisante pour décrire des contenus vidéo courants sans GPU.
+**Attention :** les technologies cibles du tableau ci-dessous datent du 14 juin 2026. Leur état réel au 17 octobre 2026 est dans les fiches (binding Node.js de Whisper inactif depuis juillet 2025, Ollama passé en v0.40, dépôt de Demucs déplacé, Moondream 3 sous licence restrictive, SDK Python d'Apple).
 
 ---
 
@@ -163,6 +54,8 @@ Ce tableau recense les portes ouvertes dans les apps existantes pour une connexi
 **Architecture à valider :** les apps web (COVENANT, Reviewer, Manifest) ne peuvent pas écrire en local — transit par email structuré à une boîte dédiée, lue par SIGNAL via IMAP
 **Devise proposée :** *OMNIA CONSPICUA · Tout est visible*
 
+**Écart documentaire connu (17/10/2026) :** le Plan Directeur (D136) décrit SIGNAL comme une app Electron à lancer juste après la V1 de RENDEZVOUS, construite sur Surveyor et son radar. Cette fiche, plus ancienne, décrit une architecture par e-mail structuré lu en IMAP. Les deux textes sont conservés tels quels ; l'arbitrage reste à faire.
+
 ---
 
 ## Historique des revues
@@ -179,5 +72,11 @@ Première session de réflexion IA — panorama complet établi. 11 familles car
 
 ---
 
-*Document fondateur · TRANQUILITY_VEILLE_IA · V1.0 · Tranquility Suite · Cellule Vidéo L'Étudiant · 14 juin 2026*
+### Migration vers le laboratoire R&D — 17 octobre 2026
+
+La veille IA (ce document) et la veille outils (`TRANQUILITY_VEILLE_OUTILS.md`) ont été réunies dans le repo `tranquility-rd` (D156). Le déclencheur est unique : consultation du labo au mini-plan de chaque chantier, ou à la demande (D157).
+
+---
+
+*Document fondateur · TRANQUILITY_VEILLE_IA · V2.0 · Tranquility Suite · Cellule Vidéo L'Étudiant · 17 octobre 2026*
 *Poussé sur `tranquility-plan-directeur` — branche `main`*

@@ -1,6 +1,7 @@
 # TRANQUILITY_WORKFLOW_ASSIST
 *Skill actif — Tranquility Suite · Cellule Vidéo L'Étudiant*
 *Créé le 30 mai 2026 — Mis à jour le 30 mai 2026 (soir) — I3 Launcher*
+*Mis à jour le 17 octobre 2026 — consultation du labo R&D au mini-plan (D155, D157)*
 
 ---
 
@@ -34,6 +35,9 @@ QUESTIONS — ce qui doit être confirmé avant de coder
 - Obligatoire pour tout chantier qui touche à plus d'un fichier
 - Facultatif pour une correction chirurgicale sur un seul bug isolé
 - Jamais plus de 4 lignes — si c'est plus long, le chantier est trop gros et doit être découpé
+
+### Consultation du labo R&D
+Avant chaque mini-plan, JARVIS cherche en silence dans les en-têtes des fiches du repo `tranquility-rd` (skill `tranquility-rd`) si une piste correspond à l'app concernée ou au problème du chantier. Si rien ne correspond, JARVIS ne dit rien. Si une fiche correspond, il le signale en une ou deux lignes : nom, verdict, conditions de réouverture et effet sur le chantier. Il signale aussi une fiche en veille dont une condition de réouverture semble devenue vraie. Quand le chantier touche ROVER, ARK, READBACK ou BackUpFlow, il consulte aussi le tableau des points d'entrée IA de `TRANQUILITY_VEILLE_IA.md`.
 
 ---
 
