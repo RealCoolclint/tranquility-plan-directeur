@@ -133,10 +133,11 @@ else
 fi
 
 # Plan Directeur le plus récent (tri numérique maj/min, pas par date ni sort -V)
+# Cherche dans actuel/ puis à la racine, jamais dans archives/.
 BEST_PD=""
 BEST_MAJ=-1
 BEST_MIN=-1
-for f in "$PLAN_DIR"/TRANQUILITY_PLAN_DIRECTEUR_V*_*.md; do
+for f in "$PLAN_DIR"/actuel/TRANQUILITY_PLAN_DIRECTEUR_V*_*.md "$PLAN_DIR"/TRANQUILITY_PLAN_DIRECTEUR_V*_*.md; do
   [ -e "$f" ] || continue
   base=$(basename "$f")
   ver=$(extract_version "$base")
