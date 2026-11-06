@@ -1,7 +1,7 @@
 # Tranquility Suite — Codes d'erreur
-## Convention commune à toute la flotte · V1.1
+## Convention commune à toute la flotte · V1.2
 
-*6 novembre 2026 · Règle posée par la PRÉSIDENCE en session VOXLOOP · Validée en bloc le 06/11/2026 (D221) · Rangée dans `tranquility-plan-directeur`*
+*6 novembre 2026 · Règle posée par la PRÉSIDENCE en session VOXLOOP (aujourd'hui CAPCOM) · Validée en bloc le 06/11/2026 (D221) · V1.2 : VXL devenu CPC (D224) · Rangée dans `tranquility-plan-directeur`*
 
 ---
 
@@ -17,7 +17,7 @@ C'est le principe des codes d'erreur d'un système d'exploitation, appliqué à 
 
 **`[PRÉFIXE]-[NNN]`** : 3 lettres propres à l'app, un tiret, 3 chiffres.
 
-Exemple : `VXL-103`, `BKF-501`.
+Exemple : `CPC-103`, `BKF-501`.
 
 - Le message visible est en français simple, en majuscules (Design Reference), avec le code en mention discrète.
 - Chaque app tient son catalogue `docs/[APP]_CODES.md` dans son propre repo : code, ce qu'on voit, ce qui se passe, que faire.
@@ -38,7 +38,7 @@ Exemple : `VXL-103`, `BKF-501`.
 | **6xx** | Services tiers | GitHub, Monday, Resend, Netlify |
 | **9xx** | Imprévu | `XXX-999` = erreur inconnue, toujours accompagnée de « PRÉVENEZ L'ADMIN » |
 
-*VOXLOOP utilise déjà 1xx, 2xx, 3xx et 4xx dans ce sens.*
+*CAPCOM utilise déjà 1xx, 2xx, 3xx, 4xx et 9xx dans ce sens.*
 
 ---
 
@@ -58,11 +58,13 @@ Exemple : `VXL-103`, `BKF-501`.
 | **PLD** | PAYLOAD | ✅ validé |
 | **RDV** | RENDEZVOUS | ✅ validé — couvre aussi SIGNAL, fonction de l'admin de RENDEZVOUS (D200) |
 | **CDX** | CODEX | ✅ validé |
-| **VXL** | VOXLOOP | ✅ en service (V0, 06/11/2026) |
+| **CPC** | CAPCOM *(ex-VOXLOOP, ex-préfixe VXL)* | ✅ en service (V0, 06/11/2026) |
 
-*Apps en projet (Cargo, Hatch, logiciel de livraison, boîte à outils Premiere et ses modules) : préfixe attribué à la création de leur fiche produit. Toute nouvelle app entre dans ce registre en même temps que dans le registre de flotte.*
+*Apps en projet (Cargo, Hatch, logiciel de livraison, boîte à outils Premiere et ses modules, dont DOWNLINK, ex-CAPCOM) : préfixe attribué à la création de leur fiche produit. Toute nouvelle app entre dans ce registre en même temps que dans le registre de flotte.*
 
 **Retirés à la validation (V1.1) :** CPT (CAPITAL, sorti de la Suite, D199) · SGN (SIGNAL, devenu une fonction de RENDEZVOUS, D200) · « Scripter » rayé des apps en projet (ancien nom de CODEX, déjà CDX) · RDB remplacé par RBK.
+
+**Renommé en V1.2 (D224) :** VXL devient CPC (numéros inchangés), VOXLOOP ayant pris le nom CAPCOM. Le préfixe VXL n'est pas réattribué.
 
 **Règle d'attribution :** 3 lettres en majuscules, uniques dans la flotte, lisibles à l'oral, sans collision avec un préfixe existant.
 

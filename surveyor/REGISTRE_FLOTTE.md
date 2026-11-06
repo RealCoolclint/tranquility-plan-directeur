@@ -3,6 +3,8 @@
 *Faits techniques de la flotte, lus par Surveyor et par son radar. Le Plan Directeur raconte les décisions ; ce registre décrit l'état. Leur divergence est une alerte.*
 *Créé le 25/09/2026 (Surveyor, rapport n°1). Toute nouvelle app y entre dès sa naissance (Loi 1).*
 
+**Homonymie (D224, 06/11/2026) :** avant le 06/11/2026, CAPCOM désignait le module Premiere de statuts Monday, aujourd'hui DOWNLINK ; depuis, CAPCOM est le réseau d'ordres (ex-VOXLOOP, dépôt `capcom`).
+
 **Règles de lecture pour le radar :** 2e colonne = dépôt (« — » si aucun), 3e colonne = catégorie. Une catégorie contenant « Hors Tranquility » exclut le dépôt des sections 3, 4, 7 et 8 du radar. Les dépôts archivés sur GitHub sont exclus automatiquement.
 
 Légende assets : ✓ présent · ⚠ écart · ✗ manquant
@@ -24,7 +26,7 @@ Légende assets : ✓ présent · ⚠ écart · ✗ manquant
 | COVENANT | COVENANT | App | Web (PWA) | Mercury | En orbite | Patch ✓ · Ambiance ⚠ fond clair (D129) · Devise ✗ non documentée | `COVENANT/assets/patch_COVENANT.png`, `ambiance_COVENANT.mp4` · copies RENDEZVOUS | — | Cache hors-ligne `CACHE_NAME` à incrémenter à chaque mise en ligne (v2 au 25/09/2026). Fonction d'envoi sur Netlify `musical-tanuki-a691a5` |
 | Launcher | Launcher | App | Desktop (daemon) | Mercury | Développement en pause (D77) | Patch ✓ · Ambiance ✓ · Devise INITIUM EST DIMIDIUM FACTI ✓ | `Launcher/src/renderer/assets/` | Pause actée (D77) | Source cachée d'assets d'autres apps (ambiance ARK, patch Transporter PNG) |
 | READBACK | READBACK | App | Desktop + iPad / iPhone | Gemini | En pause (D78) | Patch ✗ · Ambiance ✗ · Devise ✗ | — | Pause actée (D78) | Dépôt privé. À la reprise : identité visuelle + lecture native de la sortie CODEX |
-| VOXLOOP | voxloop | App | Desktop (régie Electron, V1) + Web (pages d'écoute) | Gemini | En chantier — prototype V0 (06/11/2026) | Patch ✗ · Ambiance ✗ · Splash ✗ · Animation d'ouverture ✗ · Devise ALTA ET CLARA ✓ | — | — | Dépôt privé, branche `main`. Codes VXL (`docs/VOXLOOP_CODES.md`). Absent de RENDEZVOUS, assumé au stade V0 (D213 → D223) |
+| CAPCOM *(ex-VOXLOOP)* | capcom | App | Desktop (régie Electron, V1) + Web (pages d'écoute) | Gemini | En chantier — prototype V0 sécurisé (06/11/2026) | Patch ✗ (piste : patch CAPCOM existant, D224) · Ambiance ✗ · Splash ✗ · Animation d'ouverture ✗ · Devise ALTA ET CLARA ✓ | — | — | Dépôt privé, branche `main` (ex-`voxloop`). Codes CPC (`docs/CAPCOM_CODES.md`). Absent de RENDEZVOUS, assumé au stade V0 (D213 → D227) |
 
 ## Apps en projet (sans dépôt)
 
@@ -38,7 +40,7 @@ Légende assets : ✓ présent · ⚠ écart · ✗ manquant
 | Beacon | — | App en projet | Desktop | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise LUX IN TENEBRIS | — | — | Pages de livraison |
 | Debrief | — | App en projet | Web | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise MISSUM EST | — | — | Historique des livraisons |
 | Telemetry | — | App en projet | Web / Extension Premiere | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise SEMPER AUDIRE | — | — | Suivi des versions de montage |
-| CAPCOM | — | App en projet | Extension Premiere | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise FIDE ET NUNTIA | — | — | Statuts Monday depuis Premiere |
+| DOWNLINK *(ex-CAPCOM jusqu'au 06/11/2026)* | — | App en projet | Extension Premiere | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise FIDE ET NUNTIA | — | — | Statuts Monday depuis Premiere |
 | DATAPAD | — | App en projet | Extension Premiere | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise LEGE ET INTELLEGE | — | — | Brief projet dans Premiere |
 | BLACKBOX | — | App en projet | Extension Premiere | À planifier | Rôle documenté | Patch ✓ (ressource projet) · Devise OMNIA RECORDANTUR | — | — | Journal des exports |
 | SIGNAL | — | App en projet | Web | Apollo (visée) | Idée | Devise OMNIA CONSPICUA | — | — | Vue de pilotage de la flotte : à bâtir sur Surveyor |
@@ -82,4 +84,4 @@ Légende assets : ✓ présent · ⚠ écart · ✗ manquant
 
 ---
 
-*REGISTRE_FLOTTE · V1 · 25/09/2026 · mis à jour le 06/11/2026 (entrée de VOXLOOP, Plan V5.132)*
+*REGISTRE_FLOTTE · V1 · 25/09/2026 · mis à jour le 06/11/2026 (entrée de VOXLOOP, Plan V5.132 ; renommage CAPCOM et DOWNLINK, Plan V5.133)*
