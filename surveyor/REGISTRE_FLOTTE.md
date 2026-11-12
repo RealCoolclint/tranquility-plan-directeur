@@ -26,7 +26,7 @@ Légende assets : ✓ présent · ⚠ écart · ✗ manquant
 | COVENANT | COVENANT | App | Web (PWA) | Mercury | En orbite | Patch ✓ · Ambiance ⚠ fond clair (D129) · Devise ✗ non documentée | `COVENANT/assets/patch_COVENANT.png`, `ambiance_COVENANT.mp4` · copies RENDEZVOUS | — | Cache hors-ligne `CACHE_NAME` à incrémenter à chaque mise en ligne (v2 au 25/09/2026). Fonction d'envoi sur Netlify `musical-tanuki-a691a5` |
 | Launcher | Launcher | App | Desktop (daemon) | Mercury | Développement en pause (D77) | Patch ✓ · Ambiance ✓ · Devise INITIUM EST DIMIDIUM FACTI ✓ | `Launcher/src/renderer/assets/` | Pause actée (D77) | Source cachée d'assets d'autres apps (ambiance ARK, patch Transporter PNG) |
 | READBACK | READBACK | App | Desktop + iPad / iPhone | Gemini | En pause (D78) | Patch ✗ · Ambiance ✗ · Devise ✗ | — | Pause actée (D78) | Dépôt privé. À la reprise : identité visuelle + lecture native de la sortie CODEX |
-| CAPCOM *(ex-VOXLOOP)* | capcom | App | Desktop (régie Electron, V2) + Web (pages d'écoute) | Gemini | En chantier — V2 en construction : Lot 1 terminé (07/11/2026), Lot 2 en cours, 2.1 à 2.3 livrées (11/11/2026, `a3752e1`) ; prototype V1 étiqueté `v1-prototype` | Patch choisi (D233, `PATCH_Capcom.jpg`, à produire) · Ambiance ✗ · Splash ✗ (prévu au Lot 5) · Animation d'ouverture ✗ · Devise ALTA ET CLARA ✓ | — | — | Dépôt privé, branche `main` (ex-`voxloop`). Codes CPC (`docs/CAPCOM_CODES.md`). Absent de RENDEZVOUS, assumé en construction (D213 → D247) |
+| CAPCOM *(ex-VOXLOOP)* | capcom | App | Desktop (régie Electron, V2) + Web (pages d'écoute) | Gemini | En chantier — V2 en construction : Lot 1 terminé (07/11/2026), Lot 2 en cours, 2.1 à 2.4 livrées et module canal tranché (12/11/2026, `0640947`) ; prototype V1 étiqueté `v1-prototype` | Patch choisi (D233, `PATCH_Capcom.jpg`, à produire) · Ambiance ✗ · Splash ✗ (prévu au Lot 5) · Animation d'ouverture ✗ · Devise ALTA ET CLARA ✓ | — | — | Dépôt privé, branche `main` (ex-`voxloop`). Codes CPC (`docs/CAPCOM_CODES.md`). Absent de RENDEZVOUS, assumé en construction (D213 → D250) |
 
 ## Apps en projet (sans dépôt)
 
@@ -84,4 +84,4 @@ Légende assets : ✓ présent · ⚠ écart · ✗ manquant
 
 ---
 
-*REGISTRE_FLOTTE · V1 · 25/09/2026 · mis à jour le 06/11/2026 (entrée de VOXLOOP, Plan V5.132 ; renommage CAPCOM et DOWNLINK, Plan V5.133) · mis à jour le 11/11/2026 (état de CAPCOM, Plan V5.136)*
+*REGISTRE_FLOTTE · V1 · 25/09/2026 · mis à jour le 06/11/2026 (entrée de VOXLOOP, Plan V5.132 ; renommage CAPCOM et DOWNLINK, Plan V5.133) · mis à jour le 11/11/2026 (état de CAPCOM, Plan V5.136) · mis à jour le 12/11/2026 (état de CAPCOM, Plan V5.137)*
