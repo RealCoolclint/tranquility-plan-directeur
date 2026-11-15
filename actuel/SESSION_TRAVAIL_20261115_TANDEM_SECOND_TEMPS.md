@@ -66,15 +66,17 @@ NAVIGATION · PROSPECTIVE · SÉCURITÉ · CODE (tour de table) · SETI (R&D) ·
 
 | Fichier / Élément | Nature | État |
 |-------------------|--------|------|
-| `TRANQUILITY_PLAN_DIRECTEUR_V5_149.md` | Plan Directeur (D285, D209 conclue, cadence Surveyor, I10, ressources, note de version) | 🟡 à pousser |
+| `TRANQUILITY_PLAN_DIRECTEUR_V5_149.md` | Plan Directeur (D285, D209 conclue, cadence Surveyor, I10, ressources, note de version) | ✅ `ebd74b2`, complété (Carnet V91) |
 | Ce récap | Récap | 🟡 à pousser |
-| `fiches/RD_*_V1.md` (sept fiches) | Labo `tranquility-rd`, avec le sommaire régénéré | 🟡 à pousser |
+| `fiches/RD_*_V1.md` (sept fiches) | Labo `tranquility-rd`, avec le sommaire régénéré (81 fiches, 0 alerte) | ✅ `4848ab4` |
+| `CARNET_PIEGES_V91.md` | Carnet (V90 + 1 piège), construit par concaténation sur le Mac | 🟡 à pousser |
 
 ---
 
 ## Pièges découverts
 
-- Aucun. Carnet inchangé (V90).
+- `[MÉTHODE / téléchargements] Un fichier retéléchargé sous un nom déjà présent est renommé par le Mac (suffixe -1) ; une commande de push qui cherche le nom exact copie alors l'ancienne version, sans erreur → chercher "NOM*" et prendre le plus récent, puis vérifier dans git status que chaque fichier livré apparaît bien modifié`
+- Constaté ce soir à la poussée du labo : cinq fiches modifiées au lieu de sept ; corrigé avant le commit `4848ab4`. Carnet V91.
 
 ---
 
