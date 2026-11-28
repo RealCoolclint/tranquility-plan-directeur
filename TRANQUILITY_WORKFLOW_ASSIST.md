@@ -2,6 +2,7 @@
 *Skill actif — Tranquility Suite · Cellule Vidéo L'Étudiant*
 *Créé le 30 mai 2026 — Mis à jour le 30 mai 2026 (soir) — I3 Launcher*
 *Mis à jour le 17 octobre 2026 — consultation du labo R&D au mini-plan (D155, D157)*
+*Mis à jour le 28 novembre 2026 — contexte BackUpFlow (V1 gelée, cap V2, D338 → D344)*
 
 ---
 
@@ -160,21 +161,28 @@ Au démarrage d'une session sur une app spécifique, JARVIS charge le contexte d
 ---
 
 ### BACKUPFLOW
-**Repo :** `RealCoolclint/BackUpFlow` (? — à confirmer)
+**Repo :** `RealCoolclint/BackUpFlow` — `main` = V1 en production (gelée, D343), `evolution-v2` = conception V2
 **Nature :** App Electron — backup des rushes vidéo
-**Rôle :** Copie vers SSD Perso + SSD Studio + NAS + Gofile, compression HandBrake, mail Resend
+**Rôle :** Copie vers SSD1 Studio + SSD Profil, compression, NAS (compressé), Gofile (original + compressé), lien dans Monday, mail Resend
 **Devise :** *NULLA DATA PEREUNT*
+**Documents V2 :** `docs/BACKUPFLOW_V2_ETAT_DES_LIEUX.md` (27/11) + `docs/BACKUPFLOW_V2_PARCOURS.md` (28/11, quatre actes, D338 → D344)
 
 **Particularités :**
-- Deux destinations SSD peuvent pointer au même endroit → protection doublons obligatoire
-- Compression HandBrake toujours avant upload Gofile — jamais en parallèle
-- Upload Gofile : dossier originals + dossier `_compressed` avec suffixe, structure plate
-- NAS via SMB — stable en RJ45, WiFi peut générer de fausses alertes
-- Mail admin `mpavloff@letudiant.fr` toujours en copie, même si ce n'est pas lui qui lance
+- Un T7 reste en permanence sur son ATEM : la source est lue à travers l'ATEM, par Ethernet (adaptateur direct, jamais de hub)
+- Deux destinations SSD peuvent pointer au même endroit → la V1 saute alors la copie Studio en silence
+- V1 : compression puis Gofile puis NAS, l'un après l'autre (le commentaire « EN PARALLÈLE » de `main.js` est faux)
+- V1 : le multicam suit une chaîne différente (pas de Gofile, `overwrite: true`)
+- NAS via SMB ; Wi-Fi des studios robuste mais contrôlé par l'app en V2
+- Mail admin toujours en copie, même si ce n'est pas lui qui lance
 
-**Fragilités connues :**
-- `archiveResult` reste null si `compress === false` — le bloc NAS ne s'exécute pas sans guard
-- `zipNasEnabled = false` → pas de ZIP forcé, copie directe du dossier
+**Fragilités connues (V1, acceptées jusqu'à la V2) :**
+- Sans compression, filet D334 : originaux vers le NAS (`bca26b2`, non testé au Studio)
+- Copies jamais vérifiées, progression de copie simulée
+- Écran de fin, GIF, mail et Monday « BACKUPÉ » même si NAS sauté ou Gofile en échec (`renderer.js`)
+- Échec NAS → workflow en erreur → lien Gofile jamais inscrit dans Monday
+
+**Cap V2 :** parcours JE TE CONNAIS / PRÉPARATION / EN ROUTE / BILAN ; compression obligatoire ; copie à lecture unique avec empreintes ; règle de preuve (D335)
+- Attention : D341 met en parallèle Gofile (originaux) et compression, alors qu'une entrée du carnet ci-dessus dit « jamais Promise.all avec les deux » → retrouver pourquoi cette règle existait avant de coder la V2
 
 ---
 
